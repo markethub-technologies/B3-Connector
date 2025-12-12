@@ -1,0 +1,15 @@
+{
+  // Recomendaciones de extensiones para VS Code (sugeridas también fuera del devcontainer)
+  "recommendations": [
+    "ms-vscode.cpptools",                  // C/C++ (IntelliSense, navegación)
+    "ms-vscode.cmake-tools",               // Integración CMake
+    "twxs.cmake",                          // Syntax highlight extra para CMake
+    "vadimcn.vscode-lldb",                // Debugger LLDB (muy útil en Linux/devcontainers)
+    "xaver.clang-format",                  // Autoformato de código C++
+    "matepek.vscode-catch2-test-adapter",  // Descubre y corre tests GoogleTest/Catch2
+    "zxh404.vscode-proto3",                // Soporte para archivos .proto (protobuf)
+    "redhat.vscode-xml",                   // Edición cómoda de XML (OnixS, configs)
+    "GitHub.copilot",                      // Autocompletado asistido por IA
+    "ms-vscode-remote.remote-containers"   // Necesaria en el HOST para abrir Dev Containers
+  ]
+}

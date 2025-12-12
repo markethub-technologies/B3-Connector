@@ -1,0 +1,91 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Configure MD",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "-S",
+        "b3-md-connector",
+        "-B",
+        "build/md"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Build MD",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "build/md",
+        "-j"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Configure OE",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "-S",
+        "b3-oe-connector",
+        "-B",
+        "build/oe"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Build OE",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "build/oe",
+        "-j"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "CTest MD",
+      "type": "process",
+      "command": "ctest",
+      "args": [
+        "--test-dir",
+        "build/md"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test"
+    },
+    {
+      "label": "CTest OE",
+      "type": "process",
+      "command": "ctest",
+      "args": [
+        "--test-dir",
+        "build/oe"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test"
+    }
+  ]
+}

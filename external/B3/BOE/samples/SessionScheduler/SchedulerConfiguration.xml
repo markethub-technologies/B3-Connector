@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<SchedulerSettings
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ref.onixs.biz/fix/scheduler http://ref.onixs.biz/fix/scheduler/scheduler-settings-1.5.xsd"
+  xmlns="http://ref.onixs.biz/fix/scheduler"
+  >
+  <Schedules>
+    <Schedule
+      id="ScheduleId"
+      firstDay="Sunday"
+      logonTime="17:00"
+
+      lastDay="Friday"
+      logoutTime="16:00"
+      />
+  </Schedules>
+
+  <Connections>
+    <Connection id="ConnectionId">
+      <Counterparty host="localhost" port="4500"/>
+    </Connection>
+  </Connections>
+
+</SchedulerSettings>

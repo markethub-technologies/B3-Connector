@@ -1,0 +1,16 @@
+{
+    "cmake.configureOnOpen": false,
+    "cmake.generator": "Ninja",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "cmake.defaultConfigurePreset": "dev",
+    "cmake.defaultBuildPreset": "dev",
+    // Formatting: use clang-format as the default formatter and format on save
+    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.formatOnSave": true,
+    "clang-format.style": "file",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "files.associations": {
+    "*.inc": "c"
+  },
+  "cmake.sourceDirectory": "/home/damian/repos/MarketHub.B3Connector/b3-md-connector"
+}

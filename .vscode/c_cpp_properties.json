@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Markethub.B3Connector/src",
+                "${workspaceFolder}/libs/markethub/messaging/include",
+                "${workspaceFolder}/libs/onixs/B3/BOE/include",
+                "${workspaceFolder}/libs/onixs/B3/UMDF/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}

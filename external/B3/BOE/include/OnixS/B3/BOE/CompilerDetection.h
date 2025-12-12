@@ -1,0 +1,6 @@
+#pragma once
+
+#define ONIXS_B3_BOE_COMPILER_IS_GNU
+#define ONIXS_B3_BOE_CXX11
+#define ONIXS_B3_BOE_CXX14
+#define ONIXS_B3_BOE_CXX17

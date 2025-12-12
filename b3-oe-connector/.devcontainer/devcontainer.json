@@ -1,0 +1,24 @@
+{
+  "name": "b3-oe-connector-dev",
+  "build": {
+    "dockerfile": "Dockerfile.dev",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/MarketHub.B3Connector",
+  "workspaceMount": "source=${localWorkspaceFolder}/..,target=/workspaces/MarketHub.B3Connector,type=bind",
+  "runArgs": [
+    "--network=host"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",     // C/C++ básico (IntelliSense, navegación)
+        "ms-vscode.cmake-tools",  // Flujo CMake (configure/build)
+        "vadimcn.vscode-lldb"     // Debug con LLDB dentro del container
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}

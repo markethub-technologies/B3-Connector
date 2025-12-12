@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Sample B3 BOE Configuration file.
+
+    $Revision: 1.0 $
+-->
+
+<configuration>
+    <B3BOE>
+        <SessionId>SessionId</SessionId>
+        <FirmId>FirmId</FirmId>
+        <AccessKey>AccessKey</AccessKey>
+        <SecretKey>SecretKey</SecretKey>
+        <TradingSystem.Name>TradingSystemName</TradingSystem.Name>
+        <TradingSystem.Version>TradingSystemVersion</TradingSystem.Version>
+        <TradingSystem.Vendor>TradingSystemVendor</TradingSystem.Vendor>
+        <LicenseStore>license</LicenseStore>
+    </B3BOE>
+</configuration>

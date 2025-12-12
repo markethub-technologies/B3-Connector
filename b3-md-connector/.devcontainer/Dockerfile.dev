@@ -1,0 +1,37 @@
+# Stage "sucio" / setup: se puede usar para instalaciones pesadas o tooling extra
+FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04 AS setup-env
+
+# Forzar uso de GCC/G++
+ENV CC=/usr/bin/gcc
+ENV CXX=/usr/bin/g++
+
+# Si se necesita instalar tooling extra solo para generar artefactos futuros,
+# se hace acá. Por ahora, dejamos solo un update básico (sin cosas específicas).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# Stage limpio para el devcontainer final
+FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04
+
+ENV CC=/usr/bin/gcc
+ENV CXX=/usr/bin/g++
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ninja-build \
+    cmake \
+    pkg-config \
+    libzmq3-dev \
+    libczmq-dev \
+    cppzmq-dev \
+    libsodium-dev \
+    libpgm-5.3-0 \
+    libnorm-dev \
+    jq \
+ && rm -rf /var/lib/apt/lists/*
+
+# Si en el futuro setup-env genera algo en /usr/local, se podría copiar:
+# COPY --from=setup-env /usr/local/ /usr/local/
+
+WORKDIR /workspaces/b3-connector

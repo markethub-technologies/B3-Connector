@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug b3-md-connector",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/b3-md-connector/build/b3-md-connector",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/b3-md-connector",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "Build MD"
+    },
+    {
+      "name": "Debug b3-oe-connector",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/b3-oe-connector/build/b3-oe-connector",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/b3-oe-connector",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "Build OE"
+    }
+  ]
+}

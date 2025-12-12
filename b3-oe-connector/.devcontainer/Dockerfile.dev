@@ -1,0 +1,33 @@
+# Stage "sucio" / setup
+FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04 AS setup-env
+
+ENV CC=/usr/bin/gcc
+ENV CXX=/usr/bin/g++
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# Stage limpio final
+FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04
+
+ENV CC=/usr/bin/gcc
+ENV CXX=/usr/bin/g++
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ninja-build \
+    cmake \
+    pkg-config \
+    libzmq3-dev \
+    libczmq-dev \
+    cppzmq-dev \
+    libsodium-dev \
+    libpgm-5.3-0 \
+    libnorm-dev \
+    jq \
+ && rm -rf /var/lib/apt/lists/*
+
+# COPY --from=setup-env /usr/local/ /usr/local/   # reservado por si después se usa
+
+WORKDIR /workspaces/b3-connector

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration environment="TEST">
+  <channel id="80">
+    <instrument> 
+      <a ip="233.205.192.108" port="33080"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.106" port="34080"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.107" port="31080"/>
+      <b ip="233.205.192.142" port="31080"/>
+    </incremental>
+  </channel>
+  <channel id="82">
+    <instrument> 
+      <a ip="233.205.192.111" port="33082"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.109" port="34082"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.110" port="31082"/>
+      <b ip="233.205.192.143" port="31082"/>
+    </incremental>
+  </channel>
+  <channel id="84">
+    <instrument> 
+      <a ip="233.205.192.114" port="33084"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.112" port="34084"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.113" port="31084"/>
+      <b ip="233.205.192.144" port="31084"/>
+    </incremental>
+  </channel>
+  <channel id="86">
+    <instrument> 
+      <a ip="233.205.192.117" port="33086"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.115" port="34086"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.116" port="31086"/>
+      <b ip="233.205.192.145" port="31086"/>
+    </incremental>
+  </channel>
+  <channel id="88">
+    <instrument> 
+      <a ip="233.205.192.120" port="33088"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.118" port="34088"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.119" port="31088"/>
+      <b ip="233.205.192.146" port="31088"/>
+    </incremental>
+  </channel>
+  <channel id="90">
+    <instrument> 
+      <a ip="233.205.192.123" port="33090"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.121" port="34090"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.122" port="31090"/>
+      <b ip="233.205.192.147" port="31090"/>
+    </incremental>
+  </channel>
+  <channel id="92">
+    <instrument> 
+      <a ip="233.205.192.126" port="33092"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.124" port="34092"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.125" port="31092"/>
+      <b ip="233.205.192.148" port="31092"/>
+    </incremental>
+  </channel>
+  <channel id="94">
+    <instrument> 
+      <a ip="233.205.192.129" port="33094"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.127" port="34094"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.128" port="31094"/>
+      <b ip="233.205.192.149" port="31094"/>
+    </incremental>
+  </channel>
+  <channel id="98">
+    <instrument> 
+      <a ip="233.205.192.132" port="33098"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.130" port="34098"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.131" port="31098"/>
+      <b ip="233.205.192.150" port="31098"/>
+    </incremental>
+  </channel>
+</configuration>

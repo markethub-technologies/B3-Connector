@@ -1,0 +1,19 @@
+---
+# Based on Google style with some project preferences
+BasedOnStyle: Google
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+ColumnLimit: 100
+AllowShortIfStatementsOnASingleLine: false
+DerivePointerAlignment: false
+PointerAlignment: Right
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 1
+SortIncludes: false
+BreakBeforeBraces: Attach
+ContinuationIndentWidth: 4
+ForEachMacros: [foreach, Q_FOREACH]
+NamespaceIndentation: All
+Language: Cpp
+...

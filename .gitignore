@@ -1,0 +1,130 @@
+# ============================================
+# Build directories
+# ============================================
+build/
+*/build/
+cmake-build-*/
+build-*/        # build-md/, build-oe/, build-dev/, etc.
+
+# ============================================
+# CMake artifacts
+# ============================================
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# ============================================
+# Build outputs (executables & binaries)
+# ============================================
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Ninja build files
+.ninja_deps
+.ninja_log
+build.ninja
+
+# ============================================
+# IDE / Editor / Tooling
+# ============================================
+
+# VS Code (keep config tracked, only ignore caches)
+.vscode/ipch/
+
+# JetBrains
+.idea/
+*.iml
+
+# Visual Studio (Windows)
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# clangd
+.clangd/
+
+# Tags / Indexes
+tags
+cscope.*
+
+# ============================================
+# Temporary files
+# ============================================
+*.swp
+*.swo
+*~
+.DS_Store
+*.tmp
+*.log
+*.bak
+*.orig
+core
+core.*
+
+# ============================================
+# Package managers
+# ============================================
+vcpkg_installed/
+conan/
+
+# ============================================
+# Additional common ignores
+# ============================================
+
+# Build system user-specific presets (never commit)
+CMakeUserPresets.json
+
+# Local build variants (caught by build-*/ but kept for backward compat)
+# build-dev/
+# build-prod/
+# build-testapp/
+
+# Binaries or libs sometimes generated into these dirs (safety)
+bin/
+lib/
+*.so.[0-9]*
+*.so.[0-9]*.*
+
+# Coverage & profiling
+*.gcda
+*.gcno
+coverage/
+*.profdata
+
+# Ccache
+.ccache/
+
+# CTest
+Testing/
+TestResults/

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<license version="1.0">
+  <type>trial</type>
+  <customer>
+    <name>Evaluator</name>
+  </customer>
+  <period>
+    <since>2025-12-01</since>
+    <till>2026-03-04</till>
+  </period>
+  <products>
+    <product id="206" name="B3 Binary UMDF Market Data Handler for C++" />
+  </products>
+  <checksum>739CDCDD07C270CA988220217FDFB9CE</checksum>
+</license>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration environment="PROD">
+  <channel id="80">
+    <instrument>
+      <a ip="233.252.8.108" port="10080"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.106" port="30080"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.107" port="20080"/>
+    </incremental>
+  </channel>
+  <channel id="82">
+    <instrument>
+      <a ip="233.252.8.111" port="10082"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.109" port="30082"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.110" port="20082"/>
+    </incremental>
+  </channel>
+  <channel id="84">
+    <instrument>
+      <a ip="233.252.8.114" port="10084"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.112" port="30084"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.113" port="20084"/>
+    </incremental>
+  </channel>
+  <channel id="86">
+    <instrument>
+      <a ip="233.252.8.117" port="10086"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.115" port="30086"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.116" port="20086"/>
+    </incremental>
+  </channel>
+  <channel id="88">
+    <instrument>
+      <a ip="233.252.8.120" port="10088"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.118" port="30088"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.119" port="20088"/>
+    </incremental>
+  </channel>
+  <channel id="90">
+    <instrument>
+      <a ip="233.252.8.123" port="10090"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.121" port="30090"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.122" port="20090"/>
+    </incremental>
+  </channel>
+  <channel id="92">
+    <instrument>
+      <a ip="233.252.8.126" port="10092"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.124" port="30092"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.125" port="20092"/>
+    </incremental>
+  </channel>
+  <channel id="94">
+    <instrument>
+      <a ip="233.252.8.129" port="10094"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.127" port="30094"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.128" port="20094"/>
+    </incremental>
+  </channel>
+  <channel id="98">
+    <instrument>
+      <a ip="233.252.8.132" port="10098"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.130" port="30098"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.131" port="20098"/>
+    </incremental>
+  </channel>
+  <channel id="68">
+    <instrument>
+      <a ip="233.252.8.6" port="10068"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.4" port="30068"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.5" port="20068"/>
+    </incremental>
+  </channel>
+  <channel id="70">
+    <instrument>
+      <a ip="233.252.8.9" port="10070"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.7" port="30070"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.8" port="20070"/>
+    </incremental>
+  </channel>
+  <channel id="72">
+    <instrument>
+      <a ip="233.252.8.12" port="10072"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.10" port="30072"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.11" port="20072"/>
+    </incremental>
+  </channel>
+  <channel id="74">
+    <instrument>
+      <a ip="233.252.8.15" port="10074"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.13" port="30074"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.14" port="20074"/>
+    </incremental>
+  </channel>
+  <channel id="76">
+    <instrument>
+      <a ip="233.252.8.18" port="10076"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.16" port="30076"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.17" port="20076"/>
+    </incremental>
+  </channel>
+  <channel id="78">
+    <instrument>
+      <a ip="233.252.8.21" port="10078"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.252.8.19" port="30078"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.252.8.20" port="20078"/>
+    </incremental>
+  </channel>
+</configuration>
