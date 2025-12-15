@@ -9,7 +9,9 @@
         "-S",
         "b3-md-connector",
         "-B",
-        "build/md"
+        "build/md",
+        "-G",
+        "Ninja"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -39,7 +41,9 @@
         "-S",
         "b3-oe-connector",
         "-B",
-        "build/oe"
+        "build/oe",
+        "-G",
+        "Ninja"
       ],
       "options": {
         "cwd": "${workspaceFolder}"

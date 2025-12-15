@@ -24,11 +24,8 @@ target_link_directories(markethub-messaging INTERFACE
 
 # Link por nombre de lib (-lMarketHub.Messaging) -> busca libMarketHub.Messaging.so
 # Protobuf 28.3 and its dependencies (Abseil) installed in /usr/local from precompiled cache
-# Link with --whole-archive to force inclusion of all symbols from MarketHub.Messaging
 target_link_libraries(markethub-messaging INTERFACE
-    -Wl,--whole-archive
     MarketHub.Messaging
-    -Wl,--no-whole-archive
     protobuf
     absl_log_internal_message
     absl_log_internal_check_op
