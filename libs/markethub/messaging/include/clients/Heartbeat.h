@@ -65,9 +65,29 @@ namespace markethub::messaging::clients {
     /**
      * @brief Sets the interval between heartbeat transmissions.
      *
-     * @param period Interval in seconds (minimum 1 second)
+     * Template method that accepts any std::chrono::duration type (seconds, milliseconds, hours, etc.)
+     * Mimics C# TimeSpan behavior where any duration can be passed and validation occurs at runtime.
+     *
+     * @tparam Rep Arithmetic type representing the number of ticks
+     * @tparam Period std::ratio representing the tick period
+     * @param period Interval as a std::chrono::duration (minimum 1 second)
+     * @throws std::invalid_argument if period is less than 1 second
      */
-    void SetHeartbeatPeriod(std::chrono::seconds period);
+    template <typename Rep, typename Period>
+    void SetHeartbeatPeriod(std::chrono::duration<Rep, Period> period) {
+      // Convert to seconds for comparison and storage
+      auto periodInSeconds = std::chrono::duration_cast<std::chrono::seconds>(period);
+
+      // Validate: must be at least 1 second (matching C# behavior)
+      if (periodInSeconds.count() < 1) {
+        throw std::invalid_argument("Heartbeat period cannot be less than 1 second.");
+      }
+
+      std::lock_guard<std::mutex> lock(_mutex);
+      _heartbeatPeriod = periodInSeconds;
+
+      Log("Info", "Heartbeat period set to " + std::to_string(_heartbeatPeriod.count()) + " seconds");
+    }
 
     /**
      * @brief Sets the callback to be invoked when generating a heartbeat.

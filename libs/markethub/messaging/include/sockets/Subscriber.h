@@ -208,6 +208,7 @@ namespace markethub::messaging::sockets {
     std::atomic<bool> _stopRequested; ///< Flag to signal thread stop
     std::atomic<bool> _isRunning;     ///< Flag indicating if subscriber is running
     std::atomic<bool> _disposed;      ///< Flag indicating if subscriber is disposed
+    mutable std::mutex _startStopMutex; ///< Protects Start/Stop operations from race conditions
 
     // Socket initialization synchronization
     std::mutex _initMutex;           ///< Protects socket initialization state

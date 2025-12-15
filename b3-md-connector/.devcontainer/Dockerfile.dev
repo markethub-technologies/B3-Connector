@@ -29,9 +29,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpgm-5.3-0 \
     libnorm-dev \
     jq \
+    libspdlog-dev \
  && rm -rf /var/lib/apt/lists/*
 
 # Si en el futuro setup-env genera algo en /usr/local, se podría copiar:
 # COPY --from=setup-env /usr/local/ /usr/local/
 
-WORKDIR /workspaces/b3-connector
+# ============================================================
+# Copiar protobuf precompilado desde el contexto de build
+# Build context is parent directory, so path is relative to B3-Connector/
+# ============================================================
+ARG PROTOBUF_VERSION=28.3
+ARG PROTO_CACHE_VERSION=v2
+COPY b3-md-connector/.devcontainer/cache/protobuf-${PROTOBUF_VERSION}-ubuntu2404-gcc-${PROTO_CACHE_VERSION}.tar.gz /tmp/protobuf.tar.gz
+
+# Extraer e instalar protobuf en /usr/local
+RUN echo "==> Installing protobuf ${PROTOBUF_VERSION} from cache..." && \
+    tar -xzf /tmp/protobuf.tar.gz -C / && \
+    ldconfig && \
+    rm -f /tmp/protobuf.tar.gz && \
+    echo "==> ✅ Protobuf ${PROTOBUF_VERSION} installed"
+
+WORKDIR /workspaces/MarketHub.B3Connector

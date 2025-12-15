@@ -25,7 +25,7 @@
 #include "google/protobuf/metadata_lite.h"
 #include "google/protobuf/generated_message_reflection.h"
 #include "google/protobuf/message.h"
-#include "google/protobuf/repeated_field.h" // IWYU pragma: export
+#include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
 #include "trading.pb.h"
@@ -37,1784 +37,1767 @@
 #define PROTOBUF_INTERNAL_EXPORT_otc_2eproto
 
 namespace google {
-  namespace protobuf {
-    namespace internal {
-      class AnyMetadata;
-    } // namespace internal
-  } // namespace protobuf
-} // namespace google
+namespace protobuf {
+namespace internal {
+class AnyMetadata;
+}  // namespace internal
+}  // namespace protobuf
+}  // namespace google
 
 // Internal implementation detail -- do not use these members.
 struct TableStruct_otc_2eproto {
   static const ::uint32_t offsets[];
 };
-extern const ::google::protobuf::internal::DescriptorTable descriptor_table_otc_2eproto;
+extern const ::google::protobuf::internal::DescriptorTable
+    descriptor_table_otc_2eproto;
 namespace markethub {
-  namespace messaging {
-    namespace otc {
-      class OTCTradeReport;
-      struct OTCTradeReportDefaultTypeInternal;
-      extern OTCTradeReportDefaultTypeInternal _OTCTradeReport_default_instance_;
-      class PositionCorrectionNotification;
-      struct PositionCorrectionNotificationDefaultTypeInternal;
-      extern PositionCorrectionNotificationDefaultTypeInternal
-          _PositionCorrectionNotification_default_instance_;
-      class PositionUpdateNotification;
-      struct PositionUpdateNotificationDefaultTypeInternal;
-      extern PositionUpdateNotificationDefaultTypeInternal
-          _PositionUpdateNotification_default_instance_;
-    } // namespace otc
-  } // namespace messaging
-} // namespace markethub
+namespace messaging {
+namespace otc {
+class OTCTradeReport;
+struct OTCTradeReportDefaultTypeInternal;
+extern OTCTradeReportDefaultTypeInternal _OTCTradeReport_default_instance_;
+class PositionCorrectionNotification;
+struct PositionCorrectionNotificationDefaultTypeInternal;
+extern PositionCorrectionNotificationDefaultTypeInternal _PositionCorrectionNotification_default_instance_;
+class PositionUpdateNotification;
+struct PositionUpdateNotificationDefaultTypeInternal;
+extern PositionUpdateNotificationDefaultTypeInternal _PositionUpdateNotification_default_instance_;
+}  // namespace otc
+}  // namespace messaging
+}  // namespace markethub
 namespace google {
-  namespace protobuf {} // namespace protobuf
-} // namespace google
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 
 namespace markethub {
-  namespace messaging {
-    namespace otc {
+namespace messaging {
+namespace otc {
 
-      // ===================================================================
+// ===================================================================
 
-      // -------------------------------------------------------------------
 
-      class PositionUpdateNotification final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.otc.PositionUpdateNotification)
-       */
-      {
-       public:
-        inline PositionUpdateNotification() : PositionUpdateNotification(nullptr) {}
-        ~PositionUpdateNotification() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR PositionUpdateNotification(
-            ::google::protobuf::internal::ConstantInitialized);
+// -------------------------------------------------------------------
 
-        inline PositionUpdateNotification(const PositionUpdateNotification &from)
-            : PositionUpdateNotification(nullptr, from) {}
-        inline PositionUpdateNotification(PositionUpdateNotification &&from) noexcept
-            : PositionUpdateNotification(nullptr, std::move(from)) {}
-        inline PositionUpdateNotification &operator=(const PositionUpdateNotification &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline PositionUpdateNotification &operator=(PositionUpdateNotification &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+class PositionUpdateNotification final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.otc.PositionUpdateNotification) */ {
+ public:
+  inline PositionUpdateNotification() : PositionUpdateNotification(nullptr) {}
+  ~PositionUpdateNotification() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PositionUpdateNotification(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline PositionUpdateNotification(const PositionUpdateNotification& from) : PositionUpdateNotification(nullptr, from) {}
+  inline PositionUpdateNotification(PositionUpdateNotification&& from) noexcept
+      : PositionUpdateNotification(nullptr, std::move(from)) {}
+  inline PositionUpdateNotification& operator=(const PositionUpdateNotification& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PositionUpdateNotification& operator=(PositionUpdateNotification&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const PositionUpdateNotification &default_instance() {
-          return *internal_default_instance();
-        }
-        static inline const PositionUpdateNotification *internal_default_instance() {
-          return reinterpret_cast<const PositionUpdateNotification *>(
-              &_PositionUpdateNotification_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 1;
-        friend void swap(PositionUpdateNotification &a, PositionUpdateNotification &b) {
-          a.Swap(&b);
-        }
-        inline void Swap(PositionUpdateNotification *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PositionUpdateNotification& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PositionUpdateNotification* internal_default_instance() {
+    return reinterpret_cast<const PositionUpdateNotification*>(
+        &_PositionUpdateNotification_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(PositionUpdateNotification& a, PositionUpdateNotification& b) { a.Swap(&b); }
+  inline void Swap(PositionUpdateNotification* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(PositionUpdateNotification *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PositionUpdateNotification* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        PositionUpdateNotification *New(::google::protobuf::Arena *arena = nullptr) const
-            PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<PositionUpdateNotification>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const PositionUpdateNotification &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const PositionUpdateNotification &from) {
-          PositionUpdateNotification::MergeImpl(*this, from);
-        }
+  PositionUpdateNotification* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<PositionUpdateNotification>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PositionUpdateNotification& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PositionUpdateNotification& from) { PositionUpdateNotification::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(PositionUpdateNotification *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(PositionUpdateNotification* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.otc.PositionUpdateNotification"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.otc.PositionUpdateNotification";
-        }
+ protected:
+  explicit PositionUpdateNotification(::google::protobuf::Arena* arena);
+  PositionUpdateNotification(::google::protobuf::Arena* arena, const PositionUpdateNotification& from);
+  PositionUpdateNotification(::google::protobuf::Arena* arena, PositionUpdateNotification&& from) noexcept
+      : PositionUpdateNotification(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit PositionUpdateNotification(::google::protobuf::Arena *arena);
-        PositionUpdateNotification(::google::protobuf::Arena *arena,
-                                   const PositionUpdateNotification &from);
-        PositionUpdateNotification(::google::protobuf::Arena *arena,
-                                   PositionUpdateNotification &&from) noexcept
-            : PositionUpdateNotification(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kAccountFieldNumber = 1,
+    kSymbolFieldNumber = 2,
+    kMarketFieldNumber = 3,
+    kQuantityFieldNumber = 4,
+    kPriceFieldNumber = 5,
+    kSecurityTypeFieldNumber = 6,
+    kSideFieldNumber = 8,
+  };
+  // string account = 1;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kAccountFieldNumber = 1,
-          kSymbolFieldNumber = 2,
-          kMarketFieldNumber = 3,
-          kQuantityFieldNumber = 4,
-          kPriceFieldNumber = 5,
-          kSecurityTypeFieldNumber = 6,
-          kSideFieldNumber = 8,
-        };
-        // string account = 1;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // string symbol = 2;
+  void clear_symbol() ;
+  const std::string& symbol() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_symbol(Arg_&& arg, Args_... args);
+  std::string* mutable_symbol();
+  PROTOBUF_NODISCARD std::string* release_symbol();
+  void set_allocated_symbol(std::string* value);
 
-       public:
-        // string symbol = 2;
-        void clear_symbol();
-        const std::string &symbol() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_symbol(Arg_ &&arg, Args_... args);
-        std::string *mutable_symbol();
-        PROTOBUF_NODISCARD std::string *release_symbol();
-        void set_allocated_symbol(std::string *value);
+  private:
+  const std::string& _internal_symbol() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_symbol(
+      const std::string& value);
+  std::string* _internal_mutable_symbol();
 
-       private:
-        const std::string &_internal_symbol() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_symbol(const std::string &value);
-        std::string *_internal_mutable_symbol();
+  public:
+  // string market = 3;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        // string market = 3;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // double quantity = 4;
+  void clear_quantity() ;
+  double quantity() const;
+  void set_quantity(double value);
 
-       public:
-        // double quantity = 4;
-        void clear_quantity();
-        double quantity() const;
-        void set_quantity(double value);
+  private:
+  double _internal_quantity() const;
+  void _internal_set_quantity(double value);
 
-       private:
-        double _internal_quantity() const;
-        void _internal_set_quantity(double value);
+  public:
+  // double price = 5;
+  void clear_price() ;
+  double price() const;
+  void set_price(double value);
 
-       public:
-        // double price = 5;
-        void clear_price();
-        double price() const;
-        void set_price(double value);
+  private:
+  double _internal_price() const;
+  void _internal_set_price(double value);
 
-       private:
-        double _internal_price() const;
-        void _internal_set_price(double value);
+  public:
+  // .markethub.messaging.trading.SecurityType security_type = 6;
+  void clear_security_type() ;
+  ::markethub::messaging::trading::SecurityType security_type() const;
+  void set_security_type(::markethub::messaging::trading::SecurityType value);
 
-       public:
-        // .markethub.messaging.trading.SecurityType security_type = 6;
-        void clear_security_type();
-        ::markethub::messaging::trading::SecurityType security_type() const;
-        void set_security_type(::markethub::messaging::trading::SecurityType value);
+  private:
+  ::markethub::messaging::trading::SecurityType _internal_security_type() const;
+  void _internal_set_security_type(::markethub::messaging::trading::SecurityType value);
 
-       private:
-        ::markethub::messaging::trading::SecurityType _internal_security_type() const;
-        void _internal_set_security_type(::markethub::messaging::trading::SecurityType value);
+  public:
+  // .markethub.messaging.trading.Side side = 8;
+  void clear_side() ;
+  ::markethub::messaging::trading::Side side() const;
+  void set_side(::markethub::messaging::trading::Side value);
 
-       public:
-        // .markethub.messaging.trading.Side side = 8;
-        void clear_side();
-        ::markethub::messaging::trading::Side side() const;
-        void set_side(::markethub::messaging::trading::Side value);
+  private:
+  ::markethub::messaging::trading::Side _internal_side() const;
+  void _internal_set_side(::markethub::messaging::trading::Side value);
 
-       private:
-        ::markethub::messaging::trading::Side _internal_side() const;
-        void _internal_set_side(::markethub::messaging::trading::Side value);
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.otc.PositionUpdateNotification)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      3, 7, 0,
+      78, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.otc.PositionUpdateNotification)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<3, 7, 0, 78, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_PositionUpdateNotification_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ =
-            &_PositionUpdateNotification_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PositionUpdateNotification& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    ::google::protobuf::internal::ArenaStringPtr symbol_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    double quantity_;
+    double price_;
+    int security_type_;
+    int side_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_otc_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const PositionUpdateNotification &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          ::google::protobuf::internal::ArenaStringPtr symbol_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          double quantity_;
-          double price_;
-          int security_type_;
-          int side_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_otc_2eproto;
-      };
-      // -------------------------------------------------------------------
+class PositionCorrectionNotification final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.otc.PositionCorrectionNotification) */ {
+ public:
+  inline PositionCorrectionNotification() : PositionCorrectionNotification(nullptr) {}
+  ~PositionCorrectionNotification() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PositionCorrectionNotification(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class PositionCorrectionNotification final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.otc.PositionCorrectionNotification)
-       */
-      {
-       public:
-        inline PositionCorrectionNotification() : PositionCorrectionNotification(nullptr) {}
-        ~PositionCorrectionNotification() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR PositionCorrectionNotification(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline PositionCorrectionNotification(const PositionCorrectionNotification &from)
-            : PositionCorrectionNotification(nullptr, from) {}
-        inline PositionCorrectionNotification(PositionCorrectionNotification &&from) noexcept
-            : PositionCorrectionNotification(nullptr, std::move(from)) {}
-        inline PositionCorrectionNotification &operator=(
-            const PositionCorrectionNotification &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline PositionCorrectionNotification &operator=(
-            PositionCorrectionNotification &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline PositionCorrectionNotification(const PositionCorrectionNotification& from) : PositionCorrectionNotification(nullptr, from) {}
+  inline PositionCorrectionNotification(PositionCorrectionNotification&& from) noexcept
+      : PositionCorrectionNotification(nullptr, std::move(from)) {}
+  inline PositionCorrectionNotification& operator=(const PositionCorrectionNotification& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PositionCorrectionNotification& operator=(PositionCorrectionNotification&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const PositionCorrectionNotification &default_instance() {
-          return *internal_default_instance();
-        }
-        static inline const PositionCorrectionNotification *internal_default_instance() {
-          return reinterpret_cast<const PositionCorrectionNotification *>(
-              &_PositionCorrectionNotification_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 2;
-        friend void swap(PositionCorrectionNotification &a, PositionCorrectionNotification &b) {
-          a.Swap(&b);
-        }
-        inline void Swap(PositionCorrectionNotification *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PositionCorrectionNotification& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PositionCorrectionNotification* internal_default_instance() {
+    return reinterpret_cast<const PositionCorrectionNotification*>(
+        &_PositionCorrectionNotification_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(PositionCorrectionNotification& a, PositionCorrectionNotification& b) { a.Swap(&b); }
+  inline void Swap(PositionCorrectionNotification* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(PositionCorrectionNotification *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PositionCorrectionNotification* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        PositionCorrectionNotification *New(::google::protobuf::Arena *arena = nullptr) const
-            PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<PositionCorrectionNotification>(
-              arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const PositionCorrectionNotification &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const PositionCorrectionNotification &from) {
-          PositionCorrectionNotification::MergeImpl(*this, from);
-        }
+  PositionCorrectionNotification* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<PositionCorrectionNotification>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PositionCorrectionNotification& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PositionCorrectionNotification& from) { PositionCorrectionNotification::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(PositionCorrectionNotification *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(PositionCorrectionNotification* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.otc.PositionCorrectionNotification"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.otc.PositionCorrectionNotification";
-        }
+ protected:
+  explicit PositionCorrectionNotification(::google::protobuf::Arena* arena);
+  PositionCorrectionNotification(::google::protobuf::Arena* arena, const PositionCorrectionNotification& from);
+  PositionCorrectionNotification(::google::protobuf::Arena* arena, PositionCorrectionNotification&& from) noexcept
+      : PositionCorrectionNotification(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit PositionCorrectionNotification(::google::protobuf::Arena *arena);
-        PositionCorrectionNotification(::google::protobuf::Arena *arena,
-                                       const PositionCorrectionNotification &from);
-        PositionCorrectionNotification(::google::protobuf::Arena *arena,
-                                       PositionCorrectionNotification &&from) noexcept
-            : PositionCorrectionNotification(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kAccountFieldNumber = 1,
+    kSymbolFieldNumber = 2,
+    kMarketFieldNumber = 3,
+    kOriginalQuantityFieldNumber = 4,
+    kNewQuantityFieldNumber = 5,
+    kOriginalPriceFieldNumber = 6,
+    kNewPriceFieldNumber = 7,
+    kSecurityTypeFieldNumber = 8,
+    kSideFieldNumber = 9,
+  };
+  // string account = 1;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kAccountFieldNumber = 1,
-          kSymbolFieldNumber = 2,
-          kMarketFieldNumber = 3,
-          kOriginalQuantityFieldNumber = 4,
-          kNewQuantityFieldNumber = 5,
-          kOriginalPriceFieldNumber = 6,
-          kNewPriceFieldNumber = 7,
-          kSecurityTypeFieldNumber = 8,
-          kSideFieldNumber = 9,
-        };
-        // string account = 1;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // string symbol = 2;
+  void clear_symbol() ;
+  const std::string& symbol() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_symbol(Arg_&& arg, Args_... args);
+  std::string* mutable_symbol();
+  PROTOBUF_NODISCARD std::string* release_symbol();
+  void set_allocated_symbol(std::string* value);
 
-       public:
-        // string symbol = 2;
-        void clear_symbol();
-        const std::string &symbol() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_symbol(Arg_ &&arg, Args_... args);
-        std::string *mutable_symbol();
-        PROTOBUF_NODISCARD std::string *release_symbol();
-        void set_allocated_symbol(std::string *value);
+  private:
+  const std::string& _internal_symbol() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_symbol(
+      const std::string& value);
+  std::string* _internal_mutable_symbol();
 
-       private:
-        const std::string &_internal_symbol() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_symbol(const std::string &value);
-        std::string *_internal_mutable_symbol();
+  public:
+  // string market = 3;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        // string market = 3;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // double original_quantity = 4;
+  void clear_original_quantity() ;
+  double original_quantity() const;
+  void set_original_quantity(double value);
 
-       public:
-        // double original_quantity = 4;
-        void clear_original_quantity();
-        double original_quantity() const;
-        void set_original_quantity(double value);
+  private:
+  double _internal_original_quantity() const;
+  void _internal_set_original_quantity(double value);
 
-       private:
-        double _internal_original_quantity() const;
-        void _internal_set_original_quantity(double value);
+  public:
+  // double new_quantity = 5;
+  void clear_new_quantity() ;
+  double new_quantity() const;
+  void set_new_quantity(double value);
 
-       public:
-        // double new_quantity = 5;
-        void clear_new_quantity();
-        double new_quantity() const;
-        void set_new_quantity(double value);
+  private:
+  double _internal_new_quantity() const;
+  void _internal_set_new_quantity(double value);
 
-       private:
-        double _internal_new_quantity() const;
-        void _internal_set_new_quantity(double value);
+  public:
+  // double original_price = 6;
+  void clear_original_price() ;
+  double original_price() const;
+  void set_original_price(double value);
 
-       public:
-        // double original_price = 6;
-        void clear_original_price();
-        double original_price() const;
-        void set_original_price(double value);
+  private:
+  double _internal_original_price() const;
+  void _internal_set_original_price(double value);
 
-       private:
-        double _internal_original_price() const;
-        void _internal_set_original_price(double value);
+  public:
+  // double new_price = 7;
+  void clear_new_price() ;
+  double new_price() const;
+  void set_new_price(double value);
 
-       public:
-        // double new_price = 7;
-        void clear_new_price();
-        double new_price() const;
-        void set_new_price(double value);
+  private:
+  double _internal_new_price() const;
+  void _internal_set_new_price(double value);
 
-       private:
-        double _internal_new_price() const;
-        void _internal_set_new_price(double value);
+  public:
+  // .markethub.messaging.trading.SecurityType security_type = 8;
+  void clear_security_type() ;
+  ::markethub::messaging::trading::SecurityType security_type() const;
+  void set_security_type(::markethub::messaging::trading::SecurityType value);
 
-       public:
-        // .markethub.messaging.trading.SecurityType security_type = 8;
-        void clear_security_type();
-        ::markethub::messaging::trading::SecurityType security_type() const;
-        void set_security_type(::markethub::messaging::trading::SecurityType value);
+  private:
+  ::markethub::messaging::trading::SecurityType _internal_security_type() const;
+  void _internal_set_security_type(::markethub::messaging::trading::SecurityType value);
 
-       private:
-        ::markethub::messaging::trading::SecurityType _internal_security_type() const;
-        void _internal_set_security_type(::markethub::messaging::trading::SecurityType value);
+  public:
+  // .markethub.messaging.trading.Side side = 9;
+  void clear_side() ;
+  ::markethub::messaging::trading::Side side() const;
+  void set_side(::markethub::messaging::trading::Side value);
 
-       public:
-        // .markethub.messaging.trading.Side side = 9;
-        void clear_side();
-        ::markethub::messaging::trading::Side side() const;
-        void set_side(::markethub::messaging::trading::Side value);
+  private:
+  ::markethub::messaging::trading::Side _internal_side() const;
+  void _internal_set_side(::markethub::messaging::trading::Side value);
 
-       private:
-        ::markethub::messaging::trading::Side _internal_side() const;
-        void _internal_set_side(::markethub::messaging::trading::Side value);
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.otc.PositionCorrectionNotification)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      4, 9, 0,
+      90, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.otc.PositionCorrectionNotification)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<4, 9, 0, 90, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_PositionCorrectionNotification_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ =
-            &_PositionCorrectionNotification_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PositionCorrectionNotification& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    ::google::protobuf::internal::ArenaStringPtr symbol_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    double original_quantity_;
+    double new_quantity_;
+    double original_price_;
+    double new_price_;
+    int security_type_;
+    int side_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_otc_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const PositionCorrectionNotification &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          ::google::protobuf::internal::ArenaStringPtr symbol_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          double original_quantity_;
-          double new_quantity_;
-          double original_price_;
-          double new_price_;
-          int security_type_;
-          int side_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_otc_2eproto;
-      };
-      // -------------------------------------------------------------------
+class OTCTradeReport final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.otc.OTCTradeReport) */ {
+ public:
+  inline OTCTradeReport() : OTCTradeReport(nullptr) {}
+  ~OTCTradeReport() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR OTCTradeReport(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class OTCTradeReport final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.otc.OTCTradeReport) */ {
-       public:
-        inline OTCTradeReport() : OTCTradeReport(nullptr) {}
-        ~OTCTradeReport() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR OTCTradeReport(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline OTCTradeReport(const OTCTradeReport &from) : OTCTradeReport(nullptr, from) {}
-        inline OTCTradeReport(OTCTradeReport &&from) noexcept
-            : OTCTradeReport(nullptr, std::move(from)) {}
-        inline OTCTradeReport &operator=(const OTCTradeReport &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline OTCTradeReport &operator=(OTCTradeReport &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline OTCTradeReport(const OTCTradeReport& from) : OTCTradeReport(nullptr, from) {}
+  inline OTCTradeReport(OTCTradeReport&& from) noexcept
+      : OTCTradeReport(nullptr, std::move(from)) {}
+  inline OTCTradeReport& operator=(const OTCTradeReport& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline OTCTradeReport& operator=(OTCTradeReport&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const OTCTradeReport &default_instance() { return *internal_default_instance(); }
-        static inline const OTCTradeReport *internal_default_instance() {
-          return reinterpret_cast<const OTCTradeReport *>(&_OTCTradeReport_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 0;
-        friend void swap(OTCTradeReport &a, OTCTradeReport &b) { a.Swap(&b); }
-        inline void Swap(OTCTradeReport *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const OTCTradeReport& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const OTCTradeReport* internal_default_instance() {
+    return reinterpret_cast<const OTCTradeReport*>(
+        &_OTCTradeReport_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 0;
+  friend void swap(OTCTradeReport& a, OTCTradeReport& b) { a.Swap(&b); }
+  inline void Swap(OTCTradeReport* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(OTCTradeReport *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(OTCTradeReport* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        OTCTradeReport *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<OTCTradeReport>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const OTCTradeReport &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const OTCTradeReport &from) { OTCTradeReport::MergeImpl(*this, from); }
+  OTCTradeReport* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<OTCTradeReport>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const OTCTradeReport& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const OTCTradeReport& from) { OTCTradeReport::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(OTCTradeReport *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(OTCTradeReport* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.otc.OTCTradeReport"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.otc.OTCTradeReport";
-        }
+ protected:
+  explicit OTCTradeReport(::google::protobuf::Arena* arena);
+  OTCTradeReport(::google::protobuf::Arena* arena, const OTCTradeReport& from);
+  OTCTradeReport(::google::protobuf::Arena* arena, OTCTradeReport&& from) noexcept
+      : OTCTradeReport(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit OTCTradeReport(::google::protobuf::Arena *arena);
-        OTCTradeReport(::google::protobuf::Arena *arena, const OTCTradeReport &from);
-        OTCTradeReport(::google::protobuf::Arena *arena, OTCTradeReport &&from) noexcept
-            : OTCTradeReport(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kSymbolFieldNumber = 1,
+    kMarketFieldNumber = 2,
+    kTransactionTimeStrFieldNumber = 7,
+    kContraFirmPartyNrFieldNumber = 8,
+    kSettlementDateFieldNumber = 3,
+    kQuantityFieldNumber = 4,
+    kPriceFieldNumber = 5,
+    kSideFieldNumber = 6,
+  };
+  // string symbol = 1;
+  void clear_symbol() ;
+  const std::string& symbol() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_symbol(Arg_&& arg, Args_... args);
+  std::string* mutable_symbol();
+  PROTOBUF_NODISCARD std::string* release_symbol();
+  void set_allocated_symbol(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kSymbolFieldNumber = 1,
-          kMarketFieldNumber = 2,
-          kTransactionTimeStrFieldNumber = 7,
-          kContraFirmPartyNrFieldNumber = 8,
-          kSettlementDateFieldNumber = 3,
-          kQuantityFieldNumber = 4,
-          kPriceFieldNumber = 5,
-          kSideFieldNumber = 6,
-        };
-        // string symbol = 1;
-        void clear_symbol();
-        const std::string &symbol() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_symbol(Arg_ &&arg, Args_... args);
-        std::string *mutable_symbol();
-        PROTOBUF_NODISCARD std::string *release_symbol();
-        void set_allocated_symbol(std::string *value);
+  private:
+  const std::string& _internal_symbol() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_symbol(
+      const std::string& value);
+  std::string* _internal_mutable_symbol();
 
-       private:
-        const std::string &_internal_symbol() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_symbol(const std::string &value);
-        std::string *_internal_mutable_symbol();
+  public:
+  // string market = 2;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        // string market = 2;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // string transaction_time_str = 7;
+  void clear_transaction_time_str() ;
+  const std::string& transaction_time_str() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_transaction_time_str(Arg_&& arg, Args_... args);
+  std::string* mutable_transaction_time_str();
+  PROTOBUF_NODISCARD std::string* release_transaction_time_str();
+  void set_allocated_transaction_time_str(std::string* value);
 
-       public:
-        // string transaction_time_str = 7;
-        void clear_transaction_time_str();
-        const std::string &transaction_time_str() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_transaction_time_str(Arg_ &&arg, Args_... args);
-        std::string *mutable_transaction_time_str();
-        PROTOBUF_NODISCARD std::string *release_transaction_time_str();
-        void set_allocated_transaction_time_str(std::string *value);
+  private:
+  const std::string& _internal_transaction_time_str() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_transaction_time_str(
+      const std::string& value);
+  std::string* _internal_mutable_transaction_time_str();
 
-       private:
-        const std::string &_internal_transaction_time_str() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_transaction_time_str(
-            const std::string &value);
-        std::string *_internal_mutable_transaction_time_str();
+  public:
+  // string contra_firm_party_nr = 8;
+  void clear_contra_firm_party_nr() ;
+  const std::string& contra_firm_party_nr() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_contra_firm_party_nr(Arg_&& arg, Args_... args);
+  std::string* mutable_contra_firm_party_nr();
+  PROTOBUF_NODISCARD std::string* release_contra_firm_party_nr();
+  void set_allocated_contra_firm_party_nr(std::string* value);
 
-       public:
-        // string contra_firm_party_nr = 8;
-        void clear_contra_firm_party_nr();
-        const std::string &contra_firm_party_nr() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_contra_firm_party_nr(Arg_ &&arg, Args_... args);
-        std::string *mutable_contra_firm_party_nr();
-        PROTOBUF_NODISCARD std::string *release_contra_firm_party_nr();
-        void set_allocated_contra_firm_party_nr(std::string *value);
+  private:
+  const std::string& _internal_contra_firm_party_nr() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_contra_firm_party_nr(
+      const std::string& value);
+  std::string* _internal_mutable_contra_firm_party_nr();
 
-       private:
-        const std::string &_internal_contra_firm_party_nr() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_contra_firm_party_nr(
-            const std::string &value);
-        std::string *_internal_mutable_contra_firm_party_nr();
+  public:
+  // int64 settlement_date = 3;
+  void clear_settlement_date() ;
+  ::int64_t settlement_date() const;
+  void set_settlement_date(::int64_t value);
 
-       public:
-        // int64 settlement_date = 3;
-        void clear_settlement_date();
-        ::int64_t settlement_date() const;
-        void set_settlement_date(::int64_t value);
+  private:
+  ::int64_t _internal_settlement_date() const;
+  void _internal_set_settlement_date(::int64_t value);
 
-       private:
-        ::int64_t _internal_settlement_date() const;
-        void _internal_set_settlement_date(::int64_t value);
+  public:
+  // double quantity = 4;
+  void clear_quantity() ;
+  double quantity() const;
+  void set_quantity(double value);
 
-       public:
-        // double quantity = 4;
-        void clear_quantity();
-        double quantity() const;
-        void set_quantity(double value);
+  private:
+  double _internal_quantity() const;
+  void _internal_set_quantity(double value);
 
-       private:
-        double _internal_quantity() const;
-        void _internal_set_quantity(double value);
+  public:
+  // double price = 5;
+  void clear_price() ;
+  double price() const;
+  void set_price(double value);
 
-       public:
-        // double price = 5;
-        void clear_price();
-        double price() const;
-        void set_price(double value);
+  private:
+  double _internal_price() const;
+  void _internal_set_price(double value);
 
-       private:
-        double _internal_price() const;
-        void _internal_set_price(double value);
+  public:
+  // .markethub.messaging.trading.Side side = 6;
+  void clear_side() ;
+  ::markethub::messaging::trading::Side side() const;
+  void set_side(::markethub::messaging::trading::Side value);
 
-       public:
-        // .markethub.messaging.trading.Side side = 6;
-        void clear_side();
-        ::markethub::messaging::trading::Side side() const;
-        void set_side(::markethub::messaging::trading::Side value);
+  private:
+  ::markethub::messaging::trading::Side _internal_side() const;
+  void _internal_set_side(::markethub::messaging::trading::Side value);
 
-       private:
-        ::markethub::messaging::trading::Side _internal_side() const;
-        void _internal_set_side(::markethub::messaging::trading::Side value);
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.otc.OTCTradeReport)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      3, 8, 0,
+      107, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.otc.OTCTradeReport)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<3, 8, 0, 107, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_OTCTradeReport_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ = &_OTCTradeReport_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const OTCTradeReport& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr symbol_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr transaction_time_str_;
+    ::google::protobuf::internal::ArenaStringPtr contra_firm_party_nr_;
+    ::int64_t settlement_date_;
+    double quantity_;
+    double price_;
+    int side_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_otc_2eproto;
+};
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const OTCTradeReport &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr symbol_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr transaction_time_str_;
-          ::google::protobuf::internal::ArenaStringPtr contra_firm_party_nr_;
-          ::int64_t settlement_date_;
-          double quantity_;
-          double price_;
-          int side_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_otc_2eproto;
-      };
+// ===================================================================
 
-      // ===================================================================
 
-      // ===================================================================
+
+
+// ===================================================================
+
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif // __GNUC__
-      // -------------------------------------------------------------------
+#endif  // __GNUC__
+// -------------------------------------------------------------------
 
-      // OTCTradeReport
+// OTCTradeReport
 
-      // string symbol = 1;
-      inline void OTCTradeReport::clear_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.ClearToEmpty();
-      }
-      inline const std::string &OTCTradeReport::symbol() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.symbol)
-        return _internal_symbol();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_symbol(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.symbol)
-      }
-      inline std::string *OTCTradeReport::mutable_symbol() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_symbol();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.symbol)
-        return _s;
-      }
-      inline const std::string &OTCTradeReport::_internal_symbol() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.symbol_.Get();
-      }
-      inline void OTCTradeReport::_internal_set_symbol(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.Set(value, GetArena());
-      }
-      inline std::string *OTCTradeReport::_internal_mutable_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.symbol_.Mutable(GetArena());
-      }
-      inline std::string *OTCTradeReport::release_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.symbol)
-        return _impl_.symbol_.Release();
-      }
-      inline void OTCTradeReport::set_allocated_symbol(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string symbol = 1;
+inline void OTCTradeReport::clear_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.ClearToEmpty();
+}
+inline const std::string& OTCTradeReport::symbol() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.symbol)
+  return _internal_symbol();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_symbol(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.symbol)
+}
+inline std::string* OTCTradeReport::mutable_symbol() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_symbol();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.symbol)
+  return _s;
+}
+inline const std::string& OTCTradeReport::_internal_symbol() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.symbol_.Get();
+}
+inline void OTCTradeReport::_internal_set_symbol(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.Set(value, GetArena());
+}
+inline std::string* OTCTradeReport::_internal_mutable_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.symbol_.Mutable( GetArena());
+}
+inline std::string* OTCTradeReport::release_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.symbol)
+  return _impl_.symbol_.Release();
+}
+inline void OTCTradeReport::set_allocated_symbol(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.symbol_.IsDefault()) {
           _impl_.symbol_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.symbol)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.symbol)
+}
 
-      // string market = 2;
-      inline void OTCTradeReport::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &OTCTradeReport::market() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_market(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.market)
-      }
-      inline std::string *OTCTradeReport::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.market)
-        return _s;
-      }
-      inline const std::string &OTCTradeReport::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void OTCTradeReport::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *OTCTradeReport::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *OTCTradeReport::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.market)
-        return _impl_.market_.Release();
-      }
-      inline void OTCTradeReport::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 2;
+inline void OTCTradeReport::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& OTCTradeReport::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.market)
+}
+inline std::string* OTCTradeReport::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.market)
+  return _s;
+}
+inline const std::string& OTCTradeReport::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void OTCTradeReport::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* OTCTradeReport::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* OTCTradeReport::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.market)
+  return _impl_.market_.Release();
+}
+inline void OTCTradeReport::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.market)
+}
 
-      // int64 settlement_date = 3;
-      inline void OTCTradeReport::clear_settlement_date() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_date_ = ::int64_t{0};
-      }
-      inline ::int64_t OTCTradeReport::settlement_date() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.settlement_date)
-        return _internal_settlement_date();
-      }
-      inline void OTCTradeReport::set_settlement_date(::int64_t value) {
-        _internal_set_settlement_date(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.settlement_date)
-      }
-      inline ::int64_t OTCTradeReport::_internal_settlement_date() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.settlement_date_;
-      }
-      inline void OTCTradeReport::_internal_set_settlement_date(::int64_t value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_date_ = value;
-      }
+// int64 settlement_date = 3;
+inline void OTCTradeReport::clear_settlement_date() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_date_ = ::int64_t{0};
+}
+inline ::int64_t OTCTradeReport::settlement_date() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.settlement_date)
+  return _internal_settlement_date();
+}
+inline void OTCTradeReport::set_settlement_date(::int64_t value) {
+  _internal_set_settlement_date(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.settlement_date)
+}
+inline ::int64_t OTCTradeReport::_internal_settlement_date() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.settlement_date_;
+}
+inline void OTCTradeReport::_internal_set_settlement_date(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_date_ = value;
+}
 
-      // double quantity = 4;
-      inline void OTCTradeReport::clear_quantity() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.quantity_ = 0;
-      }
-      inline double OTCTradeReport::quantity() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.quantity)
-        return _internal_quantity();
-      }
-      inline void OTCTradeReport::set_quantity(double value) {
-        _internal_set_quantity(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.quantity)
-      }
-      inline double OTCTradeReport::_internal_quantity() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.quantity_;
-      }
-      inline void OTCTradeReport::_internal_set_quantity(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.quantity_ = value;
-      }
+// double quantity = 4;
+inline void OTCTradeReport::clear_quantity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.quantity_ = 0;
+}
+inline double OTCTradeReport::quantity() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.quantity)
+  return _internal_quantity();
+}
+inline void OTCTradeReport::set_quantity(double value) {
+  _internal_set_quantity(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.quantity)
+}
+inline double OTCTradeReport::_internal_quantity() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.quantity_;
+}
+inline void OTCTradeReport::_internal_set_quantity(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.quantity_ = value;
+}
 
-      // double price = 5;
-      inline void OTCTradeReport::clear_price() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.price_ = 0;
-      }
-      inline double OTCTradeReport::price() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.price)
-        return _internal_price();
-      }
-      inline void OTCTradeReport::set_price(double value) {
-        _internal_set_price(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.price)
-      }
-      inline double OTCTradeReport::_internal_price() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.price_;
-      }
-      inline void OTCTradeReport::_internal_set_price(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.price_ = value;
-      }
+// double price = 5;
+inline void OTCTradeReport::clear_price() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.price_ = 0;
+}
+inline double OTCTradeReport::price() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.price)
+  return _internal_price();
+}
+inline void OTCTradeReport::set_price(double value) {
+  _internal_set_price(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.price)
+}
+inline double OTCTradeReport::_internal_price() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.price_;
+}
+inline void OTCTradeReport::_internal_set_price(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.price_ = value;
+}
 
-      // .markethub.messaging.trading.Side side = 6;
-      inline void OTCTradeReport::clear_side() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.side_ = 0;
-      }
-      inline ::markethub::messaging::trading::Side OTCTradeReport::side() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.side)
-        return _internal_side();
-      }
-      inline void OTCTradeReport::set_side(::markethub::messaging::trading::Side value) {
-        _internal_set_side(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.side)
-      }
-      inline ::markethub::messaging::trading::Side OTCTradeReport::_internal_side() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return static_cast<::markethub::messaging::trading::Side>(_impl_.side_);
-      }
-      inline void OTCTradeReport::_internal_set_side(::markethub::messaging::trading::Side value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.side_ = value;
-      }
+// .markethub.messaging.trading.Side side = 6;
+inline void OTCTradeReport::clear_side() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.side_ = 0;
+}
+inline ::markethub::messaging::trading::Side OTCTradeReport::side() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.side)
+  return _internal_side();
+}
+inline void OTCTradeReport::set_side(::markethub::messaging::trading::Side value) {
+  _internal_set_side(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.side)
+}
+inline ::markethub::messaging::trading::Side OTCTradeReport::_internal_side() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::markethub::messaging::trading::Side>(_impl_.side_);
+}
+inline void OTCTradeReport::_internal_set_side(::markethub::messaging::trading::Side value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.side_ = value;
+}
 
-      // string transaction_time_str = 7;
-      inline void OTCTradeReport::clear_transaction_time_str() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.transaction_time_str_.ClearToEmpty();
-      }
-      inline const std::string &OTCTradeReport::transaction_time_str() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
-        return _internal_transaction_time_str();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_transaction_time_str(Arg_ &&arg,
-                                                                                  Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.transaction_time_str_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
-      }
-      inline std::string *OTCTradeReport::mutable_transaction_time_str()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_transaction_time_str();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
-        return _s;
-      }
-      inline const std::string &OTCTradeReport::_internal_transaction_time_str() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.transaction_time_str_.Get();
-      }
-      inline void OTCTradeReport::_internal_set_transaction_time_str(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.transaction_time_str_.Set(value, GetArena());
-      }
-      inline std::string *OTCTradeReport::_internal_mutable_transaction_time_str() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.transaction_time_str_.Mutable(GetArena());
-      }
-      inline std::string *OTCTradeReport::release_transaction_time_str() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
-        return _impl_.transaction_time_str_.Release();
-      }
-      inline void OTCTradeReport::set_allocated_transaction_time_str(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.transaction_time_str_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string transaction_time_str = 7;
+inline void OTCTradeReport::clear_transaction_time_str() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.transaction_time_str_.ClearToEmpty();
+}
+inline const std::string& OTCTradeReport::transaction_time_str() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
+  return _internal_transaction_time_str();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_transaction_time_str(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.transaction_time_str_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
+}
+inline std::string* OTCTradeReport::mutable_transaction_time_str() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_transaction_time_str();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
+  return _s;
+}
+inline const std::string& OTCTradeReport::_internal_transaction_time_str() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.transaction_time_str_.Get();
+}
+inline void OTCTradeReport::_internal_set_transaction_time_str(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.transaction_time_str_.Set(value, GetArena());
+}
+inline std::string* OTCTradeReport::_internal_mutable_transaction_time_str() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.transaction_time_str_.Mutable( GetArena());
+}
+inline std::string* OTCTradeReport::release_transaction_time_str() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
+  return _impl_.transaction_time_str_.Release();
+}
+inline void OTCTradeReport::set_allocated_transaction_time_str(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.transaction_time_str_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.transaction_time_str_.IsDefault()) {
           _impl_.transaction_time_str_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.transaction_time_str)
+}
 
-      // string contra_firm_party_nr = 8;
-      inline void OTCTradeReport::clear_contra_firm_party_nr() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.contra_firm_party_nr_.ClearToEmpty();
-      }
-      inline const std::string &OTCTradeReport::contra_firm_party_nr() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
-        return _internal_contra_firm_party_nr();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_contra_firm_party_nr(Arg_ &&arg,
-                                                                                  Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.contra_firm_party_nr_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
-      }
-      inline std::string *OTCTradeReport::mutable_contra_firm_party_nr()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_contra_firm_party_nr();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
-        return _s;
-      }
-      inline const std::string &OTCTradeReport::_internal_contra_firm_party_nr() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.contra_firm_party_nr_.Get();
-      }
-      inline void OTCTradeReport::_internal_set_contra_firm_party_nr(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.contra_firm_party_nr_.Set(value, GetArena());
-      }
-      inline std::string *OTCTradeReport::_internal_mutable_contra_firm_party_nr() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.contra_firm_party_nr_.Mutable(GetArena());
-      }
-      inline std::string *OTCTradeReport::release_contra_firm_party_nr() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
-        return _impl_.contra_firm_party_nr_.Release();
-      }
-      inline void OTCTradeReport::set_allocated_contra_firm_party_nr(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.contra_firm_party_nr_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string contra_firm_party_nr = 8;
+inline void OTCTradeReport::clear_contra_firm_party_nr() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.contra_firm_party_nr_.ClearToEmpty();
+}
+inline const std::string& OTCTradeReport::contra_firm_party_nr() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
+  return _internal_contra_firm_party_nr();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void OTCTradeReport::set_contra_firm_party_nr(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.contra_firm_party_nr_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
+}
+inline std::string* OTCTradeReport::mutable_contra_firm_party_nr() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_contra_firm_party_nr();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
+  return _s;
+}
+inline const std::string& OTCTradeReport::_internal_contra_firm_party_nr() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.contra_firm_party_nr_.Get();
+}
+inline void OTCTradeReport::_internal_set_contra_firm_party_nr(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.contra_firm_party_nr_.Set(value, GetArena());
+}
+inline std::string* OTCTradeReport::_internal_mutable_contra_firm_party_nr() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.contra_firm_party_nr_.Mutable( GetArena());
+}
+inline std::string* OTCTradeReport::release_contra_firm_party_nr() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
+  return _impl_.contra_firm_party_nr_.Release();
+}
+inline void OTCTradeReport::set_allocated_contra_firm_party_nr(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.contra_firm_party_nr_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.contra_firm_party_nr_.IsDefault()) {
           _impl_.contra_firm_party_nr_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.OTCTradeReport.contra_firm_party_nr)
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // PositionUpdateNotification
+// PositionUpdateNotification
 
-      // string account = 1;
-      inline void PositionUpdateNotification::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &PositionUpdateNotification::account() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PositionUpdateNotification::set_account(Arg_ &&arg,
-                                                                                 Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.account)
-      }
-      inline std::string *PositionUpdateNotification::mutable_account()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionUpdateNotification.account)
-        return _s;
-      }
-      inline const std::string &PositionUpdateNotification::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void PositionUpdateNotification::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *PositionUpdateNotification::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *PositionUpdateNotification::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionUpdateNotification.account)
-        return _impl_.account_.Release();
-      }
-      inline void PositionUpdateNotification::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 1;
+inline void PositionUpdateNotification::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& PositionUpdateNotification::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PositionUpdateNotification::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.account)
+}
+inline std::string* PositionUpdateNotification::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionUpdateNotification.account)
+  return _s;
+}
+inline const std::string& PositionUpdateNotification::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void PositionUpdateNotification::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* PositionUpdateNotification::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* PositionUpdateNotification::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionUpdateNotification.account)
+  return _impl_.account_.Release();
+}
+inline void PositionUpdateNotification::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionUpdateNotification.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionUpdateNotification.account)
+}
 
-      // string symbol = 2;
-      inline void PositionUpdateNotification::clear_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.ClearToEmpty();
-      }
-      inline const std::string &PositionUpdateNotification::symbol() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.symbol)
-        return _internal_symbol();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PositionUpdateNotification::set_symbol(Arg_ &&arg,
-                                                                                Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.symbol)
-      }
-      inline std::string *PositionUpdateNotification::mutable_symbol()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_symbol();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionUpdateNotification.symbol)
-        return _s;
-      }
-      inline const std::string &PositionUpdateNotification::_internal_symbol() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.symbol_.Get();
-      }
-      inline void PositionUpdateNotification::_internal_set_symbol(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.Set(value, GetArena());
-      }
-      inline std::string *PositionUpdateNotification::_internal_mutable_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.symbol_.Mutable(GetArena());
-      }
-      inline std::string *PositionUpdateNotification::release_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionUpdateNotification.symbol)
-        return _impl_.symbol_.Release();
-      }
-      inline void PositionUpdateNotification::set_allocated_symbol(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string symbol = 2;
+inline void PositionUpdateNotification::clear_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.ClearToEmpty();
+}
+inline const std::string& PositionUpdateNotification::symbol() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.symbol)
+  return _internal_symbol();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PositionUpdateNotification::set_symbol(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.symbol)
+}
+inline std::string* PositionUpdateNotification::mutable_symbol() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_symbol();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionUpdateNotification.symbol)
+  return _s;
+}
+inline const std::string& PositionUpdateNotification::_internal_symbol() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.symbol_.Get();
+}
+inline void PositionUpdateNotification::_internal_set_symbol(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.Set(value, GetArena());
+}
+inline std::string* PositionUpdateNotification::_internal_mutable_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.symbol_.Mutable( GetArena());
+}
+inline std::string* PositionUpdateNotification::release_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionUpdateNotification.symbol)
+  return _impl_.symbol_.Release();
+}
+inline void PositionUpdateNotification::set_allocated_symbol(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.symbol_.IsDefault()) {
           _impl_.symbol_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionUpdateNotification.symbol)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionUpdateNotification.symbol)
+}
 
-      // string market = 3;
-      inline void PositionUpdateNotification::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &PositionUpdateNotification::market() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PositionUpdateNotification::set_market(Arg_ &&arg,
-                                                                                Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.market)
-      }
-      inline std::string *PositionUpdateNotification::mutable_market()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionUpdateNotification.market)
-        return _s;
-      }
-      inline const std::string &PositionUpdateNotification::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void PositionUpdateNotification::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *PositionUpdateNotification::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *PositionUpdateNotification::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionUpdateNotification.market)
-        return _impl_.market_.Release();
-      }
-      inline void PositionUpdateNotification::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 3;
+inline void PositionUpdateNotification::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& PositionUpdateNotification::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PositionUpdateNotification::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.market)
+}
+inline std::string* PositionUpdateNotification::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionUpdateNotification.market)
+  return _s;
+}
+inline const std::string& PositionUpdateNotification::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void PositionUpdateNotification::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* PositionUpdateNotification::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* PositionUpdateNotification::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionUpdateNotification.market)
+  return _impl_.market_.Release();
+}
+inline void PositionUpdateNotification::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionUpdateNotification.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionUpdateNotification.market)
+}
 
-      // double quantity = 4;
-      inline void PositionUpdateNotification::clear_quantity() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.quantity_ = 0;
-      }
-      inline double PositionUpdateNotification::quantity() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.quantity)
-        return _internal_quantity();
-      }
-      inline void PositionUpdateNotification::set_quantity(double value) {
-        _internal_set_quantity(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.quantity)
-      }
-      inline double PositionUpdateNotification::_internal_quantity() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.quantity_;
-      }
-      inline void PositionUpdateNotification::_internal_set_quantity(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.quantity_ = value;
-      }
+// double quantity = 4;
+inline void PositionUpdateNotification::clear_quantity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.quantity_ = 0;
+}
+inline double PositionUpdateNotification::quantity() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.quantity)
+  return _internal_quantity();
+}
+inline void PositionUpdateNotification::set_quantity(double value) {
+  _internal_set_quantity(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.quantity)
+}
+inline double PositionUpdateNotification::_internal_quantity() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.quantity_;
+}
+inline void PositionUpdateNotification::_internal_set_quantity(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.quantity_ = value;
+}
 
-      // double price = 5;
-      inline void PositionUpdateNotification::clear_price() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.price_ = 0;
-      }
-      inline double PositionUpdateNotification::price() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.price)
-        return _internal_price();
-      }
-      inline void PositionUpdateNotification::set_price(double value) {
-        _internal_set_price(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.price)
-      }
-      inline double PositionUpdateNotification::_internal_price() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.price_;
-      }
-      inline void PositionUpdateNotification::_internal_set_price(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.price_ = value;
-      }
+// double price = 5;
+inline void PositionUpdateNotification::clear_price() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.price_ = 0;
+}
+inline double PositionUpdateNotification::price() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.price)
+  return _internal_price();
+}
+inline void PositionUpdateNotification::set_price(double value) {
+  _internal_set_price(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.price)
+}
+inline double PositionUpdateNotification::_internal_price() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.price_;
+}
+inline void PositionUpdateNotification::_internal_set_price(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.price_ = value;
+}
 
-      // .markethub.messaging.trading.SecurityType security_type = 6;
-      inline void PositionUpdateNotification::clear_security_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.security_type_ = 0;
-      }
-      inline ::markethub::messaging::trading::SecurityType
-      PositionUpdateNotification::security_type() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.security_type)
-        return _internal_security_type();
-      }
-      inline void PositionUpdateNotification::set_security_type(
-          ::markethub::messaging::trading::SecurityType value) {
-        _internal_set_security_type(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.security_type)
-      }
-      inline ::markethub::messaging::trading::SecurityType
-      PositionUpdateNotification::_internal_security_type() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return static_cast<::markethub::messaging::trading::SecurityType>(_impl_.security_type_);
-      }
-      inline void PositionUpdateNotification::_internal_set_security_type(
-          ::markethub::messaging::trading::SecurityType value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.security_type_ = value;
-      }
+// .markethub.messaging.trading.SecurityType security_type = 6;
+inline void PositionUpdateNotification::clear_security_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.security_type_ = 0;
+}
+inline ::markethub::messaging::trading::SecurityType PositionUpdateNotification::security_type() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.security_type)
+  return _internal_security_type();
+}
+inline void PositionUpdateNotification::set_security_type(::markethub::messaging::trading::SecurityType value) {
+  _internal_set_security_type(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.security_type)
+}
+inline ::markethub::messaging::trading::SecurityType PositionUpdateNotification::_internal_security_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::markethub::messaging::trading::SecurityType>(_impl_.security_type_);
+}
+inline void PositionUpdateNotification::_internal_set_security_type(::markethub::messaging::trading::SecurityType value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.security_type_ = value;
+}
 
-      // .markethub.messaging.trading.Side side = 8;
-      inline void PositionUpdateNotification::clear_side() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.side_ = 0;
-      }
-      inline ::markethub::messaging::trading::Side PositionUpdateNotification::side() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.side)
-        return _internal_side();
-      }
-      inline void PositionUpdateNotification::set_side(
-          ::markethub::messaging::trading::Side value) {
-        _internal_set_side(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.side)
-      }
-      inline ::markethub::messaging::trading::Side PositionUpdateNotification::_internal_side()
-          const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return static_cast<::markethub::messaging::trading::Side>(_impl_.side_);
-      }
-      inline void PositionUpdateNotification::_internal_set_side(
-          ::markethub::messaging::trading::Side value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.side_ = value;
-      }
+// .markethub.messaging.trading.Side side = 8;
+inline void PositionUpdateNotification::clear_side() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.side_ = 0;
+}
+inline ::markethub::messaging::trading::Side PositionUpdateNotification::side() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionUpdateNotification.side)
+  return _internal_side();
+}
+inline void PositionUpdateNotification::set_side(::markethub::messaging::trading::Side value) {
+  _internal_set_side(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionUpdateNotification.side)
+}
+inline ::markethub::messaging::trading::Side PositionUpdateNotification::_internal_side() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::markethub::messaging::trading::Side>(_impl_.side_);
+}
+inline void PositionUpdateNotification::_internal_set_side(::markethub::messaging::trading::Side value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.side_ = value;
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // PositionCorrectionNotification
+// PositionCorrectionNotification
 
-      // string account = 1;
-      inline void PositionCorrectionNotification::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &PositionCorrectionNotification::account() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PositionCorrectionNotification::set_account(
-          Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.account)
-      }
-      inline std::string *PositionCorrectionNotification::mutable_account()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionCorrectionNotification.account)
-        return _s;
-      }
-      inline const std::string &PositionCorrectionNotification::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void PositionCorrectionNotification::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *PositionCorrectionNotification::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *PositionCorrectionNotification::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionCorrectionNotification.account)
-        return _impl_.account_.Release();
-      }
-      inline void PositionCorrectionNotification::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 1;
+inline void PositionCorrectionNotification::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& PositionCorrectionNotification::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PositionCorrectionNotification::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.account)
+}
+inline std::string* PositionCorrectionNotification::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionCorrectionNotification.account)
+  return _s;
+}
+inline const std::string& PositionCorrectionNotification::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void PositionCorrectionNotification::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* PositionCorrectionNotification::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* PositionCorrectionNotification::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionCorrectionNotification.account)
+  return _impl_.account_.Release();
+}
+inline void PositionCorrectionNotification::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionCorrectionNotification.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionCorrectionNotification.account)
+}
 
-      // string symbol = 2;
-      inline void PositionCorrectionNotification::clear_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.ClearToEmpty();
-      }
-      inline const std::string &PositionCorrectionNotification::symbol() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.symbol)
-        return _internal_symbol();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PositionCorrectionNotification::set_symbol(Arg_ &&arg,
-                                                                                    Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.symbol)
-      }
-      inline std::string *PositionCorrectionNotification::mutable_symbol()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_symbol();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionCorrectionNotification.symbol)
-        return _s;
-      }
-      inline const std::string &PositionCorrectionNotification::_internal_symbol() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.symbol_.Get();
-      }
-      inline void PositionCorrectionNotification::_internal_set_symbol(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.Set(value, GetArena());
-      }
-      inline std::string *PositionCorrectionNotification::_internal_mutable_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.symbol_.Mutable(GetArena());
-      }
-      inline std::string *PositionCorrectionNotification::release_symbol() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionCorrectionNotification.symbol)
-        return _impl_.symbol_.Release();
-      }
-      inline void PositionCorrectionNotification::set_allocated_symbol(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.symbol_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string symbol = 2;
+inline void PositionCorrectionNotification::clear_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.ClearToEmpty();
+}
+inline const std::string& PositionCorrectionNotification::symbol() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.symbol)
+  return _internal_symbol();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PositionCorrectionNotification::set_symbol(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.symbol)
+}
+inline std::string* PositionCorrectionNotification::mutable_symbol() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_symbol();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionCorrectionNotification.symbol)
+  return _s;
+}
+inline const std::string& PositionCorrectionNotification::_internal_symbol() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.symbol_.Get();
+}
+inline void PositionCorrectionNotification::_internal_set_symbol(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.Set(value, GetArena());
+}
+inline std::string* PositionCorrectionNotification::_internal_mutable_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.symbol_.Mutable( GetArena());
+}
+inline std::string* PositionCorrectionNotification::release_symbol() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionCorrectionNotification.symbol)
+  return _impl_.symbol_.Release();
+}
+inline void PositionCorrectionNotification::set_allocated_symbol(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.symbol_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.symbol_.IsDefault()) {
           _impl_.symbol_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionCorrectionNotification.symbol)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionCorrectionNotification.symbol)
+}
 
-      // string market = 3;
-      inline void PositionCorrectionNotification::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &PositionCorrectionNotification::market() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PositionCorrectionNotification::set_market(Arg_ &&arg,
-                                                                                    Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.market)
-      }
-      inline std::string *PositionCorrectionNotification::mutable_market()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionCorrectionNotification.market)
-        return _s;
-      }
-      inline const std::string &PositionCorrectionNotification::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void PositionCorrectionNotification::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *PositionCorrectionNotification::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *PositionCorrectionNotification::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionCorrectionNotification.market)
-        return _impl_.market_.Release();
-      }
-      inline void PositionCorrectionNotification::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 3;
+inline void PositionCorrectionNotification::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& PositionCorrectionNotification::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PositionCorrectionNotification::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.market)
+}
+inline std::string* PositionCorrectionNotification::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.otc.PositionCorrectionNotification.market)
+  return _s;
+}
+inline const std::string& PositionCorrectionNotification::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void PositionCorrectionNotification::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* PositionCorrectionNotification::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* PositionCorrectionNotification::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.otc.PositionCorrectionNotification.market)
+  return _impl_.market_.Release();
+}
+inline void PositionCorrectionNotification::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionCorrectionNotification.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.otc.PositionCorrectionNotification.market)
+}
 
-      // double original_quantity = 4;
-      inline void PositionCorrectionNotification::clear_original_quantity() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.original_quantity_ = 0;
-      }
-      inline double PositionCorrectionNotification::original_quantity() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.original_quantity)
-        return _internal_original_quantity();
-      }
-      inline void PositionCorrectionNotification::set_original_quantity(double value) {
-        _internal_set_original_quantity(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.original_quantity)
-      }
-      inline double PositionCorrectionNotification::_internal_original_quantity() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.original_quantity_;
-      }
-      inline void PositionCorrectionNotification::_internal_set_original_quantity(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.original_quantity_ = value;
-      }
+// double original_quantity = 4;
+inline void PositionCorrectionNotification::clear_original_quantity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.original_quantity_ = 0;
+}
+inline double PositionCorrectionNotification::original_quantity() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.original_quantity)
+  return _internal_original_quantity();
+}
+inline void PositionCorrectionNotification::set_original_quantity(double value) {
+  _internal_set_original_quantity(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.original_quantity)
+}
+inline double PositionCorrectionNotification::_internal_original_quantity() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.original_quantity_;
+}
+inline void PositionCorrectionNotification::_internal_set_original_quantity(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.original_quantity_ = value;
+}
 
-      // double new_quantity = 5;
-      inline void PositionCorrectionNotification::clear_new_quantity() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.new_quantity_ = 0;
-      }
-      inline double PositionCorrectionNotification::new_quantity() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.new_quantity)
-        return _internal_new_quantity();
-      }
-      inline void PositionCorrectionNotification::set_new_quantity(double value) {
-        _internal_set_new_quantity(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.new_quantity)
-      }
-      inline double PositionCorrectionNotification::_internal_new_quantity() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.new_quantity_;
-      }
-      inline void PositionCorrectionNotification::_internal_set_new_quantity(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.new_quantity_ = value;
-      }
+// double new_quantity = 5;
+inline void PositionCorrectionNotification::clear_new_quantity() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.new_quantity_ = 0;
+}
+inline double PositionCorrectionNotification::new_quantity() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.new_quantity)
+  return _internal_new_quantity();
+}
+inline void PositionCorrectionNotification::set_new_quantity(double value) {
+  _internal_set_new_quantity(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.new_quantity)
+}
+inline double PositionCorrectionNotification::_internal_new_quantity() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.new_quantity_;
+}
+inline void PositionCorrectionNotification::_internal_set_new_quantity(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.new_quantity_ = value;
+}
 
-      // double original_price = 6;
-      inline void PositionCorrectionNotification::clear_original_price() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.original_price_ = 0;
-      }
-      inline double PositionCorrectionNotification::original_price() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.original_price)
-        return _internal_original_price();
-      }
-      inline void PositionCorrectionNotification::set_original_price(double value) {
-        _internal_set_original_price(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.original_price)
-      }
-      inline double PositionCorrectionNotification::_internal_original_price() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.original_price_;
-      }
-      inline void PositionCorrectionNotification::_internal_set_original_price(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.original_price_ = value;
-      }
+// double original_price = 6;
+inline void PositionCorrectionNotification::clear_original_price() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.original_price_ = 0;
+}
+inline double PositionCorrectionNotification::original_price() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.original_price)
+  return _internal_original_price();
+}
+inline void PositionCorrectionNotification::set_original_price(double value) {
+  _internal_set_original_price(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.original_price)
+}
+inline double PositionCorrectionNotification::_internal_original_price() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.original_price_;
+}
+inline void PositionCorrectionNotification::_internal_set_original_price(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.original_price_ = value;
+}
 
-      // double new_price = 7;
-      inline void PositionCorrectionNotification::clear_new_price() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.new_price_ = 0;
-      }
-      inline double PositionCorrectionNotification::new_price() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.new_price)
-        return _internal_new_price();
-      }
-      inline void PositionCorrectionNotification::set_new_price(double value) {
-        _internal_set_new_price(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.new_price)
-      }
-      inline double PositionCorrectionNotification::_internal_new_price() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.new_price_;
-      }
-      inline void PositionCorrectionNotification::_internal_set_new_price(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.new_price_ = value;
-      }
+// double new_price = 7;
+inline void PositionCorrectionNotification::clear_new_price() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.new_price_ = 0;
+}
+inline double PositionCorrectionNotification::new_price() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.new_price)
+  return _internal_new_price();
+}
+inline void PositionCorrectionNotification::set_new_price(double value) {
+  _internal_set_new_price(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.new_price)
+}
+inline double PositionCorrectionNotification::_internal_new_price() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.new_price_;
+}
+inline void PositionCorrectionNotification::_internal_set_new_price(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.new_price_ = value;
+}
 
-      // .markethub.messaging.trading.SecurityType security_type = 8;
-      inline void PositionCorrectionNotification::clear_security_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.security_type_ = 0;
-      }
-      inline ::markethub::messaging::trading::SecurityType
-      PositionCorrectionNotification::security_type() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.security_type)
-        return _internal_security_type();
-      }
-      inline void PositionCorrectionNotification::set_security_type(
-          ::markethub::messaging::trading::SecurityType value) {
-        _internal_set_security_type(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.security_type)
-      }
-      inline ::markethub::messaging::trading::SecurityType
-      PositionCorrectionNotification::_internal_security_type() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return static_cast<::markethub::messaging::trading::SecurityType>(_impl_.security_type_);
-      }
-      inline void PositionCorrectionNotification::_internal_set_security_type(
-          ::markethub::messaging::trading::SecurityType value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.security_type_ = value;
-      }
+// .markethub.messaging.trading.SecurityType security_type = 8;
+inline void PositionCorrectionNotification::clear_security_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.security_type_ = 0;
+}
+inline ::markethub::messaging::trading::SecurityType PositionCorrectionNotification::security_type() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.security_type)
+  return _internal_security_type();
+}
+inline void PositionCorrectionNotification::set_security_type(::markethub::messaging::trading::SecurityType value) {
+  _internal_set_security_type(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.security_type)
+}
+inline ::markethub::messaging::trading::SecurityType PositionCorrectionNotification::_internal_security_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::markethub::messaging::trading::SecurityType>(_impl_.security_type_);
+}
+inline void PositionCorrectionNotification::_internal_set_security_type(::markethub::messaging::trading::SecurityType value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.security_type_ = value;
+}
 
-      // .markethub.messaging.trading.Side side = 9;
-      inline void PositionCorrectionNotification::clear_side() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.side_ = 0;
-      }
-      inline ::markethub::messaging::trading::Side PositionCorrectionNotification::side() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.side)
-        return _internal_side();
-      }
-      inline void PositionCorrectionNotification::set_side(
-          ::markethub::messaging::trading::Side value) {
-        _internal_set_side(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.side)
-      }
-      inline ::markethub::messaging::trading::Side PositionCorrectionNotification::_internal_side()
-          const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return static_cast<::markethub::messaging::trading::Side>(_impl_.side_);
-      }
-      inline void PositionCorrectionNotification::_internal_set_side(
-          ::markethub::messaging::trading::Side value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.side_ = value;
-      }
+// .markethub.messaging.trading.Side side = 9;
+inline void PositionCorrectionNotification::clear_side() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.side_ = 0;
+}
+inline ::markethub::messaging::trading::Side PositionCorrectionNotification::side() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.otc.PositionCorrectionNotification.side)
+  return _internal_side();
+}
+inline void PositionCorrectionNotification::set_side(::markethub::messaging::trading::Side value) {
+  _internal_set_side(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.otc.PositionCorrectionNotification.side)
+}
+inline ::markethub::messaging::trading::Side PositionCorrectionNotification::_internal_side() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::markethub::messaging::trading::Side>(_impl_.side_);
+}
+inline void PositionCorrectionNotification::_internal_set_side(::markethub::messaging::trading::Side value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.side_ = value;
+}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
-#endif // __GNUC__
+#endif  // __GNUC__
 
-      // @@protoc_insertion_point(namespace_scope)
-    } // namespace otc
-  } // namespace messaging
-} // namespace markethub
+// @@protoc_insertion_point(namespace_scope)
+}  // namespace otc
+}  // namespace messaging
+}  // namespace markethub
+
 
 // @@protoc_insertion_point(global_scope)
 
 #include "google/protobuf/port_undef.inc"
 
-#endif // GOOGLE_PROTOBUF_INCLUDED_otc_2eproto_2epb_2eh
+#endif  // GOOGLE_PROTOBUF_INCLUDED_otc_2eproto_2epb_2eh

@@ -25,7 +25,7 @@
 #include "google/protobuf/metadata_lite.h"
 #include "google/protobuf/generated_message_reflection.h"
 #include "google/protobuf/message.h"
-#include "google/protobuf/repeated_field.h" // IWYU pragma: export
+#include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
 // @@protoc_insertion_point(includes)
@@ -36,12 +36,12 @@
 #define PROTOBUF_INTERNAL_EXPORT_risk_5fmanagement_2eproto
 
 namespace google {
-  namespace protobuf {
-    namespace internal {
-      class AnyMetadata;
-    } // namespace internal
-  } // namespace protobuf
-} // namespace google
+namespace protobuf {
+namespace internal {
+class AnyMetadata;
+}  // namespace internal
+}  // namespace protobuf
+}  // namespace google
 
 // Internal implementation detail -- do not use these members.
 struct TableStruct_risk_5fmanagement_2eproto {
@@ -50,3524 +50,3539 @@ struct TableStruct_risk_5fmanagement_2eproto {
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_risk_5fmanagement_2eproto;
 namespace markethub {
-  namespace messaging {
-    namespace risk_management {
-      class HoldingReport;
-      struct HoldingReportDefaultTypeInternal;
-      extern HoldingReportDefaultTypeInternal _HoldingReport_default_instance_;
-      class HoldingReportRequest;
-      struct HoldingReportRequestDefaultTypeInternal;
-      extern HoldingReportRequestDefaultTypeInternal _HoldingReportRequest_default_instance_;
-      class HoldingReportResponse;
-      struct HoldingReportResponseDefaultTypeInternal;
-      extern HoldingReportResponseDefaultTypeInternal _HoldingReportResponse_default_instance_;
-      class InitialPositionUpdateRequest;
-      struct InitialPositionUpdateRequestDefaultTypeInternal;
-      extern InitialPositionUpdateRequestDefaultTypeInternal
-          _InitialPositionUpdateRequest_default_instance_;
-      class PNLReport;
-      struct PNLReportDefaultTypeInternal;
-      extern PNLReportDefaultTypeInternal _PNLReport_default_instance_;
-      class PNLReportRequest;
-      struct PNLReportRequestDefaultTypeInternal;
-      extern PNLReportRequestDefaultTypeInternal _PNLReportRequest_default_instance_;
-      class PNLReportResponse;
-      struct PNLReportResponseDefaultTypeInternal;
-      extern PNLReportResponseDefaultTypeInternal _PNLReportResponse_default_instance_;
-    } // namespace risk_management
-  } // namespace messaging
-} // namespace markethub
+namespace messaging {
+namespace risk_management {
+class HoldingReport;
+struct HoldingReportDefaultTypeInternal;
+extern HoldingReportDefaultTypeInternal _HoldingReport_default_instance_;
+class HoldingReportRequest;
+struct HoldingReportRequestDefaultTypeInternal;
+extern HoldingReportRequestDefaultTypeInternal _HoldingReportRequest_default_instance_;
+class HoldingReportResponse;
+struct HoldingReportResponseDefaultTypeInternal;
+extern HoldingReportResponseDefaultTypeInternal _HoldingReportResponse_default_instance_;
+class InitialPositionUpdateRequest;
+struct InitialPositionUpdateRequestDefaultTypeInternal;
+extern InitialPositionUpdateRequestDefaultTypeInternal _InitialPositionUpdateRequest_default_instance_;
+class PNLReport;
+struct PNLReportDefaultTypeInternal;
+extern PNLReportDefaultTypeInternal _PNLReport_default_instance_;
+class PNLReportRequest;
+struct PNLReportRequestDefaultTypeInternal;
+extern PNLReportRequestDefaultTypeInternal _PNLReportRequest_default_instance_;
+class PNLReportResponse;
+struct PNLReportResponseDefaultTypeInternal;
+extern PNLReportResponseDefaultTypeInternal _PNLReportResponse_default_instance_;
+}  // namespace risk_management
+}  // namespace messaging
+}  // namespace markethub
 namespace google {
-  namespace protobuf {} // namespace protobuf
-} // namespace google
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 
 namespace markethub {
-  namespace messaging {
-    namespace risk_management {
+namespace messaging {
+namespace risk_management {
 
-      // ===================================================================
+// ===================================================================
 
-      // -------------------------------------------------------------------
 
-      class PNLReportRequest final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.PNLReportRequest)
-       */
-      {
-       public:
-        inline PNLReportRequest() : PNLReportRequest(nullptr) {}
-        ~PNLReportRequest() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR PNLReportRequest(
-            ::google::protobuf::internal::ConstantInitialized);
+// -------------------------------------------------------------------
 
-        inline PNLReportRequest(const PNLReportRequest &from) : PNLReportRequest(nullptr, from) {}
-        inline PNLReportRequest(PNLReportRequest &&from) noexcept
-            : PNLReportRequest(nullptr, std::move(from)) {}
-        inline PNLReportRequest &operator=(const PNLReportRequest &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline PNLReportRequest &operator=(PNLReportRequest &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+class PNLReportRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.PNLReportRequest) */ {
+ public:
+  inline PNLReportRequest() : PNLReportRequest(nullptr) {}
+  ~PNLReportRequest() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PNLReportRequest(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline PNLReportRequest(const PNLReportRequest& from) : PNLReportRequest(nullptr, from) {}
+  inline PNLReportRequest(PNLReportRequest&& from) noexcept
+      : PNLReportRequest(nullptr, std::move(from)) {}
+  inline PNLReportRequest& operator=(const PNLReportRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PNLReportRequest& operator=(PNLReportRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const PNLReportRequest &default_instance() { return *internal_default_instance(); }
-        static inline const PNLReportRequest *internal_default_instance() {
-          return reinterpret_cast<const PNLReportRequest *>(&_PNLReportRequest_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 3;
-        friend void swap(PNLReportRequest &a, PNLReportRequest &b) { a.Swap(&b); }
-        inline void Swap(PNLReportRequest *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PNLReportRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PNLReportRequest* internal_default_instance() {
+    return reinterpret_cast<const PNLReportRequest*>(
+        &_PNLReportRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(PNLReportRequest& a, PNLReportRequest& b) { a.Swap(&b); }
+  inline void Swap(PNLReportRequest* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(PNLReportRequest *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PNLReportRequest* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        PNLReportRequest *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<PNLReportRequest>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const PNLReportRequest &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const PNLReportRequest &from) { PNLReportRequest::MergeImpl(*this, from); }
+  PNLReportRequest* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<PNLReportRequest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PNLReportRequest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PNLReportRequest& from) { PNLReportRequest::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(PNLReportRequest *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(PNLReportRequest* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.PNLReportRequest"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.PNLReportRequest";
-        }
+ protected:
+  explicit PNLReportRequest(::google::protobuf::Arena* arena);
+  PNLReportRequest(::google::protobuf::Arena* arena, const PNLReportRequest& from);
+  PNLReportRequest(::google::protobuf::Arena* arena, PNLReportRequest&& from) noexcept
+      : PNLReportRequest(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit PNLReportRequest(::google::protobuf::Arena *arena);
-        PNLReportRequest(::google::protobuf::Arena *arena, const PNLReportRequest &from);
-        PNLReportRequest(::google::protobuf::Arena *arena, PNLReportRequest &&from) noexcept
-            : PNLReportRequest(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kMarketFieldNumber = 1,
+    kAccountFieldNumber = 2,
+  };
+  // string market = 1;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kMarketFieldNumber = 1,
-          kAccountFieldNumber = 2,
-        };
-        // string market = 1;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // string account = 2;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-       public:
-        // string account = 2;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.PNLReportRequest)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      74, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.PNLReportRequest)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<1, 2, 0, 74, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_PNLReportRequest_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ = &_PNLReportRequest_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PNLReportRequest& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const PNLReportRequest &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
-      // -------------------------------------------------------------------
+class PNLReport final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.PNLReport) */ {
+ public:
+  inline PNLReport() : PNLReport(nullptr) {}
+  ~PNLReport() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PNLReport(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class PNLReport final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.PNLReport) */
-      {
-       public:
-        inline PNLReport() : PNLReport(nullptr) {}
-        ~PNLReport() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR PNLReport(::google::protobuf::internal::ConstantInitialized);
-
-        inline PNLReport(const PNLReport &from) : PNLReport(nullptr, from) {}
-        inline PNLReport(PNLReport &&from) noexcept : PNLReport(nullptr, std::move(from)) {}
-        inline PNLReport &operator=(const PNLReport &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline PNLReport &operator=(PNLReport &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline PNLReport(const PNLReport& from) : PNLReport(nullptr, from) {}
+  inline PNLReport(PNLReport&& from) noexcept
+      : PNLReport(nullptr, std::move(from)) {}
+  inline PNLReport& operator=(const PNLReport& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PNLReport& operator=(PNLReport&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const PNLReport &default_instance() { return *internal_default_instance(); }
-        static inline const PNLReport *internal_default_instance() {
-          return reinterpret_cast<const PNLReport *>(&_PNLReport_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 5;
-        friend void swap(PNLReport &a, PNLReport &b) { a.Swap(&b); }
-        inline void Swap(PNLReport *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PNLReport& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PNLReport* internal_default_instance() {
+    return reinterpret_cast<const PNLReport*>(
+        &_PNLReport_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 5;
+  friend void swap(PNLReport& a, PNLReport& b) { a.Swap(&b); }
+  inline void Swap(PNLReport* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(PNLReport *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PNLReport* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        PNLReport *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<PNLReport>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const PNLReport &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const PNLReport &from) { PNLReport::MergeImpl(*this, from); }
+  PNLReport* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<PNLReport>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PNLReport& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PNLReport& from) { PNLReport::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(PNLReport *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(PNLReport* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.PNLReport"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.PNLReport";
-        }
+ protected:
+  explicit PNLReport(::google::protobuf::Arena* arena);
+  PNLReport(::google::protobuf::Arena* arena, const PNLReport& from);
+  PNLReport(::google::protobuf::Arena* arena, PNLReport&& from) noexcept
+      : PNLReport(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit PNLReport(::google::protobuf::Arena *arena);
-        PNLReport(::google::protobuf::Arena *arena, const PNLReport &from);
-        PNLReport(::google::protobuf::Arena *arena, PNLReport &&from) noexcept : PNLReport(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kAssetFieldNumber = 1,
+    kSettlementTypeFieldNumber = 2,
+    kMarketFieldNumber = 3,
+    kAccountFieldNumber = 8,
+    kCurrencyFieldNumber = 10,
+    kPnlFieldNumber = 4,
+    kFeesFieldNumber = 5,
+    kUnrealizedFieldNumber = 6,
+    kTimestampFieldNumber = 7,
+    kFeesUnrealizedFieldNumber = 9,
+  };
+  // string asset = 1;
+  void clear_asset() ;
+  const std::string& asset() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_asset(Arg_&& arg, Args_... args);
+  std::string* mutable_asset();
+  PROTOBUF_NODISCARD std::string* release_asset();
+  void set_allocated_asset(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kAssetFieldNumber = 1,
-          kSettlementTypeFieldNumber = 2,
-          kMarketFieldNumber = 3,
-          kAccountFieldNumber = 8,
-          kCurrencyFieldNumber = 10,
-          kPnlFieldNumber = 4,
-          kFeesFieldNumber = 5,
-          kUnrealizedFieldNumber = 6,
-          kTimestampFieldNumber = 7,
-          kFeesUnrealizedFieldNumber = 9,
-        };
-        // string asset = 1;
-        void clear_asset();
-        const std::string &asset() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_asset(Arg_ &&arg, Args_... args);
-        std::string *mutable_asset();
-        PROTOBUF_NODISCARD std::string *release_asset();
-        void set_allocated_asset(std::string *value);
+  private:
+  const std::string& _internal_asset() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_asset(
+      const std::string& value);
+  std::string* _internal_mutable_asset();
 
-       private:
-        const std::string &_internal_asset() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_asset(const std::string &value);
-        std::string *_internal_mutable_asset();
+  public:
+  // string settlement_type = 2;
+  void clear_settlement_type() ;
+  const std::string& settlement_type() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_settlement_type(Arg_&& arg, Args_... args);
+  std::string* mutable_settlement_type();
+  PROTOBUF_NODISCARD std::string* release_settlement_type();
+  void set_allocated_settlement_type(std::string* value);
 
-       public:
-        // string settlement_type = 2;
-        void clear_settlement_type();
-        const std::string &settlement_type() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_settlement_type(Arg_ &&arg, Args_... args);
-        std::string *mutable_settlement_type();
-        PROTOBUF_NODISCARD std::string *release_settlement_type();
-        void set_allocated_settlement_type(std::string *value);
+  private:
+  const std::string& _internal_settlement_type() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_settlement_type(
+      const std::string& value);
+  std::string* _internal_mutable_settlement_type();
 
-       private:
-        const std::string &_internal_settlement_type() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_settlement_type(const std::string &value);
-        std::string *_internal_mutable_settlement_type();
+  public:
+  // string market = 3;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        // string market = 3;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // string account = 8;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-       public:
-        // string account = 8;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // string currency = 10;
+  void clear_currency() ;
+  const std::string& currency() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_currency(Arg_&& arg, Args_... args);
+  std::string* mutable_currency();
+  PROTOBUF_NODISCARD std::string* release_currency();
+  void set_allocated_currency(std::string* value);
 
-       public:
-        // string currency = 10;
-        void clear_currency();
-        const std::string &currency() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_currency(Arg_ &&arg, Args_... args);
-        std::string *mutable_currency();
-        PROTOBUF_NODISCARD std::string *release_currency();
-        void set_allocated_currency(std::string *value);
+  private:
+  const std::string& _internal_currency() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_currency(
+      const std::string& value);
+  std::string* _internal_mutable_currency();
 
-       private:
-        const std::string &_internal_currency() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_currency(const std::string &value);
-        std::string *_internal_mutable_currency();
+  public:
+  // double pnl = 4;
+  void clear_pnl() ;
+  double pnl() const;
+  void set_pnl(double value);
 
-       public:
-        // double pnl = 4;
-        void clear_pnl();
-        double pnl() const;
-        void set_pnl(double value);
+  private:
+  double _internal_pnl() const;
+  void _internal_set_pnl(double value);
 
-       private:
-        double _internal_pnl() const;
-        void _internal_set_pnl(double value);
+  public:
+  // double fees = 5;
+  void clear_fees() ;
+  double fees() const;
+  void set_fees(double value);
 
-       public:
-        // double fees = 5;
-        void clear_fees();
-        double fees() const;
-        void set_fees(double value);
+  private:
+  double _internal_fees() const;
+  void _internal_set_fees(double value);
 
-       private:
-        double _internal_fees() const;
-        void _internal_set_fees(double value);
+  public:
+  // double unrealized = 6;
+  void clear_unrealized() ;
+  double unrealized() const;
+  void set_unrealized(double value);
 
-       public:
-        // double unrealized = 6;
-        void clear_unrealized();
-        double unrealized() const;
-        void set_unrealized(double value);
+  private:
+  double _internal_unrealized() const;
+  void _internal_set_unrealized(double value);
 
-       private:
-        double _internal_unrealized() const;
-        void _internal_set_unrealized(double value);
+  public:
+  // int64 timestamp = 7;
+  void clear_timestamp() ;
+  ::int64_t timestamp() const;
+  void set_timestamp(::int64_t value);
 
-       public:
-        // int64 timestamp = 7;
-        void clear_timestamp();
-        ::int64_t timestamp() const;
-        void set_timestamp(::int64_t value);
+  private:
+  ::int64_t _internal_timestamp() const;
+  void _internal_set_timestamp(::int64_t value);
 
-       private:
-        ::int64_t _internal_timestamp() const;
-        void _internal_set_timestamp(::int64_t value);
+  public:
+  // double fees_unrealized = 9;
+  void clear_fees_unrealized() ;
+  double fees_unrealized() const;
+  void set_fees_unrealized(double value);
 
-       public:
-        // double fees_unrealized = 9;
-        void clear_fees_unrealized();
-        double fees_unrealized() const;
-        void set_fees_unrealized(double value);
+  private:
+  double _internal_fees_unrealized() const;
+  void _internal_set_fees_unrealized(double value);
 
-       private:
-        double _internal_fees_unrealized() const;
-        void _internal_set_fees_unrealized(double value);
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.PNLReport)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      4, 10, 0,
+      103, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.PNLReport)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<4, 10, 0, 103, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_PNLReport_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ = &_PNLReport_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PNLReport& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr asset_;
+    ::google::protobuf::internal::ArenaStringPtr settlement_type_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    ::google::protobuf::internal::ArenaStringPtr currency_;
+    double pnl_;
+    double fees_;
+    double unrealized_;
+    ::int64_t timestamp_;
+    double fees_unrealized_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const PNLReport &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr asset_;
-          ::google::protobuf::internal::ArenaStringPtr settlement_type_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          ::google::protobuf::internal::ArenaStringPtr currency_;
-          double pnl_;
-          double fees_;
-          double unrealized_;
-          ::int64_t timestamp_;
-          double fees_unrealized_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
-      // -------------------------------------------------------------------
+class InitialPositionUpdateRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.InitialPositionUpdateRequest) */ {
+ public:
+  inline InitialPositionUpdateRequest() : InitialPositionUpdateRequest(nullptr) {}
+  ~InitialPositionUpdateRequest() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR InitialPositionUpdateRequest(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class InitialPositionUpdateRequest final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.InitialPositionUpdateRequest)
-       */
-      {
-       public:
-        inline InitialPositionUpdateRequest() : InitialPositionUpdateRequest(nullptr) {}
-        ~InitialPositionUpdateRequest() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR InitialPositionUpdateRequest(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline InitialPositionUpdateRequest(const InitialPositionUpdateRequest &from)
-            : InitialPositionUpdateRequest(nullptr, from) {}
-        inline InitialPositionUpdateRequest(InitialPositionUpdateRequest &&from) noexcept
-            : InitialPositionUpdateRequest(nullptr, std::move(from)) {}
-        inline InitialPositionUpdateRequest &operator=(const InitialPositionUpdateRequest &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline InitialPositionUpdateRequest &operator=(
-            InitialPositionUpdateRequest &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline InitialPositionUpdateRequest(const InitialPositionUpdateRequest& from) : InitialPositionUpdateRequest(nullptr, from) {}
+  inline InitialPositionUpdateRequest(InitialPositionUpdateRequest&& from) noexcept
+      : InitialPositionUpdateRequest(nullptr, std::move(from)) {}
+  inline InitialPositionUpdateRequest& operator=(const InitialPositionUpdateRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline InitialPositionUpdateRequest& operator=(InitialPositionUpdateRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const InitialPositionUpdateRequest &default_instance() {
-          return *internal_default_instance();
-        }
-        static inline const InitialPositionUpdateRequest *internal_default_instance() {
-          return reinterpret_cast<const InitialPositionUpdateRequest *>(
-              &_InitialPositionUpdateRequest_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 6;
-        friend void swap(InitialPositionUpdateRequest &a, InitialPositionUpdateRequest &b) {
-          a.Swap(&b);
-        }
-        inline void Swap(InitialPositionUpdateRequest *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const InitialPositionUpdateRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const InitialPositionUpdateRequest* internal_default_instance() {
+    return reinterpret_cast<const InitialPositionUpdateRequest*>(
+        &_InitialPositionUpdateRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 6;
+  friend void swap(InitialPositionUpdateRequest& a, InitialPositionUpdateRequest& b) { a.Swap(&b); }
+  inline void Swap(InitialPositionUpdateRequest* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(InitialPositionUpdateRequest *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(InitialPositionUpdateRequest* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        InitialPositionUpdateRequest *New(::google::protobuf::Arena *arena = nullptr) const
-            PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<InitialPositionUpdateRequest>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const InitialPositionUpdateRequest &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const InitialPositionUpdateRequest &from) {
-          InitialPositionUpdateRequest::MergeImpl(*this, from);
-        }
+  InitialPositionUpdateRequest* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<InitialPositionUpdateRequest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const InitialPositionUpdateRequest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const InitialPositionUpdateRequest& from) { InitialPositionUpdateRequest::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(InitialPositionUpdateRequest *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(InitialPositionUpdateRequest* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.InitialPositionUpdateRequest"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.InitialPositionUpdateRequest";
-        }
+ protected:
+  explicit InitialPositionUpdateRequest(::google::protobuf::Arena* arena);
+  InitialPositionUpdateRequest(::google::protobuf::Arena* arena, const InitialPositionUpdateRequest& from);
+  InitialPositionUpdateRequest(::google::protobuf::Arena* arena, InitialPositionUpdateRequest&& from) noexcept
+      : InitialPositionUpdateRequest(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit InitialPositionUpdateRequest(::google::protobuf::Arena *arena);
-        InitialPositionUpdateRequest(::google::protobuf::Arena *arena,
-                                     const InitialPositionUpdateRequest &from);
-        InitialPositionUpdateRequest(::google::protobuf::Arena *arena,
-                                     InitialPositionUpdateRequest &&from) noexcept
-            : InitialPositionUpdateRequest(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kAccountFieldNumber = 1,
+    kMarketFieldNumber = 2,
+    kAssetFieldNumber = 3,
+    kSettlementTypeFieldNumber = 4,
+    kValueFieldNumber = 5,
+  };
+  // string account = 1;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kAccountFieldNumber = 1,
-          kMarketFieldNumber = 2,
-          kAssetFieldNumber = 3,
-          kSettlementTypeFieldNumber = 4,
-          kValueFieldNumber = 5,
-        };
-        // string account = 1;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // string market = 2;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        // string market = 2;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // string asset = 3;
+  void clear_asset() ;
+  const std::string& asset() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_asset(Arg_&& arg, Args_... args);
+  std::string* mutable_asset();
+  PROTOBUF_NODISCARD std::string* release_asset();
+  void set_allocated_asset(std::string* value);
 
-       public:
-        // string asset = 3;
-        void clear_asset();
-        const std::string &asset() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_asset(Arg_ &&arg, Args_... args);
-        std::string *mutable_asset();
-        PROTOBUF_NODISCARD std::string *release_asset();
-        void set_allocated_asset(std::string *value);
+  private:
+  const std::string& _internal_asset() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_asset(
+      const std::string& value);
+  std::string* _internal_mutable_asset();
 
-       private:
-        const std::string &_internal_asset() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_asset(const std::string &value);
-        std::string *_internal_mutable_asset();
+  public:
+  // string settlement_type = 4;
+  void clear_settlement_type() ;
+  const std::string& settlement_type() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_settlement_type(Arg_&& arg, Args_... args);
+  std::string* mutable_settlement_type();
+  PROTOBUF_NODISCARD std::string* release_settlement_type();
+  void set_allocated_settlement_type(std::string* value);
 
-       public:
-        // string settlement_type = 4;
-        void clear_settlement_type();
-        const std::string &settlement_type() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_settlement_type(Arg_ &&arg, Args_... args);
-        std::string *mutable_settlement_type();
-        PROTOBUF_NODISCARD std::string *release_settlement_type();
-        void set_allocated_settlement_type(std::string *value);
+  private:
+  const std::string& _internal_settlement_type() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_settlement_type(
+      const std::string& value);
+  std::string* _internal_mutable_settlement_type();
 
-       private:
-        const std::string &_internal_settlement_type() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_settlement_type(const std::string &value);
-        std::string *_internal_mutable_settlement_type();
+  public:
+  // double value = 5;
+  void clear_value() ;
+  double value() const;
+  void set_value(double value);
 
-       public:
-        // double value = 5;
-        void clear_value();
-        double value() const;
-        void set_value(double value);
+  private:
+  double _internal_value() const;
+  void _internal_set_value(double value);
 
-       private:
-        double _internal_value() const;
-        void _internal_set_value(double value);
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.InitialPositionUpdateRequest)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      3, 5, 0,
+      106, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.InitialPositionUpdateRequest)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<3, 5, 0, 106, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_InitialPositionUpdateRequest_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ =
-            &_InitialPositionUpdateRequest_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const InitialPositionUpdateRequest& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr asset_;
+    ::google::protobuf::internal::ArenaStringPtr settlement_type_;
+    double value_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const InitialPositionUpdateRequest &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr asset_;
-          ::google::protobuf::internal::ArenaStringPtr settlement_type_;
-          double value_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
-      // -------------------------------------------------------------------
+class HoldingReportRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.HoldingReportRequest) */ {
+ public:
+  inline HoldingReportRequest() : HoldingReportRequest(nullptr) {}
+  ~HoldingReportRequest() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR HoldingReportRequest(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class HoldingReportRequest final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.HoldingReportRequest)
-       */
-      {
-       public:
-        inline HoldingReportRequest() : HoldingReportRequest(nullptr) {}
-        ~HoldingReportRequest() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR HoldingReportRequest(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline HoldingReportRequest(const HoldingReportRequest &from)
-            : HoldingReportRequest(nullptr, from) {}
-        inline HoldingReportRequest(HoldingReportRequest &&from) noexcept
-            : HoldingReportRequest(nullptr, std::move(from)) {}
-        inline HoldingReportRequest &operator=(const HoldingReportRequest &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline HoldingReportRequest &operator=(HoldingReportRequest &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline HoldingReportRequest(const HoldingReportRequest& from) : HoldingReportRequest(nullptr, from) {}
+  inline HoldingReportRequest(HoldingReportRequest&& from) noexcept
+      : HoldingReportRequest(nullptr, std::move(from)) {}
+  inline HoldingReportRequest& operator=(const HoldingReportRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline HoldingReportRequest& operator=(HoldingReportRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const HoldingReportRequest &default_instance() {
-          return *internal_default_instance();
-        }
-        static inline const HoldingReportRequest *internal_default_instance() {
-          return reinterpret_cast<const HoldingReportRequest *>(
-              &_HoldingReportRequest_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 0;
-        friend void swap(HoldingReportRequest &a, HoldingReportRequest &b) { a.Swap(&b); }
-        inline void Swap(HoldingReportRequest *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const HoldingReportRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const HoldingReportRequest* internal_default_instance() {
+    return reinterpret_cast<const HoldingReportRequest*>(
+        &_HoldingReportRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 0;
+  friend void swap(HoldingReportRequest& a, HoldingReportRequest& b) { a.Swap(&b); }
+  inline void Swap(HoldingReportRequest* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(HoldingReportRequest *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(HoldingReportRequest* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        HoldingReportRequest *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<HoldingReportRequest>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const HoldingReportRequest &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const HoldingReportRequest &from) {
-          HoldingReportRequest::MergeImpl(*this, from);
-        }
+  HoldingReportRequest* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<HoldingReportRequest>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const HoldingReportRequest& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const HoldingReportRequest& from) { HoldingReportRequest::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(HoldingReportRequest *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(HoldingReportRequest* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.HoldingReportRequest"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.HoldingReportRequest";
-        }
+ protected:
+  explicit HoldingReportRequest(::google::protobuf::Arena* arena);
+  HoldingReportRequest(::google::protobuf::Arena* arena, const HoldingReportRequest& from);
+  HoldingReportRequest(::google::protobuf::Arena* arena, HoldingReportRequest&& from) noexcept
+      : HoldingReportRequest(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit HoldingReportRequest(::google::protobuf::Arena *arena);
-        HoldingReportRequest(::google::protobuf::Arena *arena, const HoldingReportRequest &from);
-        HoldingReportRequest(::google::protobuf::Arena *arena, HoldingReportRequest &&from) noexcept
-            : HoldingReportRequest(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kMarketFieldNumber = 1,
+    kAccountFieldNumber = 2,
+  };
+  // string market = 1;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kMarketFieldNumber = 1,
-          kAccountFieldNumber = 2,
-        };
-        // string market = 1;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // string account = 2;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-       public:
-        // string account = 2;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.HoldingReportRequest)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      78, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.HoldingReportRequest)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<1, 2, 0, 78, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_HoldingReportRequest_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ =
-            &_HoldingReportRequest_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const HoldingReportRequest& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const HoldingReportRequest &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
-      // -------------------------------------------------------------------
+class HoldingReport final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.HoldingReport) */ {
+ public:
+  inline HoldingReport() : HoldingReport(nullptr) {}
+  ~HoldingReport() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR HoldingReport(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class HoldingReport final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.HoldingReport)
-       */
-      {
-       public:
-        inline HoldingReport() : HoldingReport(nullptr) {}
-        ~HoldingReport() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR HoldingReport(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline HoldingReport(const HoldingReport &from) : HoldingReport(nullptr, from) {}
-        inline HoldingReport(HoldingReport &&from) noexcept
-            : HoldingReport(nullptr, std::move(from)) {}
-        inline HoldingReport &operator=(const HoldingReport &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline HoldingReport &operator=(HoldingReport &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline HoldingReport(const HoldingReport& from) : HoldingReport(nullptr, from) {}
+  inline HoldingReport(HoldingReport&& from) noexcept
+      : HoldingReport(nullptr, std::move(from)) {}
+  inline HoldingReport& operator=(const HoldingReport& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline HoldingReport& operator=(HoldingReport&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const HoldingReport &default_instance() { return *internal_default_instance(); }
-        static inline const HoldingReport *internal_default_instance() {
-          return reinterpret_cast<const HoldingReport *>(&_HoldingReport_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 2;
-        friend void swap(HoldingReport &a, HoldingReport &b) { a.Swap(&b); }
-        inline void Swap(HoldingReport *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const HoldingReport& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const HoldingReport* internal_default_instance() {
+    return reinterpret_cast<const HoldingReport*>(
+        &_HoldingReport_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 2;
+  friend void swap(HoldingReport& a, HoldingReport& b) { a.Swap(&b); }
+  inline void Swap(HoldingReport* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(HoldingReport *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(HoldingReport* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        HoldingReport *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<HoldingReport>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const HoldingReport &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const HoldingReport &from) { HoldingReport::MergeImpl(*this, from); }
+  HoldingReport* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<HoldingReport>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const HoldingReport& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const HoldingReport& from) { HoldingReport::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(HoldingReport *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(HoldingReport* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.HoldingReport"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.HoldingReport";
-        }
+ protected:
+  explicit HoldingReport(::google::protobuf::Arena* arena);
+  HoldingReport(::google::protobuf::Arena* arena, const HoldingReport& from);
+  HoldingReport(::google::protobuf::Arena* arena, HoldingReport&& from) noexcept
+      : HoldingReport(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit HoldingReport(::google::protobuf::Arena *arena);
-        HoldingReport(::google::protobuf::Arena *arena, const HoldingReport &from);
-        HoldingReport(::google::protobuf::Arena *arena, HoldingReport &&from) noexcept
-            : HoldingReport(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kAssetFieldNumber = 1,
+    kSettlementTypeFieldNumber = 2,
+    kMarketFieldNumber = 3,
+    kAccountFieldNumber = 15,
+    kRealizedHoldingsFieldNumber = 4,
+    kUnrealizedBuyHoldingFieldNumber = 5,
+    kUnrealizedSellHoldingFieldNumber = 6,
+    kTimestampFieldNumber = 7,
+    kBuyTotalFieldNumber = 8,
+    kSellTotalFieldNumber = 9,
+    kOtcHoldingFieldNumber = 10,
+    kStartOfDayHoldingFieldNumber = 11,
+    kLastPriceArsFieldNumber = 12,
+    kLastPriceUsdFieldNumber = 13,
+    kLastPriceCableFieldNumber = 14,
+  };
+  // string asset = 1;
+  void clear_asset() ;
+  const std::string& asset() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_asset(Arg_&& arg, Args_... args);
+  std::string* mutable_asset();
+  PROTOBUF_NODISCARD std::string* release_asset();
+  void set_allocated_asset(std::string* value);
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kAssetFieldNumber = 1,
-          kSettlementTypeFieldNumber = 2,
-          kMarketFieldNumber = 3,
-          kAccountFieldNumber = 15,
-          kRealizedHoldingsFieldNumber = 4,
-          kUnrealizedBuyHoldingFieldNumber = 5,
-          kUnrealizedSellHoldingFieldNumber = 6,
-          kTimestampFieldNumber = 7,
-          kBuyTotalFieldNumber = 8,
-          kSellTotalFieldNumber = 9,
-          kOtcHoldingFieldNumber = 10,
-          kStartOfDayHoldingFieldNumber = 11,
-          kLastPriceArsFieldNumber = 12,
-          kLastPriceUsdFieldNumber = 13,
-          kLastPriceCableFieldNumber = 14,
-        };
-        // string asset = 1;
-        void clear_asset();
-        const std::string &asset() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_asset(Arg_ &&arg, Args_... args);
-        std::string *mutable_asset();
-        PROTOBUF_NODISCARD std::string *release_asset();
-        void set_allocated_asset(std::string *value);
+  private:
+  const std::string& _internal_asset() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_asset(
+      const std::string& value);
+  std::string* _internal_mutable_asset();
 
-       private:
-        const std::string &_internal_asset() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_asset(const std::string &value);
-        std::string *_internal_mutable_asset();
+  public:
+  // string settlement_type = 2;
+  void clear_settlement_type() ;
+  const std::string& settlement_type() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_settlement_type(Arg_&& arg, Args_... args);
+  std::string* mutable_settlement_type();
+  PROTOBUF_NODISCARD std::string* release_settlement_type();
+  void set_allocated_settlement_type(std::string* value);
 
-       public:
-        // string settlement_type = 2;
-        void clear_settlement_type();
-        const std::string &settlement_type() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_settlement_type(Arg_ &&arg, Args_... args);
-        std::string *mutable_settlement_type();
-        PROTOBUF_NODISCARD std::string *release_settlement_type();
-        void set_allocated_settlement_type(std::string *value);
+  private:
+  const std::string& _internal_settlement_type() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_settlement_type(
+      const std::string& value);
+  std::string* _internal_mutable_settlement_type();
 
-       private:
-        const std::string &_internal_settlement_type() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_settlement_type(const std::string &value);
-        std::string *_internal_mutable_settlement_type();
+  public:
+  // string market = 3;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        // string market = 3;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // string account = 15;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-       public:
-        // string account = 15;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // double realized_holdings = 4;
+  void clear_realized_holdings() ;
+  double realized_holdings() const;
+  void set_realized_holdings(double value);
 
-       public:
-        // double realized_holdings = 4;
-        void clear_realized_holdings();
-        double realized_holdings() const;
-        void set_realized_holdings(double value);
+  private:
+  double _internal_realized_holdings() const;
+  void _internal_set_realized_holdings(double value);
 
-       private:
-        double _internal_realized_holdings() const;
-        void _internal_set_realized_holdings(double value);
+  public:
+  // double unrealized_buy_holding = 5;
+  void clear_unrealized_buy_holding() ;
+  double unrealized_buy_holding() const;
+  void set_unrealized_buy_holding(double value);
 
-       public:
-        // double unrealized_buy_holding = 5;
-        void clear_unrealized_buy_holding();
-        double unrealized_buy_holding() const;
-        void set_unrealized_buy_holding(double value);
+  private:
+  double _internal_unrealized_buy_holding() const;
+  void _internal_set_unrealized_buy_holding(double value);
 
-       private:
-        double _internal_unrealized_buy_holding() const;
-        void _internal_set_unrealized_buy_holding(double value);
+  public:
+  // double unrealized_sell_holding = 6;
+  void clear_unrealized_sell_holding() ;
+  double unrealized_sell_holding() const;
+  void set_unrealized_sell_holding(double value);
 
-       public:
-        // double unrealized_sell_holding = 6;
-        void clear_unrealized_sell_holding();
-        double unrealized_sell_holding() const;
-        void set_unrealized_sell_holding(double value);
+  private:
+  double _internal_unrealized_sell_holding() const;
+  void _internal_set_unrealized_sell_holding(double value);
 
-       private:
-        double _internal_unrealized_sell_holding() const;
-        void _internal_set_unrealized_sell_holding(double value);
+  public:
+  // int64 timestamp = 7;
+  void clear_timestamp() ;
+  ::int64_t timestamp() const;
+  void set_timestamp(::int64_t value);
 
-       public:
-        // int64 timestamp = 7;
-        void clear_timestamp();
-        ::int64_t timestamp() const;
-        void set_timestamp(::int64_t value);
+  private:
+  ::int64_t _internal_timestamp() const;
+  void _internal_set_timestamp(::int64_t value);
 
-       private:
-        ::int64_t _internal_timestamp() const;
-        void _internal_set_timestamp(::int64_t value);
+  public:
+  // double buy_total = 8;
+  void clear_buy_total() ;
+  double buy_total() const;
+  void set_buy_total(double value);
 
-       public:
-        // double buy_total = 8;
-        void clear_buy_total();
-        double buy_total() const;
-        void set_buy_total(double value);
+  private:
+  double _internal_buy_total() const;
+  void _internal_set_buy_total(double value);
 
-       private:
-        double _internal_buy_total() const;
-        void _internal_set_buy_total(double value);
+  public:
+  // double sell_total = 9;
+  void clear_sell_total() ;
+  double sell_total() const;
+  void set_sell_total(double value);
 
-       public:
-        // double sell_total = 9;
-        void clear_sell_total();
-        double sell_total() const;
-        void set_sell_total(double value);
+  private:
+  double _internal_sell_total() const;
+  void _internal_set_sell_total(double value);
 
-       private:
-        double _internal_sell_total() const;
-        void _internal_set_sell_total(double value);
+  public:
+  // double otc_holding = 10;
+  void clear_otc_holding() ;
+  double otc_holding() const;
+  void set_otc_holding(double value);
 
-       public:
-        // double otc_holding = 10;
-        void clear_otc_holding();
-        double otc_holding() const;
-        void set_otc_holding(double value);
+  private:
+  double _internal_otc_holding() const;
+  void _internal_set_otc_holding(double value);
 
-       private:
-        double _internal_otc_holding() const;
-        void _internal_set_otc_holding(double value);
+  public:
+  // double start_of_day_holding = 11;
+  void clear_start_of_day_holding() ;
+  double start_of_day_holding() const;
+  void set_start_of_day_holding(double value);
 
-       public:
-        // double start_of_day_holding = 11;
-        void clear_start_of_day_holding();
-        double start_of_day_holding() const;
-        void set_start_of_day_holding(double value);
+  private:
+  double _internal_start_of_day_holding() const;
+  void _internal_set_start_of_day_holding(double value);
 
-       private:
-        double _internal_start_of_day_holding() const;
-        void _internal_set_start_of_day_holding(double value);
+  public:
+  // double last_price_ars = 12;
+  void clear_last_price_ars() ;
+  double last_price_ars() const;
+  void set_last_price_ars(double value);
 
-       public:
-        // double last_price_ars = 12;
-        void clear_last_price_ars();
-        double last_price_ars() const;
-        void set_last_price_ars(double value);
+  private:
+  double _internal_last_price_ars() const;
+  void _internal_set_last_price_ars(double value);
 
-       private:
-        double _internal_last_price_ars() const;
-        void _internal_set_last_price_ars(double value);
+  public:
+  // double last_price_usd = 13;
+  void clear_last_price_usd() ;
+  double last_price_usd() const;
+  void set_last_price_usd(double value);
 
-       public:
-        // double last_price_usd = 13;
-        void clear_last_price_usd();
-        double last_price_usd() const;
-        void set_last_price_usd(double value);
+  private:
+  double _internal_last_price_usd() const;
+  void _internal_set_last_price_usd(double value);
 
-       private:
-        double _internal_last_price_usd() const;
-        void _internal_set_last_price_usd(double value);
+  public:
+  // double last_price_cable = 14;
+  void clear_last_price_cable() ;
+  double last_price_cable() const;
+  void set_last_price_cable(double value);
 
-       public:
-        // double last_price_cable = 14;
-        void clear_last_price_cable();
-        double last_price_cable() const;
-        void set_last_price_cable(double value);
+  private:
+  double _internal_last_price_cable() const;
+  void _internal_set_last_price_cable(double value);
 
-       private:
-        double _internal_last_price_cable() const;
-        void _internal_set_last_price_cable(double value);
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.HoldingReport)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      4, 15, 0,
+      99, 2>
+      _table_;
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.HoldingReport)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<4, 15, 0, 99, 2> _table_;
+  static constexpr const void* _raw_default_instance_ =
+      &_HoldingReport_default_instance_;
 
-        static constexpr const void *_raw_default_instance_ = &_HoldingReport_default_instance_;
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const HoldingReport& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr asset_;
+    ::google::protobuf::internal::ArenaStringPtr settlement_type_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    double realized_holdings_;
+    double unrealized_buy_holding_;
+    double unrealized_sell_holding_;
+    ::int64_t timestamp_;
+    double buy_total_;
+    double sell_total_;
+    double otc_holding_;
+    double start_of_day_holding_;
+    double last_price_ars_;
+    double last_price_usd_;
+    double last_price_cable_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
+// -------------------------------------------------------------------
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const HoldingReport &from_msg);
-          ::google::protobuf::internal::ArenaStringPtr asset_;
-          ::google::protobuf::internal::ArenaStringPtr settlement_type_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          double realized_holdings_;
-          double unrealized_buy_holding_;
-          double unrealized_sell_holding_;
-          ::int64_t timestamp_;
-          double buy_total_;
-          double sell_total_;
-          double otc_holding_;
-          double start_of_day_holding_;
-          double last_price_ars_;
-          double last_price_usd_;
-          double last_price_cable_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
-      // -------------------------------------------------------------------
+class PNLReportResponse final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.PNLReportResponse) */ {
+ public:
+  inline PNLReportResponse() : PNLReportResponse(nullptr) {}
+  ~PNLReportResponse() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR PNLReportResponse(
+      ::google::protobuf::internal::ConstantInitialized);
 
-      class PNLReportResponse final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.PNLReportResponse)
-       */
-      {
-       public:
-        inline PNLReportResponse() : PNLReportResponse(nullptr) {}
-        ~PNLReportResponse() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR PNLReportResponse(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline PNLReportResponse(const PNLReportResponse &from)
-            : PNLReportResponse(nullptr, from) {}
-        inline PNLReportResponse(PNLReportResponse &&from) noexcept
-            : PNLReportResponse(nullptr, std::move(from)) {}
-        inline PNLReportResponse &operator=(const PNLReportResponse &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline PNLReportResponse &operator=(PNLReportResponse &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline PNLReportResponse(const PNLReportResponse& from) : PNLReportResponse(nullptr, from) {}
+  inline PNLReportResponse(PNLReportResponse&& from) noexcept
+      : PNLReportResponse(nullptr, std::move(from)) {}
+  inline PNLReportResponse& operator=(const PNLReportResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PNLReportResponse& operator=(PNLReportResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const PNLReportResponse &default_instance() { return *internal_default_instance(); }
-        static inline const PNLReportResponse *internal_default_instance() {
-          return reinterpret_cast<const PNLReportResponse *>(&_PNLReportResponse_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 4;
-        friend void swap(PNLReportResponse &a, PNLReportResponse &b) { a.Swap(&b); }
-        inline void Swap(PNLReportResponse *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PNLReportResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PNLReportResponse* internal_default_instance() {
+    return reinterpret_cast<const PNLReportResponse*>(
+        &_PNLReportResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 4;
+  friend void swap(PNLReportResponse& a, PNLReportResponse& b) { a.Swap(&b); }
+  inline void Swap(PNLReportResponse* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(PNLReportResponse *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PNLReportResponse* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        PNLReportResponse *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<PNLReportResponse>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const PNLReportResponse &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const PNLReportResponse &from) { PNLReportResponse::MergeImpl(*this, from); }
+  PNLReportResponse* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<PNLReportResponse>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const PNLReportResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const PNLReportResponse& from) { PNLReportResponse::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(PNLReportResponse *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(PNLReportResponse* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.PNLReportResponse"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.PNLReportResponse";
-        }
+ protected:
+  explicit PNLReportResponse(::google::protobuf::Arena* arena);
+  PNLReportResponse(::google::protobuf::Arena* arena, const PNLReportResponse& from);
+  PNLReportResponse(::google::protobuf::Arena* arena, PNLReportResponse&& from) noexcept
+      : PNLReportResponse(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit PNLReportResponse(::google::protobuf::Arena *arena);
-        PNLReportResponse(::google::protobuf::Arena *arena, const PNLReportResponse &from);
-        PNLReportResponse(::google::protobuf::Arena *arena, PNLReportResponse &&from) noexcept
-            : PNLReportResponse(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kPnlReportsFieldNumber = 7,
+    kMarketFieldNumber = 5,
+    kAccountFieldNumber = 6,
+    kTimestampFieldNumber = 2,
+  };
+  // repeated .markethub.messaging.risk_management.PNLReport pnl_reports = 7;
+  int pnl_reports_size() const;
+  private:
+  int _internal_pnl_reports_size() const;
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kPnlReportsFieldNumber = 7,
-          kMarketFieldNumber = 5,
-          kAccountFieldNumber = 6,
-          kTimestampFieldNumber = 2,
-        };
-        // repeated .markethub.messaging.risk_management.PNLReport pnl_reports = 7;
-        int pnl_reports_size() const;
+  public:
+  void clear_pnl_reports() ;
+  ::markethub::messaging::risk_management::PNLReport* mutable_pnl_reports(int index);
+  ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>* mutable_pnl_reports();
 
-       private:
-        int _internal_pnl_reports_size() const;
+  private:
+  const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>& _internal_pnl_reports() const;
+  ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>* _internal_mutable_pnl_reports();
+  public:
+  const ::markethub::messaging::risk_management::PNLReport& pnl_reports(int index) const;
+  ::markethub::messaging::risk_management::PNLReport* add_pnl_reports();
+  const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>& pnl_reports() const;
+  // string market = 5;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        void clear_pnl_reports();
-        ::markethub::messaging::risk_management::PNLReport *mutable_pnl_reports(int index);
-        ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport> *
-        mutable_pnl_reports();
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const ::google::protobuf::RepeatedPtrField<
-            ::markethub::messaging::risk_management::PNLReport> &
-        _internal_pnl_reports() const;
-        ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport> *
-        _internal_mutable_pnl_reports();
+  public:
+  // string account = 6;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-       public:
-        const ::markethub::messaging::risk_management::PNLReport &pnl_reports(int index) const;
-        ::markethub::messaging::risk_management::PNLReport *add_pnl_reports();
-        const ::google::protobuf::RepeatedPtrField<
-            ::markethub::messaging::risk_management::PNLReport> &
-        pnl_reports() const;
-        // string market = 5;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // int64 timestamp = 2;
+  void clear_timestamp() ;
+  ::int64_t timestamp() const;
+  void set_timestamp(::int64_t value);
 
-       public:
-        // string account = 6;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  ::int64_t _internal_timestamp() const;
+  void _internal_set_timestamp(::int64_t value);
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.PNLReportResponse)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      3, 4, 1,
+      75, 2>
+      _table_;
 
-       public:
-        // int64 timestamp = 2;
-        void clear_timestamp();
-        ::int64_t timestamp() const;
-        void set_timestamp(::int64_t value);
+  static constexpr const void* _raw_default_instance_ =
+      &_PNLReportResponse_default_instance_;
 
-       private:
-        ::int64_t _internal_timestamp() const;
-        void _internal_set_timestamp(::int64_t value);
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const PNLReportResponse& from_msg);
+    ::google::protobuf::RepeatedPtrField< ::markethub::messaging::risk_management::PNLReport > pnl_reports_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    ::int64_t timestamp_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
+// -------------------------------------------------------------------
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.PNLReportResponse)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<3, 4, 1, 75, 2> _table_;
+class HoldingReportResponse final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.HoldingReportResponse) */ {
+ public:
+  inline HoldingReportResponse() : HoldingReportResponse(nullptr) {}
+  ~HoldingReportResponse() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR HoldingReportResponse(
+      ::google::protobuf::internal::ConstantInitialized);
 
-        static constexpr const void *_raw_default_instance_ = &_PNLReportResponse_default_instance_;
-
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const PNLReportResponse &from_msg);
-          ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>
-              pnl_reports_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          ::int64_t timestamp_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
-      // -------------------------------------------------------------------
-
-      class HoldingReportResponse final : public ::google::protobuf::Message
-      /* @@protoc_insertion_point(class_definition:markethub.messaging.risk_management.HoldingReportResponse)
-       */
-      {
-       public:
-        inline HoldingReportResponse() : HoldingReportResponse(nullptr) {}
-        ~HoldingReportResponse() PROTOBUF_FINAL;
-        template <typename = void>
-        explicit PROTOBUF_CONSTEXPR HoldingReportResponse(
-            ::google::protobuf::internal::ConstantInitialized);
-
-        inline HoldingReportResponse(const HoldingReportResponse &from)
-            : HoldingReportResponse(nullptr, from) {}
-        inline HoldingReportResponse(HoldingReportResponse &&from) noexcept
-            : HoldingReportResponse(nullptr, std::move(from)) {}
-        inline HoldingReportResponse &operator=(const HoldingReportResponse &from) {
-          CopyFrom(from);
-          return *this;
-        }
-        inline HoldingReportResponse &operator=(HoldingReportResponse &&from) noexcept {
-          if (this == &from)
-            return *this;
-          if (GetArena() == from.GetArena()
+  inline HoldingReportResponse(const HoldingReportResponse& from) : HoldingReportResponse(nullptr, from) {}
+  inline HoldingReportResponse(HoldingReportResponse&& from) noexcept
+      : HoldingReportResponse(nullptr, std::move(from)) {}
+  inline HoldingReportResponse& operator=(const HoldingReportResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline HoldingReportResponse& operator=(HoldingReportResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-              && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-          ) {
-            InternalSwap(&from);
-          } else {
-            CopyFrom(from);
-          }
-          return *this;
-        }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-        inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-              ::google::protobuf::UnknownFieldSet::default_instance);
-        }
-        inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-            ABSL_ATTRIBUTE_LIFETIME_BOUND {
-          return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-        }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-        static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-        static const ::google::protobuf::Descriptor *GetDescriptor() {
-          return default_instance().GetMetadata().descriptor;
-        }
-        static const ::google::protobuf::Reflection *GetReflection() {
-          return default_instance().GetMetadata().reflection;
-        }
-        static const HoldingReportResponse &default_instance() {
-          return *internal_default_instance();
-        }
-        static inline const HoldingReportResponse *internal_default_instance() {
-          return reinterpret_cast<const HoldingReportResponse *>(
-              &_HoldingReportResponse_default_instance_);
-        }
-        static constexpr int kIndexInFileMessages = 1;
-        friend void swap(HoldingReportResponse &a, HoldingReportResponse &b) { a.Swap(&b); }
-        inline void Swap(HoldingReportResponse *other) {
-          if (other == this)
-            return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const HoldingReportResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const HoldingReportResponse* internal_default_instance() {
+    return reinterpret_cast<const HoldingReportResponse*>(
+        &_HoldingReportResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(HoldingReportResponse& a, HoldingReportResponse& b) { a.Swap(&b); }
+  inline void Swap(HoldingReportResponse* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-          if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-            InternalSwap(other);
-          } else {
-            ::google::protobuf::internal::GenericSwap(this, other);
-          }
-        }
-        void UnsafeArenaSwap(HoldingReportResponse *other) {
-          if (other == this)
-            return;
-          ABSL_DCHECK(GetArena() == other->GetArena());
-          InternalSwap(other);
-        }
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(HoldingReportResponse* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
 
-        // implements Message ----------------------------------------------
+  // implements Message ----------------------------------------------
 
-        HoldingReportResponse *New(::google::protobuf::Arena *arena = nullptr) const
-            PROTOBUF_FINAL {
-          return ::google::protobuf::Message::DefaultConstruct<HoldingReportResponse>(arena);
-        }
-        using ::google::protobuf::Message::CopyFrom;
-        void CopyFrom(const HoldingReportResponse &from);
-        using ::google::protobuf::Message::MergeFrom;
-        void MergeFrom(const HoldingReportResponse &from) {
-          HoldingReportResponse::MergeImpl(*this, from);
-        }
+  HoldingReportResponse* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<HoldingReportResponse>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const HoldingReportResponse& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const HoldingReportResponse& from) { HoldingReportResponse::MergeImpl(*this, from); }
 
-       private:
-        static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                              const ::google::protobuf::MessageLite &from_msg);
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
 
-       public:
-        bool IsInitialized() const { return true; }
-        ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-       private:
-        static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-        static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                             ::google::protobuf::io::EpsCopyOutputStream *stream);
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
 
-       public:
-        ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-        ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                      ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-          return _InternalSerialize(*this, target, stream);
-        }
-#else  // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ByteSizeLong() const final;
-        ::uint8_t *_InternalSerialize(
-            ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-        int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-       private:
-        void SharedCtor(::google::protobuf::Arena *arena);
-        void SharedDtor();
-        void InternalSwap(HoldingReportResponse *other);
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(HoldingReportResponse* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.risk_management.HoldingReportResponse"; }
 
-       private:
-        friend class ::google::protobuf::internal::AnyMetadata;
-        static ::absl::string_view FullMessageName() {
-          return "markethub.messaging.risk_management.HoldingReportResponse";
-        }
+ protected:
+  explicit HoldingReportResponse(::google::protobuf::Arena* arena);
+  HoldingReportResponse(::google::protobuf::Arena* arena, const HoldingReportResponse& from);
+  HoldingReportResponse(::google::protobuf::Arena* arena, HoldingReportResponse&& from) noexcept
+      : HoldingReportResponse(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
 
-       protected:
-        explicit HoldingReportResponse(::google::protobuf::Arena *arena);
-        HoldingReportResponse(::google::protobuf::Arena *arena, const HoldingReportResponse &from);
-        HoldingReportResponse(::google::protobuf::Arena *arena,
-                              HoldingReportResponse &&from) noexcept
-            : HoldingReportResponse(arena) {
-          *this = ::std::move(from);
-        }
-        const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-        static const ::google::protobuf::Message::ClassDataFull _class_data_;
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
 
-       public:
-        ::google::protobuf::Metadata GetMetadata() const;
-        // nested types ----------------------------------------------------
+  // accessors -------------------------------------------------------
+  enum : int {
+    kHoldingReportsFieldNumber = 8,
+    kMarketFieldNumber = 6,
+    kAccountFieldNumber = 7,
+    kTimestampFieldNumber = 2,
+  };
+  // repeated .markethub.messaging.risk_management.HoldingReport holding_reports = 8;
+  int holding_reports_size() const;
+  private:
+  int _internal_holding_reports_size() const;
 
-        // accessors -------------------------------------------------------
-        enum : int {
-          kHoldingReportsFieldNumber = 8,
-          kMarketFieldNumber = 6,
-          kAccountFieldNumber = 7,
-          kTimestampFieldNumber = 2,
-        };
-        // repeated .markethub.messaging.risk_management.HoldingReport holding_reports = 8;
-        int holding_reports_size() const;
+  public:
+  void clear_holding_reports() ;
+  ::markethub::messaging::risk_management::HoldingReport* mutable_holding_reports(int index);
+  ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>* mutable_holding_reports();
 
-       private:
-        int _internal_holding_reports_size() const;
+  private:
+  const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>& _internal_holding_reports() const;
+  ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>* _internal_mutable_holding_reports();
+  public:
+  const ::markethub::messaging::risk_management::HoldingReport& holding_reports(int index) const;
+  ::markethub::messaging::risk_management::HoldingReport* add_holding_reports();
+  const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>& holding_reports() const;
+  // string market = 6;
+  void clear_market() ;
+  const std::string& market() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_market(Arg_&& arg, Args_... args);
+  std::string* mutable_market();
+  PROTOBUF_NODISCARD std::string* release_market();
+  void set_allocated_market(std::string* value);
 
-       public:
-        void clear_holding_reports();
-        ::markethub::messaging::risk_management::HoldingReport *mutable_holding_reports(int index);
-        ::google::protobuf::RepeatedPtrField<
-            ::markethub::messaging::risk_management::HoldingReport> *
-        mutable_holding_reports();
+  private:
+  const std::string& _internal_market() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(
+      const std::string& value);
+  std::string* _internal_mutable_market();
 
-       private:
-        const ::google::protobuf::RepeatedPtrField<
-            ::markethub::messaging::risk_management::HoldingReport> &
-        _internal_holding_reports() const;
-        ::google::protobuf::RepeatedPtrField<
-            ::markethub::messaging::risk_management::HoldingReport> *
-        _internal_mutable_holding_reports();
+  public:
+  // string account = 7;
+  void clear_account() ;
+  const std::string& account() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_account(Arg_&& arg, Args_... args);
+  std::string* mutable_account();
+  PROTOBUF_NODISCARD std::string* release_account();
+  void set_allocated_account(std::string* value);
 
-       public:
-        const ::markethub::messaging::risk_management::HoldingReport &holding_reports(
-            int index) const;
-        ::markethub::messaging::risk_management::HoldingReport *add_holding_reports();
-        const ::google::protobuf::RepeatedPtrField<
-            ::markethub::messaging::risk_management::HoldingReport> &
-        holding_reports() const;
-        // string market = 6;
-        void clear_market();
-        const std::string &market() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_market(Arg_ &&arg, Args_... args);
-        std::string *mutable_market();
-        PROTOBUF_NODISCARD std::string *release_market();
-        void set_allocated_market(std::string *value);
+  private:
+  const std::string& _internal_account() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(
+      const std::string& value);
+  std::string* _internal_mutable_account();
 
-       private:
-        const std::string &_internal_market() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_market(const std::string &value);
-        std::string *_internal_mutable_market();
+  public:
+  // int64 timestamp = 2;
+  void clear_timestamp() ;
+  ::int64_t timestamp() const;
+  void set_timestamp(::int64_t value);
 
-       public:
-        // string account = 7;
-        void clear_account();
-        const std::string &account() const;
-        template <typename Arg_ = const std::string &, typename... Args_>
-        void set_account(Arg_ &&arg, Args_... args);
-        std::string *mutable_account();
-        PROTOBUF_NODISCARD std::string *release_account();
-        void set_allocated_account(std::string *value);
+  private:
+  ::int64_t _internal_timestamp() const;
+  void _internal_set_timestamp(::int64_t value);
 
-       private:
-        const std::string &_internal_account() const;
-        inline PROTOBUF_ALWAYS_INLINE void _internal_set_account(const std::string &value);
-        std::string *_internal_mutable_account();
+  public:
+  // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.HoldingReportResponse)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      3, 4, 1,
+      79, 2>
+      _table_;
 
-       public:
-        // int64 timestamp = 2;
-        void clear_timestamp();
-        ::int64_t timestamp() const;
-        void set_timestamp(::int64_t value);
+  static constexpr const void* _raw_default_instance_ =
+      &_HoldingReportResponse_default_instance_;
 
-       private:
-        ::int64_t _internal_timestamp() const;
-        void _internal_set_timestamp(::int64_t value);
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const HoldingReportResponse& from_msg);
+    ::google::protobuf::RepeatedPtrField< ::markethub::messaging::risk_management::HoldingReport > holding_reports_;
+    ::google::protobuf::internal::ArenaStringPtr market_;
+    ::google::protobuf::internal::ArenaStringPtr account_;
+    ::int64_t timestamp_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_risk_5fmanagement_2eproto;
+};
 
-       public:
-        // @@protoc_insertion_point(class_scope:markethub.messaging.risk_management.HoldingReportResponse)
-       private:
-        class _Internal;
-        friend class ::google::protobuf::internal::TcParser;
-        static const ::google::protobuf::internal::TcParseTable<3, 4, 1, 79, 2> _table_;
+// ===================================================================
 
-        static constexpr const void *_raw_default_instance_ =
-            &_HoldingReportResponse_default_instance_;
 
-        friend class ::google::protobuf::MessageLite;
-        friend class ::google::protobuf::Arena;
-        template <typename T>
-        friend class ::google::protobuf::Arena::InternalHelper;
-        using InternalArenaConstructable_ = void;
-        using DestructorSkippable_ = void;
-        struct Impl_ {
-          inline explicit constexpr Impl_(
-              ::google::protobuf::internal::ConstantInitialized) noexcept;
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena);
-          inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                                ::google::protobuf::Arena *arena, const Impl_ &from,
-                                const HoldingReportResponse &from_msg);
-          ::google::protobuf::RepeatedPtrField<
-              ::markethub::messaging::risk_management::HoldingReport>
-              holding_reports_;
-          ::google::protobuf::internal::ArenaStringPtr market_;
-          ::google::protobuf::internal::ArenaStringPtr account_;
-          ::int64_t timestamp_;
-          mutable ::google::protobuf::internal::CachedSize _cached_size_;
-          PROTOBUF_TSAN_DECLARE_MEMBER
-        };
-        union {
-          Impl_ _impl_;
-        };
-        friend struct ::TableStruct_risk_5fmanagement_2eproto;
-      };
 
-      // ===================================================================
 
-      // ===================================================================
+// ===================================================================
+
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif // __GNUC__
-      // -------------------------------------------------------------------
+#endif  // __GNUC__
+// -------------------------------------------------------------------
 
-      // HoldingReportRequest
+// HoldingReportRequest
 
-      // string market = 1;
-      inline void HoldingReportRequest::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReportRequest::market() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportRequest.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReportRequest::set_market(Arg_ &&arg,
-                                                                          Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportRequest.market)
-      }
-      inline std::string *HoldingReportRequest::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportRequest.market)
-        return _s;
-      }
-      inline const std::string &HoldingReportRequest::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void HoldingReportRequest::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReportRequest::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReportRequest::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportRequest.market)
-        return _impl_.market_.Release();
-      }
-      inline void HoldingReportRequest::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 1;
+inline void HoldingReportRequest::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& HoldingReportRequest::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportRequest.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReportRequest::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportRequest.market)
+}
+inline std::string* HoldingReportRequest::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportRequest.market)
+  return _s;
+}
+inline const std::string& HoldingReportRequest::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void HoldingReportRequest::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* HoldingReportRequest::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* HoldingReportRequest::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportRequest.market)
+  return _impl_.market_.Release();
+}
+inline void HoldingReportRequest::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportRequest.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportRequest.market)
+}
 
-      // string account = 2;
-      inline void HoldingReportRequest::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReportRequest::account() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportRequest.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReportRequest::set_account(Arg_ &&arg,
-                                                                           Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportRequest.account)
-      }
-      inline std::string *HoldingReportRequest::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportRequest.account)
-        return _s;
-      }
-      inline const std::string &HoldingReportRequest::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void HoldingReportRequest::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReportRequest::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReportRequest::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportRequest.account)
-        return _impl_.account_.Release();
-      }
-      inline void HoldingReportRequest::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 2;
+inline void HoldingReportRequest::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& HoldingReportRequest::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportRequest.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReportRequest::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportRequest.account)
+}
+inline std::string* HoldingReportRequest::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportRequest.account)
+  return _s;
+}
+inline const std::string& HoldingReportRequest::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void HoldingReportRequest::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* HoldingReportRequest::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* HoldingReportRequest::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportRequest.account)
+  return _impl_.account_.Release();
+}
+inline void HoldingReportRequest::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportRequest.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportRequest.account)
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // HoldingReportResponse
+// HoldingReportResponse
 
-      // int64 timestamp = 2;
-      inline void HoldingReportResponse::clear_timestamp() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = ::int64_t{0};
-      }
-      inline ::int64_t HoldingReportResponse::timestamp() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.timestamp)
-        return _internal_timestamp();
-      }
-      inline void HoldingReportResponse::set_timestamp(::int64_t value) {
-        _internal_set_timestamp(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportResponse.timestamp)
-      }
-      inline ::int64_t HoldingReportResponse::_internal_timestamp() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.timestamp_;
-      }
-      inline void HoldingReportResponse::_internal_set_timestamp(::int64_t value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = value;
-      }
+// int64 timestamp = 2;
+inline void HoldingReportResponse::clear_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = ::int64_t{0};
+}
+inline ::int64_t HoldingReportResponse::timestamp() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.timestamp)
+  return _internal_timestamp();
+}
+inline void HoldingReportResponse::set_timestamp(::int64_t value) {
+  _internal_set_timestamp(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportResponse.timestamp)
+}
+inline ::int64_t HoldingReportResponse::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_;
+}
+inline void HoldingReportResponse::_internal_set_timestamp(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = value;
+}
 
-      // string market = 6;
-      inline void HoldingReportResponse::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReportResponse::market() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReportResponse::set_market(Arg_ &&arg,
-                                                                           Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportResponse.market)
-      }
-      inline std::string *HoldingReportResponse::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportResponse.market)
-        return _s;
-      }
-      inline const std::string &HoldingReportResponse::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void HoldingReportResponse::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReportResponse::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReportResponse::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportResponse.market)
-        return _impl_.market_.Release();
-      }
-      inline void HoldingReportResponse::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 6;
+inline void HoldingReportResponse::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& HoldingReportResponse::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReportResponse::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportResponse.market)
+}
+inline std::string* HoldingReportResponse::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportResponse.market)
+  return _s;
+}
+inline const std::string& HoldingReportResponse::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void HoldingReportResponse::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* HoldingReportResponse::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* HoldingReportResponse::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportResponse.market)
+  return _impl_.market_.Release();
+}
+inline void HoldingReportResponse::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportResponse.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportResponse.market)
+}
 
-      // string account = 7;
-      inline void HoldingReportResponse::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReportResponse::account() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReportResponse::set_account(Arg_ &&arg,
-                                                                            Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportResponse.account)
-      }
-      inline std::string *HoldingReportResponse::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportResponse.account)
-        return _s;
-      }
-      inline const std::string &HoldingReportResponse::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void HoldingReportResponse::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReportResponse::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReportResponse::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportResponse.account)
-        return _impl_.account_.Release();
-      }
-      inline void HoldingReportResponse::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 7;
+inline void HoldingReportResponse::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& HoldingReportResponse::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReportResponse::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReportResponse.account)
+}
+inline std::string* HoldingReportResponse::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportResponse.account)
+  return _s;
+}
+inline const std::string& HoldingReportResponse::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void HoldingReportResponse::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* HoldingReportResponse::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* HoldingReportResponse::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReportResponse.account)
+  return _impl_.account_.Release();
+}
+inline void HoldingReportResponse::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportResponse.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReportResponse.account)
+}
 
-      // repeated .markethub.messaging.risk_management.HoldingReport holding_reports = 8;
-      inline int HoldingReportResponse::_internal_holding_reports_size() const {
-        return _internal_holding_reports().size();
-      }
-      inline int HoldingReportResponse::holding_reports_size() const {
-        return _internal_holding_reports_size();
-      }
-      inline void HoldingReportResponse::clear_holding_reports() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.holding_reports_.Clear();
-      }
-      inline ::markethub::messaging::risk_management::HoldingReport *
-      HoldingReportResponse::mutable_holding_reports(int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
-        return _internal_mutable_holding_reports()->Mutable(index);
-      }
-      inline ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::HoldingReport> *
-      HoldingReportResponse::mutable_holding_reports() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_mutable_list:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _internal_mutable_holding_reports();
-      }
-      inline const ::markethub::messaging::risk_management::HoldingReport &
-      HoldingReportResponse::holding_reports(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
-        return _internal_holding_reports().Get(index);
-      }
-      inline ::markethub::messaging::risk_management::HoldingReport *
-      HoldingReportResponse::add_holding_reports() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        ::markethub::messaging::risk_management::HoldingReport *_add =
-            _internal_mutable_holding_reports()->Add();
-        // @@protoc_insertion_point(field_add:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
-        return _add;
-      }
-      inline const ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::HoldingReport> &
-      HoldingReportResponse::holding_reports() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_list:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
-        return _internal_holding_reports();
-      }
-      inline const ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::HoldingReport> &
-      HoldingReportResponse::_internal_holding_reports() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.holding_reports_;
-      }
-      inline ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::HoldingReport> *
-      HoldingReportResponse::_internal_mutable_holding_reports() {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return &_impl_.holding_reports_;
-      }
+// repeated .markethub.messaging.risk_management.HoldingReport holding_reports = 8;
+inline int HoldingReportResponse::_internal_holding_reports_size() const {
+  return _internal_holding_reports().size();
+}
+inline int HoldingReportResponse::holding_reports_size() const {
+  return _internal_holding_reports_size();
+}
+inline void HoldingReportResponse::clear_holding_reports() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.holding_reports_.Clear();
+}
+inline ::markethub::messaging::risk_management::HoldingReport* HoldingReportResponse::mutable_holding_reports(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
+  return _internal_mutable_holding_reports()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>* HoldingReportResponse::mutable_holding_reports()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_holding_reports();
+}
+inline const ::markethub::messaging::risk_management::HoldingReport& HoldingReportResponse::holding_reports(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
+  return _internal_holding_reports().Get(index);
+}
+inline ::markethub::messaging::risk_management::HoldingReport* HoldingReportResponse::add_holding_reports() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::markethub::messaging::risk_management::HoldingReport* _add = _internal_mutable_holding_reports()->Add();
+  // @@protoc_insertion_point(field_add:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>& HoldingReportResponse::holding_reports() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:markethub.messaging.risk_management.HoldingReportResponse.holding_reports)
+  return _internal_holding_reports();
+}
+inline const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>&
+HoldingReportResponse::_internal_holding_reports() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.holding_reports_;
+}
+inline ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::HoldingReport>*
+HoldingReportResponse::_internal_mutable_holding_reports() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.holding_reports_;
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // HoldingReport
+// HoldingReport
 
-      // string asset = 1;
-      inline void HoldingReport::clear_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReport::asset() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.asset)
-        return _internal_asset();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_asset(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.asset)
-      }
-      inline std::string *HoldingReport::mutable_asset() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_asset();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.asset)
-        return _s;
-      }
-      inline const std::string &HoldingReport::_internal_asset() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.asset_.Get();
-      }
-      inline void HoldingReport::_internal_set_asset(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReport::_internal_mutable_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.asset_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReport::release_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.asset)
-        return _impl_.asset_.Release();
-      }
-      inline void HoldingReport::set_allocated_asset(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string asset = 1;
+inline void HoldingReport::clear_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.ClearToEmpty();
+}
+inline const std::string& HoldingReport::asset() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.asset)
+  return _internal_asset();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_asset(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.asset)
+}
+inline std::string* HoldingReport::mutable_asset() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_asset();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.asset)
+  return _s;
+}
+inline const std::string& HoldingReport::_internal_asset() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.asset_.Get();
+}
+inline void HoldingReport::_internal_set_asset(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.Set(value, GetArena());
+}
+inline std::string* HoldingReport::_internal_mutable_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.asset_.Mutable( GetArena());
+}
+inline std::string* HoldingReport::release_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.asset)
+  return _impl_.asset_.Release();
+}
+inline void HoldingReport::set_allocated_asset(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.asset_.IsDefault()) {
           _impl_.asset_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.asset)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.asset)
+}
 
-      // string settlement_type = 2;
-      inline void HoldingReport::clear_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReport::settlement_type() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.settlement_type)
-        return _internal_settlement_type();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_settlement_type(Arg_ &&arg,
-                                                                            Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.settlement_type)
-      }
-      inline std::string *HoldingReport::mutable_settlement_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_settlement_type();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.settlement_type)
-        return _s;
-      }
-      inline const std::string &HoldingReport::_internal_settlement_type() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.settlement_type_.Get();
-      }
-      inline void HoldingReport::_internal_set_settlement_type(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReport::_internal_mutable_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.settlement_type_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReport::release_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.settlement_type)
-        return _impl_.settlement_type_.Release();
-      }
-      inline void HoldingReport::set_allocated_settlement_type(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string settlement_type = 2;
+inline void HoldingReport::clear_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.ClearToEmpty();
+}
+inline const std::string& HoldingReport::settlement_type() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.settlement_type)
+  return _internal_settlement_type();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_settlement_type(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.settlement_type)
+}
+inline std::string* HoldingReport::mutable_settlement_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_settlement_type();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.settlement_type)
+  return _s;
+}
+inline const std::string& HoldingReport::_internal_settlement_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.settlement_type_.Get();
+}
+inline void HoldingReport::_internal_set_settlement_type(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.Set(value, GetArena());
+}
+inline std::string* HoldingReport::_internal_mutable_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.settlement_type_.Mutable( GetArena());
+}
+inline std::string* HoldingReport::release_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.settlement_type)
+  return _impl_.settlement_type_.Release();
+}
+inline void HoldingReport::set_allocated_settlement_type(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.settlement_type_.IsDefault()) {
           _impl_.settlement_type_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.settlement_type)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.settlement_type)
+}
 
-      // string market = 3;
-      inline void HoldingReport::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReport::market() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_market(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.market)
-      }
-      inline std::string *HoldingReport::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.market)
-        return _s;
-      }
-      inline const std::string &HoldingReport::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void HoldingReport::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReport::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReport::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.market)
-        return _impl_.market_.Release();
-      }
-      inline void HoldingReport::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 3;
+inline void HoldingReport::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& HoldingReport::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.market)
+}
+inline std::string* HoldingReport::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.market)
+  return _s;
+}
+inline const std::string& HoldingReport::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void HoldingReport::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* HoldingReport::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* HoldingReport::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.market)
+  return _impl_.market_.Release();
+}
+inline void HoldingReport::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.market)
+}
 
-      // double realized_holdings = 4;
-      inline void HoldingReport::clear_realized_holdings() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.realized_holdings_ = 0;
-      }
-      inline double HoldingReport::realized_holdings() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.realized_holdings)
-        return _internal_realized_holdings();
-      }
-      inline void HoldingReport::set_realized_holdings(double value) {
-        _internal_set_realized_holdings(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.realized_holdings)
-      }
-      inline double HoldingReport::_internal_realized_holdings() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.realized_holdings_;
-      }
-      inline void HoldingReport::_internal_set_realized_holdings(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.realized_holdings_ = value;
-      }
+// double realized_holdings = 4;
+inline void HoldingReport::clear_realized_holdings() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.realized_holdings_ = 0;
+}
+inline double HoldingReport::realized_holdings() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.realized_holdings)
+  return _internal_realized_holdings();
+}
+inline void HoldingReport::set_realized_holdings(double value) {
+  _internal_set_realized_holdings(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.realized_holdings)
+}
+inline double HoldingReport::_internal_realized_holdings() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.realized_holdings_;
+}
+inline void HoldingReport::_internal_set_realized_holdings(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.realized_holdings_ = value;
+}
 
-      // double unrealized_buy_holding = 5;
-      inline void HoldingReport::clear_unrealized_buy_holding() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.unrealized_buy_holding_ = 0;
-      }
-      inline double HoldingReport::unrealized_buy_holding() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.unrealized_buy_holding)
-        return _internal_unrealized_buy_holding();
-      }
-      inline void HoldingReport::set_unrealized_buy_holding(double value) {
-        _internal_set_unrealized_buy_holding(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.unrealized_buy_holding)
-      }
-      inline double HoldingReport::_internal_unrealized_buy_holding() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.unrealized_buy_holding_;
-      }
-      inline void HoldingReport::_internal_set_unrealized_buy_holding(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.unrealized_buy_holding_ = value;
-      }
+// double unrealized_buy_holding = 5;
+inline void HoldingReport::clear_unrealized_buy_holding() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.unrealized_buy_holding_ = 0;
+}
+inline double HoldingReport::unrealized_buy_holding() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.unrealized_buy_holding)
+  return _internal_unrealized_buy_holding();
+}
+inline void HoldingReport::set_unrealized_buy_holding(double value) {
+  _internal_set_unrealized_buy_holding(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.unrealized_buy_holding)
+}
+inline double HoldingReport::_internal_unrealized_buy_holding() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.unrealized_buy_holding_;
+}
+inline void HoldingReport::_internal_set_unrealized_buy_holding(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.unrealized_buy_holding_ = value;
+}
 
-      // double unrealized_sell_holding = 6;
-      inline void HoldingReport::clear_unrealized_sell_holding() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.unrealized_sell_holding_ = 0;
-      }
-      inline double HoldingReport::unrealized_sell_holding() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.unrealized_sell_holding)
-        return _internal_unrealized_sell_holding();
-      }
-      inline void HoldingReport::set_unrealized_sell_holding(double value) {
-        _internal_set_unrealized_sell_holding(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.unrealized_sell_holding)
-      }
-      inline double HoldingReport::_internal_unrealized_sell_holding() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.unrealized_sell_holding_;
-      }
-      inline void HoldingReport::_internal_set_unrealized_sell_holding(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.unrealized_sell_holding_ = value;
-      }
+// double unrealized_sell_holding = 6;
+inline void HoldingReport::clear_unrealized_sell_holding() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.unrealized_sell_holding_ = 0;
+}
+inline double HoldingReport::unrealized_sell_holding() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.unrealized_sell_holding)
+  return _internal_unrealized_sell_holding();
+}
+inline void HoldingReport::set_unrealized_sell_holding(double value) {
+  _internal_set_unrealized_sell_holding(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.unrealized_sell_holding)
+}
+inline double HoldingReport::_internal_unrealized_sell_holding() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.unrealized_sell_holding_;
+}
+inline void HoldingReport::_internal_set_unrealized_sell_holding(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.unrealized_sell_holding_ = value;
+}
 
-      // int64 timestamp = 7;
-      inline void HoldingReport::clear_timestamp() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = ::int64_t{0};
-      }
-      inline ::int64_t HoldingReport::timestamp() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.timestamp)
-        return _internal_timestamp();
-      }
-      inline void HoldingReport::set_timestamp(::int64_t value) {
-        _internal_set_timestamp(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.timestamp)
-      }
-      inline ::int64_t HoldingReport::_internal_timestamp() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.timestamp_;
-      }
-      inline void HoldingReport::_internal_set_timestamp(::int64_t value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = value;
-      }
+// int64 timestamp = 7;
+inline void HoldingReport::clear_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = ::int64_t{0};
+}
+inline ::int64_t HoldingReport::timestamp() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.timestamp)
+  return _internal_timestamp();
+}
+inline void HoldingReport::set_timestamp(::int64_t value) {
+  _internal_set_timestamp(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.timestamp)
+}
+inline ::int64_t HoldingReport::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_;
+}
+inline void HoldingReport::_internal_set_timestamp(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = value;
+}
 
-      // double buy_total = 8;
-      inline void HoldingReport::clear_buy_total() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.buy_total_ = 0;
-      }
-      inline double HoldingReport::buy_total() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.buy_total)
-        return _internal_buy_total();
-      }
-      inline void HoldingReport::set_buy_total(double value) {
-        _internal_set_buy_total(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.buy_total)
-      }
-      inline double HoldingReport::_internal_buy_total() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.buy_total_;
-      }
-      inline void HoldingReport::_internal_set_buy_total(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.buy_total_ = value;
-      }
+// double buy_total = 8;
+inline void HoldingReport::clear_buy_total() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.buy_total_ = 0;
+}
+inline double HoldingReport::buy_total() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.buy_total)
+  return _internal_buy_total();
+}
+inline void HoldingReport::set_buy_total(double value) {
+  _internal_set_buy_total(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.buy_total)
+}
+inline double HoldingReport::_internal_buy_total() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.buy_total_;
+}
+inline void HoldingReport::_internal_set_buy_total(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.buy_total_ = value;
+}
 
-      // double sell_total = 9;
-      inline void HoldingReport::clear_sell_total() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.sell_total_ = 0;
-      }
-      inline double HoldingReport::sell_total() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.sell_total)
-        return _internal_sell_total();
-      }
-      inline void HoldingReport::set_sell_total(double value) {
-        _internal_set_sell_total(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.sell_total)
-      }
-      inline double HoldingReport::_internal_sell_total() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.sell_total_;
-      }
-      inline void HoldingReport::_internal_set_sell_total(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.sell_total_ = value;
-      }
+// double sell_total = 9;
+inline void HoldingReport::clear_sell_total() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.sell_total_ = 0;
+}
+inline double HoldingReport::sell_total() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.sell_total)
+  return _internal_sell_total();
+}
+inline void HoldingReport::set_sell_total(double value) {
+  _internal_set_sell_total(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.sell_total)
+}
+inline double HoldingReport::_internal_sell_total() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.sell_total_;
+}
+inline void HoldingReport::_internal_set_sell_total(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.sell_total_ = value;
+}
 
-      // double otc_holding = 10;
-      inline void HoldingReport::clear_otc_holding() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.otc_holding_ = 0;
-      }
-      inline double HoldingReport::otc_holding() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.otc_holding)
-        return _internal_otc_holding();
-      }
-      inline void HoldingReport::set_otc_holding(double value) {
-        _internal_set_otc_holding(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.otc_holding)
-      }
-      inline double HoldingReport::_internal_otc_holding() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.otc_holding_;
-      }
-      inline void HoldingReport::_internal_set_otc_holding(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.otc_holding_ = value;
-      }
+// double otc_holding = 10;
+inline void HoldingReport::clear_otc_holding() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.otc_holding_ = 0;
+}
+inline double HoldingReport::otc_holding() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.otc_holding)
+  return _internal_otc_holding();
+}
+inline void HoldingReport::set_otc_holding(double value) {
+  _internal_set_otc_holding(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.otc_holding)
+}
+inline double HoldingReport::_internal_otc_holding() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.otc_holding_;
+}
+inline void HoldingReport::_internal_set_otc_holding(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.otc_holding_ = value;
+}
 
-      // double start_of_day_holding = 11;
-      inline void HoldingReport::clear_start_of_day_holding() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.start_of_day_holding_ = 0;
-      }
-      inline double HoldingReport::start_of_day_holding() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.start_of_day_holding)
-        return _internal_start_of_day_holding();
-      }
-      inline void HoldingReport::set_start_of_day_holding(double value) {
-        _internal_set_start_of_day_holding(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.start_of_day_holding)
-      }
-      inline double HoldingReport::_internal_start_of_day_holding() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.start_of_day_holding_;
-      }
-      inline void HoldingReport::_internal_set_start_of_day_holding(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.start_of_day_holding_ = value;
-      }
+// double start_of_day_holding = 11;
+inline void HoldingReport::clear_start_of_day_holding() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.start_of_day_holding_ = 0;
+}
+inline double HoldingReport::start_of_day_holding() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.start_of_day_holding)
+  return _internal_start_of_day_holding();
+}
+inline void HoldingReport::set_start_of_day_holding(double value) {
+  _internal_set_start_of_day_holding(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.start_of_day_holding)
+}
+inline double HoldingReport::_internal_start_of_day_holding() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.start_of_day_holding_;
+}
+inline void HoldingReport::_internal_set_start_of_day_holding(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.start_of_day_holding_ = value;
+}
 
-      // double last_price_ars = 12;
-      inline void HoldingReport::clear_last_price_ars() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.last_price_ars_ = 0;
-      }
-      inline double HoldingReport::last_price_ars() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.last_price_ars)
-        return _internal_last_price_ars();
-      }
-      inline void HoldingReport::set_last_price_ars(double value) {
-        _internal_set_last_price_ars(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.last_price_ars)
-      }
-      inline double HoldingReport::_internal_last_price_ars() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.last_price_ars_;
-      }
-      inline void HoldingReport::_internal_set_last_price_ars(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.last_price_ars_ = value;
-      }
+// double last_price_ars = 12;
+inline void HoldingReport::clear_last_price_ars() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.last_price_ars_ = 0;
+}
+inline double HoldingReport::last_price_ars() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.last_price_ars)
+  return _internal_last_price_ars();
+}
+inline void HoldingReport::set_last_price_ars(double value) {
+  _internal_set_last_price_ars(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.last_price_ars)
+}
+inline double HoldingReport::_internal_last_price_ars() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.last_price_ars_;
+}
+inline void HoldingReport::_internal_set_last_price_ars(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.last_price_ars_ = value;
+}
 
-      // double last_price_usd = 13;
-      inline void HoldingReport::clear_last_price_usd() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.last_price_usd_ = 0;
-      }
-      inline double HoldingReport::last_price_usd() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.last_price_usd)
-        return _internal_last_price_usd();
-      }
-      inline void HoldingReport::set_last_price_usd(double value) {
-        _internal_set_last_price_usd(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.last_price_usd)
-      }
-      inline double HoldingReport::_internal_last_price_usd() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.last_price_usd_;
-      }
-      inline void HoldingReport::_internal_set_last_price_usd(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.last_price_usd_ = value;
-      }
+// double last_price_usd = 13;
+inline void HoldingReport::clear_last_price_usd() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.last_price_usd_ = 0;
+}
+inline double HoldingReport::last_price_usd() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.last_price_usd)
+  return _internal_last_price_usd();
+}
+inline void HoldingReport::set_last_price_usd(double value) {
+  _internal_set_last_price_usd(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.last_price_usd)
+}
+inline double HoldingReport::_internal_last_price_usd() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.last_price_usd_;
+}
+inline void HoldingReport::_internal_set_last_price_usd(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.last_price_usd_ = value;
+}
 
-      // double last_price_cable = 14;
-      inline void HoldingReport::clear_last_price_cable() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.last_price_cable_ = 0;
-      }
-      inline double HoldingReport::last_price_cable() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.last_price_cable)
-        return _internal_last_price_cable();
-      }
-      inline void HoldingReport::set_last_price_cable(double value) {
-        _internal_set_last_price_cable(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.last_price_cable)
-      }
-      inline double HoldingReport::_internal_last_price_cable() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.last_price_cable_;
-      }
-      inline void HoldingReport::_internal_set_last_price_cable(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.last_price_cable_ = value;
-      }
+// double last_price_cable = 14;
+inline void HoldingReport::clear_last_price_cable() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.last_price_cable_ = 0;
+}
+inline double HoldingReport::last_price_cable() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.last_price_cable)
+  return _internal_last_price_cable();
+}
+inline void HoldingReport::set_last_price_cable(double value) {
+  _internal_set_last_price_cable(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.last_price_cable)
+}
+inline double HoldingReport::_internal_last_price_cable() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.last_price_cable_;
+}
+inline void HoldingReport::_internal_set_last_price_cable(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.last_price_cable_ = value;
+}
 
-      // string account = 15;
-      inline void HoldingReport::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &HoldingReport::account() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_account(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.account)
-      }
-      inline std::string *HoldingReport::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.account)
-        return _s;
-      }
-      inline const std::string &HoldingReport::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void HoldingReport::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *HoldingReport::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *HoldingReport::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.account)
-        return _impl_.account_.Release();
-      }
-      inline void HoldingReport::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 15;
+inline void HoldingReport::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& HoldingReport::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.HoldingReport.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void HoldingReport::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.HoldingReport.account)
+}
+inline std::string* HoldingReport::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.HoldingReport.account)
+  return _s;
+}
+inline const std::string& HoldingReport::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void HoldingReport::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* HoldingReport::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* HoldingReport::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.HoldingReport.account)
+  return _impl_.account_.Release();
+}
+inline void HoldingReport::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.HoldingReport.account)
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // PNLReportRequest
+// PNLReportRequest
 
-      // string market = 1;
-      inline void PNLReportRequest::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &PNLReportRequest::market() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportRequest.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReportRequest::set_market(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportRequest.market)
-      }
-      inline std::string *PNLReportRequest::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportRequest.market)
-        return _s;
-      }
-      inline const std::string &PNLReportRequest::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void PNLReportRequest::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *PNLReportRequest::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *PNLReportRequest::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportRequest.market)
-        return _impl_.market_.Release();
-      }
-      inline void PNLReportRequest::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 1;
+inline void PNLReportRequest::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& PNLReportRequest::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportRequest.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReportRequest::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportRequest.market)
+}
+inline std::string* PNLReportRequest::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportRequest.market)
+  return _s;
+}
+inline const std::string& PNLReportRequest::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void PNLReportRequest::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* PNLReportRequest::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* PNLReportRequest::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportRequest.market)
+  return _impl_.market_.Release();
+}
+inline void PNLReportRequest::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportRequest.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportRequest.market)
+}
 
-      // string account = 2;
-      inline void PNLReportRequest::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &PNLReportRequest::account() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportRequest.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReportRequest::set_account(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportRequest.account)
-      }
-      inline std::string *PNLReportRequest::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportRequest.account)
-        return _s;
-      }
-      inline const std::string &PNLReportRequest::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void PNLReportRequest::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *PNLReportRequest::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *PNLReportRequest::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportRequest.account)
-        return _impl_.account_.Release();
-      }
-      inline void PNLReportRequest::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 2;
+inline void PNLReportRequest::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& PNLReportRequest::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportRequest.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReportRequest::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportRequest.account)
+}
+inline std::string* PNLReportRequest::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportRequest.account)
+  return _s;
+}
+inline const std::string& PNLReportRequest::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void PNLReportRequest::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* PNLReportRequest::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* PNLReportRequest::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportRequest.account)
+  return _impl_.account_.Release();
+}
+inline void PNLReportRequest::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportRequest.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportRequest.account)
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // PNLReportResponse
+// PNLReportResponse
 
-      // int64 timestamp = 2;
-      inline void PNLReportResponse::clear_timestamp() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = ::int64_t{0};
-      }
-      inline ::int64_t PNLReportResponse::timestamp() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.timestamp)
-        return _internal_timestamp();
-      }
-      inline void PNLReportResponse::set_timestamp(::int64_t value) {
-        _internal_set_timestamp(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportResponse.timestamp)
-      }
-      inline ::int64_t PNLReportResponse::_internal_timestamp() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.timestamp_;
-      }
-      inline void PNLReportResponse::_internal_set_timestamp(::int64_t value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = value;
-      }
+// int64 timestamp = 2;
+inline void PNLReportResponse::clear_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = ::int64_t{0};
+}
+inline ::int64_t PNLReportResponse::timestamp() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.timestamp)
+  return _internal_timestamp();
+}
+inline void PNLReportResponse::set_timestamp(::int64_t value) {
+  _internal_set_timestamp(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportResponse.timestamp)
+}
+inline ::int64_t PNLReportResponse::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_;
+}
+inline void PNLReportResponse::_internal_set_timestamp(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = value;
+}
 
-      // string market = 5;
-      inline void PNLReportResponse::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &PNLReportResponse::market() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReportResponse::set_market(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportResponse.market)
-      }
-      inline std::string *PNLReportResponse::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportResponse.market)
-        return _s;
-      }
-      inline const std::string &PNLReportResponse::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void PNLReportResponse::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *PNLReportResponse::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *PNLReportResponse::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportResponse.market)
-        return _impl_.market_.Release();
-      }
-      inline void PNLReportResponse::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 5;
+inline void PNLReportResponse::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& PNLReportResponse::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReportResponse::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportResponse.market)
+}
+inline std::string* PNLReportResponse::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportResponse.market)
+  return _s;
+}
+inline const std::string& PNLReportResponse::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void PNLReportResponse::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* PNLReportResponse::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* PNLReportResponse::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportResponse.market)
+  return _impl_.market_.Release();
+}
+inline void PNLReportResponse::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportResponse.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportResponse.market)
+}
 
-      // string account = 6;
-      inline void PNLReportResponse::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &PNLReportResponse::account() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReportResponse::set_account(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportResponse.account)
-      }
-      inline std::string *PNLReportResponse::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportResponse.account)
-        return _s;
-      }
-      inline const std::string &PNLReportResponse::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void PNLReportResponse::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *PNLReportResponse::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *PNLReportResponse::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportResponse.account)
-        return _impl_.account_.Release();
-      }
-      inline void PNLReportResponse::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 6;
+inline void PNLReportResponse::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& PNLReportResponse::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReportResponse::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReportResponse.account)
+}
+inline std::string* PNLReportResponse::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportResponse.account)
+  return _s;
+}
+inline const std::string& PNLReportResponse::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void PNLReportResponse::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* PNLReportResponse::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* PNLReportResponse::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReportResponse.account)
+  return _impl_.account_.Release();
+}
+inline void PNLReportResponse::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportResponse.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReportResponse.account)
+}
 
-      // repeated .markethub.messaging.risk_management.PNLReport pnl_reports = 7;
-      inline int PNLReportResponse::_internal_pnl_reports_size() const {
-        return _internal_pnl_reports().size();
-      }
-      inline int PNLReportResponse::pnl_reports_size() const {
-        return _internal_pnl_reports_size();
-      }
-      inline void PNLReportResponse::clear_pnl_reports() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.pnl_reports_.Clear();
-      }
-      inline ::markethub::messaging::risk_management::PNLReport *
-      PNLReportResponse::mutable_pnl_reports(int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
-        return _internal_mutable_pnl_reports()->Mutable(index);
-      }
-      inline ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::PNLReport> *
-      PNLReportResponse::mutable_pnl_reports() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_mutable_list:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _internal_mutable_pnl_reports();
-      }
-      inline const ::markethub::messaging::risk_management::PNLReport &
-      PNLReportResponse::pnl_reports(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
-        return _internal_pnl_reports().Get(index);
-      }
-      inline ::markethub::messaging::risk_management::PNLReport *
-      PNLReportResponse::add_pnl_reports() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        ::markethub::messaging::risk_management::PNLReport *_add =
-            _internal_mutable_pnl_reports()->Add();
-        // @@protoc_insertion_point(field_add:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
-        return _add;
-      }
-      inline const ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::PNLReport> &
-      PNLReportResponse::pnl_reports() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_list:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
-        return _internal_pnl_reports();
-      }
-      inline const ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::PNLReport> &
-      PNLReportResponse::_internal_pnl_reports() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.pnl_reports_;
-      }
-      inline ::google::protobuf::RepeatedPtrField<
-          ::markethub::messaging::risk_management::PNLReport> *
-      PNLReportResponse::_internal_mutable_pnl_reports() {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return &_impl_.pnl_reports_;
-      }
+// repeated .markethub.messaging.risk_management.PNLReport pnl_reports = 7;
+inline int PNLReportResponse::_internal_pnl_reports_size() const {
+  return _internal_pnl_reports().size();
+}
+inline int PNLReportResponse::pnl_reports_size() const {
+  return _internal_pnl_reports_size();
+}
+inline void PNLReportResponse::clear_pnl_reports() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pnl_reports_.Clear();
+}
+inline ::markethub::messaging::risk_management::PNLReport* PNLReportResponse::mutable_pnl_reports(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
+  return _internal_mutable_pnl_reports()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>* PNLReportResponse::mutable_pnl_reports()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_pnl_reports();
+}
+inline const ::markethub::messaging::risk_management::PNLReport& PNLReportResponse::pnl_reports(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
+  return _internal_pnl_reports().Get(index);
+}
+inline ::markethub::messaging::risk_management::PNLReport* PNLReportResponse::add_pnl_reports() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::markethub::messaging::risk_management::PNLReport* _add = _internal_mutable_pnl_reports()->Add();
+  // @@protoc_insertion_point(field_add:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>& PNLReportResponse::pnl_reports() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:markethub.messaging.risk_management.PNLReportResponse.pnl_reports)
+  return _internal_pnl_reports();
+}
+inline const ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>&
+PNLReportResponse::_internal_pnl_reports() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.pnl_reports_;
+}
+inline ::google::protobuf::RepeatedPtrField<::markethub::messaging::risk_management::PNLReport>*
+PNLReportResponse::_internal_mutable_pnl_reports() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.pnl_reports_;
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // PNLReport
+// PNLReport
 
-      // string asset = 1;
-      inline void PNLReport::clear_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.ClearToEmpty();
-      }
-      inline const std::string &PNLReport::asset() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.asset)
-        return _internal_asset();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_asset(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.asset)
-      }
-      inline std::string *PNLReport::mutable_asset() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_asset();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.asset)
-        return _s;
-      }
-      inline const std::string &PNLReport::_internal_asset() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.asset_.Get();
-      }
-      inline void PNLReport::_internal_set_asset(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.Set(value, GetArena());
-      }
-      inline std::string *PNLReport::_internal_mutable_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.asset_.Mutable(GetArena());
-      }
-      inline std::string *PNLReport::release_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.asset)
-        return _impl_.asset_.Release();
-      }
-      inline void PNLReport::set_allocated_asset(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string asset = 1;
+inline void PNLReport::clear_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.ClearToEmpty();
+}
+inline const std::string& PNLReport::asset() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.asset)
+  return _internal_asset();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_asset(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.asset)
+}
+inline std::string* PNLReport::mutable_asset() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_asset();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.asset)
+  return _s;
+}
+inline const std::string& PNLReport::_internal_asset() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.asset_.Get();
+}
+inline void PNLReport::_internal_set_asset(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.Set(value, GetArena());
+}
+inline std::string* PNLReport::_internal_mutable_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.asset_.Mutable( GetArena());
+}
+inline std::string* PNLReport::release_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.asset)
+  return _impl_.asset_.Release();
+}
+inline void PNLReport::set_allocated_asset(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.asset_.IsDefault()) {
           _impl_.asset_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.asset)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.asset)
+}
 
-      // string settlement_type = 2;
-      inline void PNLReport::clear_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.ClearToEmpty();
-      }
-      inline const std::string &PNLReport::settlement_type() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.settlement_type)
-        return _internal_settlement_type();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_settlement_type(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.settlement_type)
-      }
-      inline std::string *PNLReport::mutable_settlement_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_settlement_type();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.settlement_type)
-        return _s;
-      }
-      inline const std::string &PNLReport::_internal_settlement_type() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.settlement_type_.Get();
-      }
-      inline void PNLReport::_internal_set_settlement_type(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.Set(value, GetArena());
-      }
-      inline std::string *PNLReport::_internal_mutable_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.settlement_type_.Mutable(GetArena());
-      }
-      inline std::string *PNLReport::release_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.settlement_type)
-        return _impl_.settlement_type_.Release();
-      }
-      inline void PNLReport::set_allocated_settlement_type(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string settlement_type = 2;
+inline void PNLReport::clear_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.ClearToEmpty();
+}
+inline const std::string& PNLReport::settlement_type() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.settlement_type)
+  return _internal_settlement_type();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_settlement_type(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.settlement_type)
+}
+inline std::string* PNLReport::mutable_settlement_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_settlement_type();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.settlement_type)
+  return _s;
+}
+inline const std::string& PNLReport::_internal_settlement_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.settlement_type_.Get();
+}
+inline void PNLReport::_internal_set_settlement_type(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.Set(value, GetArena());
+}
+inline std::string* PNLReport::_internal_mutable_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.settlement_type_.Mutable( GetArena());
+}
+inline std::string* PNLReport::release_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.settlement_type)
+  return _impl_.settlement_type_.Release();
+}
+inline void PNLReport::set_allocated_settlement_type(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.settlement_type_.IsDefault()) {
           _impl_.settlement_type_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.settlement_type)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.settlement_type)
+}
 
-      // string market = 3;
-      inline void PNLReport::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &PNLReport::market() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_market(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.market)
-      }
-      inline std::string *PNLReport::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.market)
-        return _s;
-      }
-      inline const std::string &PNLReport::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void PNLReport::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *PNLReport::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *PNLReport::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.market)
-        return _impl_.market_.Release();
-      }
-      inline void PNLReport::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 3;
+inline void PNLReport::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& PNLReport::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.market)
+}
+inline std::string* PNLReport::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.market)
+  return _s;
+}
+inline const std::string& PNLReport::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void PNLReport::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* PNLReport::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* PNLReport::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.market)
+  return _impl_.market_.Release();
+}
+inline void PNLReport::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.market)
+}
 
-      // double pnl = 4;
-      inline void PNLReport::clear_pnl() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.pnl_ = 0;
-      }
-      inline double PNLReport::pnl() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.pnl)
-        return _internal_pnl();
-      }
-      inline void PNLReport::set_pnl(double value) {
-        _internal_set_pnl(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.pnl)
-      }
-      inline double PNLReport::_internal_pnl() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.pnl_;
-      }
-      inline void PNLReport::_internal_set_pnl(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.pnl_ = value;
-      }
+// double pnl = 4;
+inline void PNLReport::clear_pnl() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pnl_ = 0;
+}
+inline double PNLReport::pnl() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.pnl)
+  return _internal_pnl();
+}
+inline void PNLReport::set_pnl(double value) {
+  _internal_set_pnl(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.pnl)
+}
+inline double PNLReport::_internal_pnl() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.pnl_;
+}
+inline void PNLReport::_internal_set_pnl(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pnl_ = value;
+}
 
-      // double fees = 5;
-      inline void PNLReport::clear_fees() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.fees_ = 0;
-      }
-      inline double PNLReport::fees() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.fees)
-        return _internal_fees();
-      }
-      inline void PNLReport::set_fees(double value) {
-        _internal_set_fees(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.fees)
-      }
-      inline double PNLReport::_internal_fees() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.fees_;
-      }
-      inline void PNLReport::_internal_set_fees(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.fees_ = value;
-      }
+// double fees = 5;
+inline void PNLReport::clear_fees() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.fees_ = 0;
+}
+inline double PNLReport::fees() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.fees)
+  return _internal_fees();
+}
+inline void PNLReport::set_fees(double value) {
+  _internal_set_fees(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.fees)
+}
+inline double PNLReport::_internal_fees() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.fees_;
+}
+inline void PNLReport::_internal_set_fees(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.fees_ = value;
+}
 
-      // double unrealized = 6;
-      inline void PNLReport::clear_unrealized() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.unrealized_ = 0;
-      }
-      inline double PNLReport::unrealized() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.unrealized)
-        return _internal_unrealized();
-      }
-      inline void PNLReport::set_unrealized(double value) {
-        _internal_set_unrealized(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.unrealized)
-      }
-      inline double PNLReport::_internal_unrealized() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.unrealized_;
-      }
-      inline void PNLReport::_internal_set_unrealized(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.unrealized_ = value;
-      }
+// double unrealized = 6;
+inline void PNLReport::clear_unrealized() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.unrealized_ = 0;
+}
+inline double PNLReport::unrealized() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.unrealized)
+  return _internal_unrealized();
+}
+inline void PNLReport::set_unrealized(double value) {
+  _internal_set_unrealized(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.unrealized)
+}
+inline double PNLReport::_internal_unrealized() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.unrealized_;
+}
+inline void PNLReport::_internal_set_unrealized(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.unrealized_ = value;
+}
 
-      // int64 timestamp = 7;
-      inline void PNLReport::clear_timestamp() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = ::int64_t{0};
-      }
-      inline ::int64_t PNLReport::timestamp() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.timestamp)
-        return _internal_timestamp();
-      }
-      inline void PNLReport::set_timestamp(::int64_t value) {
-        _internal_set_timestamp(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.timestamp)
-      }
-      inline ::int64_t PNLReport::_internal_timestamp() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.timestamp_;
-      }
-      inline void PNLReport::_internal_set_timestamp(::int64_t value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.timestamp_ = value;
-      }
+// int64 timestamp = 7;
+inline void PNLReport::clear_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = ::int64_t{0};
+}
+inline ::int64_t PNLReport::timestamp() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.timestamp)
+  return _internal_timestamp();
+}
+inline void PNLReport::set_timestamp(::int64_t value) {
+  _internal_set_timestamp(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.timestamp)
+}
+inline ::int64_t PNLReport::_internal_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_;
+}
+inline void PNLReport::_internal_set_timestamp(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_ = value;
+}
 
-      // string account = 8;
-      inline void PNLReport::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &PNLReport::account() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_account(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.account)
-      }
-      inline std::string *PNLReport::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.account)
-        return _s;
-      }
-      inline const std::string &PNLReport::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void PNLReport::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *PNLReport::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *PNLReport::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.account)
-        return _impl_.account_.Release();
-      }
-      inline void PNLReport::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 8;
+inline void PNLReport::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& PNLReport::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.account)
+}
+inline std::string* PNLReport::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.account)
+  return _s;
+}
+inline const std::string& PNLReport::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void PNLReport::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* PNLReport::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* PNLReport::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.account)
+  return _impl_.account_.Release();
+}
+inline void PNLReport::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.account)
+}
 
-      // double fees_unrealized = 9;
-      inline void PNLReport::clear_fees_unrealized() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.fees_unrealized_ = 0;
-      }
-      inline double PNLReport::fees_unrealized() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.fees_unrealized)
-        return _internal_fees_unrealized();
-      }
-      inline void PNLReport::set_fees_unrealized(double value) {
-        _internal_set_fees_unrealized(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.fees_unrealized)
-      }
-      inline double PNLReport::_internal_fees_unrealized() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.fees_unrealized_;
-      }
-      inline void PNLReport::_internal_set_fees_unrealized(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.fees_unrealized_ = value;
-      }
+// double fees_unrealized = 9;
+inline void PNLReport::clear_fees_unrealized() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.fees_unrealized_ = 0;
+}
+inline double PNLReport::fees_unrealized() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.fees_unrealized)
+  return _internal_fees_unrealized();
+}
+inline void PNLReport::set_fees_unrealized(double value) {
+  _internal_set_fees_unrealized(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.fees_unrealized)
+}
+inline double PNLReport::_internal_fees_unrealized() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.fees_unrealized_;
+}
+inline void PNLReport::_internal_set_fees_unrealized(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.fees_unrealized_ = value;
+}
 
-      // string currency = 10;
-      inline void PNLReport::clear_currency() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.currency_.ClearToEmpty();
-      }
-      inline const std::string &PNLReport::currency() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.currency)
-        return _internal_currency();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_currency(Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.currency_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.currency)
-      }
-      inline std::string *PNLReport::mutable_currency() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_currency();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.currency)
-        return _s;
-      }
-      inline const std::string &PNLReport::_internal_currency() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.currency_.Get();
-      }
-      inline void PNLReport::_internal_set_currency(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.currency_.Set(value, GetArena());
-      }
-      inline std::string *PNLReport::_internal_mutable_currency() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.currency_.Mutable(GetArena());
-      }
-      inline std::string *PNLReport::release_currency() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.currency)
-        return _impl_.currency_.Release();
-      }
-      inline void PNLReport::set_allocated_currency(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.currency_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string currency = 10;
+inline void PNLReport::clear_currency() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.currency_.ClearToEmpty();
+}
+inline const std::string& PNLReport::currency() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.PNLReport.currency)
+  return _internal_currency();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void PNLReport::set_currency(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.currency_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.PNLReport.currency)
+}
+inline std::string* PNLReport::mutable_currency() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_currency();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.PNLReport.currency)
+  return _s;
+}
+inline const std::string& PNLReport::_internal_currency() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.currency_.Get();
+}
+inline void PNLReport::_internal_set_currency(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.currency_.Set(value, GetArena());
+}
+inline std::string* PNLReport::_internal_mutable_currency() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.currency_.Mutable( GetArena());
+}
+inline std::string* PNLReport::release_currency() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.PNLReport.currency)
+  return _impl_.currency_.Release();
+}
+inline void PNLReport::set_allocated_currency(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.currency_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.currency_.IsDefault()) {
           _impl_.currency_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.currency)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.PNLReport.currency)
+}
 
-      // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
-      // InitialPositionUpdateRequest
+// InitialPositionUpdateRequest
 
-      // string account = 1;
-      inline void InitialPositionUpdateRequest::clear_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.ClearToEmpty();
-      }
-      inline const std::string &InitialPositionUpdateRequest::account() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
-        return _internal_account();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_account(Arg_ &&arg,
-                                                                                   Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
-      }
-      inline std::string *InitialPositionUpdateRequest::mutable_account()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_account();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
-        return _s;
-      }
-      inline const std::string &InitialPositionUpdateRequest::_internal_account() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.account_.Get();
-      }
-      inline void InitialPositionUpdateRequest::_internal_set_account(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.Set(value, GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::_internal_mutable_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.account_.Mutable(GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::release_account() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
-        return _impl_.account_.Release();
-      }
-      inline void InitialPositionUpdateRequest::set_allocated_account(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.account_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string account = 1;
+inline void InitialPositionUpdateRequest::clear_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.ClearToEmpty();
+}
+inline const std::string& InitialPositionUpdateRequest::account() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
+  return _internal_account();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_account(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
+}
+inline std::string* InitialPositionUpdateRequest::mutable_account() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_account();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
+  return _s;
+}
+inline const std::string& InitialPositionUpdateRequest::_internal_account() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.account_.Get();
+}
+inline void InitialPositionUpdateRequest::_internal_set_account(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.Set(value, GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::_internal_mutable_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.account_.Mutable( GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::release_account() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
+  return _impl_.account_.Release();
+}
+inline void InitialPositionUpdateRequest::set_allocated_account(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.account_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.account_.IsDefault()) {
           _impl_.account_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.account)
+}
 
-      // string market = 2;
-      inline void InitialPositionUpdateRequest::clear_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.ClearToEmpty();
-      }
-      inline const std::string &InitialPositionUpdateRequest::market() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
-        return _internal_market();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_market(Arg_ &&arg,
-                                                                                  Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
-      }
-      inline std::string *InitialPositionUpdateRequest::mutable_market()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_market();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
-        return _s;
-      }
-      inline const std::string &InitialPositionUpdateRequest::_internal_market() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.market_.Get();
-      }
-      inline void InitialPositionUpdateRequest::_internal_set_market(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.Set(value, GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::_internal_mutable_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.market_.Mutable(GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::release_market() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
-        return _impl_.market_.Release();
-      }
-      inline void InitialPositionUpdateRequest::set_allocated_market(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.market_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string market = 2;
+inline void InitialPositionUpdateRequest::clear_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.ClearToEmpty();
+}
+inline const std::string& InitialPositionUpdateRequest::market() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
+  return _internal_market();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_market(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
+}
+inline std::string* InitialPositionUpdateRequest::mutable_market() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_market();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
+  return _s;
+}
+inline const std::string& InitialPositionUpdateRequest::_internal_market() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.market_.Get();
+}
+inline void InitialPositionUpdateRequest::_internal_set_market(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.Set(value, GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::_internal_mutable_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.market_.Mutable( GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::release_market() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
+  return _impl_.market_.Release();
+}
+inline void InitialPositionUpdateRequest::set_allocated_market(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.market_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.market_.IsDefault()) {
           _impl_.market_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.market)
+}
 
-      // string asset = 3;
-      inline void InitialPositionUpdateRequest::clear_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.ClearToEmpty();
-      }
-      inline const std::string &InitialPositionUpdateRequest::asset() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
-        return _internal_asset();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_asset(Arg_ &&arg,
-                                                                                 Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
-      }
-      inline std::string *InitialPositionUpdateRequest::mutable_asset()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_asset();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
-        return _s;
-      }
-      inline const std::string &InitialPositionUpdateRequest::_internal_asset() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.asset_.Get();
-      }
-      inline void InitialPositionUpdateRequest::_internal_set_asset(const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.Set(value, GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::_internal_mutable_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.asset_.Mutable(GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::release_asset() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
-        return _impl_.asset_.Release();
-      }
-      inline void InitialPositionUpdateRequest::set_allocated_asset(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.asset_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string asset = 3;
+inline void InitialPositionUpdateRequest::clear_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.ClearToEmpty();
+}
+inline const std::string& InitialPositionUpdateRequest::asset() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
+  return _internal_asset();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_asset(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
+}
+inline std::string* InitialPositionUpdateRequest::mutable_asset() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_asset();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
+  return _s;
+}
+inline const std::string& InitialPositionUpdateRequest::_internal_asset() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.asset_.Get();
+}
+inline void InitialPositionUpdateRequest::_internal_set_asset(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.Set(value, GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::_internal_mutable_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.asset_.Mutable( GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::release_asset() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
+  return _impl_.asset_.Release();
+}
+inline void InitialPositionUpdateRequest::set_allocated_asset(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.asset_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.asset_.IsDefault()) {
           _impl_.asset_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.asset)
+}
 
-      // string settlement_type = 4;
-      inline void InitialPositionUpdateRequest::clear_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.ClearToEmpty();
-      }
-      inline const std::string &InitialPositionUpdateRequest::settlement_type() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
-        return _internal_settlement_type();
-      }
-      template <typename Arg_, typename... Args_>
-      inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_settlement_type(
-          Arg_ &&arg, Args_... args) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
-      }
-      inline std::string *InitialPositionUpdateRequest::mutable_settlement_type()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        std::string *_s = _internal_mutable_settlement_type();
-        // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
-        return _s;
-      }
-      inline const std::string &InitialPositionUpdateRequest::_internal_settlement_type() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.settlement_type_.Get();
-      }
-      inline void InitialPositionUpdateRequest::_internal_set_settlement_type(
-          const std::string &value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.Set(value, GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::_internal_mutable_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        return _impl_.settlement_type_.Mutable(GetArena());
-      }
-      inline std::string *InitialPositionUpdateRequest::release_settlement_type() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
-        return _impl_.settlement_type_.Release();
-      }
-      inline void InitialPositionUpdateRequest::set_allocated_settlement_type(std::string *value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.settlement_type_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+// string settlement_type = 4;
+inline void InitialPositionUpdateRequest::clear_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.ClearToEmpty();
+}
+inline const std::string& InitialPositionUpdateRequest::settlement_type() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
+  return _internal_settlement_type();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void InitialPositionUpdateRequest::set_settlement_type(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
+}
+inline std::string* InitialPositionUpdateRequest::mutable_settlement_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_settlement_type();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
+  return _s;
+}
+inline const std::string& InitialPositionUpdateRequest::_internal_settlement_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.settlement_type_.Get();
+}
+inline void InitialPositionUpdateRequest::_internal_set_settlement_type(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.Set(value, GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::_internal_mutable_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.settlement_type_.Mutable( GetArena());
+}
+inline std::string* InitialPositionUpdateRequest::release_settlement_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
+  return _impl_.settlement_type_.Release();
+}
+inline void InitialPositionUpdateRequest::set_allocated_settlement_type(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.settlement_type_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         if (_impl_.settlement_type_.IsDefault()) {
           _impl_.settlement_type_.Set("", GetArena());
         }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-       // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
-      }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.risk_management.InitialPositionUpdateRequest.settlement_type)
+}
 
-      // double value = 5;
-      inline void InitialPositionUpdateRequest::clear_value() {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.value_ = 0;
-      }
-      inline double InitialPositionUpdateRequest::value() const {
-        // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.value)
-        return _internal_value();
-      }
-      inline void InitialPositionUpdateRequest::set_value(double value) {
-        _internal_set_value(value);
-        // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.value)
-      }
-      inline double InitialPositionUpdateRequest::_internal_value() const {
-        ::google::protobuf::internal::TSanRead(&_impl_);
-        return _impl_.value_;
-      }
-      inline void InitialPositionUpdateRequest::_internal_set_value(double value) {
-        ::google::protobuf::internal::TSanWrite(&_impl_);
-        _impl_.value_ = value;
-      }
+// double value = 5;
+inline void InitialPositionUpdateRequest::clear_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.value_ = 0;
+}
+inline double InitialPositionUpdateRequest::value() const {
+  // @@protoc_insertion_point(field_get:markethub.messaging.risk_management.InitialPositionUpdateRequest.value)
+  return _internal_value();
+}
+inline void InitialPositionUpdateRequest::set_value(double value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:markethub.messaging.risk_management.InitialPositionUpdateRequest.value)
+}
+inline double InitialPositionUpdateRequest::_internal_value() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.value_;
+}
+inline void InitialPositionUpdateRequest::_internal_set_value(double value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.value_ = value;
+}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
-#endif // __GNUC__
+#endif  // __GNUC__
 
-      // @@protoc_insertion_point(namespace_scope)
-    } // namespace risk_management
-  } // namespace messaging
-} // namespace markethub
+// @@protoc_insertion_point(namespace_scope)
+}  // namespace risk_management
+}  // namespace messaging
+}  // namespace markethub
+
 
 // @@protoc_insertion_point(global_scope)
 
 #include "google/protobuf/port_undef.inc"
 
-#endif // GOOGLE_PROTOBUF_INCLUDED_risk_5fmanagement_2eproto_2epb_2eh
+#endif  // GOOGLE_PROTOBUF_INCLUDED_risk_5fmanagement_2eproto_2epb_2eh

@@ -128,3 +128,7 @@ coverage/
 # CTest
 Testing/
 TestResults/
+b3-md-connector/.devcontainer/.env
+
+# Devcontainer cache (protobuf precompiled)
+**/.devcontainer/cache/

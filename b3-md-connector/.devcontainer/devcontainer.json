@@ -2,7 +2,7 @@
   "name": "b3-md-connector-dev",
   "build": {
     "dockerfile": "Dockerfile.dev",
-    "context": ".."
+    "context": "../.."
   },
   "workspaceFolder": "/workspaces/MarketHub.B3Connector",
   "workspaceMount": "source=${localWorkspaceFolder}/..,target=/workspaces/MarketHub.B3Connector,type=bind",

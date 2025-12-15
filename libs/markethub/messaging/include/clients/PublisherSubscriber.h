@@ -2,6 +2,8 @@
 
 #include <string>
 #include <memory>
+#include <vector>
+#include <chrono>
 #include "../sockets/Publisher.h"
 #include "../sockets/Subscriber.h"
 #include "../models/messages.pb.h"
@@ -119,6 +121,30 @@ namespace markethub::messaging::clients {
      * @return True if running, false otherwise
      */
     bool IsRunning() const { return _isRunning.load(); }
+
+    /**
+     * @brief Sends a message and waits for responses with a timeout.
+     *
+     * This method implements a synchronous request/response pattern needed for RPC-style
+     * communication. It sends a message via the Publisher and collects all responses that
+     * arrive via the Subscriber within the specified timeout period.
+     *
+     * Use cases:
+     * - Request/response patterns where you need to wait for server acknowledgment
+     * - Testing scenarios to verify message round-trip behavior
+     * - Scenarios where multiple servers may respond to the same request
+     *
+     * Implementation note: This temporarily sets up a message collector on the Subscriber,
+     * sends the message, waits for the timeout period, then restores the original callback.
+     * All responses that match the request_message_id are collected.
+     *
+     * Thread-safe.
+     * @param message Message to send (ClientId will be set automatically)
+     * @param timeout Maximum time to wait for responses (0ms = return immediately)
+     * @return Vector of received responses (empty if timeout occurs or no responses received)
+     */
+    std::vector<WrapperMessage> SendAndWaitForResponse(const WrapperMessage &message,
+                                                        std::chrono::milliseconds timeout);
 
    protected:
     /**

@@ -25,7 +25,7 @@
 #include "google/protobuf/metadata_lite.h"
 #include "google/protobuf/generated_message_reflection.h"
 #include "google/protobuf/message.h"
-#include "google/protobuf/repeated_field.h" // IWYU pragma: export
+#include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
 #include "system.pb.h"
@@ -41,7364 +41,6267 @@
 #define PROTOBUF_INTERNAL_EXPORT_messages_2eproto
 
 namespace google {
-  namespace protobuf {
-    namespace internal {
-      class AnyMetadata;
-    } // namespace internal
-  } // namespace protobuf
-} // namespace google
+namespace protobuf {
+namespace internal {
+class AnyMetadata;
+}  // namespace internal
+}  // namespace protobuf
+}  // namespace google
 
 // Internal implementation detail -- do not use these members.
 struct TableStruct_messages_2eproto {
   static const ::uint32_t offsets[];
 };
-extern const ::google::protobuf::internal::DescriptorTable descriptor_table_messages_2eproto;
+extern const ::google::protobuf::internal::DescriptorTable
+    descriptor_table_messages_2eproto;
 namespace markethub {
-  namespace messaging {
-    class WrapperMessage;
-    struct WrapperMessageDefaultTypeInternal;
-    extern WrapperMessageDefaultTypeInternal _WrapperMessage_default_instance_;
-  } // namespace messaging
-} // namespace markethub
+namespace messaging {
+class WrapperMessage;
+struct WrapperMessageDefaultTypeInternal;
+extern WrapperMessageDefaultTypeInternal _WrapperMessage_default_instance_;
+}  // namespace messaging
+}  // namespace markethub
 namespace google {
-  namespace protobuf {} // namespace protobuf
-} // namespace google
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 
 namespace markethub {
-  namespace messaging {
+namespace messaging {
 
-    // ===================================================================
+// ===================================================================
 
-    // -------------------------------------------------------------------
 
-    class WrapperMessage final : public ::google::protobuf::Message
-    /* @@protoc_insertion_point(class_definition:markethub.messaging.WrapperMessage) */ {
-     public:
-      inline WrapperMessage() : WrapperMessage(nullptr) {}
-      ~WrapperMessage() PROTOBUF_FINAL;
-      template <typename = void>
-      explicit PROTOBUF_CONSTEXPR WrapperMessage(::google::protobuf::internal::ConstantInitialized);
+// -------------------------------------------------------------------
 
-      inline WrapperMessage(const WrapperMessage &from) : WrapperMessage(nullptr, from) {}
-      inline WrapperMessage(WrapperMessage &&from) noexcept
-          : WrapperMessage(nullptr, std::move(from)) {}
-      inline WrapperMessage &operator=(const WrapperMessage &from) {
-        CopyFrom(from);
-        return *this;
-      }
-      inline WrapperMessage &operator=(WrapperMessage &&from) noexcept {
-        if (this == &from)
-          return *this;
-        if (GetArena() == from.GetArena()
+class WrapperMessage final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:markethub.messaging.WrapperMessage) */ {
+ public:
+  inline WrapperMessage() : WrapperMessage(nullptr) {}
+  ~WrapperMessage() PROTOBUF_FINAL;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR WrapperMessage(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline WrapperMessage(const WrapperMessage& from) : WrapperMessage(nullptr, from) {}
+  inline WrapperMessage(WrapperMessage&& from) noexcept
+      : WrapperMessage(nullptr, std::move(from)) {}
+  inline WrapperMessage& operator=(const WrapperMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline WrapperMessage& operator=(WrapperMessage&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-            && GetArena() != nullptr
-#endif // !PROTOBUF_FORCE_COPY_IN_MOVE
-        ) {
-          InternalSwap(&from);
-        } else {
-          CopyFrom(from);
-        }
-        return *this;
-      }
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
 
-      inline const ::google::protobuf::UnknownFieldSet &unknown_fields() const
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(
-            ::google::protobuf::UnknownFieldSet::default_instance);
-      }
-      inline ::google::protobuf::UnknownFieldSet *mutable_unknown_fields()
-          ABSL_ATTRIBUTE_LIFETIME_BOUND {
-        return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-      }
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
 
-      static const ::google::protobuf::Descriptor *descriptor() { return GetDescriptor(); }
-      static const ::google::protobuf::Descriptor *GetDescriptor() {
-        return default_instance().GetMetadata().descriptor;
-      }
-      static const ::google::protobuf::Reflection *GetReflection() {
-        return default_instance().GetMetadata().reflection;
-      }
-      static const WrapperMessage &default_instance() { return *internal_default_instance(); }
-      enum MessageCase {
-        kPing = 5,
-        kPong = 6,
-        kSecurityListRequest = 7,
-        kSecurityListResponse = 8,
-        kSecurityDefinitionRequest = 9,
-        kSecurityDefinitionResponse = 10,
-        kMarketDataSuscriptionRequest = 11,
-        kMarketDataSuscriptionResponse = 12,
-        kNewOrderRequest = 13,
-        kCancelOrderRequest = 14,
-        kReplaceOrderRequest = 15,
-        kExecutionReport = 16,
-        kOrderStatusRequest = 17,
-        kTradingSessionStatusRequest = 18,
-        kTradingSessionStatusResponse = 19,
-        kMassCancelRequest = 20,
-        kMassCancelResponse = 21,
-        kMassOrderStatusRequest = 22,
-        kMassOrderStatusResponse = 23,
-        kTradeCaptureReportRequest = 24,
-        kTradeCaptureReportResponse = 25,
-        kMarketDataUpdate = 26,
-        kStop = 27,
-        kAllSymbolsRequest = 28,
-        kAllSymbolsResponse = 29,
-        kSecurityStatusRequest = 31,
-        kSecurityStatusResponse = 32,
-        kAccountListRequest = 33,
-        kAccountListResponse = 34,
-        kAccountListIncremental = 35,
-        kAddServiceRequest = 36,
-        kAddServiceResponse = 37,
-        kHeartbeat = 38,
-        kRemoveServiceRequest = 39,
-        kNodesBroadcast = 40,
-        kFindNodeRequest = 41,
-        kFindNodeResponse = 42,
-        kDiscoverServicesRequest = 43,
-        kTradeCaptureReport = 44,
-        kHoldingReportRequest = 46,
-        kPnlReportRequest = 47,
-        kHoldingReportResponse = 49,
-        kPnlReportResponse = 50,
-        kFilterSymbolsRequest = 51,
-        kFilterSymbolsResponse = 52,
-        kAllInstrumentsRequest = 53,
-        kAllInstrumentsResponse = 54,
-        kPreviousClosePriceRequest = 55,
-        kPreviousClosePriceResponse = 56,
-        kHoldingReport = 57,
-        kPnlReport = 58,
-        kNextBusinessDayRequest = 59,
-        kNextBusinessDayResponse = 60,
-        kReposMappingRequest = 61,
-        kReposMappingResponse = 62,
-        kOtcTradeReport = 63,
-        kPositionUpdateNotification = 64,
-        kPositionCorrectionNotification = 65,
-        kStrategyChangeParamsRequest = 66,
-        kStrategyChangeParamsResponse = 67,
-        kStrategyChangeStatusRequest = 68,
-        kStrategyChangeStatusResponse = 69,
-        kInitialPositionUpdateRequest = 70,
-        MESSAGE_NOT_SET = 0,
-      };
-      static inline const WrapperMessage *internal_default_instance() {
-        return reinterpret_cast<const WrapperMessage *>(&_WrapperMessage_default_instance_);
-      }
-      static constexpr int kIndexInFileMessages = 0;
-      friend void swap(WrapperMessage &a, WrapperMessage &b) { a.Swap(&b); }
-      inline void Swap(WrapperMessage *other) {
-        if (other == this)
-          return;
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const WrapperMessage& default_instance() {
+    return *internal_default_instance();
+  }
+  enum MessageCase {
+    kPing = 5,
+    kPong = 6,
+    kSecurityListRequest = 7,
+    kSecurityListResponse = 8,
+    kSecurityDefinitionRequest = 9,
+    kSecurityDefinitionResponse = 10,
+    kMarketDataSuscriptionRequest = 11,
+    kMarketDataSuscriptionResponse = 12,
+    kNewOrderRequest = 13,
+    kCancelOrderRequest = 14,
+    kReplaceOrderRequest = 15,
+    kExecutionReport = 16,
+    kOrderStatusRequest = 17,
+    kTradingSessionStatusRequest = 18,
+    kTradingSessionStatusResponse = 19,
+    kMassCancelRequest = 20,
+    kMassCancelResponse = 21,
+    kMassOrderStatusRequest = 22,
+    kMassOrderStatusResponse = 23,
+    kTradeCaptureReportRequest = 24,
+    kTradeCaptureReportResponse = 25,
+    kMarketDataUpdate = 26,
+    kStop = 27,
+    kAllSymbolsRequest = 28,
+    kAllSymbolsResponse = 29,
+    kSecurityStatusRequest = 31,
+    kSecurityStatusResponse = 32,
+    kAccountListRequest = 33,
+    kAccountListResponse = 34,
+    kAccountListIncremental = 35,
+    kAddServiceRequest = 36,
+    kAddServiceResponse = 37,
+    kHeartbeat = 38,
+    kRemoveServiceRequest = 39,
+    kNodesBroadcast = 40,
+    kFindNodeRequest = 41,
+    kFindNodeResponse = 42,
+    kDiscoverServicesRequest = 43,
+    kTradeCaptureReport = 44,
+    kHoldingReportRequest = 46,
+    kPnlReportRequest = 47,
+    kHoldingReportResponse = 49,
+    kPnlReportResponse = 50,
+    kFilterSymbolsRequest = 51,
+    kFilterSymbolsResponse = 52,
+    kAllInstrumentsRequest = 53,
+    kAllInstrumentsResponse = 54,
+    kPreviousClosePriceRequest = 55,
+    kPreviousClosePriceResponse = 56,
+    kHoldingReport = 57,
+    kPnlReport = 58,
+    kNextBusinessDayRequest = 59,
+    kNextBusinessDayResponse = 60,
+    kReposMappingRequest = 61,
+    kReposMappingResponse = 62,
+    kOtcTradeReport = 63,
+    kPositionUpdateNotification = 64,
+    kPositionCorrectionNotification = 65,
+    kStrategyChangeParamsRequest = 66,
+    kStrategyChangeParamsResponse = 67,
+    kStrategyChangeStatusRequest = 68,
+    kStrategyChangeStatusResponse = 69,
+    kInitialPositionUpdateRequest = 70,
+    MESSAGE_NOT_SET = 0,
+  };
+  static inline const WrapperMessage* internal_default_instance() {
+    return reinterpret_cast<const WrapperMessage*>(
+        &_WrapperMessage_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 0;
+  friend void swap(WrapperMessage& a, WrapperMessage& b) { a.Swap(&b); }
+  inline void Swap(WrapperMessage* other) {
+    if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-        if (GetArena() != nullptr && GetArena() == other->GetArena()) {
-#else  // PROTOBUF_FORCE_COPY_IN_SWAP
-        if (GetArena() == other->GetArena()) {
-#endif // !PROTOBUF_FORCE_COPY_IN_SWAP
-          InternalSwap(other);
-        } else {
-          ::google::protobuf::internal::GenericSwap(this, other);
-        }
-      }
-      void UnsafeArenaSwap(WrapperMessage *other) {
-        if (other == this)
-          return;
-        ABSL_DCHECK(GetArena() == other->GetArena());
-        InternalSwap(other);
-      }
-
-      // implements Message ----------------------------------------------
-
-      WrapperMessage *New(::google::protobuf::Arena *arena = nullptr) const PROTOBUF_FINAL {
-        return ::google::protobuf::Message::DefaultConstruct<WrapperMessage>(arena);
-      }
-      using ::google::protobuf::Message::CopyFrom;
-      void CopyFrom(const WrapperMessage &from);
-      using ::google::protobuf::Message::MergeFrom;
-      void MergeFrom(const WrapperMessage &from) { WrapperMessage::MergeImpl(*this, from); }
-
-     private:
-      static void MergeImpl(::google::protobuf::MessageLite &to_msg,
-                            const ::google::protobuf::MessageLite &from_msg);
-
-     public:
-      bool IsInitialized() const { return true; }
-      ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-     private:
-      static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
-      static ::uint8_t *_InternalSerialize(const MessageLite &msg, ::uint8_t *target,
-                                           ::google::protobuf::io::EpsCopyOutputStream *stream);
-
-     public:
-      ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-      ::uint8_t *_InternalSerialize(::uint8_t *target,
-                                    ::google::protobuf::io::EpsCopyOutputStream *stream) const {
-        return _InternalSerialize(*this, target, stream);
-      }
-#else  // PROTOBUF_CUSTOM_VTABLE
-      ::size_t ByteSizeLong() const final;
-      ::uint8_t *_InternalSerialize(
-          ::uint8_t *target, ::google::protobuf::io::EpsCopyOutputStream *stream) const final;
-#endif // PROTOBUF_CUSTOM_VTABLE
-      int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-     private:
-      void SharedCtor(::google::protobuf::Arena *arena);
-      void SharedDtor();
-      void InternalSwap(WrapperMessage *other);
-
-     private:
-      friend class ::google::protobuf::internal::AnyMetadata;
-      static ::absl::string_view FullMessageName() { return "markethub.messaging.WrapperMessage"; }
-
-     protected:
-      explicit WrapperMessage(::google::protobuf::Arena *arena);
-      WrapperMessage(::google::protobuf::Arena *arena, const WrapperMessage &from);
-      WrapperMessage(::google::protobuf::Arena *arena, WrapperMessage &&from) noexcept
-          : WrapperMessage(arena) {
-        *this = ::std::move(from);
-      }
-      const ::google::protobuf::Message::ClassData *GetClassData() const PROTOBUF_FINAL;
-      static const ::google::protobuf::Message::ClassDataFull _class_data_;
-
-     public:
-      ::google::protobuf::Metadata GetMetadata() const;
-      // nested types ----------------------------------------------------
-
-      // accessors -------------------------------------------------------
-      enum : int {
-        kMessageTypeFieldNumber = 1,
-        kMessageIdFieldNumber = 2,
-        kRequestMessageIdFieldNumber = 3,
-        kClientIdFieldNumber = 4,
-        kPingFieldNumber = 5,
-        kPongFieldNumber = 6,
-        kSecurityListRequestFieldNumber = 7,
-        kSecurityListResponseFieldNumber = 8,
-        kSecurityDefinitionRequestFieldNumber = 9,
-        kSecurityDefinitionResponseFieldNumber = 10,
-        kMarketDataSuscriptionRequestFieldNumber = 11,
-        kMarketDataSuscriptionResponseFieldNumber = 12,
-        kNewOrderRequestFieldNumber = 13,
-        kCancelOrderRequestFieldNumber = 14,
-        kReplaceOrderRequestFieldNumber = 15,
-        kExecutionReportFieldNumber = 16,
-        kOrderStatusRequestFieldNumber = 17,
-        kTradingSessionStatusRequestFieldNumber = 18,
-        kTradingSessionStatusResponseFieldNumber = 19,
-        kMassCancelRequestFieldNumber = 20,
-        kMassCancelResponseFieldNumber = 21,
-        kMassOrderStatusRequestFieldNumber = 22,
-        kMassOrderStatusResponseFieldNumber = 23,
-        kTradeCaptureReportRequestFieldNumber = 24,
-        kTradeCaptureReportResponseFieldNumber = 25,
-        kMarketDataUpdateFieldNumber = 26,
-        kStopFieldNumber = 27,
-        kAllSymbolsRequestFieldNumber = 28,
-        kAllSymbolsResponseFieldNumber = 29,
-        kSecurityStatusRequestFieldNumber = 31,
-        kSecurityStatusResponseFieldNumber = 32,
-        kAccountListRequestFieldNumber = 33,
-        kAccountListResponseFieldNumber = 34,
-        kAccountListIncrementalFieldNumber = 35,
-        kAddServiceRequestFieldNumber = 36,
-        kAddServiceResponseFieldNumber = 37,
-        kHeartbeatFieldNumber = 38,
-        kRemoveServiceRequestFieldNumber = 39,
-        kNodesBroadcastFieldNumber = 40,
-        kFindNodeRequestFieldNumber = 41,
-        kFindNodeResponseFieldNumber = 42,
-        kDiscoverServicesRequestFieldNumber = 43,
-        kTradeCaptureReportFieldNumber = 44,
-        kHoldingReportRequestFieldNumber = 46,
-        kPnlReportRequestFieldNumber = 47,
-        kHoldingReportResponseFieldNumber = 49,
-        kPnlReportResponseFieldNumber = 50,
-        kFilterSymbolsRequestFieldNumber = 51,
-        kFilterSymbolsResponseFieldNumber = 52,
-        kAllInstrumentsRequestFieldNumber = 53,
-        kAllInstrumentsResponseFieldNumber = 54,
-        kPreviousClosePriceRequestFieldNumber = 55,
-        kPreviousClosePriceResponseFieldNumber = 56,
-        kHoldingReportFieldNumber = 57,
-        kPnlReportFieldNumber = 58,
-        kNextBusinessDayRequestFieldNumber = 59,
-        kNextBusinessDayResponseFieldNumber = 60,
-        kReposMappingRequestFieldNumber = 61,
-        kReposMappingResponseFieldNumber = 62,
-        kOtcTradeReportFieldNumber = 63,
-        kPositionUpdateNotificationFieldNumber = 64,
-        kPositionCorrectionNotificationFieldNumber = 65,
-        kStrategyChangeParamsRequestFieldNumber = 66,
-        kStrategyChangeParamsResponseFieldNumber = 67,
-        kStrategyChangeStatusRequestFieldNumber = 68,
-        kStrategyChangeStatusResponseFieldNumber = 69,
-        kInitialPositionUpdateRequestFieldNumber = 70,
-      };
-      // string message_type = 1;
-      void clear_message_type();
-      const std::string &message_type() const;
-      template <typename Arg_ = const std::string &, typename... Args_>
-      void set_message_type(Arg_ &&arg, Args_... args);
-      std::string *mutable_message_type();
-      PROTOBUF_NODISCARD std::string *release_message_type();
-      void set_allocated_message_type(std::string *value);
-
-     private:
-      const std::string &_internal_message_type() const;
-      inline PROTOBUF_ALWAYS_INLINE void _internal_set_message_type(const std::string &value);
-      std::string *_internal_mutable_message_type();
-
-     public:
-      // string message_id = 2;
-      void clear_message_id();
-      const std::string &message_id() const;
-      template <typename Arg_ = const std::string &, typename... Args_>
-      void set_message_id(Arg_ &&arg, Args_... args);
-      std::string *mutable_message_id();
-      PROTOBUF_NODISCARD std::string *release_message_id();
-      void set_allocated_message_id(std::string *value);
-
-     private:
-      const std::string &_internal_message_id() const;
-      inline PROTOBUF_ALWAYS_INLINE void _internal_set_message_id(const std::string &value);
-      std::string *_internal_mutable_message_id();
-
-     public:
-      // string request_message_id = 3;
-      void clear_request_message_id();
-      const std::string &request_message_id() const;
-      template <typename Arg_ = const std::string &, typename... Args_>
-      void set_request_message_id(Arg_ &&arg, Args_... args);
-      std::string *mutable_request_message_id();
-      PROTOBUF_NODISCARD std::string *release_request_message_id();
-      void set_allocated_request_message_id(std::string *value);
-
-     private:
-      const std::string &_internal_request_message_id() const;
-      inline PROTOBUF_ALWAYS_INLINE void _internal_set_request_message_id(const std::string &value);
-      std::string *_internal_mutable_request_message_id();
-
-     public:
-      // string client_id = 4;
-      void clear_client_id();
-      const std::string &client_id() const;
-      template <typename Arg_ = const std::string &, typename... Args_>
-      void set_client_id(Arg_ &&arg, Args_... args);
-      std::string *mutable_client_id();
-      PROTOBUF_NODISCARD std::string *release_client_id();
-      void set_allocated_client_id(std::string *value);
-
-     private:
-      const std::string &_internal_client_id() const;
-      inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_id(const std::string &value);
-      std::string *_internal_mutable_client_id();
-
-     public:
-      // .markethub.messaging.system.Ping ping = 5;
-      bool has_ping() const;
-
-     private:
-      bool _internal_has_ping() const;
-
-     public:
-      void clear_ping();
-      const ::markethub::messaging::system::Ping &ping() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::Ping *release_ping();
-      ::markethub::messaging::system::Ping *mutable_ping();
-      void set_allocated_ping(::markethub::messaging::system::Ping *value);
-      void unsafe_arena_set_allocated_ping(::markethub::messaging::system::Ping *value);
-      ::markethub::messaging::system::Ping *unsafe_arena_release_ping();
-
-     private:
-      const ::markethub::messaging::system::Ping &_internal_ping() const;
-      ::markethub::messaging::system::Ping *_internal_mutable_ping();
-
-     public:
-      // .markethub.messaging.system.Pong pong = 6;
-      bool has_pong() const;
-
-     private:
-      bool _internal_has_pong() const;
-
-     public:
-      void clear_pong();
-      const ::markethub::messaging::system::Pong &pong() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::Pong *release_pong();
-      ::markethub::messaging::system::Pong *mutable_pong();
-      void set_allocated_pong(::markethub::messaging::system::Pong *value);
-      void unsafe_arena_set_allocated_pong(::markethub::messaging::system::Pong *value);
-      ::markethub::messaging::system::Pong *unsafe_arena_release_pong();
-
-     private:
-      const ::markethub::messaging::system::Pong &_internal_pong() const;
-      ::markethub::messaging::system::Pong *_internal_mutable_pong();
-
-     public:
-      // .markethub.messaging.trading.SecurityListRequest security_list_request = 7;
-      bool has_security_list_request() const;
-
-     private:
-      bool _internal_has_security_list_request() const;
-
-     public:
-      void clear_security_list_request();
-      const ::markethub::messaging::trading::SecurityListRequest &security_list_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityListRequest *
-      release_security_list_request();
-      ::markethub::messaging::trading::SecurityListRequest *mutable_security_list_request();
-      void set_allocated_security_list_request(
-          ::markethub::messaging::trading::SecurityListRequest *value);
-      void unsafe_arena_set_allocated_security_list_request(
-          ::markethub::messaging::trading::SecurityListRequest *value);
-      ::markethub::messaging::trading::SecurityListRequest *
-      unsafe_arena_release_security_list_request();
-
-     private:
-      const ::markethub::messaging::trading::SecurityListRequest &_internal_security_list_request()
-          const;
-      ::markethub::messaging::trading::SecurityListRequest *
-      _internal_mutable_security_list_request();
-
-     public:
-      // .markethub.messaging.trading.SecurityListResponse security_list_response = 8;
-      bool has_security_list_response() const;
-
-     private:
-      bool _internal_has_security_list_response() const;
-
-     public:
-      void clear_security_list_response();
-      const ::markethub::messaging::trading::SecurityListResponse &security_list_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityListResponse *
-      release_security_list_response();
-      ::markethub::messaging::trading::SecurityListResponse *mutable_security_list_response();
-      void set_allocated_security_list_response(
-          ::markethub::messaging::trading::SecurityListResponse *value);
-      void unsafe_arena_set_allocated_security_list_response(
-          ::markethub::messaging::trading::SecurityListResponse *value);
-      ::markethub::messaging::trading::SecurityListResponse *
-      unsafe_arena_release_security_list_response();
-
-     private:
-      const ::markethub::messaging::trading::SecurityListResponse &
-      _internal_security_list_response() const;
-      ::markethub::messaging::trading::SecurityListResponse *
-      _internal_mutable_security_list_response();
-
-     public:
-      // .markethub.messaging.trading.SecurityDefinitionRequest security_definition_request = 9;
-      bool has_security_definition_request() const;
-
-     private:
-      bool _internal_has_security_definition_request() const;
-
-     public:
-      void clear_security_definition_request();
-      const ::markethub::messaging::trading::SecurityDefinitionRequest &
-      security_definition_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityDefinitionRequest *
-      release_security_definition_request();
-      ::markethub::messaging::trading::SecurityDefinitionRequest *
-      mutable_security_definition_request();
-      void set_allocated_security_definition_request(
-          ::markethub::messaging::trading::SecurityDefinitionRequest *value);
-      void unsafe_arena_set_allocated_security_definition_request(
-          ::markethub::messaging::trading::SecurityDefinitionRequest *value);
-      ::markethub::messaging::trading::SecurityDefinitionRequest *
-      unsafe_arena_release_security_definition_request();
-
-     private:
-      const ::markethub::messaging::trading::SecurityDefinitionRequest &
-      _internal_security_definition_request() const;
-      ::markethub::messaging::trading::SecurityDefinitionRequest *
-      _internal_mutable_security_definition_request();
-
-     public:
-      // .markethub.messaging.trading.SecurityDefinitionResponse security_definition_response = 10;
-      bool has_security_definition_response() const;
-
-     private:
-      bool _internal_has_security_definition_response() const;
-
-     public:
-      void clear_security_definition_response();
-      const ::markethub::messaging::trading::SecurityDefinitionResponse &
-      security_definition_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityDefinitionResponse *
-      release_security_definition_response();
-      ::markethub::messaging::trading::SecurityDefinitionResponse *
-      mutable_security_definition_response();
-      void set_allocated_security_definition_response(
-          ::markethub::messaging::trading::SecurityDefinitionResponse *value);
-      void unsafe_arena_set_allocated_security_definition_response(
-          ::markethub::messaging::trading::SecurityDefinitionResponse *value);
-      ::markethub::messaging::trading::SecurityDefinitionResponse *
-      unsafe_arena_release_security_definition_response();
-
-     private:
-      const ::markethub::messaging::trading::SecurityDefinitionResponse &
-      _internal_security_definition_response() const;
-      ::markethub::messaging::trading::SecurityDefinitionResponse *
-      _internal_mutable_security_definition_response();
-
-     public:
-      // .markethub.messaging.trading.MarketDataSuscriptionRequest market_data_suscription_request =
-      // 11;
-      bool has_market_data_suscription_request() const;
-
-     private:
-      bool _internal_has_market_data_suscription_request() const;
-
-     public:
-      void clear_market_data_suscription_request();
-      const ::markethub::messaging::trading::MarketDataSuscriptionRequest &
-      market_data_suscription_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-      release_market_data_suscription_request();
-      ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-      mutable_market_data_suscription_request();
-      void set_allocated_market_data_suscription_request(
-          ::markethub::messaging::trading::MarketDataSuscriptionRequest *value);
-      void unsafe_arena_set_allocated_market_data_suscription_request(
-          ::markethub::messaging::trading::MarketDataSuscriptionRequest *value);
-      ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-      unsafe_arena_release_market_data_suscription_request();
-
-     private:
-      const ::markethub::messaging::trading::MarketDataSuscriptionRequest &
-      _internal_market_data_suscription_request() const;
-      ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-      _internal_mutable_market_data_suscription_request();
-
-     public:
-      // .markethub.messaging.trading.MarketDataSuscriptionResponse market_data_suscription_response
-      // = 12;
-      bool has_market_data_suscription_response() const;
-
-     private:
-      bool _internal_has_market_data_suscription_response() const;
-
-     public:
-      void clear_market_data_suscription_response();
-      const ::markethub::messaging::trading::MarketDataSuscriptionResponse &
-      market_data_suscription_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-      release_market_data_suscription_response();
-      ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-      mutable_market_data_suscription_response();
-      void set_allocated_market_data_suscription_response(
-          ::markethub::messaging::trading::MarketDataSuscriptionResponse *value);
-      void unsafe_arena_set_allocated_market_data_suscription_response(
-          ::markethub::messaging::trading::MarketDataSuscriptionResponse *value);
-      ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-      unsafe_arena_release_market_data_suscription_response();
-
-     private:
-      const ::markethub::messaging::trading::MarketDataSuscriptionResponse &
-      _internal_market_data_suscription_response() const;
-      ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-      _internal_mutable_market_data_suscription_response();
-
-     public:
-      // .markethub.messaging.trading.NewOrderRequest new_order_request = 13;
-      bool has_new_order_request() const;
-
-     private:
-      bool _internal_has_new_order_request() const;
-
-     public:
-      void clear_new_order_request();
-      const ::markethub::messaging::trading::NewOrderRequest &new_order_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::NewOrderRequest *
-      release_new_order_request();
-      ::markethub::messaging::trading::NewOrderRequest *mutable_new_order_request();
-      void set_allocated_new_order_request(::markethub::messaging::trading::NewOrderRequest *value);
-      void unsafe_arena_set_allocated_new_order_request(
-          ::markethub::messaging::trading::NewOrderRequest *value);
-      ::markethub::messaging::trading::NewOrderRequest *unsafe_arena_release_new_order_request();
-
-     private:
-      const ::markethub::messaging::trading::NewOrderRequest &_internal_new_order_request() const;
-      ::markethub::messaging::trading::NewOrderRequest *_internal_mutable_new_order_request();
-
-     public:
-      // .markethub.messaging.trading.CancelOrderRequest cancel_order_request = 14;
-      bool has_cancel_order_request() const;
-
-     private:
-      bool _internal_has_cancel_order_request() const;
-
-     public:
-      void clear_cancel_order_request();
-      const ::markethub::messaging::trading::CancelOrderRequest &cancel_order_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::CancelOrderRequest *
-      release_cancel_order_request();
-      ::markethub::messaging::trading::CancelOrderRequest *mutable_cancel_order_request();
-      void set_allocated_cancel_order_request(
-          ::markethub::messaging::trading::CancelOrderRequest *value);
-      void unsafe_arena_set_allocated_cancel_order_request(
-          ::markethub::messaging::trading::CancelOrderRequest *value);
-      ::markethub::messaging::trading::CancelOrderRequest *
-      unsafe_arena_release_cancel_order_request();
-
-     private:
-      const ::markethub::messaging::trading::CancelOrderRequest &_internal_cancel_order_request()
-          const;
-      ::markethub::messaging::trading::CancelOrderRequest *_internal_mutable_cancel_order_request();
-
-     public:
-      // .markethub.messaging.trading.ReplaceOrderRequest replace_order_request = 15;
-      bool has_replace_order_request() const;
-
-     private:
-      bool _internal_has_replace_order_request() const;
-
-     public:
-      void clear_replace_order_request();
-      const ::markethub::messaging::trading::ReplaceOrderRequest &replace_order_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::ReplaceOrderRequest *
-      release_replace_order_request();
-      ::markethub::messaging::trading::ReplaceOrderRequest *mutable_replace_order_request();
-      void set_allocated_replace_order_request(
-          ::markethub::messaging::trading::ReplaceOrderRequest *value);
-      void unsafe_arena_set_allocated_replace_order_request(
-          ::markethub::messaging::trading::ReplaceOrderRequest *value);
-      ::markethub::messaging::trading::ReplaceOrderRequest *
-      unsafe_arena_release_replace_order_request();
-
-     private:
-      const ::markethub::messaging::trading::ReplaceOrderRequest &_internal_replace_order_request()
-          const;
-      ::markethub::messaging::trading::ReplaceOrderRequest *
-      _internal_mutable_replace_order_request();
-
-     public:
-      // .markethub.messaging.trading.ExecutionReport execution_report = 16;
-      bool has_execution_report() const;
-
-     private:
-      bool _internal_has_execution_report() const;
-
-     public:
-      void clear_execution_report();
-      const ::markethub::messaging::trading::ExecutionReport &execution_report() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::ExecutionReport *
-      release_execution_report();
-      ::markethub::messaging::trading::ExecutionReport *mutable_execution_report();
-      void set_allocated_execution_report(::markethub::messaging::trading::ExecutionReport *value);
-      void unsafe_arena_set_allocated_execution_report(
-          ::markethub::messaging::trading::ExecutionReport *value);
-      ::markethub::messaging::trading::ExecutionReport *unsafe_arena_release_execution_report();
-
-     private:
-      const ::markethub::messaging::trading::ExecutionReport &_internal_execution_report() const;
-      ::markethub::messaging::trading::ExecutionReport *_internal_mutable_execution_report();
-
-     public:
-      // .markethub.messaging.trading.OrderStatusRequest order_status_request = 17;
-      bool has_order_status_request() const;
-
-     private:
-      bool _internal_has_order_status_request() const;
-
-     public:
-      void clear_order_status_request();
-      const ::markethub::messaging::trading::OrderStatusRequest &order_status_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::OrderStatusRequest *
-      release_order_status_request();
-      ::markethub::messaging::trading::OrderStatusRequest *mutable_order_status_request();
-      void set_allocated_order_status_request(
-          ::markethub::messaging::trading::OrderStatusRequest *value);
-      void unsafe_arena_set_allocated_order_status_request(
-          ::markethub::messaging::trading::OrderStatusRequest *value);
-      ::markethub::messaging::trading::OrderStatusRequest *
-      unsafe_arena_release_order_status_request();
-
-     private:
-      const ::markethub::messaging::trading::OrderStatusRequest &_internal_order_status_request()
-          const;
-      ::markethub::messaging::trading::OrderStatusRequest *_internal_mutable_order_status_request();
-
-     public:
-      // .markethub.messaging.trading.TradingSessionStatusRequest trading_session_status_request =
-      // 18;
-      bool has_trading_session_status_request() const;
-
-     private:
-      bool _internal_has_trading_session_status_request() const;
-
-     public:
-      void clear_trading_session_status_request();
-      const ::markethub::messaging::trading::TradingSessionStatusRequest &
-      trading_session_status_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::TradingSessionStatusRequest *
-      release_trading_session_status_request();
-      ::markethub::messaging::trading::TradingSessionStatusRequest *
-      mutable_trading_session_status_request();
-      void set_allocated_trading_session_status_request(
-          ::markethub::messaging::trading::TradingSessionStatusRequest *value);
-      void unsafe_arena_set_allocated_trading_session_status_request(
-          ::markethub::messaging::trading::TradingSessionStatusRequest *value);
-      ::markethub::messaging::trading::TradingSessionStatusRequest *
-      unsafe_arena_release_trading_session_status_request();
-
-     private:
-      const ::markethub::messaging::trading::TradingSessionStatusRequest &
-      _internal_trading_session_status_request() const;
-      ::markethub::messaging::trading::TradingSessionStatusRequest *
-      _internal_mutable_trading_session_status_request();
-
-     public:
-      // .markethub.messaging.trading.TradingSessionStatusResponse trading_session_status_response =
-      // 19;
-      bool has_trading_session_status_response() const;
-
-     private:
-      bool _internal_has_trading_session_status_response() const;
-
-     public:
-      void clear_trading_session_status_response();
-      const ::markethub::messaging::trading::TradingSessionStatusResponse &
-      trading_session_status_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::TradingSessionStatusResponse *
-      release_trading_session_status_response();
-      ::markethub::messaging::trading::TradingSessionStatusResponse *
-      mutable_trading_session_status_response();
-      void set_allocated_trading_session_status_response(
-          ::markethub::messaging::trading::TradingSessionStatusResponse *value);
-      void unsafe_arena_set_allocated_trading_session_status_response(
-          ::markethub::messaging::trading::TradingSessionStatusResponse *value);
-      ::markethub::messaging::trading::TradingSessionStatusResponse *
-      unsafe_arena_release_trading_session_status_response();
-
-     private:
-      const ::markethub::messaging::trading::TradingSessionStatusResponse &
-      _internal_trading_session_status_response() const;
-      ::markethub::messaging::trading::TradingSessionStatusResponse *
-      _internal_mutable_trading_session_status_response();
-
-     public:
-      // .markethub.messaging.trading.MassCancelRequest mass_cancel_request = 20;
-      bool has_mass_cancel_request() const;
-
-     private:
-      bool _internal_has_mass_cancel_request() const;
-
-     public:
-      void clear_mass_cancel_request();
-      const ::markethub::messaging::trading::MassCancelRequest &mass_cancel_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::MassCancelRequest *
-      release_mass_cancel_request();
-      ::markethub::messaging::trading::MassCancelRequest *mutable_mass_cancel_request();
-      void set_allocated_mass_cancel_request(
-          ::markethub::messaging::trading::MassCancelRequest *value);
-      void unsafe_arena_set_allocated_mass_cancel_request(
-          ::markethub::messaging::trading::MassCancelRequest *value);
-      ::markethub::messaging::trading::MassCancelRequest *
-      unsafe_arena_release_mass_cancel_request();
-
-     private:
-      const ::markethub::messaging::trading::MassCancelRequest &_internal_mass_cancel_request()
-          const;
-      ::markethub::messaging::trading::MassCancelRequest *_internal_mutable_mass_cancel_request();
-
-     public:
-      // .markethub.messaging.trading.MassCancelResponse mass_cancel_response = 21;
-      bool has_mass_cancel_response() const;
-
-     private:
-      bool _internal_has_mass_cancel_response() const;
-
-     public:
-      void clear_mass_cancel_response();
-      const ::markethub::messaging::trading::MassCancelResponse &mass_cancel_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::MassCancelResponse *
-      release_mass_cancel_response();
-      ::markethub::messaging::trading::MassCancelResponse *mutable_mass_cancel_response();
-      void set_allocated_mass_cancel_response(
-          ::markethub::messaging::trading::MassCancelResponse *value);
-      void unsafe_arena_set_allocated_mass_cancel_response(
-          ::markethub::messaging::trading::MassCancelResponse *value);
-      ::markethub::messaging::trading::MassCancelResponse *
-      unsafe_arena_release_mass_cancel_response();
-
-     private:
-      const ::markethub::messaging::trading::MassCancelResponse &_internal_mass_cancel_response()
-          const;
-      ::markethub::messaging::trading::MassCancelResponse *_internal_mutable_mass_cancel_response();
-
-     public:
-      // .markethub.messaging.trading.MassOrderStatusRequest mass_order_status_request = 22;
-      bool has_mass_order_status_request() const;
-
-     private:
-      bool _internal_has_mass_order_status_request() const;
-
-     public:
-      void clear_mass_order_status_request();
-      const ::markethub::messaging::trading::MassOrderStatusRequest &mass_order_status_request()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::MassOrderStatusRequest *
-      release_mass_order_status_request();
-      ::markethub::messaging::trading::MassOrderStatusRequest *mutable_mass_order_status_request();
-      void set_allocated_mass_order_status_request(
-          ::markethub::messaging::trading::MassOrderStatusRequest *value);
-      void unsafe_arena_set_allocated_mass_order_status_request(
-          ::markethub::messaging::trading::MassOrderStatusRequest *value);
-      ::markethub::messaging::trading::MassOrderStatusRequest *
-      unsafe_arena_release_mass_order_status_request();
-
-     private:
-      const ::markethub::messaging::trading::MassOrderStatusRequest &
-      _internal_mass_order_status_request() const;
-      ::markethub::messaging::trading::MassOrderStatusRequest *
-      _internal_mutable_mass_order_status_request();
-
-     public:
-      // .markethub.messaging.trading.MassOrderStatusResponse mass_order_status_response = 23;
-      bool has_mass_order_status_response() const;
-
-     private:
-      bool _internal_has_mass_order_status_response() const;
-
-     public:
-      void clear_mass_order_status_response();
-      const ::markethub::messaging::trading::MassOrderStatusResponse &mass_order_status_response()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::MassOrderStatusResponse *
-      release_mass_order_status_response();
-      ::markethub::messaging::trading::MassOrderStatusResponse *
-      mutable_mass_order_status_response();
-      void set_allocated_mass_order_status_response(
-          ::markethub::messaging::trading::MassOrderStatusResponse *value);
-      void unsafe_arena_set_allocated_mass_order_status_response(
-          ::markethub::messaging::trading::MassOrderStatusResponse *value);
-      ::markethub::messaging::trading::MassOrderStatusResponse *
-      unsafe_arena_release_mass_order_status_response();
-
-     private:
-      const ::markethub::messaging::trading::MassOrderStatusResponse &
-      _internal_mass_order_status_response() const;
-      ::markethub::messaging::trading::MassOrderStatusResponse *
-      _internal_mutable_mass_order_status_response();
-
-     public:
-      // .markethub.messaging.trading.TradeCaptureReportRequest trade_capture_report_request = 24;
-      bool has_trade_capture_report_request() const;
-
-     private:
-      bool _internal_has_trade_capture_report_request() const;
-
-     public:
-      void clear_trade_capture_report_request();
-      const ::markethub::messaging::trading::TradeCaptureReportRequest &
-      trade_capture_report_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::TradeCaptureReportRequest *
-      release_trade_capture_report_request();
-      ::markethub::messaging::trading::TradeCaptureReportRequest *
-      mutable_trade_capture_report_request();
-      void set_allocated_trade_capture_report_request(
-          ::markethub::messaging::trading::TradeCaptureReportRequest *value);
-      void unsafe_arena_set_allocated_trade_capture_report_request(
-          ::markethub::messaging::trading::TradeCaptureReportRequest *value);
-      ::markethub::messaging::trading::TradeCaptureReportRequest *
-      unsafe_arena_release_trade_capture_report_request();
-
-     private:
-      const ::markethub::messaging::trading::TradeCaptureReportRequest &
-      _internal_trade_capture_report_request() const;
-      ::markethub::messaging::trading::TradeCaptureReportRequest *
-      _internal_mutable_trade_capture_report_request();
-
-     public:
-      // .markethub.messaging.trading.TradeCaptureReportResponse trade_capture_report_response = 25;
-      bool has_trade_capture_report_response() const;
-
-     private:
-      bool _internal_has_trade_capture_report_response() const;
-
-     public:
-      void clear_trade_capture_report_response();
-      const ::markethub::messaging::trading::TradeCaptureReportResponse &
-      trade_capture_report_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::TradeCaptureReportResponse *
-      release_trade_capture_report_response();
-      ::markethub::messaging::trading::TradeCaptureReportResponse *
-      mutable_trade_capture_report_response();
-      void set_allocated_trade_capture_report_response(
-          ::markethub::messaging::trading::TradeCaptureReportResponse *value);
-      void unsafe_arena_set_allocated_trade_capture_report_response(
-          ::markethub::messaging::trading::TradeCaptureReportResponse *value);
-      ::markethub::messaging::trading::TradeCaptureReportResponse *
-      unsafe_arena_release_trade_capture_report_response();
-
-     private:
-      const ::markethub::messaging::trading::TradeCaptureReportResponse &
-      _internal_trade_capture_report_response() const;
-      ::markethub::messaging::trading::TradeCaptureReportResponse *
-      _internal_mutable_trade_capture_report_response();
-
-     public:
-      // .markethub.messaging.trading.Book market_data_update = 26;
-      bool has_market_data_update() const;
-
-     private:
-      bool _internal_has_market_data_update() const;
-
-     public:
-      void clear_market_data_update();
-      const ::markethub::messaging::trading::Book &market_data_update() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::Book *release_market_data_update();
-      ::markethub::messaging::trading::Book *mutable_market_data_update();
-      void set_allocated_market_data_update(::markethub::messaging::trading::Book *value);
-      void unsafe_arena_set_allocated_market_data_update(
-          ::markethub::messaging::trading::Book *value);
-      ::markethub::messaging::trading::Book *unsafe_arena_release_market_data_update();
-
-     private:
-      const ::markethub::messaging::trading::Book &_internal_market_data_update() const;
-      ::markethub::messaging::trading::Book *_internal_mutable_market_data_update();
-
-     public:
-      // .markethub.messaging.system.Stop stop = 27;
-      bool has_stop() const;
-
-     private:
-      bool _internal_has_stop() const;
-
-     public:
-      void clear_stop();
-      const ::markethub::messaging::system::Stop &stop() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::Stop *release_stop();
-      ::markethub::messaging::system::Stop *mutable_stop();
-      void set_allocated_stop(::markethub::messaging::system::Stop *value);
-      void unsafe_arena_set_allocated_stop(::markethub::messaging::system::Stop *value);
-      ::markethub::messaging::system::Stop *unsafe_arena_release_stop();
-
-     private:
-      const ::markethub::messaging::system::Stop &_internal_stop() const;
-      ::markethub::messaging::system::Stop *_internal_mutable_stop();
-
-     public:
-      // .markethub.messaging.system.AllSymbolsRequest all_symbols_request = 28;
-      bool has_all_symbols_request() const;
-
-     private:
-      bool _internal_has_all_symbols_request() const;
-
-     public:
-      void clear_all_symbols_request();
-      const ::markethub::messaging::system::AllSymbolsRequest &all_symbols_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::AllSymbolsRequest *
-      release_all_symbols_request();
-      ::markethub::messaging::system::AllSymbolsRequest *mutable_all_symbols_request();
-      void set_allocated_all_symbols_request(
-          ::markethub::messaging::system::AllSymbolsRequest *value);
-      void unsafe_arena_set_allocated_all_symbols_request(
-          ::markethub::messaging::system::AllSymbolsRequest *value);
-      ::markethub::messaging::system::AllSymbolsRequest *unsafe_arena_release_all_symbols_request();
-
-     private:
-      const ::markethub::messaging::system::AllSymbolsRequest &_internal_all_symbols_request()
-          const;
-      ::markethub::messaging::system::AllSymbolsRequest *_internal_mutable_all_symbols_request();
-
-     public:
-      // .markethub.messaging.system.AllSymbolsResponse all_symbols_response = 29;
-      bool has_all_symbols_response() const;
-
-     private:
-      bool _internal_has_all_symbols_response() const;
-
-     public:
-      void clear_all_symbols_response();
-      const ::markethub::messaging::system::AllSymbolsResponse &all_symbols_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::AllSymbolsResponse *
-      release_all_symbols_response();
-      ::markethub::messaging::system::AllSymbolsResponse *mutable_all_symbols_response();
-      void set_allocated_all_symbols_response(
-          ::markethub::messaging::system::AllSymbolsResponse *value);
-      void unsafe_arena_set_allocated_all_symbols_response(
-          ::markethub::messaging::system::AllSymbolsResponse *value);
-      ::markethub::messaging::system::AllSymbolsResponse *
-      unsafe_arena_release_all_symbols_response();
-
-     private:
-      const ::markethub::messaging::system::AllSymbolsResponse &_internal_all_symbols_response()
-          const;
-      ::markethub::messaging::system::AllSymbolsResponse *_internal_mutable_all_symbols_response();
-
-     public:
-      // .markethub.messaging.trading.SecurityStatusRequest security_status_request = 31;
-      bool has_security_status_request() const;
-
-     private:
-      bool _internal_has_security_status_request() const;
-
-     public:
-      void clear_security_status_request();
-      const ::markethub::messaging::trading::SecurityStatusRequest &security_status_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityStatusRequest *
-      release_security_status_request();
-      ::markethub::messaging::trading::SecurityStatusRequest *mutable_security_status_request();
-      void set_allocated_security_status_request(
-          ::markethub::messaging::trading::SecurityStatusRequest *value);
-      void unsafe_arena_set_allocated_security_status_request(
-          ::markethub::messaging::trading::SecurityStatusRequest *value);
-      ::markethub::messaging::trading::SecurityStatusRequest *
-      unsafe_arena_release_security_status_request();
-
-     private:
-      const ::markethub::messaging::trading::SecurityStatusRequest &
-      _internal_security_status_request() const;
-      ::markethub::messaging::trading::SecurityStatusRequest *
-      _internal_mutable_security_status_request();
-
-     public:
-      // .markethub.messaging.trading.SecurityStatusResponse security_status_response = 32;
-      bool has_security_status_response() const;
-
-     private:
-      bool _internal_has_security_status_response() const;
-
-     public:
-      void clear_security_status_response();
-      const ::markethub::messaging::trading::SecurityStatusResponse &security_status_response()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityStatusResponse *
-      release_security_status_response();
-      ::markethub::messaging::trading::SecurityStatusResponse *mutable_security_status_response();
-      void set_allocated_security_status_response(
-          ::markethub::messaging::trading::SecurityStatusResponse *value);
-      void unsafe_arena_set_allocated_security_status_response(
-          ::markethub::messaging::trading::SecurityStatusResponse *value);
-      ::markethub::messaging::trading::SecurityStatusResponse *
-      unsafe_arena_release_security_status_response();
-
-     private:
-      const ::markethub::messaging::trading::SecurityStatusResponse &
-      _internal_security_status_response() const;
-      ::markethub::messaging::trading::SecurityStatusResponse *
-      _internal_mutable_security_status_response();
-
-     public:
-      // .markethub.messaging.rofex.AccountListRequest account_list_request = 33;
-      bool has_account_list_request() const;
-
-     private:
-      bool _internal_has_account_list_request() const;
-
-     public:
-      void clear_account_list_request();
-      const ::markethub::messaging::rofex::AccountListRequest &account_list_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::rofex::AccountListRequest *
-      release_account_list_request();
-      ::markethub::messaging::rofex::AccountListRequest *mutable_account_list_request();
-      void set_allocated_account_list_request(
-          ::markethub::messaging::rofex::AccountListRequest *value);
-      void unsafe_arena_set_allocated_account_list_request(
-          ::markethub::messaging::rofex::AccountListRequest *value);
-      ::markethub::messaging::rofex::AccountListRequest *
-      unsafe_arena_release_account_list_request();
-
-     private:
-      const ::markethub::messaging::rofex::AccountListRequest &_internal_account_list_request()
-          const;
-      ::markethub::messaging::rofex::AccountListRequest *_internal_mutable_account_list_request();
-
-     public:
-      // .markethub.messaging.rofex.AccountListResponse account_list_response = 34;
-      bool has_account_list_response() const;
-
-     private:
-      bool _internal_has_account_list_response() const;
-
-     public:
-      void clear_account_list_response();
-      const ::markethub::messaging::rofex::AccountListResponse &account_list_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::rofex::AccountListResponse *
-      release_account_list_response();
-      ::markethub::messaging::rofex::AccountListResponse *mutable_account_list_response();
-      void set_allocated_account_list_response(
-          ::markethub::messaging::rofex::AccountListResponse *value);
-      void unsafe_arena_set_allocated_account_list_response(
-          ::markethub::messaging::rofex::AccountListResponse *value);
-      ::markethub::messaging::rofex::AccountListResponse *
-      unsafe_arena_release_account_list_response();
-
-     private:
-      const ::markethub::messaging::rofex::AccountListResponse &_internal_account_list_response()
-          const;
-      ::markethub::messaging::rofex::AccountListResponse *_internal_mutable_account_list_response();
-
-     public:
-      // .markethub.messaging.rofex.AccountListIncremental account_list_incremental = 35;
-      bool has_account_list_incremental() const;
-
-     private:
-      bool _internal_has_account_list_incremental() const;
-
-     public:
-      void clear_account_list_incremental();
-      const ::markethub::messaging::rofex::AccountListIncremental &account_list_incremental() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::rofex::AccountListIncremental *
-      release_account_list_incremental();
-      ::markethub::messaging::rofex::AccountListIncremental *mutable_account_list_incremental();
-      void set_allocated_account_list_incremental(
-          ::markethub::messaging::rofex::AccountListIncremental *value);
-      void unsafe_arena_set_allocated_account_list_incremental(
-          ::markethub::messaging::rofex::AccountListIncremental *value);
-      ::markethub::messaging::rofex::AccountListIncremental *
-      unsafe_arena_release_account_list_incremental();
-
-     private:
-      const ::markethub::messaging::rofex::AccountListIncremental &
-      _internal_account_list_incremental() const;
-      ::markethub::messaging::rofex::AccountListIncremental *
-      _internal_mutable_account_list_incremental();
-
-     public:
-      // .markethub.messaging.system.AddServiceRequest add_service_request = 36;
-      bool has_add_service_request() const;
-
-     private:
-      bool _internal_has_add_service_request() const;
-
-     public:
-      void clear_add_service_request();
-      const ::markethub::messaging::system::AddServiceRequest &add_service_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::AddServiceRequest *
-      release_add_service_request();
-      ::markethub::messaging::system::AddServiceRequest *mutable_add_service_request();
-      void set_allocated_add_service_request(
-          ::markethub::messaging::system::AddServiceRequest *value);
-      void unsafe_arena_set_allocated_add_service_request(
-          ::markethub::messaging::system::AddServiceRequest *value);
-      ::markethub::messaging::system::AddServiceRequest *unsafe_arena_release_add_service_request();
-
-     private:
-      const ::markethub::messaging::system::AddServiceRequest &_internal_add_service_request()
-          const;
-      ::markethub::messaging::system::AddServiceRequest *_internal_mutable_add_service_request();
-
-     public:
-      // .markethub.messaging.system.AddServiceResponse add_service_response = 37;
-      bool has_add_service_response() const;
-
-     private:
-      bool _internal_has_add_service_response() const;
-
-     public:
-      void clear_add_service_response();
-      const ::markethub::messaging::system::AddServiceResponse &add_service_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::AddServiceResponse *
-      release_add_service_response();
-      ::markethub::messaging::system::AddServiceResponse *mutable_add_service_response();
-      void set_allocated_add_service_response(
-          ::markethub::messaging::system::AddServiceResponse *value);
-      void unsafe_arena_set_allocated_add_service_response(
-          ::markethub::messaging::system::AddServiceResponse *value);
-      ::markethub::messaging::system::AddServiceResponse *
-      unsafe_arena_release_add_service_response();
-
-     private:
-      const ::markethub::messaging::system::AddServiceResponse &_internal_add_service_response()
-          const;
-      ::markethub::messaging::system::AddServiceResponse *_internal_mutable_add_service_response();
-
-     public:
-      // .markethub.messaging.system.Heartbeat heartbeat = 38;
-      bool has_heartbeat() const;
-
-     private:
-      bool _internal_has_heartbeat() const;
-
-     public:
-      void clear_heartbeat();
-      const ::markethub::messaging::system::Heartbeat &heartbeat() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::Heartbeat *release_heartbeat();
-      ::markethub::messaging::system::Heartbeat *mutable_heartbeat();
-      void set_allocated_heartbeat(::markethub::messaging::system::Heartbeat *value);
-      void unsafe_arena_set_allocated_heartbeat(::markethub::messaging::system::Heartbeat *value);
-      ::markethub::messaging::system::Heartbeat *unsafe_arena_release_heartbeat();
-
-     private:
-      const ::markethub::messaging::system::Heartbeat &_internal_heartbeat() const;
-      ::markethub::messaging::system::Heartbeat *_internal_mutable_heartbeat();
-
-     public:
-      // .markethub.messaging.system.RemoveServiceRequest remove_service_request = 39;
-      bool has_remove_service_request() const;
-
-     private:
-      bool _internal_has_remove_service_request() const;
-
-     public:
-      void clear_remove_service_request();
-      const ::markethub::messaging::system::RemoveServiceRequest &remove_service_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::RemoveServiceRequest *
-      release_remove_service_request();
-      ::markethub::messaging::system::RemoveServiceRequest *mutable_remove_service_request();
-      void set_allocated_remove_service_request(
-          ::markethub::messaging::system::RemoveServiceRequest *value);
-      void unsafe_arena_set_allocated_remove_service_request(
-          ::markethub::messaging::system::RemoveServiceRequest *value);
-      ::markethub::messaging::system::RemoveServiceRequest *
-      unsafe_arena_release_remove_service_request();
-
-     private:
-      const ::markethub::messaging::system::RemoveServiceRequest &_internal_remove_service_request()
-          const;
-      ::markethub::messaging::system::RemoveServiceRequest *
-      _internal_mutable_remove_service_request();
-
-     public:
-      // .markethub.messaging.system.NodesBroadcast nodes_broadcast = 40;
-      bool has_nodes_broadcast() const;
-
-     private:
-      bool _internal_has_nodes_broadcast() const;
-
-     public:
-      void clear_nodes_broadcast();
-      const ::markethub::messaging::system::NodesBroadcast &nodes_broadcast() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::NodesBroadcast *release_nodes_broadcast();
-      ::markethub::messaging::system::NodesBroadcast *mutable_nodes_broadcast();
-      void set_allocated_nodes_broadcast(::markethub::messaging::system::NodesBroadcast *value);
-      void unsafe_arena_set_allocated_nodes_broadcast(
-          ::markethub::messaging::system::NodesBroadcast *value);
-      ::markethub::messaging::system::NodesBroadcast *unsafe_arena_release_nodes_broadcast();
-
-     private:
-      const ::markethub::messaging::system::NodesBroadcast &_internal_nodes_broadcast() const;
-      ::markethub::messaging::system::NodesBroadcast *_internal_mutable_nodes_broadcast();
-
-     public:
-      // .markethub.messaging.system.FindNodeRequest find_node_request = 41;
-      bool has_find_node_request() const;
-
-     private:
-      bool _internal_has_find_node_request() const;
-
-     public:
-      void clear_find_node_request();
-      const ::markethub::messaging::system::FindNodeRequest &find_node_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::FindNodeRequest *
-      release_find_node_request();
-      ::markethub::messaging::system::FindNodeRequest *mutable_find_node_request();
-      void set_allocated_find_node_request(::markethub::messaging::system::FindNodeRequest *value);
-      void unsafe_arena_set_allocated_find_node_request(
-          ::markethub::messaging::system::FindNodeRequest *value);
-      ::markethub::messaging::system::FindNodeRequest *unsafe_arena_release_find_node_request();
-
-     private:
-      const ::markethub::messaging::system::FindNodeRequest &_internal_find_node_request() const;
-      ::markethub::messaging::system::FindNodeRequest *_internal_mutable_find_node_request();
-
-     public:
-      // .markethub.messaging.system.FindNodeResponse find_node_response = 42;
-      bool has_find_node_response() const;
-
-     private:
-      bool _internal_has_find_node_response() const;
-
-     public:
-      void clear_find_node_response();
-      const ::markethub::messaging::system::FindNodeResponse &find_node_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::FindNodeResponse *
-      release_find_node_response();
-      ::markethub::messaging::system::FindNodeResponse *mutable_find_node_response();
-      void set_allocated_find_node_response(
-          ::markethub::messaging::system::FindNodeResponse *value);
-      void unsafe_arena_set_allocated_find_node_response(
-          ::markethub::messaging::system::FindNodeResponse *value);
-      ::markethub::messaging::system::FindNodeResponse *unsafe_arena_release_find_node_response();
-
-     private:
-      const ::markethub::messaging::system::FindNodeResponse &_internal_find_node_response() const;
-      ::markethub::messaging::system::FindNodeResponse *_internal_mutable_find_node_response();
-
-     public:
-      // .markethub.messaging.system.DiscoverServicesRequest discover_services_request = 43;
-      bool has_discover_services_request() const;
-
-     private:
-      bool _internal_has_discover_services_request() const;
-
-     public:
-      void clear_discover_services_request();
-      const ::markethub::messaging::system::DiscoverServicesRequest &discover_services_request()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::DiscoverServicesRequest *
-      release_discover_services_request();
-      ::markethub::messaging::system::DiscoverServicesRequest *mutable_discover_services_request();
-      void set_allocated_discover_services_request(
-          ::markethub::messaging::system::DiscoverServicesRequest *value);
-      void unsafe_arena_set_allocated_discover_services_request(
-          ::markethub::messaging::system::DiscoverServicesRequest *value);
-      ::markethub::messaging::system::DiscoverServicesRequest *
-      unsafe_arena_release_discover_services_request();
-
-     private:
-      const ::markethub::messaging::system::DiscoverServicesRequest &
-      _internal_discover_services_request() const;
-      ::markethub::messaging::system::DiscoverServicesRequest *
-      _internal_mutable_discover_services_request();
-
-     public:
-      // .markethub.messaging.trading.TradeCaptureReport trade_capture_report = 44;
-      bool has_trade_capture_report() const;
-
-     private:
-      bool _internal_has_trade_capture_report() const;
-
-     public:
-      void clear_trade_capture_report();
-      const ::markethub::messaging::trading::TradeCaptureReport &trade_capture_report() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::trading::TradeCaptureReport *
-      release_trade_capture_report();
-      ::markethub::messaging::trading::TradeCaptureReport *mutable_trade_capture_report();
-      void set_allocated_trade_capture_report(
-          ::markethub::messaging::trading::TradeCaptureReport *value);
-      void unsafe_arena_set_allocated_trade_capture_report(
-          ::markethub::messaging::trading::TradeCaptureReport *value);
-      ::markethub::messaging::trading::TradeCaptureReport *
-      unsafe_arena_release_trade_capture_report();
-
-     private:
-      const ::markethub::messaging::trading::TradeCaptureReport &_internal_trade_capture_report()
-          const;
-      ::markethub::messaging::trading::TradeCaptureReport *_internal_mutable_trade_capture_report();
-
-     public:
-      // .markethub.messaging.risk_management.HoldingReportRequest holding_report_request = 46;
-      bool has_holding_report_request() const;
-
-     private:
-      bool _internal_has_holding_report_request() const;
-
-     public:
-      void clear_holding_report_request();
-      const ::markethub::messaging::risk_management::HoldingReportRequest &holding_report_request()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::HoldingReportRequest *
-      release_holding_report_request();
-      ::markethub::messaging::risk_management::HoldingReportRequest *
-      mutable_holding_report_request();
-      void set_allocated_holding_report_request(
-          ::markethub::messaging::risk_management::HoldingReportRequest *value);
-      void unsafe_arena_set_allocated_holding_report_request(
-          ::markethub::messaging::risk_management::HoldingReportRequest *value);
-      ::markethub::messaging::risk_management::HoldingReportRequest *
-      unsafe_arena_release_holding_report_request();
-
-     private:
-      const ::markethub::messaging::risk_management::HoldingReportRequest &
-      _internal_holding_report_request() const;
-      ::markethub::messaging::risk_management::HoldingReportRequest *
-      _internal_mutable_holding_report_request();
-
-     public:
-      // .markethub.messaging.risk_management.PNLReportRequest pnl_report_request = 47;
-      bool has_pnl_report_request() const;
-
-     private:
-      bool _internal_has_pnl_report_request() const;
-
-     public:
-      void clear_pnl_report_request();
-      const ::markethub::messaging::risk_management::PNLReportRequest &pnl_report_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::PNLReportRequest *
-      release_pnl_report_request();
-      ::markethub::messaging::risk_management::PNLReportRequest *mutable_pnl_report_request();
-      void set_allocated_pnl_report_request(
-          ::markethub::messaging::risk_management::PNLReportRequest *value);
-      void unsafe_arena_set_allocated_pnl_report_request(
-          ::markethub::messaging::risk_management::PNLReportRequest *value);
-      ::markethub::messaging::risk_management::PNLReportRequest *
-      unsafe_arena_release_pnl_report_request();
-
-     private:
-      const ::markethub::messaging::risk_management::PNLReportRequest &
-      _internal_pnl_report_request() const;
-      ::markethub::messaging::risk_management::PNLReportRequest *
-      _internal_mutable_pnl_report_request();
-
-     public:
-      // .markethub.messaging.risk_management.HoldingReportResponse holding_report_response = 49;
-      bool has_holding_report_response() const;
-
-     private:
-      bool _internal_has_holding_report_response() const;
-
-     public:
-      void clear_holding_report_response();
-      const ::markethub::messaging::risk_management::HoldingReportResponse &
-      holding_report_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::HoldingReportResponse *
-      release_holding_report_response();
-      ::markethub::messaging::risk_management::HoldingReportResponse *
-      mutable_holding_report_response();
-      void set_allocated_holding_report_response(
-          ::markethub::messaging::risk_management::HoldingReportResponse *value);
-      void unsafe_arena_set_allocated_holding_report_response(
-          ::markethub::messaging::risk_management::HoldingReportResponse *value);
-      ::markethub::messaging::risk_management::HoldingReportResponse *
-      unsafe_arena_release_holding_report_response();
-
-     private:
-      const ::markethub::messaging::risk_management::HoldingReportResponse &
-      _internal_holding_report_response() const;
-      ::markethub::messaging::risk_management::HoldingReportResponse *
-      _internal_mutable_holding_report_response();
-
-     public:
-      // .markethub.messaging.risk_management.PNLReportResponse pnl_report_response = 50;
-      bool has_pnl_report_response() const;
-
-     private:
-      bool _internal_has_pnl_report_response() const;
-
-     public:
-      void clear_pnl_report_response();
-      const ::markethub::messaging::risk_management::PNLReportResponse &pnl_report_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::PNLReportResponse *
-      release_pnl_report_response();
-      ::markethub::messaging::risk_management::PNLReportResponse *mutable_pnl_report_response();
-      void set_allocated_pnl_report_response(
-          ::markethub::messaging::risk_management::PNLReportResponse *value);
-      void unsafe_arena_set_allocated_pnl_report_response(
-          ::markethub::messaging::risk_management::PNLReportResponse *value);
-      ::markethub::messaging::risk_management::PNLReportResponse *
-      unsafe_arena_release_pnl_report_response();
-
-     private:
-      const ::markethub::messaging::risk_management::PNLReportResponse &
-      _internal_pnl_report_response() const;
-      ::markethub::messaging::risk_management::PNLReportResponse *
-      _internal_mutable_pnl_report_response();
-
-     public:
-      // .markethub.messaging.system.FilterSymbolsRequest filter_symbols_request = 51;
-      bool has_filter_symbols_request() const;
-
-     private:
-      bool _internal_has_filter_symbols_request() const;
-
-     public:
-      void clear_filter_symbols_request();
-      const ::markethub::messaging::system::FilterSymbolsRequest &filter_symbols_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::FilterSymbolsRequest *
-      release_filter_symbols_request();
-      ::markethub::messaging::system::FilterSymbolsRequest *mutable_filter_symbols_request();
-      void set_allocated_filter_symbols_request(
-          ::markethub::messaging::system::FilterSymbolsRequest *value);
-      void unsafe_arena_set_allocated_filter_symbols_request(
-          ::markethub::messaging::system::FilterSymbolsRequest *value);
-      ::markethub::messaging::system::FilterSymbolsRequest *
-      unsafe_arena_release_filter_symbols_request();
-
-     private:
-      const ::markethub::messaging::system::FilterSymbolsRequest &_internal_filter_symbols_request()
-          const;
-      ::markethub::messaging::system::FilterSymbolsRequest *
-      _internal_mutable_filter_symbols_request();
-
-     public:
-      // .markethub.messaging.system.FilterSymbolsResponse filter_symbols_response = 52;
-      bool has_filter_symbols_response() const;
-
-     private:
-      bool _internal_has_filter_symbols_response() const;
-
-     public:
-      void clear_filter_symbols_response();
-      const ::markethub::messaging::system::FilterSymbolsResponse &filter_symbols_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::FilterSymbolsResponse *
-      release_filter_symbols_response();
-      ::markethub::messaging::system::FilterSymbolsResponse *mutable_filter_symbols_response();
-      void set_allocated_filter_symbols_response(
-          ::markethub::messaging::system::FilterSymbolsResponse *value);
-      void unsafe_arena_set_allocated_filter_symbols_response(
-          ::markethub::messaging::system::FilterSymbolsResponse *value);
-      ::markethub::messaging::system::FilterSymbolsResponse *
-      unsafe_arena_release_filter_symbols_response();
-
-     private:
-      const ::markethub::messaging::system::FilterSymbolsResponse &
-      _internal_filter_symbols_response() const;
-      ::markethub::messaging::system::FilterSymbolsResponse *
-      _internal_mutable_filter_symbols_response();
-
-     public:
-      // .markethub.messaging.system.AllInstrumentsRequest all_instruments_request = 53;
-      bool has_all_instruments_request() const;
-
-     private:
-      bool _internal_has_all_instruments_request() const;
-
-     public:
-      void clear_all_instruments_request();
-      const ::markethub::messaging::system::AllInstrumentsRequest &all_instruments_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::AllInstrumentsRequest *
-      release_all_instruments_request();
-      ::markethub::messaging::system::AllInstrumentsRequest *mutable_all_instruments_request();
-      void set_allocated_all_instruments_request(
-          ::markethub::messaging::system::AllInstrumentsRequest *value);
-      void unsafe_arena_set_allocated_all_instruments_request(
-          ::markethub::messaging::system::AllInstrumentsRequest *value);
-      ::markethub::messaging::system::AllInstrumentsRequest *
-      unsafe_arena_release_all_instruments_request();
-
-     private:
-      const ::markethub::messaging::system::AllInstrumentsRequest &
-      _internal_all_instruments_request() const;
-      ::markethub::messaging::system::AllInstrumentsRequest *
-      _internal_mutable_all_instruments_request();
-
-     public:
-      // .markethub.messaging.system.AllInstrumentsResponse all_instruments_response = 54;
-      bool has_all_instruments_response() const;
-
-     private:
-      bool _internal_has_all_instruments_response() const;
-
-     public:
-      void clear_all_instruments_response();
-      const ::markethub::messaging::system::AllInstrumentsResponse &all_instruments_response()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::AllInstrumentsResponse *
-      release_all_instruments_response();
-      ::markethub::messaging::system::AllInstrumentsResponse *mutable_all_instruments_response();
-      void set_allocated_all_instruments_response(
-          ::markethub::messaging::system::AllInstrumentsResponse *value);
-      void unsafe_arena_set_allocated_all_instruments_response(
-          ::markethub::messaging::system::AllInstrumentsResponse *value);
-      ::markethub::messaging::system::AllInstrumentsResponse *
-      unsafe_arena_release_all_instruments_response();
-
-     private:
-      const ::markethub::messaging::system::AllInstrumentsResponse &
-      _internal_all_instruments_response() const;
-      ::markethub::messaging::system::AllInstrumentsResponse *
-      _internal_mutable_all_instruments_response();
-
-     public:
-      // .markethub.messaging.system.PreviousClosePriceRequest previous_close_price_request = 55;
-      bool has_previous_close_price_request() const;
-
-     private:
-      bool _internal_has_previous_close_price_request() const;
-
-     public:
-      void clear_previous_close_price_request();
-      const ::markethub::messaging::system::PreviousClosePriceRequest &
-      previous_close_price_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::PreviousClosePriceRequest *
-      release_previous_close_price_request();
-      ::markethub::messaging::system::PreviousClosePriceRequest *
-      mutable_previous_close_price_request();
-      void set_allocated_previous_close_price_request(
-          ::markethub::messaging::system::PreviousClosePriceRequest *value);
-      void unsafe_arena_set_allocated_previous_close_price_request(
-          ::markethub::messaging::system::PreviousClosePriceRequest *value);
-      ::markethub::messaging::system::PreviousClosePriceRequest *
-      unsafe_arena_release_previous_close_price_request();
-
-     private:
-      const ::markethub::messaging::system::PreviousClosePriceRequest &
-      _internal_previous_close_price_request() const;
-      ::markethub::messaging::system::PreviousClosePriceRequest *
-      _internal_mutable_previous_close_price_request();
-
-     public:
-      // .markethub.messaging.system.PreviousClosePriceResponse previous_close_price_response = 56;
-      bool has_previous_close_price_response() const;
-
-     private:
-      bool _internal_has_previous_close_price_response() const;
-
-     public:
-      void clear_previous_close_price_response();
-      const ::markethub::messaging::system::PreviousClosePriceResponse &
-      previous_close_price_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::PreviousClosePriceResponse *
-      release_previous_close_price_response();
-      ::markethub::messaging::system::PreviousClosePriceResponse *
-      mutable_previous_close_price_response();
-      void set_allocated_previous_close_price_response(
-          ::markethub::messaging::system::PreviousClosePriceResponse *value);
-      void unsafe_arena_set_allocated_previous_close_price_response(
-          ::markethub::messaging::system::PreviousClosePriceResponse *value);
-      ::markethub::messaging::system::PreviousClosePriceResponse *
-      unsafe_arena_release_previous_close_price_response();
-
-     private:
-      const ::markethub::messaging::system::PreviousClosePriceResponse &
-      _internal_previous_close_price_response() const;
-      ::markethub::messaging::system::PreviousClosePriceResponse *
-      _internal_mutable_previous_close_price_response();
-
-     public:
-      // .markethub.messaging.risk_management.HoldingReport holding_report = 57;
-      bool has_holding_report() const;
-
-     private:
-      bool _internal_has_holding_report() const;
-
-     public:
-      void clear_holding_report();
-      const ::markethub::messaging::risk_management::HoldingReport &holding_report() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::HoldingReport *
-      release_holding_report();
-      ::markethub::messaging::risk_management::HoldingReport *mutable_holding_report();
-      void set_allocated_holding_report(
-          ::markethub::messaging::risk_management::HoldingReport *value);
-      void unsafe_arena_set_allocated_holding_report(
-          ::markethub::messaging::risk_management::HoldingReport *value);
-      ::markethub::messaging::risk_management::HoldingReport *unsafe_arena_release_holding_report();
-
-     private:
-      const ::markethub::messaging::risk_management::HoldingReport &_internal_holding_report()
-          const;
-      ::markethub::messaging::risk_management::HoldingReport *_internal_mutable_holding_report();
-
-     public:
-      // .markethub.messaging.risk_management.PNLReport pnl_report = 58;
-      bool has_pnl_report() const;
-
-     private:
-      bool _internal_has_pnl_report() const;
-
-     public:
-      void clear_pnl_report();
-      const ::markethub::messaging::risk_management::PNLReport &pnl_report() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::PNLReport *release_pnl_report();
-      ::markethub::messaging::risk_management::PNLReport *mutable_pnl_report();
-      void set_allocated_pnl_report(::markethub::messaging::risk_management::PNLReport *value);
-      void unsafe_arena_set_allocated_pnl_report(
-          ::markethub::messaging::risk_management::PNLReport *value);
-      ::markethub::messaging::risk_management::PNLReport *unsafe_arena_release_pnl_report();
-
-     private:
-      const ::markethub::messaging::risk_management::PNLReport &_internal_pnl_report() const;
-      ::markethub::messaging::risk_management::PNLReport *_internal_mutable_pnl_report();
-
-     public:
-      // .markethub.messaging.system.NextBusinessDayRequest next_business_day_request = 59;
-      bool has_next_business_day_request() const;
-
-     private:
-      bool _internal_has_next_business_day_request() const;
-
-     public:
-      void clear_next_business_day_request();
-      const ::markethub::messaging::system::NextBusinessDayRequest &next_business_day_request()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::NextBusinessDayRequest *
-      release_next_business_day_request();
-      ::markethub::messaging::system::NextBusinessDayRequest *mutable_next_business_day_request();
-      void set_allocated_next_business_day_request(
-          ::markethub::messaging::system::NextBusinessDayRequest *value);
-      void unsafe_arena_set_allocated_next_business_day_request(
-          ::markethub::messaging::system::NextBusinessDayRequest *value);
-      ::markethub::messaging::system::NextBusinessDayRequest *
-      unsafe_arena_release_next_business_day_request();
-
-     private:
-      const ::markethub::messaging::system::NextBusinessDayRequest &
-      _internal_next_business_day_request() const;
-      ::markethub::messaging::system::NextBusinessDayRequest *
-      _internal_mutable_next_business_day_request();
-
-     public:
-      // .markethub.messaging.system.NextBusinessDayResponse next_business_day_response = 60;
-      bool has_next_business_day_response() const;
-
-     private:
-      bool _internal_has_next_business_day_response() const;
-
-     public:
-      void clear_next_business_day_response();
-      const ::markethub::messaging::system::NextBusinessDayResponse &next_business_day_response()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::NextBusinessDayResponse *
-      release_next_business_day_response();
-      ::markethub::messaging::system::NextBusinessDayResponse *mutable_next_business_day_response();
-      void set_allocated_next_business_day_response(
-          ::markethub::messaging::system::NextBusinessDayResponse *value);
-      void unsafe_arena_set_allocated_next_business_day_response(
-          ::markethub::messaging::system::NextBusinessDayResponse *value);
-      ::markethub::messaging::system::NextBusinessDayResponse *
-      unsafe_arena_release_next_business_day_response();
-
-     private:
-      const ::markethub::messaging::system::NextBusinessDayResponse &
-      _internal_next_business_day_response() const;
-      ::markethub::messaging::system::NextBusinessDayResponse *
-      _internal_mutable_next_business_day_response();
-
-     public:
-      // .markethub.messaging.system.ReposMappingRequest repos_mapping_request = 61;
-      bool has_repos_mapping_request() const;
-
-     private:
-      bool _internal_has_repos_mapping_request() const;
-
-     public:
-      void clear_repos_mapping_request();
-      const ::markethub::messaging::system::ReposMappingRequest &repos_mapping_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::ReposMappingRequest *
-      release_repos_mapping_request();
-      ::markethub::messaging::system::ReposMappingRequest *mutable_repos_mapping_request();
-      void set_allocated_repos_mapping_request(
-          ::markethub::messaging::system::ReposMappingRequest *value);
-      void unsafe_arena_set_allocated_repos_mapping_request(
-          ::markethub::messaging::system::ReposMappingRequest *value);
-      ::markethub::messaging::system::ReposMappingRequest *
-      unsafe_arena_release_repos_mapping_request();
-
-     private:
-      const ::markethub::messaging::system::ReposMappingRequest &_internal_repos_mapping_request()
-          const;
-      ::markethub::messaging::system::ReposMappingRequest *
-      _internal_mutable_repos_mapping_request();
-
-     public:
-      // .markethub.messaging.system.ReposMappingResponse repos_mapping_response = 62;
-      bool has_repos_mapping_response() const;
-
-     private:
-      bool _internal_has_repos_mapping_response() const;
-
-     public:
-      void clear_repos_mapping_response();
-      const ::markethub::messaging::system::ReposMappingResponse &repos_mapping_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::ReposMappingResponse *
-      release_repos_mapping_response();
-      ::markethub::messaging::system::ReposMappingResponse *mutable_repos_mapping_response();
-      void set_allocated_repos_mapping_response(
-          ::markethub::messaging::system::ReposMappingResponse *value);
-      void unsafe_arena_set_allocated_repos_mapping_response(
-          ::markethub::messaging::system::ReposMappingResponse *value);
-      ::markethub::messaging::system::ReposMappingResponse *
-      unsafe_arena_release_repos_mapping_response();
-
-     private:
-      const ::markethub::messaging::system::ReposMappingResponse &_internal_repos_mapping_response()
-          const;
-      ::markethub::messaging::system::ReposMappingResponse *
-      _internal_mutable_repos_mapping_response();
-
-     public:
-      // .markethub.messaging.otc.OTCTradeReport otc_trade_report = 63;
-      bool has_otc_trade_report() const;
-
-     private:
-      bool _internal_has_otc_trade_report() const;
-
-     public:
-      void clear_otc_trade_report();
-      const ::markethub::messaging::otc::OTCTradeReport &otc_trade_report() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::otc::OTCTradeReport *release_otc_trade_report();
-      ::markethub::messaging::otc::OTCTradeReport *mutable_otc_trade_report();
-      void set_allocated_otc_trade_report(::markethub::messaging::otc::OTCTradeReport *value);
-      void unsafe_arena_set_allocated_otc_trade_report(
-          ::markethub::messaging::otc::OTCTradeReport *value);
-      ::markethub::messaging::otc::OTCTradeReport *unsafe_arena_release_otc_trade_report();
-
-     private:
-      const ::markethub::messaging::otc::OTCTradeReport &_internal_otc_trade_report() const;
-      ::markethub::messaging::otc::OTCTradeReport *_internal_mutable_otc_trade_report();
-
-     public:
-      // .markethub.messaging.otc.PositionUpdateNotification position_update_notification = 64;
-      bool has_position_update_notification() const;
-
-     private:
-      bool _internal_has_position_update_notification() const;
-
-     public:
-      void clear_position_update_notification();
-      const ::markethub::messaging::otc::PositionUpdateNotification &position_update_notification()
-          const;
-      PROTOBUF_NODISCARD ::markethub::messaging::otc::PositionUpdateNotification *
-      release_position_update_notification();
-      ::markethub::messaging::otc::PositionUpdateNotification *
-      mutable_position_update_notification();
-      void set_allocated_position_update_notification(
-          ::markethub::messaging::otc::PositionUpdateNotification *value);
-      void unsafe_arena_set_allocated_position_update_notification(
-          ::markethub::messaging::otc::PositionUpdateNotification *value);
-      ::markethub::messaging::otc::PositionUpdateNotification *
-      unsafe_arena_release_position_update_notification();
-
-     private:
-      const ::markethub::messaging::otc::PositionUpdateNotification &
-      _internal_position_update_notification() const;
-      ::markethub::messaging::otc::PositionUpdateNotification *
-      _internal_mutable_position_update_notification();
-
-     public:
-      // .markethub.messaging.otc.PositionCorrectionNotification position_correction_notification =
-      // 65;
-      bool has_position_correction_notification() const;
-
-     private:
-      bool _internal_has_position_correction_notification() const;
-
-     public:
-      void clear_position_correction_notification();
-      const ::markethub::messaging::otc::PositionCorrectionNotification &
-      position_correction_notification() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::otc::PositionCorrectionNotification *
-      release_position_correction_notification();
-      ::markethub::messaging::otc::PositionCorrectionNotification *
-      mutable_position_correction_notification();
-      void set_allocated_position_correction_notification(
-          ::markethub::messaging::otc::PositionCorrectionNotification *value);
-      void unsafe_arena_set_allocated_position_correction_notification(
-          ::markethub::messaging::otc::PositionCorrectionNotification *value);
-      ::markethub::messaging::otc::PositionCorrectionNotification *
-      unsafe_arena_release_position_correction_notification();
-
-     private:
-      const ::markethub::messaging::otc::PositionCorrectionNotification &
-      _internal_position_correction_notification() const;
-      ::markethub::messaging::otc::PositionCorrectionNotification *
-      _internal_mutable_position_correction_notification();
-
-     public:
-      // .markethub.messaging.system.StrategyChangeParamsRequest strategy_change_params_request =
-      // 66;
-      bool has_strategy_change_params_request() const;
-
-     private:
-      bool _internal_has_strategy_change_params_request() const;
-
-     public:
-      void clear_strategy_change_params_request();
-      const ::markethub::messaging::system::StrategyChangeParamsRequest &
-      strategy_change_params_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeParamsRequest *
-      release_strategy_change_params_request();
-      ::markethub::messaging::system::StrategyChangeParamsRequest *
-      mutable_strategy_change_params_request();
-      void set_allocated_strategy_change_params_request(
-          ::markethub::messaging::system::StrategyChangeParamsRequest *value);
-      void unsafe_arena_set_allocated_strategy_change_params_request(
-          ::markethub::messaging::system::StrategyChangeParamsRequest *value);
-      ::markethub::messaging::system::StrategyChangeParamsRequest *
-      unsafe_arena_release_strategy_change_params_request();
-
-     private:
-      const ::markethub::messaging::system::StrategyChangeParamsRequest &
-      _internal_strategy_change_params_request() const;
-      ::markethub::messaging::system::StrategyChangeParamsRequest *
-      _internal_mutable_strategy_change_params_request();
-
-     public:
-      // .markethub.messaging.system.StrategyChangeParamsResponse strategy_change_params_response =
-      // 67;
-      bool has_strategy_change_params_response() const;
-
-     private:
-      bool _internal_has_strategy_change_params_response() const;
-
-     public:
-      void clear_strategy_change_params_response();
-      const ::markethub::messaging::system::StrategyChangeParamsResponse &
-      strategy_change_params_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeParamsResponse *
-      release_strategy_change_params_response();
-      ::markethub::messaging::system::StrategyChangeParamsResponse *
-      mutable_strategy_change_params_response();
-      void set_allocated_strategy_change_params_response(
-          ::markethub::messaging::system::StrategyChangeParamsResponse *value);
-      void unsafe_arena_set_allocated_strategy_change_params_response(
-          ::markethub::messaging::system::StrategyChangeParamsResponse *value);
-      ::markethub::messaging::system::StrategyChangeParamsResponse *
-      unsafe_arena_release_strategy_change_params_response();
-
-     private:
-      const ::markethub::messaging::system::StrategyChangeParamsResponse &
-      _internal_strategy_change_params_response() const;
-      ::markethub::messaging::system::StrategyChangeParamsResponse *
-      _internal_mutable_strategy_change_params_response();
-
-     public:
-      // .markethub.messaging.system.StrategyChangeStatusRequest strategy_change_status_request =
-      // 68;
-      bool has_strategy_change_status_request() const;
-
-     private:
-      bool _internal_has_strategy_change_status_request() const;
-
-     public:
-      void clear_strategy_change_status_request();
-      const ::markethub::messaging::system::StrategyChangeStatusRequest &
-      strategy_change_status_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeStatusRequest *
-      release_strategy_change_status_request();
-      ::markethub::messaging::system::StrategyChangeStatusRequest *
-      mutable_strategy_change_status_request();
-      void set_allocated_strategy_change_status_request(
-          ::markethub::messaging::system::StrategyChangeStatusRequest *value);
-      void unsafe_arena_set_allocated_strategy_change_status_request(
-          ::markethub::messaging::system::StrategyChangeStatusRequest *value);
-      ::markethub::messaging::system::StrategyChangeStatusRequest *
-      unsafe_arena_release_strategy_change_status_request();
-
-     private:
-      const ::markethub::messaging::system::StrategyChangeStatusRequest &
-      _internal_strategy_change_status_request() const;
-      ::markethub::messaging::system::StrategyChangeStatusRequest *
-      _internal_mutable_strategy_change_status_request();
-
-     public:
-      // .markethub.messaging.system.StrategyChangeStatusResponse strategy_change_status_response =
-      // 69;
-      bool has_strategy_change_status_response() const;
-
-     private:
-      bool _internal_has_strategy_change_status_response() const;
-
-     public:
-      void clear_strategy_change_status_response();
-      const ::markethub::messaging::system::StrategyChangeStatusResponse &
-      strategy_change_status_response() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeStatusResponse *
-      release_strategy_change_status_response();
-      ::markethub::messaging::system::StrategyChangeStatusResponse *
-      mutable_strategy_change_status_response();
-      void set_allocated_strategy_change_status_response(
-          ::markethub::messaging::system::StrategyChangeStatusResponse *value);
-      void unsafe_arena_set_allocated_strategy_change_status_response(
-          ::markethub::messaging::system::StrategyChangeStatusResponse *value);
-      ::markethub::messaging::system::StrategyChangeStatusResponse *
-      unsafe_arena_release_strategy_change_status_response();
-
-     private:
-      const ::markethub::messaging::system::StrategyChangeStatusResponse &
-      _internal_strategy_change_status_response() const;
-      ::markethub::messaging::system::StrategyChangeStatusResponse *
-      _internal_mutable_strategy_change_status_response();
-
-     public:
-      // .markethub.messaging.risk_management.InitialPositionUpdateRequest
-      // initial_position_update_request = 70;
-      bool has_initial_position_update_request() const;
-
-     private:
-      bool _internal_has_initial_position_update_request() const;
-
-     public:
-      void clear_initial_position_update_request();
-      const ::markethub::messaging::risk_management::InitialPositionUpdateRequest &
-      initial_position_update_request() const;
-      PROTOBUF_NODISCARD ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-      release_initial_position_update_request();
-      ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-      mutable_initial_position_update_request();
-      void set_allocated_initial_position_update_request(
-          ::markethub::messaging::risk_management::InitialPositionUpdateRequest *value);
-      void unsafe_arena_set_allocated_initial_position_update_request(
-          ::markethub::messaging::risk_management::InitialPositionUpdateRequest *value);
-      ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-      unsafe_arena_release_initial_position_update_request();
-
-     private:
-      const ::markethub::messaging::risk_management::InitialPositionUpdateRequest &
-      _internal_initial_position_update_request() const;
-      ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-      _internal_mutable_initial_position_update_request();
-
-     public:
-      void clear_message();
-      MessageCase message_case() const;
-      // @@protoc_insertion_point(class_scope:markethub.messaging.WrapperMessage)
-     private:
-      class _Internal;
-      void set_has_ping();
-      void set_has_pong();
-      void set_has_security_list_request();
-      void set_has_security_list_response();
-      void set_has_security_definition_request();
-      void set_has_security_definition_response();
-      void set_has_market_data_suscription_request();
-      void set_has_market_data_suscription_response();
-      void set_has_new_order_request();
-      void set_has_cancel_order_request();
-      void set_has_replace_order_request();
-      void set_has_execution_report();
-      void set_has_order_status_request();
-      void set_has_trading_session_status_request();
-      void set_has_trading_session_status_response();
-      void set_has_mass_cancel_request();
-      void set_has_mass_cancel_response();
-      void set_has_mass_order_status_request();
-      void set_has_mass_order_status_response();
-      void set_has_trade_capture_report_request();
-      void set_has_trade_capture_report_response();
-      void set_has_market_data_update();
-      void set_has_stop();
-      void set_has_all_symbols_request();
-      void set_has_all_symbols_response();
-      void set_has_security_status_request();
-      void set_has_security_status_response();
-      void set_has_account_list_request();
-      void set_has_account_list_response();
-      void set_has_account_list_incremental();
-      void set_has_add_service_request();
-      void set_has_add_service_response();
-      void set_has_heartbeat();
-      void set_has_remove_service_request();
-      void set_has_nodes_broadcast();
-      void set_has_find_node_request();
-      void set_has_find_node_response();
-      void set_has_discover_services_request();
-      void set_has_trade_capture_report();
-      void set_has_holding_report_request();
-      void set_has_pnl_report_request();
-      void set_has_holding_report_response();
-      void set_has_pnl_report_response();
-      void set_has_filter_symbols_request();
-      void set_has_filter_symbols_response();
-      void set_has_all_instruments_request();
-      void set_has_all_instruments_response();
-      void set_has_previous_close_price_request();
-      void set_has_previous_close_price_response();
-      void set_has_holding_report();
-      void set_has_pnl_report();
-      void set_has_next_business_day_request();
-      void set_has_next_business_day_response();
-      void set_has_repos_mapping_request();
-      void set_has_repos_mapping_response();
-      void set_has_otc_trade_report();
-      void set_has_position_update_notification();
-      void set_has_position_correction_notification();
-      void set_has_strategy_change_params_request();
-      void set_has_strategy_change_params_response();
-      void set_has_strategy_change_status_request();
-      void set_has_strategy_change_status_response();
-      void set_has_initial_position_update_request();
-      inline bool has_message() const;
-      inline void clear_has_message();
-      friend class ::google::protobuf::internal::TcParser;
-      static const ::google::protobuf::internal::TcParseTable<2, 67, 63, 156, 11> _table_;
-
-      static constexpr const void *_raw_default_instance_ = &_WrapperMessage_default_instance_;
-
-      friend class ::google::protobuf::MessageLite;
-      friend class ::google::protobuf::Arena;
-      template <typename T>
-      friend class ::google::protobuf::Arena::InternalHelper;
-      using InternalArenaConstructable_ = void;
-      using DestructorSkippable_ = void;
-      struct Impl_ {
-        inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
-        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                              ::google::protobuf::Arena *arena);
-        inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
-                              ::google::protobuf::Arena *arena, const Impl_ &from,
-                              const WrapperMessage &from_msg);
-        ::google::protobuf::internal::ArenaStringPtr message_type_;
-        ::google::protobuf::internal::ArenaStringPtr message_id_;
-        ::google::protobuf::internal::ArenaStringPtr request_message_id_;
-        ::google::protobuf::internal::ArenaStringPtr client_id_;
-        union MessageUnion {
-          constexpr MessageUnion() : _constinit_{} {}
-          ::google::protobuf::internal::ConstantInitialized _constinit_;
-          ::markethub::messaging::system::Ping *ping_;
-          ::markethub::messaging::system::Pong *pong_;
-          ::markethub::messaging::trading::SecurityListRequest *security_list_request_;
-          ::markethub::messaging::trading::SecurityListResponse *security_list_response_;
-          ::markethub::messaging::trading::SecurityDefinitionRequest *security_definition_request_;
-          ::markethub::messaging::trading::SecurityDefinitionResponse
-              *security_definition_response_;
-          ::markethub::messaging::trading::MarketDataSuscriptionRequest
-              *market_data_suscription_request_;
-          ::markethub::messaging::trading::MarketDataSuscriptionResponse
-              *market_data_suscription_response_;
-          ::markethub::messaging::trading::NewOrderRequest *new_order_request_;
-          ::markethub::messaging::trading::CancelOrderRequest *cancel_order_request_;
-          ::markethub::messaging::trading::ReplaceOrderRequest *replace_order_request_;
-          ::markethub::messaging::trading::ExecutionReport *execution_report_;
-          ::markethub::messaging::trading::OrderStatusRequest *order_status_request_;
-          ::markethub::messaging::trading::TradingSessionStatusRequest
-              *trading_session_status_request_;
-          ::markethub::messaging::trading::TradingSessionStatusResponse
-              *trading_session_status_response_;
-          ::markethub::messaging::trading::MassCancelRequest *mass_cancel_request_;
-          ::markethub::messaging::trading::MassCancelResponse *mass_cancel_response_;
-          ::markethub::messaging::trading::MassOrderStatusRequest *mass_order_status_request_;
-          ::markethub::messaging::trading::MassOrderStatusResponse *mass_order_status_response_;
-          ::markethub::messaging::trading::TradeCaptureReportRequest *trade_capture_report_request_;
-          ::markethub::messaging::trading::TradeCaptureReportResponse
-              *trade_capture_report_response_;
-          ::markethub::messaging::trading::Book *market_data_update_;
-          ::markethub::messaging::system::Stop *stop_;
-          ::markethub::messaging::system::AllSymbolsRequest *all_symbols_request_;
-          ::markethub::messaging::system::AllSymbolsResponse *all_symbols_response_;
-          ::markethub::messaging::trading::SecurityStatusRequest *security_status_request_;
-          ::markethub::messaging::trading::SecurityStatusResponse *security_status_response_;
-          ::markethub::messaging::rofex::AccountListRequest *account_list_request_;
-          ::markethub::messaging::rofex::AccountListResponse *account_list_response_;
-          ::markethub::messaging::rofex::AccountListIncremental *account_list_incremental_;
-          ::markethub::messaging::system::AddServiceRequest *add_service_request_;
-          ::markethub::messaging::system::AddServiceResponse *add_service_response_;
-          ::markethub::messaging::system::Heartbeat *heartbeat_;
-          ::markethub::messaging::system::RemoveServiceRequest *remove_service_request_;
-          ::markethub::messaging::system::NodesBroadcast *nodes_broadcast_;
-          ::markethub::messaging::system::FindNodeRequest *find_node_request_;
-          ::markethub::messaging::system::FindNodeResponse *find_node_response_;
-          ::markethub::messaging::system::DiscoverServicesRequest *discover_services_request_;
-          ::markethub::messaging::trading::TradeCaptureReport *trade_capture_report_;
-          ::markethub::messaging::risk_management::HoldingReportRequest *holding_report_request_;
-          ::markethub::messaging::risk_management::PNLReportRequest *pnl_report_request_;
-          ::markethub::messaging::risk_management::HoldingReportResponse *holding_report_response_;
-          ::markethub::messaging::risk_management::PNLReportResponse *pnl_report_response_;
-          ::markethub::messaging::system::FilterSymbolsRequest *filter_symbols_request_;
-          ::markethub::messaging::system::FilterSymbolsResponse *filter_symbols_response_;
-          ::markethub::messaging::system::AllInstrumentsRequest *all_instruments_request_;
-          ::markethub::messaging::system::AllInstrumentsResponse *all_instruments_response_;
-          ::markethub::messaging::system::PreviousClosePriceRequest *previous_close_price_request_;
-          ::markethub::messaging::system::PreviousClosePriceResponse
-              *previous_close_price_response_;
-          ::markethub::messaging::risk_management::HoldingReport *holding_report_;
-          ::markethub::messaging::risk_management::PNLReport *pnl_report_;
-          ::markethub::messaging::system::NextBusinessDayRequest *next_business_day_request_;
-          ::markethub::messaging::system::NextBusinessDayResponse *next_business_day_response_;
-          ::markethub::messaging::system::ReposMappingRequest *repos_mapping_request_;
-          ::markethub::messaging::system::ReposMappingResponse *repos_mapping_response_;
-          ::markethub::messaging::otc::OTCTradeReport *otc_trade_report_;
-          ::markethub::messaging::otc::PositionUpdateNotification *position_update_notification_;
-          ::markethub::messaging::otc::PositionCorrectionNotification
-              *position_correction_notification_;
-          ::markethub::messaging::system::StrategyChangeParamsRequest
-              *strategy_change_params_request_;
-          ::markethub::messaging::system::StrategyChangeParamsResponse
-              *strategy_change_params_response_;
-          ::markethub::messaging::system::StrategyChangeStatusRequest
-              *strategy_change_status_request_;
-          ::markethub::messaging::system::StrategyChangeStatusResponse
-              *strategy_change_status_response_;
-          ::markethub::messaging::risk_management::InitialPositionUpdateRequest
-              *initial_position_update_request_;
-        } message_;
-        mutable ::google::protobuf::internal::CachedSize _cached_size_;
-        ::uint32_t _oneof_case_[1];
-        PROTOBUF_TSAN_DECLARE_MEMBER
-      };
-      union {
-        Impl_ _impl_;
-      };
-      friend struct ::TableStruct_messages_2eproto;
-    };
-
-    // ===================================================================
-
-    // ===================================================================
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(WrapperMessage* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  WrapperMessage* New(::google::protobuf::Arena* arena = nullptr) const PROTOBUF_FINAL {
+    return ::google::protobuf::Message::DefaultConstruct<WrapperMessage>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const WrapperMessage& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const WrapperMessage& from) { WrapperMessage::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* _InternalSerialize(
+      const MessageLite& msg, ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(WrapperMessage* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "markethub.messaging.WrapperMessage"; }
+
+ protected:
+  explicit WrapperMessage(::google::protobuf::Arena* arena);
+  WrapperMessage(::google::protobuf::Arena* arena, const WrapperMessage& from);
+  WrapperMessage(::google::protobuf::Arena* arena, WrapperMessage&& from) noexcept
+      : WrapperMessage(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const PROTOBUF_FINAL;
+  static const ::google::protobuf::Message::ClassDataFull _class_data_;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kMessageTypeFieldNumber = 1,
+    kMessageIdFieldNumber = 2,
+    kRequestMessageIdFieldNumber = 3,
+    kClientIdFieldNumber = 4,
+    kPingFieldNumber = 5,
+    kPongFieldNumber = 6,
+    kSecurityListRequestFieldNumber = 7,
+    kSecurityListResponseFieldNumber = 8,
+    kSecurityDefinitionRequestFieldNumber = 9,
+    kSecurityDefinitionResponseFieldNumber = 10,
+    kMarketDataSuscriptionRequestFieldNumber = 11,
+    kMarketDataSuscriptionResponseFieldNumber = 12,
+    kNewOrderRequestFieldNumber = 13,
+    kCancelOrderRequestFieldNumber = 14,
+    kReplaceOrderRequestFieldNumber = 15,
+    kExecutionReportFieldNumber = 16,
+    kOrderStatusRequestFieldNumber = 17,
+    kTradingSessionStatusRequestFieldNumber = 18,
+    kTradingSessionStatusResponseFieldNumber = 19,
+    kMassCancelRequestFieldNumber = 20,
+    kMassCancelResponseFieldNumber = 21,
+    kMassOrderStatusRequestFieldNumber = 22,
+    kMassOrderStatusResponseFieldNumber = 23,
+    kTradeCaptureReportRequestFieldNumber = 24,
+    kTradeCaptureReportResponseFieldNumber = 25,
+    kMarketDataUpdateFieldNumber = 26,
+    kStopFieldNumber = 27,
+    kAllSymbolsRequestFieldNumber = 28,
+    kAllSymbolsResponseFieldNumber = 29,
+    kSecurityStatusRequestFieldNumber = 31,
+    kSecurityStatusResponseFieldNumber = 32,
+    kAccountListRequestFieldNumber = 33,
+    kAccountListResponseFieldNumber = 34,
+    kAccountListIncrementalFieldNumber = 35,
+    kAddServiceRequestFieldNumber = 36,
+    kAddServiceResponseFieldNumber = 37,
+    kHeartbeatFieldNumber = 38,
+    kRemoveServiceRequestFieldNumber = 39,
+    kNodesBroadcastFieldNumber = 40,
+    kFindNodeRequestFieldNumber = 41,
+    kFindNodeResponseFieldNumber = 42,
+    kDiscoverServicesRequestFieldNumber = 43,
+    kTradeCaptureReportFieldNumber = 44,
+    kHoldingReportRequestFieldNumber = 46,
+    kPnlReportRequestFieldNumber = 47,
+    kHoldingReportResponseFieldNumber = 49,
+    kPnlReportResponseFieldNumber = 50,
+    kFilterSymbolsRequestFieldNumber = 51,
+    kFilterSymbolsResponseFieldNumber = 52,
+    kAllInstrumentsRequestFieldNumber = 53,
+    kAllInstrumentsResponseFieldNumber = 54,
+    kPreviousClosePriceRequestFieldNumber = 55,
+    kPreviousClosePriceResponseFieldNumber = 56,
+    kHoldingReportFieldNumber = 57,
+    kPnlReportFieldNumber = 58,
+    kNextBusinessDayRequestFieldNumber = 59,
+    kNextBusinessDayResponseFieldNumber = 60,
+    kReposMappingRequestFieldNumber = 61,
+    kReposMappingResponseFieldNumber = 62,
+    kOtcTradeReportFieldNumber = 63,
+    kPositionUpdateNotificationFieldNumber = 64,
+    kPositionCorrectionNotificationFieldNumber = 65,
+    kStrategyChangeParamsRequestFieldNumber = 66,
+    kStrategyChangeParamsResponseFieldNumber = 67,
+    kStrategyChangeStatusRequestFieldNumber = 68,
+    kStrategyChangeStatusResponseFieldNumber = 69,
+    kInitialPositionUpdateRequestFieldNumber = 70,
+  };
+  // string message_type = 1;
+  void clear_message_type() ;
+  const std::string& message_type() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_message_type(Arg_&& arg, Args_... args);
+  std::string* mutable_message_type();
+  PROTOBUF_NODISCARD std::string* release_message_type();
+  void set_allocated_message_type(std::string* value);
+
+  private:
+  const std::string& _internal_message_type() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message_type(
+      const std::string& value);
+  std::string* _internal_mutable_message_type();
+
+  public:
+  // string message_id = 2;
+  void clear_message_id() ;
+  const std::string& message_id() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_message_id(Arg_&& arg, Args_... args);
+  std::string* mutable_message_id();
+  PROTOBUF_NODISCARD std::string* release_message_id();
+  void set_allocated_message_id(std::string* value);
+
+  private:
+  const std::string& _internal_message_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message_id(
+      const std::string& value);
+  std::string* _internal_mutable_message_id();
+
+  public:
+  // string request_message_id = 3;
+  void clear_request_message_id() ;
+  const std::string& request_message_id() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_request_message_id(Arg_&& arg, Args_... args);
+  std::string* mutable_request_message_id();
+  PROTOBUF_NODISCARD std::string* release_request_message_id();
+  void set_allocated_request_message_id(std::string* value);
+
+  private:
+  const std::string& _internal_request_message_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_request_message_id(
+      const std::string& value);
+  std::string* _internal_mutable_request_message_id();
+
+  public:
+  // string client_id = 4;
+  void clear_client_id() ;
+  const std::string& client_id() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_client_id(Arg_&& arg, Args_... args);
+  std::string* mutable_client_id();
+  PROTOBUF_NODISCARD std::string* release_client_id();
+  void set_allocated_client_id(std::string* value);
+
+  private:
+  const std::string& _internal_client_id() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_client_id(
+      const std::string& value);
+  std::string* _internal_mutable_client_id();
+
+  public:
+  // .markethub.messaging.system.Ping ping = 5;
+  bool has_ping() const;
+  private:
+  bool _internal_has_ping() const;
+
+  public:
+  void clear_ping() ;
+  const ::markethub::messaging::system::Ping& ping() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::Ping* release_ping();
+  ::markethub::messaging::system::Ping* mutable_ping();
+  void set_allocated_ping(::markethub::messaging::system::Ping* value);
+  void unsafe_arena_set_allocated_ping(::markethub::messaging::system::Ping* value);
+  ::markethub::messaging::system::Ping* unsafe_arena_release_ping();
+
+  private:
+  const ::markethub::messaging::system::Ping& _internal_ping() const;
+  ::markethub::messaging::system::Ping* _internal_mutable_ping();
+
+  public:
+  // .markethub.messaging.system.Pong pong = 6;
+  bool has_pong() const;
+  private:
+  bool _internal_has_pong() const;
+
+  public:
+  void clear_pong() ;
+  const ::markethub::messaging::system::Pong& pong() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::Pong* release_pong();
+  ::markethub::messaging::system::Pong* mutable_pong();
+  void set_allocated_pong(::markethub::messaging::system::Pong* value);
+  void unsafe_arena_set_allocated_pong(::markethub::messaging::system::Pong* value);
+  ::markethub::messaging::system::Pong* unsafe_arena_release_pong();
+
+  private:
+  const ::markethub::messaging::system::Pong& _internal_pong() const;
+  ::markethub::messaging::system::Pong* _internal_mutable_pong();
+
+  public:
+  // .markethub.messaging.trading.SecurityListRequest security_list_request = 7;
+  bool has_security_list_request() const;
+  private:
+  bool _internal_has_security_list_request() const;
+
+  public:
+  void clear_security_list_request() ;
+  const ::markethub::messaging::trading::SecurityListRequest& security_list_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityListRequest* release_security_list_request();
+  ::markethub::messaging::trading::SecurityListRequest* mutable_security_list_request();
+  void set_allocated_security_list_request(::markethub::messaging::trading::SecurityListRequest* value);
+  void unsafe_arena_set_allocated_security_list_request(::markethub::messaging::trading::SecurityListRequest* value);
+  ::markethub::messaging::trading::SecurityListRequest* unsafe_arena_release_security_list_request();
+
+  private:
+  const ::markethub::messaging::trading::SecurityListRequest& _internal_security_list_request() const;
+  ::markethub::messaging::trading::SecurityListRequest* _internal_mutable_security_list_request();
+
+  public:
+  // .markethub.messaging.trading.SecurityListResponse security_list_response = 8;
+  bool has_security_list_response() const;
+  private:
+  bool _internal_has_security_list_response() const;
+
+  public:
+  void clear_security_list_response() ;
+  const ::markethub::messaging::trading::SecurityListResponse& security_list_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityListResponse* release_security_list_response();
+  ::markethub::messaging::trading::SecurityListResponse* mutable_security_list_response();
+  void set_allocated_security_list_response(::markethub::messaging::trading::SecurityListResponse* value);
+  void unsafe_arena_set_allocated_security_list_response(::markethub::messaging::trading::SecurityListResponse* value);
+  ::markethub::messaging::trading::SecurityListResponse* unsafe_arena_release_security_list_response();
+
+  private:
+  const ::markethub::messaging::trading::SecurityListResponse& _internal_security_list_response() const;
+  ::markethub::messaging::trading::SecurityListResponse* _internal_mutable_security_list_response();
+
+  public:
+  // .markethub.messaging.trading.SecurityDefinitionRequest security_definition_request = 9;
+  bool has_security_definition_request() const;
+  private:
+  bool _internal_has_security_definition_request() const;
+
+  public:
+  void clear_security_definition_request() ;
+  const ::markethub::messaging::trading::SecurityDefinitionRequest& security_definition_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityDefinitionRequest* release_security_definition_request();
+  ::markethub::messaging::trading::SecurityDefinitionRequest* mutable_security_definition_request();
+  void set_allocated_security_definition_request(::markethub::messaging::trading::SecurityDefinitionRequest* value);
+  void unsafe_arena_set_allocated_security_definition_request(::markethub::messaging::trading::SecurityDefinitionRequest* value);
+  ::markethub::messaging::trading::SecurityDefinitionRequest* unsafe_arena_release_security_definition_request();
+
+  private:
+  const ::markethub::messaging::trading::SecurityDefinitionRequest& _internal_security_definition_request() const;
+  ::markethub::messaging::trading::SecurityDefinitionRequest* _internal_mutable_security_definition_request();
+
+  public:
+  // .markethub.messaging.trading.SecurityDefinitionResponse security_definition_response = 10;
+  bool has_security_definition_response() const;
+  private:
+  bool _internal_has_security_definition_response() const;
+
+  public:
+  void clear_security_definition_response() ;
+  const ::markethub::messaging::trading::SecurityDefinitionResponse& security_definition_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityDefinitionResponse* release_security_definition_response();
+  ::markethub::messaging::trading::SecurityDefinitionResponse* mutable_security_definition_response();
+  void set_allocated_security_definition_response(::markethub::messaging::trading::SecurityDefinitionResponse* value);
+  void unsafe_arena_set_allocated_security_definition_response(::markethub::messaging::trading::SecurityDefinitionResponse* value);
+  ::markethub::messaging::trading::SecurityDefinitionResponse* unsafe_arena_release_security_definition_response();
+
+  private:
+  const ::markethub::messaging::trading::SecurityDefinitionResponse& _internal_security_definition_response() const;
+  ::markethub::messaging::trading::SecurityDefinitionResponse* _internal_mutable_security_definition_response();
+
+  public:
+  // .markethub.messaging.trading.MarketDataSuscriptionRequest market_data_suscription_request = 11;
+  bool has_market_data_suscription_request() const;
+  private:
+  bool _internal_has_market_data_suscription_request() const;
+
+  public:
+  void clear_market_data_suscription_request() ;
+  const ::markethub::messaging::trading::MarketDataSuscriptionRequest& market_data_suscription_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::MarketDataSuscriptionRequest* release_market_data_suscription_request();
+  ::markethub::messaging::trading::MarketDataSuscriptionRequest* mutable_market_data_suscription_request();
+  void set_allocated_market_data_suscription_request(::markethub::messaging::trading::MarketDataSuscriptionRequest* value);
+  void unsafe_arena_set_allocated_market_data_suscription_request(::markethub::messaging::trading::MarketDataSuscriptionRequest* value);
+  ::markethub::messaging::trading::MarketDataSuscriptionRequest* unsafe_arena_release_market_data_suscription_request();
+
+  private:
+  const ::markethub::messaging::trading::MarketDataSuscriptionRequest& _internal_market_data_suscription_request() const;
+  ::markethub::messaging::trading::MarketDataSuscriptionRequest* _internal_mutable_market_data_suscription_request();
+
+  public:
+  // .markethub.messaging.trading.MarketDataSuscriptionResponse market_data_suscription_response = 12;
+  bool has_market_data_suscription_response() const;
+  private:
+  bool _internal_has_market_data_suscription_response() const;
+
+  public:
+  void clear_market_data_suscription_response() ;
+  const ::markethub::messaging::trading::MarketDataSuscriptionResponse& market_data_suscription_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::MarketDataSuscriptionResponse* release_market_data_suscription_response();
+  ::markethub::messaging::trading::MarketDataSuscriptionResponse* mutable_market_data_suscription_response();
+  void set_allocated_market_data_suscription_response(::markethub::messaging::trading::MarketDataSuscriptionResponse* value);
+  void unsafe_arena_set_allocated_market_data_suscription_response(::markethub::messaging::trading::MarketDataSuscriptionResponse* value);
+  ::markethub::messaging::trading::MarketDataSuscriptionResponse* unsafe_arena_release_market_data_suscription_response();
+
+  private:
+  const ::markethub::messaging::trading::MarketDataSuscriptionResponse& _internal_market_data_suscription_response() const;
+  ::markethub::messaging::trading::MarketDataSuscriptionResponse* _internal_mutable_market_data_suscription_response();
+
+  public:
+  // .markethub.messaging.trading.NewOrderRequest new_order_request = 13;
+  bool has_new_order_request() const;
+  private:
+  bool _internal_has_new_order_request() const;
+
+  public:
+  void clear_new_order_request() ;
+  const ::markethub::messaging::trading::NewOrderRequest& new_order_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::NewOrderRequest* release_new_order_request();
+  ::markethub::messaging::trading::NewOrderRequest* mutable_new_order_request();
+  void set_allocated_new_order_request(::markethub::messaging::trading::NewOrderRequest* value);
+  void unsafe_arena_set_allocated_new_order_request(::markethub::messaging::trading::NewOrderRequest* value);
+  ::markethub::messaging::trading::NewOrderRequest* unsafe_arena_release_new_order_request();
+
+  private:
+  const ::markethub::messaging::trading::NewOrderRequest& _internal_new_order_request() const;
+  ::markethub::messaging::trading::NewOrderRequest* _internal_mutable_new_order_request();
+
+  public:
+  // .markethub.messaging.trading.CancelOrderRequest cancel_order_request = 14;
+  bool has_cancel_order_request() const;
+  private:
+  bool _internal_has_cancel_order_request() const;
+
+  public:
+  void clear_cancel_order_request() ;
+  const ::markethub::messaging::trading::CancelOrderRequest& cancel_order_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::CancelOrderRequest* release_cancel_order_request();
+  ::markethub::messaging::trading::CancelOrderRequest* mutable_cancel_order_request();
+  void set_allocated_cancel_order_request(::markethub::messaging::trading::CancelOrderRequest* value);
+  void unsafe_arena_set_allocated_cancel_order_request(::markethub::messaging::trading::CancelOrderRequest* value);
+  ::markethub::messaging::trading::CancelOrderRequest* unsafe_arena_release_cancel_order_request();
+
+  private:
+  const ::markethub::messaging::trading::CancelOrderRequest& _internal_cancel_order_request() const;
+  ::markethub::messaging::trading::CancelOrderRequest* _internal_mutable_cancel_order_request();
+
+  public:
+  // .markethub.messaging.trading.ReplaceOrderRequest replace_order_request = 15;
+  bool has_replace_order_request() const;
+  private:
+  bool _internal_has_replace_order_request() const;
+
+  public:
+  void clear_replace_order_request() ;
+  const ::markethub::messaging::trading::ReplaceOrderRequest& replace_order_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::ReplaceOrderRequest* release_replace_order_request();
+  ::markethub::messaging::trading::ReplaceOrderRequest* mutable_replace_order_request();
+  void set_allocated_replace_order_request(::markethub::messaging::trading::ReplaceOrderRequest* value);
+  void unsafe_arena_set_allocated_replace_order_request(::markethub::messaging::trading::ReplaceOrderRequest* value);
+  ::markethub::messaging::trading::ReplaceOrderRequest* unsafe_arena_release_replace_order_request();
+
+  private:
+  const ::markethub::messaging::trading::ReplaceOrderRequest& _internal_replace_order_request() const;
+  ::markethub::messaging::trading::ReplaceOrderRequest* _internal_mutable_replace_order_request();
+
+  public:
+  // .markethub.messaging.trading.ExecutionReport execution_report = 16;
+  bool has_execution_report() const;
+  private:
+  bool _internal_has_execution_report() const;
+
+  public:
+  void clear_execution_report() ;
+  const ::markethub::messaging::trading::ExecutionReport& execution_report() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::ExecutionReport* release_execution_report();
+  ::markethub::messaging::trading::ExecutionReport* mutable_execution_report();
+  void set_allocated_execution_report(::markethub::messaging::trading::ExecutionReport* value);
+  void unsafe_arena_set_allocated_execution_report(::markethub::messaging::trading::ExecutionReport* value);
+  ::markethub::messaging::trading::ExecutionReport* unsafe_arena_release_execution_report();
+
+  private:
+  const ::markethub::messaging::trading::ExecutionReport& _internal_execution_report() const;
+  ::markethub::messaging::trading::ExecutionReport* _internal_mutable_execution_report();
+
+  public:
+  // .markethub.messaging.trading.OrderStatusRequest order_status_request = 17;
+  bool has_order_status_request() const;
+  private:
+  bool _internal_has_order_status_request() const;
+
+  public:
+  void clear_order_status_request() ;
+  const ::markethub::messaging::trading::OrderStatusRequest& order_status_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::OrderStatusRequest* release_order_status_request();
+  ::markethub::messaging::trading::OrderStatusRequest* mutable_order_status_request();
+  void set_allocated_order_status_request(::markethub::messaging::trading::OrderStatusRequest* value);
+  void unsafe_arena_set_allocated_order_status_request(::markethub::messaging::trading::OrderStatusRequest* value);
+  ::markethub::messaging::trading::OrderStatusRequest* unsafe_arena_release_order_status_request();
+
+  private:
+  const ::markethub::messaging::trading::OrderStatusRequest& _internal_order_status_request() const;
+  ::markethub::messaging::trading::OrderStatusRequest* _internal_mutable_order_status_request();
+
+  public:
+  // .markethub.messaging.trading.TradingSessionStatusRequest trading_session_status_request = 18;
+  bool has_trading_session_status_request() const;
+  private:
+  bool _internal_has_trading_session_status_request() const;
+
+  public:
+  void clear_trading_session_status_request() ;
+  const ::markethub::messaging::trading::TradingSessionStatusRequest& trading_session_status_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::TradingSessionStatusRequest* release_trading_session_status_request();
+  ::markethub::messaging::trading::TradingSessionStatusRequest* mutable_trading_session_status_request();
+  void set_allocated_trading_session_status_request(::markethub::messaging::trading::TradingSessionStatusRequest* value);
+  void unsafe_arena_set_allocated_trading_session_status_request(::markethub::messaging::trading::TradingSessionStatusRequest* value);
+  ::markethub::messaging::trading::TradingSessionStatusRequest* unsafe_arena_release_trading_session_status_request();
+
+  private:
+  const ::markethub::messaging::trading::TradingSessionStatusRequest& _internal_trading_session_status_request() const;
+  ::markethub::messaging::trading::TradingSessionStatusRequest* _internal_mutable_trading_session_status_request();
+
+  public:
+  // .markethub.messaging.trading.TradingSessionStatusResponse trading_session_status_response = 19;
+  bool has_trading_session_status_response() const;
+  private:
+  bool _internal_has_trading_session_status_response() const;
+
+  public:
+  void clear_trading_session_status_response() ;
+  const ::markethub::messaging::trading::TradingSessionStatusResponse& trading_session_status_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::TradingSessionStatusResponse* release_trading_session_status_response();
+  ::markethub::messaging::trading::TradingSessionStatusResponse* mutable_trading_session_status_response();
+  void set_allocated_trading_session_status_response(::markethub::messaging::trading::TradingSessionStatusResponse* value);
+  void unsafe_arena_set_allocated_trading_session_status_response(::markethub::messaging::trading::TradingSessionStatusResponse* value);
+  ::markethub::messaging::trading::TradingSessionStatusResponse* unsafe_arena_release_trading_session_status_response();
+
+  private:
+  const ::markethub::messaging::trading::TradingSessionStatusResponse& _internal_trading_session_status_response() const;
+  ::markethub::messaging::trading::TradingSessionStatusResponse* _internal_mutable_trading_session_status_response();
+
+  public:
+  // .markethub.messaging.trading.MassCancelRequest mass_cancel_request = 20;
+  bool has_mass_cancel_request() const;
+  private:
+  bool _internal_has_mass_cancel_request() const;
+
+  public:
+  void clear_mass_cancel_request() ;
+  const ::markethub::messaging::trading::MassCancelRequest& mass_cancel_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::MassCancelRequest* release_mass_cancel_request();
+  ::markethub::messaging::trading::MassCancelRequest* mutable_mass_cancel_request();
+  void set_allocated_mass_cancel_request(::markethub::messaging::trading::MassCancelRequest* value);
+  void unsafe_arena_set_allocated_mass_cancel_request(::markethub::messaging::trading::MassCancelRequest* value);
+  ::markethub::messaging::trading::MassCancelRequest* unsafe_arena_release_mass_cancel_request();
+
+  private:
+  const ::markethub::messaging::trading::MassCancelRequest& _internal_mass_cancel_request() const;
+  ::markethub::messaging::trading::MassCancelRequest* _internal_mutable_mass_cancel_request();
+
+  public:
+  // .markethub.messaging.trading.MassCancelResponse mass_cancel_response = 21;
+  bool has_mass_cancel_response() const;
+  private:
+  bool _internal_has_mass_cancel_response() const;
+
+  public:
+  void clear_mass_cancel_response() ;
+  const ::markethub::messaging::trading::MassCancelResponse& mass_cancel_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::MassCancelResponse* release_mass_cancel_response();
+  ::markethub::messaging::trading::MassCancelResponse* mutable_mass_cancel_response();
+  void set_allocated_mass_cancel_response(::markethub::messaging::trading::MassCancelResponse* value);
+  void unsafe_arena_set_allocated_mass_cancel_response(::markethub::messaging::trading::MassCancelResponse* value);
+  ::markethub::messaging::trading::MassCancelResponse* unsafe_arena_release_mass_cancel_response();
+
+  private:
+  const ::markethub::messaging::trading::MassCancelResponse& _internal_mass_cancel_response() const;
+  ::markethub::messaging::trading::MassCancelResponse* _internal_mutable_mass_cancel_response();
+
+  public:
+  // .markethub.messaging.trading.MassOrderStatusRequest mass_order_status_request = 22;
+  bool has_mass_order_status_request() const;
+  private:
+  bool _internal_has_mass_order_status_request() const;
+
+  public:
+  void clear_mass_order_status_request() ;
+  const ::markethub::messaging::trading::MassOrderStatusRequest& mass_order_status_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::MassOrderStatusRequest* release_mass_order_status_request();
+  ::markethub::messaging::trading::MassOrderStatusRequest* mutable_mass_order_status_request();
+  void set_allocated_mass_order_status_request(::markethub::messaging::trading::MassOrderStatusRequest* value);
+  void unsafe_arena_set_allocated_mass_order_status_request(::markethub::messaging::trading::MassOrderStatusRequest* value);
+  ::markethub::messaging::trading::MassOrderStatusRequest* unsafe_arena_release_mass_order_status_request();
+
+  private:
+  const ::markethub::messaging::trading::MassOrderStatusRequest& _internal_mass_order_status_request() const;
+  ::markethub::messaging::trading::MassOrderStatusRequest* _internal_mutable_mass_order_status_request();
+
+  public:
+  // .markethub.messaging.trading.MassOrderStatusResponse mass_order_status_response = 23;
+  bool has_mass_order_status_response() const;
+  private:
+  bool _internal_has_mass_order_status_response() const;
+
+  public:
+  void clear_mass_order_status_response() ;
+  const ::markethub::messaging::trading::MassOrderStatusResponse& mass_order_status_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::MassOrderStatusResponse* release_mass_order_status_response();
+  ::markethub::messaging::trading::MassOrderStatusResponse* mutable_mass_order_status_response();
+  void set_allocated_mass_order_status_response(::markethub::messaging::trading::MassOrderStatusResponse* value);
+  void unsafe_arena_set_allocated_mass_order_status_response(::markethub::messaging::trading::MassOrderStatusResponse* value);
+  ::markethub::messaging::trading::MassOrderStatusResponse* unsafe_arena_release_mass_order_status_response();
+
+  private:
+  const ::markethub::messaging::trading::MassOrderStatusResponse& _internal_mass_order_status_response() const;
+  ::markethub::messaging::trading::MassOrderStatusResponse* _internal_mutable_mass_order_status_response();
+
+  public:
+  // .markethub.messaging.trading.TradeCaptureReportRequest trade_capture_report_request = 24;
+  bool has_trade_capture_report_request() const;
+  private:
+  bool _internal_has_trade_capture_report_request() const;
+
+  public:
+  void clear_trade_capture_report_request() ;
+  const ::markethub::messaging::trading::TradeCaptureReportRequest& trade_capture_report_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::TradeCaptureReportRequest* release_trade_capture_report_request();
+  ::markethub::messaging::trading::TradeCaptureReportRequest* mutable_trade_capture_report_request();
+  void set_allocated_trade_capture_report_request(::markethub::messaging::trading::TradeCaptureReportRequest* value);
+  void unsafe_arena_set_allocated_trade_capture_report_request(::markethub::messaging::trading::TradeCaptureReportRequest* value);
+  ::markethub::messaging::trading::TradeCaptureReportRequest* unsafe_arena_release_trade_capture_report_request();
+
+  private:
+  const ::markethub::messaging::trading::TradeCaptureReportRequest& _internal_trade_capture_report_request() const;
+  ::markethub::messaging::trading::TradeCaptureReportRequest* _internal_mutable_trade_capture_report_request();
+
+  public:
+  // .markethub.messaging.trading.TradeCaptureReportResponse trade_capture_report_response = 25;
+  bool has_trade_capture_report_response() const;
+  private:
+  bool _internal_has_trade_capture_report_response() const;
+
+  public:
+  void clear_trade_capture_report_response() ;
+  const ::markethub::messaging::trading::TradeCaptureReportResponse& trade_capture_report_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::TradeCaptureReportResponse* release_trade_capture_report_response();
+  ::markethub::messaging::trading::TradeCaptureReportResponse* mutable_trade_capture_report_response();
+  void set_allocated_trade_capture_report_response(::markethub::messaging::trading::TradeCaptureReportResponse* value);
+  void unsafe_arena_set_allocated_trade_capture_report_response(::markethub::messaging::trading::TradeCaptureReportResponse* value);
+  ::markethub::messaging::trading::TradeCaptureReportResponse* unsafe_arena_release_trade_capture_report_response();
+
+  private:
+  const ::markethub::messaging::trading::TradeCaptureReportResponse& _internal_trade_capture_report_response() const;
+  ::markethub::messaging::trading::TradeCaptureReportResponse* _internal_mutable_trade_capture_report_response();
+
+  public:
+  // .markethub.messaging.trading.Book market_data_update = 26;
+  bool has_market_data_update() const;
+  private:
+  bool _internal_has_market_data_update() const;
+
+  public:
+  void clear_market_data_update() ;
+  const ::markethub::messaging::trading::Book& market_data_update() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::Book* release_market_data_update();
+  ::markethub::messaging::trading::Book* mutable_market_data_update();
+  void set_allocated_market_data_update(::markethub::messaging::trading::Book* value);
+  void unsafe_arena_set_allocated_market_data_update(::markethub::messaging::trading::Book* value);
+  ::markethub::messaging::trading::Book* unsafe_arena_release_market_data_update();
+
+  private:
+  const ::markethub::messaging::trading::Book& _internal_market_data_update() const;
+  ::markethub::messaging::trading::Book* _internal_mutable_market_data_update();
+
+  public:
+  // .markethub.messaging.system.Stop stop = 27;
+  bool has_stop() const;
+  private:
+  bool _internal_has_stop() const;
+
+  public:
+  void clear_stop() ;
+  const ::markethub::messaging::system::Stop& stop() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::Stop* release_stop();
+  ::markethub::messaging::system::Stop* mutable_stop();
+  void set_allocated_stop(::markethub::messaging::system::Stop* value);
+  void unsafe_arena_set_allocated_stop(::markethub::messaging::system::Stop* value);
+  ::markethub::messaging::system::Stop* unsafe_arena_release_stop();
+
+  private:
+  const ::markethub::messaging::system::Stop& _internal_stop() const;
+  ::markethub::messaging::system::Stop* _internal_mutable_stop();
+
+  public:
+  // .markethub.messaging.system.AllSymbolsRequest all_symbols_request = 28;
+  bool has_all_symbols_request() const;
+  private:
+  bool _internal_has_all_symbols_request() const;
+
+  public:
+  void clear_all_symbols_request() ;
+  const ::markethub::messaging::system::AllSymbolsRequest& all_symbols_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::AllSymbolsRequest* release_all_symbols_request();
+  ::markethub::messaging::system::AllSymbolsRequest* mutable_all_symbols_request();
+  void set_allocated_all_symbols_request(::markethub::messaging::system::AllSymbolsRequest* value);
+  void unsafe_arena_set_allocated_all_symbols_request(::markethub::messaging::system::AllSymbolsRequest* value);
+  ::markethub::messaging::system::AllSymbolsRequest* unsafe_arena_release_all_symbols_request();
+
+  private:
+  const ::markethub::messaging::system::AllSymbolsRequest& _internal_all_symbols_request() const;
+  ::markethub::messaging::system::AllSymbolsRequest* _internal_mutable_all_symbols_request();
+
+  public:
+  // .markethub.messaging.system.AllSymbolsResponse all_symbols_response = 29;
+  bool has_all_symbols_response() const;
+  private:
+  bool _internal_has_all_symbols_response() const;
+
+  public:
+  void clear_all_symbols_response() ;
+  const ::markethub::messaging::system::AllSymbolsResponse& all_symbols_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::AllSymbolsResponse* release_all_symbols_response();
+  ::markethub::messaging::system::AllSymbolsResponse* mutable_all_symbols_response();
+  void set_allocated_all_symbols_response(::markethub::messaging::system::AllSymbolsResponse* value);
+  void unsafe_arena_set_allocated_all_symbols_response(::markethub::messaging::system::AllSymbolsResponse* value);
+  ::markethub::messaging::system::AllSymbolsResponse* unsafe_arena_release_all_symbols_response();
+
+  private:
+  const ::markethub::messaging::system::AllSymbolsResponse& _internal_all_symbols_response() const;
+  ::markethub::messaging::system::AllSymbolsResponse* _internal_mutable_all_symbols_response();
+
+  public:
+  // .markethub.messaging.trading.SecurityStatusRequest security_status_request = 31;
+  bool has_security_status_request() const;
+  private:
+  bool _internal_has_security_status_request() const;
+
+  public:
+  void clear_security_status_request() ;
+  const ::markethub::messaging::trading::SecurityStatusRequest& security_status_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityStatusRequest* release_security_status_request();
+  ::markethub::messaging::trading::SecurityStatusRequest* mutable_security_status_request();
+  void set_allocated_security_status_request(::markethub::messaging::trading::SecurityStatusRequest* value);
+  void unsafe_arena_set_allocated_security_status_request(::markethub::messaging::trading::SecurityStatusRequest* value);
+  ::markethub::messaging::trading::SecurityStatusRequest* unsafe_arena_release_security_status_request();
+
+  private:
+  const ::markethub::messaging::trading::SecurityStatusRequest& _internal_security_status_request() const;
+  ::markethub::messaging::trading::SecurityStatusRequest* _internal_mutable_security_status_request();
+
+  public:
+  // .markethub.messaging.trading.SecurityStatusResponse security_status_response = 32;
+  bool has_security_status_response() const;
+  private:
+  bool _internal_has_security_status_response() const;
+
+  public:
+  void clear_security_status_response() ;
+  const ::markethub::messaging::trading::SecurityStatusResponse& security_status_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::SecurityStatusResponse* release_security_status_response();
+  ::markethub::messaging::trading::SecurityStatusResponse* mutable_security_status_response();
+  void set_allocated_security_status_response(::markethub::messaging::trading::SecurityStatusResponse* value);
+  void unsafe_arena_set_allocated_security_status_response(::markethub::messaging::trading::SecurityStatusResponse* value);
+  ::markethub::messaging::trading::SecurityStatusResponse* unsafe_arena_release_security_status_response();
+
+  private:
+  const ::markethub::messaging::trading::SecurityStatusResponse& _internal_security_status_response() const;
+  ::markethub::messaging::trading::SecurityStatusResponse* _internal_mutable_security_status_response();
+
+  public:
+  // .markethub.messaging.rofex.AccountListRequest account_list_request = 33;
+  bool has_account_list_request() const;
+  private:
+  bool _internal_has_account_list_request() const;
+
+  public:
+  void clear_account_list_request() ;
+  const ::markethub::messaging::rofex::AccountListRequest& account_list_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::rofex::AccountListRequest* release_account_list_request();
+  ::markethub::messaging::rofex::AccountListRequest* mutable_account_list_request();
+  void set_allocated_account_list_request(::markethub::messaging::rofex::AccountListRequest* value);
+  void unsafe_arena_set_allocated_account_list_request(::markethub::messaging::rofex::AccountListRequest* value);
+  ::markethub::messaging::rofex::AccountListRequest* unsafe_arena_release_account_list_request();
+
+  private:
+  const ::markethub::messaging::rofex::AccountListRequest& _internal_account_list_request() const;
+  ::markethub::messaging::rofex::AccountListRequest* _internal_mutable_account_list_request();
+
+  public:
+  // .markethub.messaging.rofex.AccountListResponse account_list_response = 34;
+  bool has_account_list_response() const;
+  private:
+  bool _internal_has_account_list_response() const;
+
+  public:
+  void clear_account_list_response() ;
+  const ::markethub::messaging::rofex::AccountListResponse& account_list_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::rofex::AccountListResponse* release_account_list_response();
+  ::markethub::messaging::rofex::AccountListResponse* mutable_account_list_response();
+  void set_allocated_account_list_response(::markethub::messaging::rofex::AccountListResponse* value);
+  void unsafe_arena_set_allocated_account_list_response(::markethub::messaging::rofex::AccountListResponse* value);
+  ::markethub::messaging::rofex::AccountListResponse* unsafe_arena_release_account_list_response();
+
+  private:
+  const ::markethub::messaging::rofex::AccountListResponse& _internal_account_list_response() const;
+  ::markethub::messaging::rofex::AccountListResponse* _internal_mutable_account_list_response();
+
+  public:
+  // .markethub.messaging.rofex.AccountListIncremental account_list_incremental = 35;
+  bool has_account_list_incremental() const;
+  private:
+  bool _internal_has_account_list_incremental() const;
+
+  public:
+  void clear_account_list_incremental() ;
+  const ::markethub::messaging::rofex::AccountListIncremental& account_list_incremental() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::rofex::AccountListIncremental* release_account_list_incremental();
+  ::markethub::messaging::rofex::AccountListIncremental* mutable_account_list_incremental();
+  void set_allocated_account_list_incremental(::markethub::messaging::rofex::AccountListIncremental* value);
+  void unsafe_arena_set_allocated_account_list_incremental(::markethub::messaging::rofex::AccountListIncremental* value);
+  ::markethub::messaging::rofex::AccountListIncremental* unsafe_arena_release_account_list_incremental();
+
+  private:
+  const ::markethub::messaging::rofex::AccountListIncremental& _internal_account_list_incremental() const;
+  ::markethub::messaging::rofex::AccountListIncremental* _internal_mutable_account_list_incremental();
+
+  public:
+  // .markethub.messaging.system.AddServiceRequest add_service_request = 36;
+  bool has_add_service_request() const;
+  private:
+  bool _internal_has_add_service_request() const;
+
+  public:
+  void clear_add_service_request() ;
+  const ::markethub::messaging::system::AddServiceRequest& add_service_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::AddServiceRequest* release_add_service_request();
+  ::markethub::messaging::system::AddServiceRequest* mutable_add_service_request();
+  void set_allocated_add_service_request(::markethub::messaging::system::AddServiceRequest* value);
+  void unsafe_arena_set_allocated_add_service_request(::markethub::messaging::system::AddServiceRequest* value);
+  ::markethub::messaging::system::AddServiceRequest* unsafe_arena_release_add_service_request();
+
+  private:
+  const ::markethub::messaging::system::AddServiceRequest& _internal_add_service_request() const;
+  ::markethub::messaging::system::AddServiceRequest* _internal_mutable_add_service_request();
+
+  public:
+  // .markethub.messaging.system.AddServiceResponse add_service_response = 37;
+  bool has_add_service_response() const;
+  private:
+  bool _internal_has_add_service_response() const;
+
+  public:
+  void clear_add_service_response() ;
+  const ::markethub::messaging::system::AddServiceResponse& add_service_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::AddServiceResponse* release_add_service_response();
+  ::markethub::messaging::system::AddServiceResponse* mutable_add_service_response();
+  void set_allocated_add_service_response(::markethub::messaging::system::AddServiceResponse* value);
+  void unsafe_arena_set_allocated_add_service_response(::markethub::messaging::system::AddServiceResponse* value);
+  ::markethub::messaging::system::AddServiceResponse* unsafe_arena_release_add_service_response();
+
+  private:
+  const ::markethub::messaging::system::AddServiceResponse& _internal_add_service_response() const;
+  ::markethub::messaging::system::AddServiceResponse* _internal_mutable_add_service_response();
+
+  public:
+  // .markethub.messaging.system.Heartbeat heartbeat = 38;
+  bool has_heartbeat() const;
+  private:
+  bool _internal_has_heartbeat() const;
+
+  public:
+  void clear_heartbeat() ;
+  const ::markethub::messaging::system::Heartbeat& heartbeat() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::Heartbeat* release_heartbeat();
+  ::markethub::messaging::system::Heartbeat* mutable_heartbeat();
+  void set_allocated_heartbeat(::markethub::messaging::system::Heartbeat* value);
+  void unsafe_arena_set_allocated_heartbeat(::markethub::messaging::system::Heartbeat* value);
+  ::markethub::messaging::system::Heartbeat* unsafe_arena_release_heartbeat();
+
+  private:
+  const ::markethub::messaging::system::Heartbeat& _internal_heartbeat() const;
+  ::markethub::messaging::system::Heartbeat* _internal_mutable_heartbeat();
+
+  public:
+  // .markethub.messaging.system.RemoveServiceRequest remove_service_request = 39;
+  bool has_remove_service_request() const;
+  private:
+  bool _internal_has_remove_service_request() const;
+
+  public:
+  void clear_remove_service_request() ;
+  const ::markethub::messaging::system::RemoveServiceRequest& remove_service_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::RemoveServiceRequest* release_remove_service_request();
+  ::markethub::messaging::system::RemoveServiceRequest* mutable_remove_service_request();
+  void set_allocated_remove_service_request(::markethub::messaging::system::RemoveServiceRequest* value);
+  void unsafe_arena_set_allocated_remove_service_request(::markethub::messaging::system::RemoveServiceRequest* value);
+  ::markethub::messaging::system::RemoveServiceRequest* unsafe_arena_release_remove_service_request();
+
+  private:
+  const ::markethub::messaging::system::RemoveServiceRequest& _internal_remove_service_request() const;
+  ::markethub::messaging::system::RemoveServiceRequest* _internal_mutable_remove_service_request();
+
+  public:
+  // .markethub.messaging.system.NodesBroadcast nodes_broadcast = 40;
+  bool has_nodes_broadcast() const;
+  private:
+  bool _internal_has_nodes_broadcast() const;
+
+  public:
+  void clear_nodes_broadcast() ;
+  const ::markethub::messaging::system::NodesBroadcast& nodes_broadcast() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::NodesBroadcast* release_nodes_broadcast();
+  ::markethub::messaging::system::NodesBroadcast* mutable_nodes_broadcast();
+  void set_allocated_nodes_broadcast(::markethub::messaging::system::NodesBroadcast* value);
+  void unsafe_arena_set_allocated_nodes_broadcast(::markethub::messaging::system::NodesBroadcast* value);
+  ::markethub::messaging::system::NodesBroadcast* unsafe_arena_release_nodes_broadcast();
+
+  private:
+  const ::markethub::messaging::system::NodesBroadcast& _internal_nodes_broadcast() const;
+  ::markethub::messaging::system::NodesBroadcast* _internal_mutable_nodes_broadcast();
+
+  public:
+  // .markethub.messaging.system.FindNodeRequest find_node_request = 41;
+  bool has_find_node_request() const;
+  private:
+  bool _internal_has_find_node_request() const;
+
+  public:
+  void clear_find_node_request() ;
+  const ::markethub::messaging::system::FindNodeRequest& find_node_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::FindNodeRequest* release_find_node_request();
+  ::markethub::messaging::system::FindNodeRequest* mutable_find_node_request();
+  void set_allocated_find_node_request(::markethub::messaging::system::FindNodeRequest* value);
+  void unsafe_arena_set_allocated_find_node_request(::markethub::messaging::system::FindNodeRequest* value);
+  ::markethub::messaging::system::FindNodeRequest* unsafe_arena_release_find_node_request();
+
+  private:
+  const ::markethub::messaging::system::FindNodeRequest& _internal_find_node_request() const;
+  ::markethub::messaging::system::FindNodeRequest* _internal_mutable_find_node_request();
+
+  public:
+  // .markethub.messaging.system.FindNodeResponse find_node_response = 42;
+  bool has_find_node_response() const;
+  private:
+  bool _internal_has_find_node_response() const;
+
+  public:
+  void clear_find_node_response() ;
+  const ::markethub::messaging::system::FindNodeResponse& find_node_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::FindNodeResponse* release_find_node_response();
+  ::markethub::messaging::system::FindNodeResponse* mutable_find_node_response();
+  void set_allocated_find_node_response(::markethub::messaging::system::FindNodeResponse* value);
+  void unsafe_arena_set_allocated_find_node_response(::markethub::messaging::system::FindNodeResponse* value);
+  ::markethub::messaging::system::FindNodeResponse* unsafe_arena_release_find_node_response();
+
+  private:
+  const ::markethub::messaging::system::FindNodeResponse& _internal_find_node_response() const;
+  ::markethub::messaging::system::FindNodeResponse* _internal_mutable_find_node_response();
+
+  public:
+  // .markethub.messaging.system.DiscoverServicesRequest discover_services_request = 43;
+  bool has_discover_services_request() const;
+  private:
+  bool _internal_has_discover_services_request() const;
+
+  public:
+  void clear_discover_services_request() ;
+  const ::markethub::messaging::system::DiscoverServicesRequest& discover_services_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::DiscoverServicesRequest* release_discover_services_request();
+  ::markethub::messaging::system::DiscoverServicesRequest* mutable_discover_services_request();
+  void set_allocated_discover_services_request(::markethub::messaging::system::DiscoverServicesRequest* value);
+  void unsafe_arena_set_allocated_discover_services_request(::markethub::messaging::system::DiscoverServicesRequest* value);
+  ::markethub::messaging::system::DiscoverServicesRequest* unsafe_arena_release_discover_services_request();
+
+  private:
+  const ::markethub::messaging::system::DiscoverServicesRequest& _internal_discover_services_request() const;
+  ::markethub::messaging::system::DiscoverServicesRequest* _internal_mutable_discover_services_request();
+
+  public:
+  // .markethub.messaging.trading.TradeCaptureReport trade_capture_report = 44;
+  bool has_trade_capture_report() const;
+  private:
+  bool _internal_has_trade_capture_report() const;
+
+  public:
+  void clear_trade_capture_report() ;
+  const ::markethub::messaging::trading::TradeCaptureReport& trade_capture_report() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::trading::TradeCaptureReport* release_trade_capture_report();
+  ::markethub::messaging::trading::TradeCaptureReport* mutable_trade_capture_report();
+  void set_allocated_trade_capture_report(::markethub::messaging::trading::TradeCaptureReport* value);
+  void unsafe_arena_set_allocated_trade_capture_report(::markethub::messaging::trading::TradeCaptureReport* value);
+  ::markethub::messaging::trading::TradeCaptureReport* unsafe_arena_release_trade_capture_report();
+
+  private:
+  const ::markethub::messaging::trading::TradeCaptureReport& _internal_trade_capture_report() const;
+  ::markethub::messaging::trading::TradeCaptureReport* _internal_mutable_trade_capture_report();
+
+  public:
+  // .markethub.messaging.risk_management.HoldingReportRequest holding_report_request = 46;
+  bool has_holding_report_request() const;
+  private:
+  bool _internal_has_holding_report_request() const;
+
+  public:
+  void clear_holding_report_request() ;
+  const ::markethub::messaging::risk_management::HoldingReportRequest& holding_report_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::HoldingReportRequest* release_holding_report_request();
+  ::markethub::messaging::risk_management::HoldingReportRequest* mutable_holding_report_request();
+  void set_allocated_holding_report_request(::markethub::messaging::risk_management::HoldingReportRequest* value);
+  void unsafe_arena_set_allocated_holding_report_request(::markethub::messaging::risk_management::HoldingReportRequest* value);
+  ::markethub::messaging::risk_management::HoldingReportRequest* unsafe_arena_release_holding_report_request();
+
+  private:
+  const ::markethub::messaging::risk_management::HoldingReportRequest& _internal_holding_report_request() const;
+  ::markethub::messaging::risk_management::HoldingReportRequest* _internal_mutable_holding_report_request();
+
+  public:
+  // .markethub.messaging.risk_management.PNLReportRequest pnl_report_request = 47;
+  bool has_pnl_report_request() const;
+  private:
+  bool _internal_has_pnl_report_request() const;
+
+  public:
+  void clear_pnl_report_request() ;
+  const ::markethub::messaging::risk_management::PNLReportRequest& pnl_report_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::PNLReportRequest* release_pnl_report_request();
+  ::markethub::messaging::risk_management::PNLReportRequest* mutable_pnl_report_request();
+  void set_allocated_pnl_report_request(::markethub::messaging::risk_management::PNLReportRequest* value);
+  void unsafe_arena_set_allocated_pnl_report_request(::markethub::messaging::risk_management::PNLReportRequest* value);
+  ::markethub::messaging::risk_management::PNLReportRequest* unsafe_arena_release_pnl_report_request();
+
+  private:
+  const ::markethub::messaging::risk_management::PNLReportRequest& _internal_pnl_report_request() const;
+  ::markethub::messaging::risk_management::PNLReportRequest* _internal_mutable_pnl_report_request();
+
+  public:
+  // .markethub.messaging.risk_management.HoldingReportResponse holding_report_response = 49;
+  bool has_holding_report_response() const;
+  private:
+  bool _internal_has_holding_report_response() const;
+
+  public:
+  void clear_holding_report_response() ;
+  const ::markethub::messaging::risk_management::HoldingReportResponse& holding_report_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::HoldingReportResponse* release_holding_report_response();
+  ::markethub::messaging::risk_management::HoldingReportResponse* mutable_holding_report_response();
+  void set_allocated_holding_report_response(::markethub::messaging::risk_management::HoldingReportResponse* value);
+  void unsafe_arena_set_allocated_holding_report_response(::markethub::messaging::risk_management::HoldingReportResponse* value);
+  ::markethub::messaging::risk_management::HoldingReportResponse* unsafe_arena_release_holding_report_response();
+
+  private:
+  const ::markethub::messaging::risk_management::HoldingReportResponse& _internal_holding_report_response() const;
+  ::markethub::messaging::risk_management::HoldingReportResponse* _internal_mutable_holding_report_response();
+
+  public:
+  // .markethub.messaging.risk_management.PNLReportResponse pnl_report_response = 50;
+  bool has_pnl_report_response() const;
+  private:
+  bool _internal_has_pnl_report_response() const;
+
+  public:
+  void clear_pnl_report_response() ;
+  const ::markethub::messaging::risk_management::PNLReportResponse& pnl_report_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::PNLReportResponse* release_pnl_report_response();
+  ::markethub::messaging::risk_management::PNLReportResponse* mutable_pnl_report_response();
+  void set_allocated_pnl_report_response(::markethub::messaging::risk_management::PNLReportResponse* value);
+  void unsafe_arena_set_allocated_pnl_report_response(::markethub::messaging::risk_management::PNLReportResponse* value);
+  ::markethub::messaging::risk_management::PNLReportResponse* unsafe_arena_release_pnl_report_response();
+
+  private:
+  const ::markethub::messaging::risk_management::PNLReportResponse& _internal_pnl_report_response() const;
+  ::markethub::messaging::risk_management::PNLReportResponse* _internal_mutable_pnl_report_response();
+
+  public:
+  // .markethub.messaging.system.FilterSymbolsRequest filter_symbols_request = 51;
+  bool has_filter_symbols_request() const;
+  private:
+  bool _internal_has_filter_symbols_request() const;
+
+  public:
+  void clear_filter_symbols_request() ;
+  const ::markethub::messaging::system::FilterSymbolsRequest& filter_symbols_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::FilterSymbolsRequest* release_filter_symbols_request();
+  ::markethub::messaging::system::FilterSymbolsRequest* mutable_filter_symbols_request();
+  void set_allocated_filter_symbols_request(::markethub::messaging::system::FilterSymbolsRequest* value);
+  void unsafe_arena_set_allocated_filter_symbols_request(::markethub::messaging::system::FilterSymbolsRequest* value);
+  ::markethub::messaging::system::FilterSymbolsRequest* unsafe_arena_release_filter_symbols_request();
+
+  private:
+  const ::markethub::messaging::system::FilterSymbolsRequest& _internal_filter_symbols_request() const;
+  ::markethub::messaging::system::FilterSymbolsRequest* _internal_mutable_filter_symbols_request();
+
+  public:
+  // .markethub.messaging.system.FilterSymbolsResponse filter_symbols_response = 52;
+  bool has_filter_symbols_response() const;
+  private:
+  bool _internal_has_filter_symbols_response() const;
+
+  public:
+  void clear_filter_symbols_response() ;
+  const ::markethub::messaging::system::FilterSymbolsResponse& filter_symbols_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::FilterSymbolsResponse* release_filter_symbols_response();
+  ::markethub::messaging::system::FilterSymbolsResponse* mutable_filter_symbols_response();
+  void set_allocated_filter_symbols_response(::markethub::messaging::system::FilterSymbolsResponse* value);
+  void unsafe_arena_set_allocated_filter_symbols_response(::markethub::messaging::system::FilterSymbolsResponse* value);
+  ::markethub::messaging::system::FilterSymbolsResponse* unsafe_arena_release_filter_symbols_response();
+
+  private:
+  const ::markethub::messaging::system::FilterSymbolsResponse& _internal_filter_symbols_response() const;
+  ::markethub::messaging::system::FilterSymbolsResponse* _internal_mutable_filter_symbols_response();
+
+  public:
+  // .markethub.messaging.system.AllInstrumentsRequest all_instruments_request = 53;
+  bool has_all_instruments_request() const;
+  private:
+  bool _internal_has_all_instruments_request() const;
+
+  public:
+  void clear_all_instruments_request() ;
+  const ::markethub::messaging::system::AllInstrumentsRequest& all_instruments_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::AllInstrumentsRequest* release_all_instruments_request();
+  ::markethub::messaging::system::AllInstrumentsRequest* mutable_all_instruments_request();
+  void set_allocated_all_instruments_request(::markethub::messaging::system::AllInstrumentsRequest* value);
+  void unsafe_arena_set_allocated_all_instruments_request(::markethub::messaging::system::AllInstrumentsRequest* value);
+  ::markethub::messaging::system::AllInstrumentsRequest* unsafe_arena_release_all_instruments_request();
+
+  private:
+  const ::markethub::messaging::system::AllInstrumentsRequest& _internal_all_instruments_request() const;
+  ::markethub::messaging::system::AllInstrumentsRequest* _internal_mutable_all_instruments_request();
+
+  public:
+  // .markethub.messaging.system.AllInstrumentsResponse all_instruments_response = 54;
+  bool has_all_instruments_response() const;
+  private:
+  bool _internal_has_all_instruments_response() const;
+
+  public:
+  void clear_all_instruments_response() ;
+  const ::markethub::messaging::system::AllInstrumentsResponse& all_instruments_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::AllInstrumentsResponse* release_all_instruments_response();
+  ::markethub::messaging::system::AllInstrumentsResponse* mutable_all_instruments_response();
+  void set_allocated_all_instruments_response(::markethub::messaging::system::AllInstrumentsResponse* value);
+  void unsafe_arena_set_allocated_all_instruments_response(::markethub::messaging::system::AllInstrumentsResponse* value);
+  ::markethub::messaging::system::AllInstrumentsResponse* unsafe_arena_release_all_instruments_response();
+
+  private:
+  const ::markethub::messaging::system::AllInstrumentsResponse& _internal_all_instruments_response() const;
+  ::markethub::messaging::system::AllInstrumentsResponse* _internal_mutable_all_instruments_response();
+
+  public:
+  // .markethub.messaging.system.PreviousClosePriceRequest previous_close_price_request = 55;
+  bool has_previous_close_price_request() const;
+  private:
+  bool _internal_has_previous_close_price_request() const;
+
+  public:
+  void clear_previous_close_price_request() ;
+  const ::markethub::messaging::system::PreviousClosePriceRequest& previous_close_price_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::PreviousClosePriceRequest* release_previous_close_price_request();
+  ::markethub::messaging::system::PreviousClosePriceRequest* mutable_previous_close_price_request();
+  void set_allocated_previous_close_price_request(::markethub::messaging::system::PreviousClosePriceRequest* value);
+  void unsafe_arena_set_allocated_previous_close_price_request(::markethub::messaging::system::PreviousClosePriceRequest* value);
+  ::markethub::messaging::system::PreviousClosePriceRequest* unsafe_arena_release_previous_close_price_request();
+
+  private:
+  const ::markethub::messaging::system::PreviousClosePriceRequest& _internal_previous_close_price_request() const;
+  ::markethub::messaging::system::PreviousClosePriceRequest* _internal_mutable_previous_close_price_request();
+
+  public:
+  // .markethub.messaging.system.PreviousClosePriceResponse previous_close_price_response = 56;
+  bool has_previous_close_price_response() const;
+  private:
+  bool _internal_has_previous_close_price_response() const;
+
+  public:
+  void clear_previous_close_price_response() ;
+  const ::markethub::messaging::system::PreviousClosePriceResponse& previous_close_price_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::PreviousClosePriceResponse* release_previous_close_price_response();
+  ::markethub::messaging::system::PreviousClosePriceResponse* mutable_previous_close_price_response();
+  void set_allocated_previous_close_price_response(::markethub::messaging::system::PreviousClosePriceResponse* value);
+  void unsafe_arena_set_allocated_previous_close_price_response(::markethub::messaging::system::PreviousClosePriceResponse* value);
+  ::markethub::messaging::system::PreviousClosePriceResponse* unsafe_arena_release_previous_close_price_response();
+
+  private:
+  const ::markethub::messaging::system::PreviousClosePriceResponse& _internal_previous_close_price_response() const;
+  ::markethub::messaging::system::PreviousClosePriceResponse* _internal_mutable_previous_close_price_response();
+
+  public:
+  // .markethub.messaging.risk_management.HoldingReport holding_report = 57;
+  bool has_holding_report() const;
+  private:
+  bool _internal_has_holding_report() const;
+
+  public:
+  void clear_holding_report() ;
+  const ::markethub::messaging::risk_management::HoldingReport& holding_report() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::HoldingReport* release_holding_report();
+  ::markethub::messaging::risk_management::HoldingReport* mutable_holding_report();
+  void set_allocated_holding_report(::markethub::messaging::risk_management::HoldingReport* value);
+  void unsafe_arena_set_allocated_holding_report(::markethub::messaging::risk_management::HoldingReport* value);
+  ::markethub::messaging::risk_management::HoldingReport* unsafe_arena_release_holding_report();
+
+  private:
+  const ::markethub::messaging::risk_management::HoldingReport& _internal_holding_report() const;
+  ::markethub::messaging::risk_management::HoldingReport* _internal_mutable_holding_report();
+
+  public:
+  // .markethub.messaging.risk_management.PNLReport pnl_report = 58;
+  bool has_pnl_report() const;
+  private:
+  bool _internal_has_pnl_report() const;
+
+  public:
+  void clear_pnl_report() ;
+  const ::markethub::messaging::risk_management::PNLReport& pnl_report() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::PNLReport* release_pnl_report();
+  ::markethub::messaging::risk_management::PNLReport* mutable_pnl_report();
+  void set_allocated_pnl_report(::markethub::messaging::risk_management::PNLReport* value);
+  void unsafe_arena_set_allocated_pnl_report(::markethub::messaging::risk_management::PNLReport* value);
+  ::markethub::messaging::risk_management::PNLReport* unsafe_arena_release_pnl_report();
+
+  private:
+  const ::markethub::messaging::risk_management::PNLReport& _internal_pnl_report() const;
+  ::markethub::messaging::risk_management::PNLReport* _internal_mutable_pnl_report();
+
+  public:
+  // .markethub.messaging.system.NextBusinessDayRequest next_business_day_request = 59;
+  bool has_next_business_day_request() const;
+  private:
+  bool _internal_has_next_business_day_request() const;
+
+  public:
+  void clear_next_business_day_request() ;
+  const ::markethub::messaging::system::NextBusinessDayRequest& next_business_day_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::NextBusinessDayRequest* release_next_business_day_request();
+  ::markethub::messaging::system::NextBusinessDayRequest* mutable_next_business_day_request();
+  void set_allocated_next_business_day_request(::markethub::messaging::system::NextBusinessDayRequest* value);
+  void unsafe_arena_set_allocated_next_business_day_request(::markethub::messaging::system::NextBusinessDayRequest* value);
+  ::markethub::messaging::system::NextBusinessDayRequest* unsafe_arena_release_next_business_day_request();
+
+  private:
+  const ::markethub::messaging::system::NextBusinessDayRequest& _internal_next_business_day_request() const;
+  ::markethub::messaging::system::NextBusinessDayRequest* _internal_mutable_next_business_day_request();
+
+  public:
+  // .markethub.messaging.system.NextBusinessDayResponse next_business_day_response = 60;
+  bool has_next_business_day_response() const;
+  private:
+  bool _internal_has_next_business_day_response() const;
+
+  public:
+  void clear_next_business_day_response() ;
+  const ::markethub::messaging::system::NextBusinessDayResponse& next_business_day_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::NextBusinessDayResponse* release_next_business_day_response();
+  ::markethub::messaging::system::NextBusinessDayResponse* mutable_next_business_day_response();
+  void set_allocated_next_business_day_response(::markethub::messaging::system::NextBusinessDayResponse* value);
+  void unsafe_arena_set_allocated_next_business_day_response(::markethub::messaging::system::NextBusinessDayResponse* value);
+  ::markethub::messaging::system::NextBusinessDayResponse* unsafe_arena_release_next_business_day_response();
+
+  private:
+  const ::markethub::messaging::system::NextBusinessDayResponse& _internal_next_business_day_response() const;
+  ::markethub::messaging::system::NextBusinessDayResponse* _internal_mutable_next_business_day_response();
+
+  public:
+  // .markethub.messaging.system.ReposMappingRequest repos_mapping_request = 61;
+  bool has_repos_mapping_request() const;
+  private:
+  bool _internal_has_repos_mapping_request() const;
+
+  public:
+  void clear_repos_mapping_request() ;
+  const ::markethub::messaging::system::ReposMappingRequest& repos_mapping_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::ReposMappingRequest* release_repos_mapping_request();
+  ::markethub::messaging::system::ReposMappingRequest* mutable_repos_mapping_request();
+  void set_allocated_repos_mapping_request(::markethub::messaging::system::ReposMappingRequest* value);
+  void unsafe_arena_set_allocated_repos_mapping_request(::markethub::messaging::system::ReposMappingRequest* value);
+  ::markethub::messaging::system::ReposMappingRequest* unsafe_arena_release_repos_mapping_request();
+
+  private:
+  const ::markethub::messaging::system::ReposMappingRequest& _internal_repos_mapping_request() const;
+  ::markethub::messaging::system::ReposMappingRequest* _internal_mutable_repos_mapping_request();
+
+  public:
+  // .markethub.messaging.system.ReposMappingResponse repos_mapping_response = 62;
+  bool has_repos_mapping_response() const;
+  private:
+  bool _internal_has_repos_mapping_response() const;
+
+  public:
+  void clear_repos_mapping_response() ;
+  const ::markethub::messaging::system::ReposMappingResponse& repos_mapping_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::ReposMappingResponse* release_repos_mapping_response();
+  ::markethub::messaging::system::ReposMappingResponse* mutable_repos_mapping_response();
+  void set_allocated_repos_mapping_response(::markethub::messaging::system::ReposMappingResponse* value);
+  void unsafe_arena_set_allocated_repos_mapping_response(::markethub::messaging::system::ReposMappingResponse* value);
+  ::markethub::messaging::system::ReposMappingResponse* unsafe_arena_release_repos_mapping_response();
+
+  private:
+  const ::markethub::messaging::system::ReposMappingResponse& _internal_repos_mapping_response() const;
+  ::markethub::messaging::system::ReposMappingResponse* _internal_mutable_repos_mapping_response();
+
+  public:
+  // .markethub.messaging.otc.OTCTradeReport otc_trade_report = 63;
+  bool has_otc_trade_report() const;
+  private:
+  bool _internal_has_otc_trade_report() const;
+
+  public:
+  void clear_otc_trade_report() ;
+  const ::markethub::messaging::otc::OTCTradeReport& otc_trade_report() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::otc::OTCTradeReport* release_otc_trade_report();
+  ::markethub::messaging::otc::OTCTradeReport* mutable_otc_trade_report();
+  void set_allocated_otc_trade_report(::markethub::messaging::otc::OTCTradeReport* value);
+  void unsafe_arena_set_allocated_otc_trade_report(::markethub::messaging::otc::OTCTradeReport* value);
+  ::markethub::messaging::otc::OTCTradeReport* unsafe_arena_release_otc_trade_report();
+
+  private:
+  const ::markethub::messaging::otc::OTCTradeReport& _internal_otc_trade_report() const;
+  ::markethub::messaging::otc::OTCTradeReport* _internal_mutable_otc_trade_report();
+
+  public:
+  // .markethub.messaging.otc.PositionUpdateNotification position_update_notification = 64;
+  bool has_position_update_notification() const;
+  private:
+  bool _internal_has_position_update_notification() const;
+
+  public:
+  void clear_position_update_notification() ;
+  const ::markethub::messaging::otc::PositionUpdateNotification& position_update_notification() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::otc::PositionUpdateNotification* release_position_update_notification();
+  ::markethub::messaging::otc::PositionUpdateNotification* mutable_position_update_notification();
+  void set_allocated_position_update_notification(::markethub::messaging::otc::PositionUpdateNotification* value);
+  void unsafe_arena_set_allocated_position_update_notification(::markethub::messaging::otc::PositionUpdateNotification* value);
+  ::markethub::messaging::otc::PositionUpdateNotification* unsafe_arena_release_position_update_notification();
+
+  private:
+  const ::markethub::messaging::otc::PositionUpdateNotification& _internal_position_update_notification() const;
+  ::markethub::messaging::otc::PositionUpdateNotification* _internal_mutable_position_update_notification();
+
+  public:
+  // .markethub.messaging.otc.PositionCorrectionNotification position_correction_notification = 65;
+  bool has_position_correction_notification() const;
+  private:
+  bool _internal_has_position_correction_notification() const;
+
+  public:
+  void clear_position_correction_notification() ;
+  const ::markethub::messaging::otc::PositionCorrectionNotification& position_correction_notification() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::otc::PositionCorrectionNotification* release_position_correction_notification();
+  ::markethub::messaging::otc::PositionCorrectionNotification* mutable_position_correction_notification();
+  void set_allocated_position_correction_notification(::markethub::messaging::otc::PositionCorrectionNotification* value);
+  void unsafe_arena_set_allocated_position_correction_notification(::markethub::messaging::otc::PositionCorrectionNotification* value);
+  ::markethub::messaging::otc::PositionCorrectionNotification* unsafe_arena_release_position_correction_notification();
+
+  private:
+  const ::markethub::messaging::otc::PositionCorrectionNotification& _internal_position_correction_notification() const;
+  ::markethub::messaging::otc::PositionCorrectionNotification* _internal_mutable_position_correction_notification();
+
+  public:
+  // .markethub.messaging.system.StrategyChangeParamsRequest strategy_change_params_request = 66;
+  bool has_strategy_change_params_request() const;
+  private:
+  bool _internal_has_strategy_change_params_request() const;
+
+  public:
+  void clear_strategy_change_params_request() ;
+  const ::markethub::messaging::system::StrategyChangeParamsRequest& strategy_change_params_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeParamsRequest* release_strategy_change_params_request();
+  ::markethub::messaging::system::StrategyChangeParamsRequest* mutable_strategy_change_params_request();
+  void set_allocated_strategy_change_params_request(::markethub::messaging::system::StrategyChangeParamsRequest* value);
+  void unsafe_arena_set_allocated_strategy_change_params_request(::markethub::messaging::system::StrategyChangeParamsRequest* value);
+  ::markethub::messaging::system::StrategyChangeParamsRequest* unsafe_arena_release_strategy_change_params_request();
+
+  private:
+  const ::markethub::messaging::system::StrategyChangeParamsRequest& _internal_strategy_change_params_request() const;
+  ::markethub::messaging::system::StrategyChangeParamsRequest* _internal_mutable_strategy_change_params_request();
+
+  public:
+  // .markethub.messaging.system.StrategyChangeParamsResponse strategy_change_params_response = 67;
+  bool has_strategy_change_params_response() const;
+  private:
+  bool _internal_has_strategy_change_params_response() const;
+
+  public:
+  void clear_strategy_change_params_response() ;
+  const ::markethub::messaging::system::StrategyChangeParamsResponse& strategy_change_params_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeParamsResponse* release_strategy_change_params_response();
+  ::markethub::messaging::system::StrategyChangeParamsResponse* mutable_strategy_change_params_response();
+  void set_allocated_strategy_change_params_response(::markethub::messaging::system::StrategyChangeParamsResponse* value);
+  void unsafe_arena_set_allocated_strategy_change_params_response(::markethub::messaging::system::StrategyChangeParamsResponse* value);
+  ::markethub::messaging::system::StrategyChangeParamsResponse* unsafe_arena_release_strategy_change_params_response();
+
+  private:
+  const ::markethub::messaging::system::StrategyChangeParamsResponse& _internal_strategy_change_params_response() const;
+  ::markethub::messaging::system::StrategyChangeParamsResponse* _internal_mutable_strategy_change_params_response();
+
+  public:
+  // .markethub.messaging.system.StrategyChangeStatusRequest strategy_change_status_request = 68;
+  bool has_strategy_change_status_request() const;
+  private:
+  bool _internal_has_strategy_change_status_request() const;
+
+  public:
+  void clear_strategy_change_status_request() ;
+  const ::markethub::messaging::system::StrategyChangeStatusRequest& strategy_change_status_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeStatusRequest* release_strategy_change_status_request();
+  ::markethub::messaging::system::StrategyChangeStatusRequest* mutable_strategy_change_status_request();
+  void set_allocated_strategy_change_status_request(::markethub::messaging::system::StrategyChangeStatusRequest* value);
+  void unsafe_arena_set_allocated_strategy_change_status_request(::markethub::messaging::system::StrategyChangeStatusRequest* value);
+  ::markethub::messaging::system::StrategyChangeStatusRequest* unsafe_arena_release_strategy_change_status_request();
+
+  private:
+  const ::markethub::messaging::system::StrategyChangeStatusRequest& _internal_strategy_change_status_request() const;
+  ::markethub::messaging::system::StrategyChangeStatusRequest* _internal_mutable_strategy_change_status_request();
+
+  public:
+  // .markethub.messaging.system.StrategyChangeStatusResponse strategy_change_status_response = 69;
+  bool has_strategy_change_status_response() const;
+  private:
+  bool _internal_has_strategy_change_status_response() const;
+
+  public:
+  void clear_strategy_change_status_response() ;
+  const ::markethub::messaging::system::StrategyChangeStatusResponse& strategy_change_status_response() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::system::StrategyChangeStatusResponse* release_strategy_change_status_response();
+  ::markethub::messaging::system::StrategyChangeStatusResponse* mutable_strategy_change_status_response();
+  void set_allocated_strategy_change_status_response(::markethub::messaging::system::StrategyChangeStatusResponse* value);
+  void unsafe_arena_set_allocated_strategy_change_status_response(::markethub::messaging::system::StrategyChangeStatusResponse* value);
+  ::markethub::messaging::system::StrategyChangeStatusResponse* unsafe_arena_release_strategy_change_status_response();
+
+  private:
+  const ::markethub::messaging::system::StrategyChangeStatusResponse& _internal_strategy_change_status_response() const;
+  ::markethub::messaging::system::StrategyChangeStatusResponse* _internal_mutable_strategy_change_status_response();
+
+  public:
+  // .markethub.messaging.risk_management.InitialPositionUpdateRequest initial_position_update_request = 70;
+  bool has_initial_position_update_request() const;
+  private:
+  bool _internal_has_initial_position_update_request() const;
+
+  public:
+  void clear_initial_position_update_request() ;
+  const ::markethub::messaging::risk_management::InitialPositionUpdateRequest& initial_position_update_request() const;
+  PROTOBUF_NODISCARD ::markethub::messaging::risk_management::InitialPositionUpdateRequest* release_initial_position_update_request();
+  ::markethub::messaging::risk_management::InitialPositionUpdateRequest* mutable_initial_position_update_request();
+  void set_allocated_initial_position_update_request(::markethub::messaging::risk_management::InitialPositionUpdateRequest* value);
+  void unsafe_arena_set_allocated_initial_position_update_request(::markethub::messaging::risk_management::InitialPositionUpdateRequest* value);
+  ::markethub::messaging::risk_management::InitialPositionUpdateRequest* unsafe_arena_release_initial_position_update_request();
+
+  private:
+  const ::markethub::messaging::risk_management::InitialPositionUpdateRequest& _internal_initial_position_update_request() const;
+  ::markethub::messaging::risk_management::InitialPositionUpdateRequest* _internal_mutable_initial_position_update_request();
+
+  public:
+  void clear_message();
+  MessageCase message_case() const;
+  // @@protoc_insertion_point(class_scope:markethub.messaging.WrapperMessage)
+ private:
+  class _Internal;
+  void set_has_ping();
+  void set_has_pong();
+  void set_has_security_list_request();
+  void set_has_security_list_response();
+  void set_has_security_definition_request();
+  void set_has_security_definition_response();
+  void set_has_market_data_suscription_request();
+  void set_has_market_data_suscription_response();
+  void set_has_new_order_request();
+  void set_has_cancel_order_request();
+  void set_has_replace_order_request();
+  void set_has_execution_report();
+  void set_has_order_status_request();
+  void set_has_trading_session_status_request();
+  void set_has_trading_session_status_response();
+  void set_has_mass_cancel_request();
+  void set_has_mass_cancel_response();
+  void set_has_mass_order_status_request();
+  void set_has_mass_order_status_response();
+  void set_has_trade_capture_report_request();
+  void set_has_trade_capture_report_response();
+  void set_has_market_data_update();
+  void set_has_stop();
+  void set_has_all_symbols_request();
+  void set_has_all_symbols_response();
+  void set_has_security_status_request();
+  void set_has_security_status_response();
+  void set_has_account_list_request();
+  void set_has_account_list_response();
+  void set_has_account_list_incremental();
+  void set_has_add_service_request();
+  void set_has_add_service_response();
+  void set_has_heartbeat();
+  void set_has_remove_service_request();
+  void set_has_nodes_broadcast();
+  void set_has_find_node_request();
+  void set_has_find_node_response();
+  void set_has_discover_services_request();
+  void set_has_trade_capture_report();
+  void set_has_holding_report_request();
+  void set_has_pnl_report_request();
+  void set_has_holding_report_response();
+  void set_has_pnl_report_response();
+  void set_has_filter_symbols_request();
+  void set_has_filter_symbols_response();
+  void set_has_all_instruments_request();
+  void set_has_all_instruments_response();
+  void set_has_previous_close_price_request();
+  void set_has_previous_close_price_response();
+  void set_has_holding_report();
+  void set_has_pnl_report();
+  void set_has_next_business_day_request();
+  void set_has_next_business_day_response();
+  void set_has_repos_mapping_request();
+  void set_has_repos_mapping_response();
+  void set_has_otc_trade_report();
+  void set_has_position_update_notification();
+  void set_has_position_correction_notification();
+  void set_has_strategy_change_params_request();
+  void set_has_strategy_change_params_response();
+  void set_has_strategy_change_status_request();
+  void set_has_strategy_change_status_response();
+  void set_has_initial_position_update_request();
+  inline bool has_message() const;
+  inline void clear_has_message();
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      2, 67, 63,
+      156, 11>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_WrapperMessage_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const WrapperMessage& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr message_type_;
+    ::google::protobuf::internal::ArenaStringPtr message_id_;
+    ::google::protobuf::internal::ArenaStringPtr request_message_id_;
+    ::google::protobuf::internal::ArenaStringPtr client_id_;
+    union MessageUnion {
+      constexpr MessageUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::markethub::messaging::system::Ping* ping_;
+      ::markethub::messaging::system::Pong* pong_;
+      ::markethub::messaging::trading::SecurityListRequest* security_list_request_;
+      ::markethub::messaging::trading::SecurityListResponse* security_list_response_;
+      ::markethub::messaging::trading::SecurityDefinitionRequest* security_definition_request_;
+      ::markethub::messaging::trading::SecurityDefinitionResponse* security_definition_response_;
+      ::markethub::messaging::trading::MarketDataSuscriptionRequest* market_data_suscription_request_;
+      ::markethub::messaging::trading::MarketDataSuscriptionResponse* market_data_suscription_response_;
+      ::markethub::messaging::trading::NewOrderRequest* new_order_request_;
+      ::markethub::messaging::trading::CancelOrderRequest* cancel_order_request_;
+      ::markethub::messaging::trading::ReplaceOrderRequest* replace_order_request_;
+      ::markethub::messaging::trading::ExecutionReport* execution_report_;
+      ::markethub::messaging::trading::OrderStatusRequest* order_status_request_;
+      ::markethub::messaging::trading::TradingSessionStatusRequest* trading_session_status_request_;
+      ::markethub::messaging::trading::TradingSessionStatusResponse* trading_session_status_response_;
+      ::markethub::messaging::trading::MassCancelRequest* mass_cancel_request_;
+      ::markethub::messaging::trading::MassCancelResponse* mass_cancel_response_;
+      ::markethub::messaging::trading::MassOrderStatusRequest* mass_order_status_request_;
+      ::markethub::messaging::trading::MassOrderStatusResponse* mass_order_status_response_;
+      ::markethub::messaging::trading::TradeCaptureReportRequest* trade_capture_report_request_;
+      ::markethub::messaging::trading::TradeCaptureReportResponse* trade_capture_report_response_;
+      ::markethub::messaging::trading::Book* market_data_update_;
+      ::markethub::messaging::system::Stop* stop_;
+      ::markethub::messaging::system::AllSymbolsRequest* all_symbols_request_;
+      ::markethub::messaging::system::AllSymbolsResponse* all_symbols_response_;
+      ::markethub::messaging::trading::SecurityStatusRequest* security_status_request_;
+      ::markethub::messaging::trading::SecurityStatusResponse* security_status_response_;
+      ::markethub::messaging::rofex::AccountListRequest* account_list_request_;
+      ::markethub::messaging::rofex::AccountListResponse* account_list_response_;
+      ::markethub::messaging::rofex::AccountListIncremental* account_list_incremental_;
+      ::markethub::messaging::system::AddServiceRequest* add_service_request_;
+      ::markethub::messaging::system::AddServiceResponse* add_service_response_;
+      ::markethub::messaging::system::Heartbeat* heartbeat_;
+      ::markethub::messaging::system::RemoveServiceRequest* remove_service_request_;
+      ::markethub::messaging::system::NodesBroadcast* nodes_broadcast_;
+      ::markethub::messaging::system::FindNodeRequest* find_node_request_;
+      ::markethub::messaging::system::FindNodeResponse* find_node_response_;
+      ::markethub::messaging::system::DiscoverServicesRequest* discover_services_request_;
+      ::markethub::messaging::trading::TradeCaptureReport* trade_capture_report_;
+      ::markethub::messaging::risk_management::HoldingReportRequest* holding_report_request_;
+      ::markethub::messaging::risk_management::PNLReportRequest* pnl_report_request_;
+      ::markethub::messaging::risk_management::HoldingReportResponse* holding_report_response_;
+      ::markethub::messaging::risk_management::PNLReportResponse* pnl_report_response_;
+      ::markethub::messaging::system::FilterSymbolsRequest* filter_symbols_request_;
+      ::markethub::messaging::system::FilterSymbolsResponse* filter_symbols_response_;
+      ::markethub::messaging::system::AllInstrumentsRequest* all_instruments_request_;
+      ::markethub::messaging::system::AllInstrumentsResponse* all_instruments_response_;
+      ::markethub::messaging::system::PreviousClosePriceRequest* previous_close_price_request_;
+      ::markethub::messaging::system::PreviousClosePriceResponse* previous_close_price_response_;
+      ::markethub::messaging::risk_management::HoldingReport* holding_report_;
+      ::markethub::messaging::risk_management::PNLReport* pnl_report_;
+      ::markethub::messaging::system::NextBusinessDayRequest* next_business_day_request_;
+      ::markethub::messaging::system::NextBusinessDayResponse* next_business_day_response_;
+      ::markethub::messaging::system::ReposMappingRequest* repos_mapping_request_;
+      ::markethub::messaging::system::ReposMappingResponse* repos_mapping_response_;
+      ::markethub::messaging::otc::OTCTradeReport* otc_trade_report_;
+      ::markethub::messaging::otc::PositionUpdateNotification* position_update_notification_;
+      ::markethub::messaging::otc::PositionCorrectionNotification* position_correction_notification_;
+      ::markethub::messaging::system::StrategyChangeParamsRequest* strategy_change_params_request_;
+      ::markethub::messaging::system::StrategyChangeParamsResponse* strategy_change_params_response_;
+      ::markethub::messaging::system::StrategyChangeStatusRequest* strategy_change_status_request_;
+      ::markethub::messaging::system::StrategyChangeStatusResponse* strategy_change_status_response_;
+      ::markethub::messaging::risk_management::InitialPositionUpdateRequest* initial_position_update_request_;
+    } message_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::uint32_t _oneof_case_[1];
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_messages_2eproto;
+};
+
+// ===================================================================
+
+
+
+
+// ===================================================================
+
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif // __GNUC__
-    // -------------------------------------------------------------------
+#endif  // __GNUC__
+// -------------------------------------------------------------------
 
-    // WrapperMessage
+// WrapperMessage
 
-    // string message_type = 1;
-    inline void WrapperMessage::clear_message_type() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_type_.ClearToEmpty();
-    }
-    inline const std::string &WrapperMessage::message_type() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.message_type)
-      return _internal_message_type();
-    }
-    template <typename Arg_, typename... Args_>
-    inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_message_type(Arg_ &&arg, Args_... args) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_type_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-      // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.message_type)
-    }
-    inline std::string *WrapperMessage::mutable_message_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      std::string *_s = _internal_mutable_message_type();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.message_type)
-      return _s;
-    }
-    inline const std::string &WrapperMessage::_internal_message_type() const {
-      ::google::protobuf::internal::TSanRead(&_impl_);
-      return _impl_.message_type_.Get();
-    }
-    inline void WrapperMessage::_internal_set_message_type(const std::string &value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_type_.Set(value, GetArena());
-    }
-    inline std::string *WrapperMessage::_internal_mutable_message_type() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      return _impl_.message_type_.Mutable(GetArena());
-    }
-    inline std::string *WrapperMessage::release_message_type() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.message_type)
-      return _impl_.message_type_.Release();
-    }
-    inline void WrapperMessage::set_allocated_message_type(std::string *value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_type_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      if (_impl_.message_type_.IsDefault()) {
-        _impl_.message_type_.Set("", GetArena());
-      }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.message_type)
-    }
-
-    // string message_id = 2;
-    inline void WrapperMessage::clear_message_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_id_.ClearToEmpty();
-    }
-    inline const std::string &WrapperMessage::message_id() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.message_id)
-      return _internal_message_id();
-    }
-    template <typename Arg_, typename... Args_>
-    inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_message_id(Arg_ &&arg, Args_... args) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_id_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-      // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.message_id)
-    }
-    inline std::string *WrapperMessage::mutable_message_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      std::string *_s = _internal_mutable_message_id();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.message_id)
-      return _s;
-    }
-    inline const std::string &WrapperMessage::_internal_message_id() const {
-      ::google::protobuf::internal::TSanRead(&_impl_);
-      return _impl_.message_id_.Get();
-    }
-    inline void WrapperMessage::_internal_set_message_id(const std::string &value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_id_.Set(value, GetArena());
-    }
-    inline std::string *WrapperMessage::_internal_mutable_message_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      return _impl_.message_id_.Mutable(GetArena());
-    }
-    inline std::string *WrapperMessage::release_message_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.message_id)
-      return _impl_.message_id_.Release();
-    }
-    inline void WrapperMessage::set_allocated_message_id(std::string *value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.message_id_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      if (_impl_.message_id_.IsDefault()) {
-        _impl_.message_id_.Set("", GetArena());
-      }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.message_id)
-    }
-
-    // string request_message_id = 3;
-    inline void WrapperMessage::clear_request_message_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.request_message_id_.ClearToEmpty();
-    }
-    inline const std::string &WrapperMessage::request_message_id() const
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.request_message_id)
-      return _internal_request_message_id();
-    }
-    template <typename Arg_, typename... Args_>
-    inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_request_message_id(Arg_ &&arg,
-                                                                              Args_... args) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.request_message_id_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-      // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.request_message_id)
-    }
-    inline std::string *WrapperMessage::mutable_request_message_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      std::string *_s = _internal_mutable_request_message_id();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.request_message_id)
-      return _s;
-    }
-    inline const std::string &WrapperMessage::_internal_request_message_id() const {
-      ::google::protobuf::internal::TSanRead(&_impl_);
-      return _impl_.request_message_id_.Get();
-    }
-    inline void WrapperMessage::_internal_set_request_message_id(const std::string &value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.request_message_id_.Set(value, GetArena());
-    }
-    inline std::string *WrapperMessage::_internal_mutable_request_message_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      return _impl_.request_message_id_.Mutable(GetArena());
-    }
-    inline std::string *WrapperMessage::release_request_message_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.request_message_id)
-      return _impl_.request_message_id_.Release();
-    }
-    inline void WrapperMessage::set_allocated_request_message_id(std::string *value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.request_message_id_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      if (_impl_.request_message_id_.IsDefault()) {
-        _impl_.request_message_id_.Set("", GetArena());
-      }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.request_message_id)
-    }
-
-    // string client_id = 4;
-    inline void WrapperMessage::clear_client_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.client_id_.ClearToEmpty();
-    }
-    inline const std::string &WrapperMessage::client_id() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.client_id)
-      return _internal_client_id();
-    }
-    template <typename Arg_, typename... Args_>
-    inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_client_id(Arg_ &&arg, Args_... args) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.client_id_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
-      // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.client_id)
-    }
-    inline std::string *WrapperMessage::mutable_client_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      std::string *_s = _internal_mutable_client_id();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.client_id)
-      return _s;
-    }
-    inline const std::string &WrapperMessage::_internal_client_id() const {
-      ::google::protobuf::internal::TSanRead(&_impl_);
-      return _impl_.client_id_.Get();
-    }
-    inline void WrapperMessage::_internal_set_client_id(const std::string &value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.client_id_.Set(value, GetArena());
-    }
-    inline std::string *WrapperMessage::_internal_mutable_client_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      return _impl_.client_id_.Mutable(GetArena());
-    }
-    inline std::string *WrapperMessage::release_client_id() {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.client_id)
-      return _impl_.client_id_.Release();
-    }
-    inline void WrapperMessage::set_allocated_client_id(std::string *value) {
-      ::google::protobuf::internal::TSanWrite(&_impl_);
-      _impl_.client_id_.SetAllocated(value, GetArena());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      if (_impl_.client_id_.IsDefault()) {
-        _impl_.client_id_.Set("", GetArena());
-      }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-      // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.client_id)
-    }
-
-    // .markethub.messaging.system.Ping ping = 5;
-    inline bool WrapperMessage::has_ping() const { return message_case() == kPing; }
-    inline bool WrapperMessage::_internal_has_ping() const { return message_case() == kPing; }
-    inline void WrapperMessage::set_has_ping() { _impl_._oneof_case_[0] = kPing; }
-    inline ::markethub::messaging::system::Ping *WrapperMessage::release_ping() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.ping)
-      if (message_case() == kPing) {
-        clear_has_message();
-        auto *temp = _impl_.message_.ping_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+// string message_type = 1;
+inline void WrapperMessage::clear_message_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_type_.ClearToEmpty();
+}
+inline const std::string& WrapperMessage::message_type() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.message_type)
+  return _internal_message_type();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_message_type(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_type_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.message_type)
+}
+inline std::string* WrapperMessage::mutable_message_type() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_message_type();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.message_type)
+  return _s;
+}
+inline const std::string& WrapperMessage::_internal_message_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.message_type_.Get();
+}
+inline void WrapperMessage::_internal_set_message_type(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_type_.Set(value, GetArena());
+}
+inline std::string* WrapperMessage::_internal_mutable_message_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.message_type_.Mutable( GetArena());
+}
+inline std::string* WrapperMessage::release_message_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.message_type)
+  return _impl_.message_type_.Release();
+}
+inline void WrapperMessage::set_allocated_message_type(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_type_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.message_type_.IsDefault()) {
+          _impl_.message_type_.Set("", GetArena());
         }
-        _impl_.message_.ping_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::Ping &WrapperMessage::_internal_ping() const {
-      return message_case() == kPing ? *_impl_.message_.ping_
-                                     : reinterpret_cast<::markethub::messaging::system::Ping &>(
-                                           ::markethub::messaging::system::_Ping_default_instance_);
-    }
-    inline const ::markethub::messaging::system::Ping &WrapperMessage::ping() const
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.ping)
-      return _internal_ping();
-    }
-    inline ::markethub::messaging::system::Ping *WrapperMessage::unsafe_arena_release_ping() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.ping)
-      if (message_case() == kPing) {
-        clear_has_message();
-        auto *temp = _impl_.message_.ping_;
-        _impl_.message_.ping_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_ping(
-        ::markethub::messaging::system::Ping *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_ping();
-        _impl_.message_.ping_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.ping)
-    }
-    inline ::markethub::messaging::system::Ping *WrapperMessage::_internal_mutable_ping() {
-      if (message_case() != kPing) {
-        clear_message();
-        set_has_ping();
-        _impl_.message_.ping_ =
-            ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Ping>(
-                GetArena());
-      }
-      return _impl_.message_.ping_;
-    }
-    inline ::markethub::messaging::system::Ping *WrapperMessage::mutable_ping()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::Ping *_msg = _internal_mutable_ping();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.ping)
-      return _msg;
-    }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.message_type)
+}
 
-    // .markethub.messaging.system.Pong pong = 6;
-    inline bool WrapperMessage::has_pong() const { return message_case() == kPong; }
-    inline bool WrapperMessage::_internal_has_pong() const { return message_case() == kPong; }
-    inline void WrapperMessage::set_has_pong() { _impl_._oneof_case_[0] = kPong; }
-    inline ::markethub::messaging::system::Pong *WrapperMessage::release_pong() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pong)
-      if (message_case() == kPong) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pong_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+// string message_id = 2;
+inline void WrapperMessage::clear_message_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_id_.ClearToEmpty();
+}
+inline const std::string& WrapperMessage::message_id() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.message_id)
+  return _internal_message_id();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_message_id(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.message_id)
+}
+inline std::string* WrapperMessage::mutable_message_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_message_id();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.message_id)
+  return _s;
+}
+inline const std::string& WrapperMessage::_internal_message_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.message_id_.Get();
+}
+inline void WrapperMessage::_internal_set_message_id(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_id_.Set(value, GetArena());
+}
+inline std::string* WrapperMessage::_internal_mutable_message_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.message_id_.Mutable( GetArena());
+}
+inline std::string* WrapperMessage::release_message_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.message_id)
+  return _impl_.message_id_.Release();
+}
+inline void WrapperMessage::set_allocated_message_id(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.message_id_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.message_id_.IsDefault()) {
+          _impl_.message_id_.Set("", GetArena());
         }
-        _impl_.message_.pong_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::Pong &WrapperMessage::_internal_pong() const {
-      return message_case() == kPong ? *_impl_.message_.pong_
-                                     : reinterpret_cast<::markethub::messaging::system::Pong &>(
-                                           ::markethub::messaging::system::_Pong_default_instance_);
-    }
-    inline const ::markethub::messaging::system::Pong &WrapperMessage::pong() const
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pong)
-      return _internal_pong();
-    }
-    inline ::markethub::messaging::system::Pong *WrapperMessage::unsafe_arena_release_pong() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pong)
-      if (message_case() == kPong) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pong_;
-        _impl_.message_.pong_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_pong(
-        ::markethub::messaging::system::Pong *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_pong();
-        _impl_.message_.pong_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pong)
-    }
-    inline ::markethub::messaging::system::Pong *WrapperMessage::_internal_mutable_pong() {
-      if (message_case() != kPong) {
-        clear_message();
-        set_has_pong();
-        _impl_.message_.pong_ =
-            ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Pong>(
-                GetArena());
-      }
-      return _impl_.message_.pong_;
-    }
-    inline ::markethub::messaging::system::Pong *WrapperMessage::mutable_pong()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::Pong *_msg = _internal_mutable_pong();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pong)
-      return _msg;
-    }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.message_id)
+}
 
-    // .markethub.messaging.trading.SecurityListRequest security_list_request = 7;
-    inline bool WrapperMessage::has_security_list_request() const {
-      return message_case() == kSecurityListRequest;
-    }
-    inline bool WrapperMessage::_internal_has_security_list_request() const {
-      return message_case() == kSecurityListRequest;
-    }
-    inline void WrapperMessage::set_has_security_list_request() {
-      _impl_._oneof_case_[0] = kSecurityListRequest;
-    }
-    inline ::markethub::messaging::trading::SecurityListRequest *
-    WrapperMessage::release_security_list_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_list_request)
-      if (message_case() == kSecurityListRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_list_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+// string request_message_id = 3;
+inline void WrapperMessage::clear_request_message_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.request_message_id_.ClearToEmpty();
+}
+inline const std::string& WrapperMessage::request_message_id() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.request_message_id)
+  return _internal_request_message_id();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_request_message_id(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.request_message_id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.request_message_id)
+}
+inline std::string* WrapperMessage::mutable_request_message_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_request_message_id();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.request_message_id)
+  return _s;
+}
+inline const std::string& WrapperMessage::_internal_request_message_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.request_message_id_.Get();
+}
+inline void WrapperMessage::_internal_set_request_message_id(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.request_message_id_.Set(value, GetArena());
+}
+inline std::string* WrapperMessage::_internal_mutable_request_message_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.request_message_id_.Mutable( GetArena());
+}
+inline std::string* WrapperMessage::release_request_message_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.request_message_id)
+  return _impl_.request_message_id_.Release();
+}
+inline void WrapperMessage::set_allocated_request_message_id(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.request_message_id_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.request_message_id_.IsDefault()) {
+          _impl_.request_message_id_.Set("", GetArena());
         }
-        _impl_.message_.security_list_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::SecurityListRequest &
-    WrapperMessage::_internal_security_list_request() const {
-      return message_case() == kSecurityListRequest
-                 ? *_impl_.message_.security_list_request_
-                 : reinterpret_cast<::markethub::messaging::trading::SecurityListRequest &>(
-                       ::markethub::messaging::trading::_SecurityListRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::SecurityListRequest &
-    WrapperMessage::security_list_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_list_request)
-      return _internal_security_list_request();
-    }
-    inline ::markethub::messaging::trading::SecurityListRequest *
-    WrapperMessage::unsafe_arena_release_security_list_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_list_request)
-      if (message_case() == kSecurityListRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_list_request_;
-        _impl_.message_.security_list_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_security_list_request(
-        ::markethub::messaging::trading::SecurityListRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_security_list_request();
-        _impl_.message_.security_list_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_list_request)
-    }
-    inline ::markethub::messaging::trading::SecurityListRequest *
-    WrapperMessage::_internal_mutable_security_list_request() {
-      if (message_case() != kSecurityListRequest) {
-        clear_message();
-        set_has_security_list_request();
-        _impl_.message_.security_list_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::SecurityListRequest>(GetArena());
-      }
-      return _impl_.message_.security_list_request_;
-    }
-    inline ::markethub::messaging::trading::SecurityListRequest *
-    WrapperMessage::mutable_security_list_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::SecurityListRequest *_msg =
-          _internal_mutable_security_list_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_list_request)
-      return _msg;
-    }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.request_message_id)
+}
 
-    // .markethub.messaging.trading.SecurityListResponse security_list_response = 8;
-    inline bool WrapperMessage::has_security_list_response() const {
-      return message_case() == kSecurityListResponse;
-    }
-    inline bool WrapperMessage::_internal_has_security_list_response() const {
-      return message_case() == kSecurityListResponse;
-    }
-    inline void WrapperMessage::set_has_security_list_response() {
-      _impl_._oneof_case_[0] = kSecurityListResponse;
-    }
-    inline ::markethub::messaging::trading::SecurityListResponse *
-    WrapperMessage::release_security_list_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_list_response)
-      if (message_case() == kSecurityListResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_list_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+// string client_id = 4;
+inline void WrapperMessage::clear_client_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.client_id_.ClearToEmpty();
+}
+inline const std::string& WrapperMessage::client_id() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.client_id)
+  return _internal_client_id();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void WrapperMessage::set_client_id(Arg_&& arg,
+                                                     Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.client_id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:markethub.messaging.WrapperMessage.client_id)
+}
+inline std::string* WrapperMessage::mutable_client_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_client_id();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.client_id)
+  return _s;
+}
+inline const std::string& WrapperMessage::_internal_client_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.client_id_.Get();
+}
+inline void WrapperMessage::_internal_set_client_id(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.client_id_.Set(value, GetArena());
+}
+inline std::string* WrapperMessage::_internal_mutable_client_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.client_id_.Mutable( GetArena());
+}
+inline std::string* WrapperMessage::release_client_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.client_id)
+  return _impl_.client_id_.Release();
+}
+inline void WrapperMessage::set_allocated_client_id(std::string* value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.client_id_.SetAllocated(value, GetArena());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.client_id_.IsDefault()) {
+          _impl_.client_id_.Set("", GetArena());
         }
-        _impl_.message_.security_list_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::SecurityListResponse &
-    WrapperMessage::_internal_security_list_response() const {
-      return message_case() == kSecurityListResponse
-                 ? *_impl_.message_.security_list_response_
-                 : reinterpret_cast<::markethub::messaging::trading::SecurityListResponse &>(
-                       ::markethub::messaging::trading::_SecurityListResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::SecurityListResponse &
-    WrapperMessage::security_list_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_list_response)
-      return _internal_security_list_response();
-    }
-    inline ::markethub::messaging::trading::SecurityListResponse *
-    WrapperMessage::unsafe_arena_release_security_list_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_list_response)
-      if (message_case() == kSecurityListResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_list_response_;
-        _impl_.message_.security_list_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_security_list_response(
-        ::markethub::messaging::trading::SecurityListResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_security_list_response();
-        _impl_.message_.security_list_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_list_response)
-    }
-    inline ::markethub::messaging::trading::SecurityListResponse *
-    WrapperMessage::_internal_mutable_security_list_response() {
-      if (message_case() != kSecurityListResponse) {
-        clear_message();
-        set_has_security_list_response();
-        _impl_.message_.security_list_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::SecurityListResponse>(GetArena());
-      }
-      return _impl_.message_.security_list_response_;
-    }
-    inline ::markethub::messaging::trading::SecurityListResponse *
-    WrapperMessage::mutable_security_list_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::SecurityListResponse *_msg =
-          _internal_mutable_security_list_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_list_response)
-      return _msg;
-    }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:markethub.messaging.WrapperMessage.client_id)
+}
 
-    // .markethub.messaging.trading.SecurityDefinitionRequest security_definition_request = 9;
-    inline bool WrapperMessage::has_security_definition_request() const {
-      return message_case() == kSecurityDefinitionRequest;
+// .markethub.messaging.system.Ping ping = 5;
+inline bool WrapperMessage::has_ping() const {
+  return message_case() == kPing;
+}
+inline bool WrapperMessage::_internal_has_ping() const {
+  return message_case() == kPing;
+}
+inline void WrapperMessage::set_has_ping() {
+  _impl_._oneof_case_[0] = kPing;
+}
+inline ::markethub::messaging::system::Ping* WrapperMessage::release_ping() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.ping)
+  if (message_case() == kPing) {
+    clear_has_message();
+    auto* temp = _impl_.message_.ping_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_security_definition_request() const {
-      return message_case() == kSecurityDefinitionRequest;
-    }
-    inline void WrapperMessage::set_has_security_definition_request() {
-      _impl_._oneof_case_[0] = kSecurityDefinitionRequest;
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionRequest *
-    WrapperMessage::release_security_definition_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_definition_request)
-      if (message_case() == kSecurityDefinitionRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_definition_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.security_definition_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::SecurityDefinitionRequest &
-    WrapperMessage::_internal_security_definition_request() const {
-      return message_case() == kSecurityDefinitionRequest
-                 ? *_impl_.message_.security_definition_request_
-                 : reinterpret_cast<::markethub::messaging::trading::SecurityDefinitionRequest &>(
-                       ::markethub::messaging::trading::
-                           _SecurityDefinitionRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::SecurityDefinitionRequest &
-    WrapperMessage::security_definition_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_definition_request)
-      return _internal_security_definition_request();
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionRequest *
-    WrapperMessage::unsafe_arena_release_security_definition_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_definition_request)
-      if (message_case() == kSecurityDefinitionRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_definition_request_;
-        _impl_.message_.security_definition_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_security_definition_request(
-        ::markethub::messaging::trading::SecurityDefinitionRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_security_definition_request();
-        _impl_.message_.security_definition_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_definition_request)
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionRequest *
-    WrapperMessage::_internal_mutable_security_definition_request() {
-      if (message_case() != kSecurityDefinitionRequest) {
-        clear_message();
-        set_has_security_definition_request();
-        _impl_.message_.security_definition_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::SecurityDefinitionRequest>(GetArena());
-      }
-      return _impl_.message_.security_definition_request_;
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionRequest *
-    WrapperMessage::mutable_security_definition_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::SecurityDefinitionRequest *_msg =
-          _internal_mutable_security_definition_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_definition_request)
-      return _msg;
-    }
+    _impl_.message_.ping_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::Ping& WrapperMessage::_internal_ping() const {
+  return message_case() == kPing ? *_impl_.message_.ping_ : reinterpret_cast<::markethub::messaging::system::Ping&>(::markethub::messaging::system::_Ping_default_instance_);
+}
+inline const ::markethub::messaging::system::Ping& WrapperMessage::ping() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.ping)
+  return _internal_ping();
+}
+inline ::markethub::messaging::system::Ping* WrapperMessage::unsafe_arena_release_ping() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.ping)
+  if (message_case() == kPing) {
+    clear_has_message();
+    auto* temp = _impl_.message_.ping_;
+    _impl_.message_.ping_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_ping(::markethub::messaging::system::Ping* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_ping();
+    _impl_.message_.ping_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.ping)
+}
+inline ::markethub::messaging::system::Ping* WrapperMessage::_internal_mutable_ping() {
+  if (message_case() != kPing) {
+    clear_message();
+    set_has_ping();
+    _impl_.message_.ping_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Ping>(GetArena());
+  }
+  return _impl_.message_.ping_;
+}
+inline ::markethub::messaging::system::Ping* WrapperMessage::mutable_ping() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::Ping* _msg = _internal_mutable_ping();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.ping)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.SecurityDefinitionResponse security_definition_response = 10;
-    inline bool WrapperMessage::has_security_definition_response() const {
-      return message_case() == kSecurityDefinitionResponse;
+// .markethub.messaging.system.Pong pong = 6;
+inline bool WrapperMessage::has_pong() const {
+  return message_case() == kPong;
+}
+inline bool WrapperMessage::_internal_has_pong() const {
+  return message_case() == kPong;
+}
+inline void WrapperMessage::set_has_pong() {
+  _impl_._oneof_case_[0] = kPong;
+}
+inline ::markethub::messaging::system::Pong* WrapperMessage::release_pong() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pong)
+  if (message_case() == kPong) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pong_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_security_definition_response() const {
-      return message_case() == kSecurityDefinitionResponse;
-    }
-    inline void WrapperMessage::set_has_security_definition_response() {
-      _impl_._oneof_case_[0] = kSecurityDefinitionResponse;
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionResponse *
-    WrapperMessage::release_security_definition_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_definition_response)
-      if (message_case() == kSecurityDefinitionResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_definition_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.security_definition_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::SecurityDefinitionResponse &
-    WrapperMessage::_internal_security_definition_response() const {
-      return message_case() == kSecurityDefinitionResponse
-                 ? *_impl_.message_.security_definition_response_
-                 : reinterpret_cast<::markethub::messaging::trading::SecurityDefinitionResponse &>(
-                       ::markethub::messaging::trading::
-                           _SecurityDefinitionResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::SecurityDefinitionResponse &
-    WrapperMessage::security_definition_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_definition_response)
-      return _internal_security_definition_response();
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionResponse *
-    WrapperMessage::unsafe_arena_release_security_definition_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_definition_response)
-      if (message_case() == kSecurityDefinitionResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_definition_response_;
-        _impl_.message_.security_definition_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_security_definition_response(
-        ::markethub::messaging::trading::SecurityDefinitionResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_security_definition_response();
-        _impl_.message_.security_definition_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_definition_response)
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionResponse *
-    WrapperMessage::_internal_mutable_security_definition_response() {
-      if (message_case() != kSecurityDefinitionResponse) {
-        clear_message();
-        set_has_security_definition_response();
-        _impl_.message_.security_definition_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::SecurityDefinitionResponse>(GetArena());
-      }
-      return _impl_.message_.security_definition_response_;
-    }
-    inline ::markethub::messaging::trading::SecurityDefinitionResponse *
-    WrapperMessage::mutable_security_definition_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::SecurityDefinitionResponse *_msg =
-          _internal_mutable_security_definition_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_definition_response)
-      return _msg;
-    }
+    _impl_.message_.pong_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::Pong& WrapperMessage::_internal_pong() const {
+  return message_case() == kPong ? *_impl_.message_.pong_ : reinterpret_cast<::markethub::messaging::system::Pong&>(::markethub::messaging::system::_Pong_default_instance_);
+}
+inline const ::markethub::messaging::system::Pong& WrapperMessage::pong() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pong)
+  return _internal_pong();
+}
+inline ::markethub::messaging::system::Pong* WrapperMessage::unsafe_arena_release_pong() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pong)
+  if (message_case() == kPong) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pong_;
+    _impl_.message_.pong_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_pong(::markethub::messaging::system::Pong* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_pong();
+    _impl_.message_.pong_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pong)
+}
+inline ::markethub::messaging::system::Pong* WrapperMessage::_internal_mutable_pong() {
+  if (message_case() != kPong) {
+    clear_message();
+    set_has_pong();
+    _impl_.message_.pong_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Pong>(GetArena());
+  }
+  return _impl_.message_.pong_;
+}
+inline ::markethub::messaging::system::Pong* WrapperMessage::mutable_pong() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::Pong* _msg = _internal_mutable_pong();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pong)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.MarketDataSuscriptionRequest market_data_suscription_request =
-    // 11;
-    inline bool WrapperMessage::has_market_data_suscription_request() const {
-      return message_case() == kMarketDataSuscriptionRequest;
+// .markethub.messaging.trading.SecurityListRequest security_list_request = 7;
+inline bool WrapperMessage::has_security_list_request() const {
+  return message_case() == kSecurityListRequest;
+}
+inline bool WrapperMessage::_internal_has_security_list_request() const {
+  return message_case() == kSecurityListRequest;
+}
+inline void WrapperMessage::set_has_security_list_request() {
+  _impl_._oneof_case_[0] = kSecurityListRequest;
+}
+inline ::markethub::messaging::trading::SecurityListRequest* WrapperMessage::release_security_list_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_list_request)
+  if (message_case() == kSecurityListRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_list_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_market_data_suscription_request() const {
-      return message_case() == kMarketDataSuscriptionRequest;
-    }
-    inline void WrapperMessage::set_has_market_data_suscription_request() {
-      _impl_._oneof_case_[0] = kMarketDataSuscriptionRequest;
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-    WrapperMessage::release_market_data_suscription_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.market_data_suscription_request)
-      if (message_case() == kMarketDataSuscriptionRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.market_data_suscription_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.market_data_suscription_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::MarketDataSuscriptionRequest &
-    WrapperMessage::_internal_market_data_suscription_request() const {
-      return message_case() == kMarketDataSuscriptionRequest
-                 ? *_impl_.message_.market_data_suscription_request_
-                 : reinterpret_cast<
-                       ::markethub::messaging::trading::MarketDataSuscriptionRequest &>(
-                       ::markethub::messaging::trading::
-                           _MarketDataSuscriptionRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::MarketDataSuscriptionRequest &
-    WrapperMessage::market_data_suscription_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.market_data_suscription_request)
-      return _internal_market_data_suscription_request();
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-    WrapperMessage::unsafe_arena_release_market_data_suscription_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.market_data_suscription_request)
-      if (message_case() == kMarketDataSuscriptionRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.market_data_suscription_request_;
-        _impl_.message_.market_data_suscription_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_market_data_suscription_request(
-        ::markethub::messaging::trading::MarketDataSuscriptionRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_market_data_suscription_request();
-        _impl_.message_.market_data_suscription_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.market_data_suscription_request)
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-    WrapperMessage::_internal_mutable_market_data_suscription_request() {
-      if (message_case() != kMarketDataSuscriptionRequest) {
-        clear_message();
-        set_has_market_data_suscription_request();
-        _impl_.message_.market_data_suscription_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::MarketDataSuscriptionRequest>(GetArena());
-      }
-      return _impl_.message_.market_data_suscription_request_;
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionRequest *
-    WrapperMessage::mutable_market_data_suscription_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::MarketDataSuscriptionRequest *_msg =
-          _internal_mutable_market_data_suscription_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.market_data_suscription_request)
-      return _msg;
-    }
+    _impl_.message_.security_list_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::SecurityListRequest& WrapperMessage::_internal_security_list_request() const {
+  return message_case() == kSecurityListRequest ? *_impl_.message_.security_list_request_ : reinterpret_cast<::markethub::messaging::trading::SecurityListRequest&>(::markethub::messaging::trading::_SecurityListRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::SecurityListRequest& WrapperMessage::security_list_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_list_request)
+  return _internal_security_list_request();
+}
+inline ::markethub::messaging::trading::SecurityListRequest* WrapperMessage::unsafe_arena_release_security_list_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_list_request)
+  if (message_case() == kSecurityListRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_list_request_;
+    _impl_.message_.security_list_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_security_list_request(::markethub::messaging::trading::SecurityListRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_security_list_request();
+    _impl_.message_.security_list_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_list_request)
+}
+inline ::markethub::messaging::trading::SecurityListRequest* WrapperMessage::_internal_mutable_security_list_request() {
+  if (message_case() != kSecurityListRequest) {
+    clear_message();
+    set_has_security_list_request();
+    _impl_.message_.security_list_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::SecurityListRequest>(GetArena());
+  }
+  return _impl_.message_.security_list_request_;
+}
+inline ::markethub::messaging::trading::SecurityListRequest* WrapperMessage::mutable_security_list_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::SecurityListRequest* _msg = _internal_mutable_security_list_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_list_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.MarketDataSuscriptionResponse market_data_suscription_response =
-    // 12;
-    inline bool WrapperMessage::has_market_data_suscription_response() const {
-      return message_case() == kMarketDataSuscriptionResponse;
+// .markethub.messaging.trading.SecurityListResponse security_list_response = 8;
+inline bool WrapperMessage::has_security_list_response() const {
+  return message_case() == kSecurityListResponse;
+}
+inline bool WrapperMessage::_internal_has_security_list_response() const {
+  return message_case() == kSecurityListResponse;
+}
+inline void WrapperMessage::set_has_security_list_response() {
+  _impl_._oneof_case_[0] = kSecurityListResponse;
+}
+inline ::markethub::messaging::trading::SecurityListResponse* WrapperMessage::release_security_list_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_list_response)
+  if (message_case() == kSecurityListResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_list_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_market_data_suscription_response() const {
-      return message_case() == kMarketDataSuscriptionResponse;
-    }
-    inline void WrapperMessage::set_has_market_data_suscription_response() {
-      _impl_._oneof_case_[0] = kMarketDataSuscriptionResponse;
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-    WrapperMessage::release_market_data_suscription_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.market_data_suscription_response)
-      if (message_case() == kMarketDataSuscriptionResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.market_data_suscription_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.market_data_suscription_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::MarketDataSuscriptionResponse &
-    WrapperMessage::_internal_market_data_suscription_response() const {
-      return message_case() == kMarketDataSuscriptionResponse
-                 ? *_impl_.message_.market_data_suscription_response_
-                 : reinterpret_cast<
-                       ::markethub::messaging::trading::MarketDataSuscriptionResponse &>(
-                       ::markethub::messaging::trading::
-                           _MarketDataSuscriptionResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::MarketDataSuscriptionResponse &
-    WrapperMessage::market_data_suscription_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.market_data_suscription_response)
-      return _internal_market_data_suscription_response();
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-    WrapperMessage::unsafe_arena_release_market_data_suscription_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.market_data_suscription_response)
-      if (message_case() == kMarketDataSuscriptionResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.market_data_suscription_response_;
-        _impl_.message_.market_data_suscription_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_market_data_suscription_response(
-        ::markethub::messaging::trading::MarketDataSuscriptionResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_market_data_suscription_response();
-        _impl_.message_.market_data_suscription_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.market_data_suscription_response)
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-    WrapperMessage::_internal_mutable_market_data_suscription_response() {
-      if (message_case() != kMarketDataSuscriptionResponse) {
-        clear_message();
-        set_has_market_data_suscription_response();
-        _impl_.message_.market_data_suscription_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::MarketDataSuscriptionResponse>(GetArena());
-      }
-      return _impl_.message_.market_data_suscription_response_;
-    }
-    inline ::markethub::messaging::trading::MarketDataSuscriptionResponse *
-    WrapperMessage::mutable_market_data_suscription_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::MarketDataSuscriptionResponse *_msg =
-          _internal_mutable_market_data_suscription_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.market_data_suscription_response)
-      return _msg;
-    }
+    _impl_.message_.security_list_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::SecurityListResponse& WrapperMessage::_internal_security_list_response() const {
+  return message_case() == kSecurityListResponse ? *_impl_.message_.security_list_response_ : reinterpret_cast<::markethub::messaging::trading::SecurityListResponse&>(::markethub::messaging::trading::_SecurityListResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::SecurityListResponse& WrapperMessage::security_list_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_list_response)
+  return _internal_security_list_response();
+}
+inline ::markethub::messaging::trading::SecurityListResponse* WrapperMessage::unsafe_arena_release_security_list_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_list_response)
+  if (message_case() == kSecurityListResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_list_response_;
+    _impl_.message_.security_list_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_security_list_response(::markethub::messaging::trading::SecurityListResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_security_list_response();
+    _impl_.message_.security_list_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_list_response)
+}
+inline ::markethub::messaging::trading::SecurityListResponse* WrapperMessage::_internal_mutable_security_list_response() {
+  if (message_case() != kSecurityListResponse) {
+    clear_message();
+    set_has_security_list_response();
+    _impl_.message_.security_list_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::SecurityListResponse>(GetArena());
+  }
+  return _impl_.message_.security_list_response_;
+}
+inline ::markethub::messaging::trading::SecurityListResponse* WrapperMessage::mutable_security_list_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::SecurityListResponse* _msg = _internal_mutable_security_list_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_list_response)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.NewOrderRequest new_order_request = 13;
-    inline bool WrapperMessage::has_new_order_request() const {
-      return message_case() == kNewOrderRequest;
+// .markethub.messaging.trading.SecurityDefinitionRequest security_definition_request = 9;
+inline bool WrapperMessage::has_security_definition_request() const {
+  return message_case() == kSecurityDefinitionRequest;
+}
+inline bool WrapperMessage::_internal_has_security_definition_request() const {
+  return message_case() == kSecurityDefinitionRequest;
+}
+inline void WrapperMessage::set_has_security_definition_request() {
+  _impl_._oneof_case_[0] = kSecurityDefinitionRequest;
+}
+inline ::markethub::messaging::trading::SecurityDefinitionRequest* WrapperMessage::release_security_definition_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_definition_request)
+  if (message_case() == kSecurityDefinitionRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_definition_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_new_order_request() const {
-      return message_case() == kNewOrderRequest;
-    }
-    inline void WrapperMessage::set_has_new_order_request() {
-      _impl_._oneof_case_[0] = kNewOrderRequest;
-    }
-    inline ::markethub::messaging::trading::NewOrderRequest *
-    WrapperMessage::release_new_order_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.new_order_request)
-      if (message_case() == kNewOrderRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.new_order_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.new_order_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::NewOrderRequest &
-    WrapperMessage::_internal_new_order_request() const {
-      return message_case() == kNewOrderRequest
-                 ? *_impl_.message_.new_order_request_
-                 : reinterpret_cast<::markethub::messaging::trading::NewOrderRequest &>(
-                       ::markethub::messaging::trading::_NewOrderRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::NewOrderRequest &
-    WrapperMessage::new_order_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.new_order_request)
-      return _internal_new_order_request();
-    }
-    inline ::markethub::messaging::trading::NewOrderRequest *
-    WrapperMessage::unsafe_arena_release_new_order_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.new_order_request)
-      if (message_case() == kNewOrderRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.new_order_request_;
-        _impl_.message_.new_order_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_new_order_request(
-        ::markethub::messaging::trading::NewOrderRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_new_order_request();
-        _impl_.message_.new_order_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.new_order_request)
-    }
-    inline ::markethub::messaging::trading::NewOrderRequest *
-    WrapperMessage::_internal_mutable_new_order_request() {
-      if (message_case() != kNewOrderRequest) {
-        clear_message();
-        set_has_new_order_request();
-        _impl_.message_.new_order_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::NewOrderRequest>(GetArena());
-      }
-      return _impl_.message_.new_order_request_;
-    }
-    inline ::markethub::messaging::trading::NewOrderRequest *
-    WrapperMessage::mutable_new_order_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::NewOrderRequest *_msg =
-          _internal_mutable_new_order_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.new_order_request)
-      return _msg;
-    }
+    _impl_.message_.security_definition_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::SecurityDefinitionRequest& WrapperMessage::_internal_security_definition_request() const {
+  return message_case() == kSecurityDefinitionRequest ? *_impl_.message_.security_definition_request_ : reinterpret_cast<::markethub::messaging::trading::SecurityDefinitionRequest&>(::markethub::messaging::trading::_SecurityDefinitionRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::SecurityDefinitionRequest& WrapperMessage::security_definition_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_definition_request)
+  return _internal_security_definition_request();
+}
+inline ::markethub::messaging::trading::SecurityDefinitionRequest* WrapperMessage::unsafe_arena_release_security_definition_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_definition_request)
+  if (message_case() == kSecurityDefinitionRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_definition_request_;
+    _impl_.message_.security_definition_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_security_definition_request(::markethub::messaging::trading::SecurityDefinitionRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_security_definition_request();
+    _impl_.message_.security_definition_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_definition_request)
+}
+inline ::markethub::messaging::trading::SecurityDefinitionRequest* WrapperMessage::_internal_mutable_security_definition_request() {
+  if (message_case() != kSecurityDefinitionRequest) {
+    clear_message();
+    set_has_security_definition_request();
+    _impl_.message_.security_definition_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::SecurityDefinitionRequest>(GetArena());
+  }
+  return _impl_.message_.security_definition_request_;
+}
+inline ::markethub::messaging::trading::SecurityDefinitionRequest* WrapperMessage::mutable_security_definition_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::SecurityDefinitionRequest* _msg = _internal_mutable_security_definition_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_definition_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.CancelOrderRequest cancel_order_request = 14;
-    inline bool WrapperMessage::has_cancel_order_request() const {
-      return message_case() == kCancelOrderRequest;
+// .markethub.messaging.trading.SecurityDefinitionResponse security_definition_response = 10;
+inline bool WrapperMessage::has_security_definition_response() const {
+  return message_case() == kSecurityDefinitionResponse;
+}
+inline bool WrapperMessage::_internal_has_security_definition_response() const {
+  return message_case() == kSecurityDefinitionResponse;
+}
+inline void WrapperMessage::set_has_security_definition_response() {
+  _impl_._oneof_case_[0] = kSecurityDefinitionResponse;
+}
+inline ::markethub::messaging::trading::SecurityDefinitionResponse* WrapperMessage::release_security_definition_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_definition_response)
+  if (message_case() == kSecurityDefinitionResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_definition_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_cancel_order_request() const {
-      return message_case() == kCancelOrderRequest;
-    }
-    inline void WrapperMessage::set_has_cancel_order_request() {
-      _impl_._oneof_case_[0] = kCancelOrderRequest;
-    }
-    inline ::markethub::messaging::trading::CancelOrderRequest *
-    WrapperMessage::release_cancel_order_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.cancel_order_request)
-      if (message_case() == kCancelOrderRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.cancel_order_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.cancel_order_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::CancelOrderRequest &
-    WrapperMessage::_internal_cancel_order_request() const {
-      return message_case() == kCancelOrderRequest
-                 ? *_impl_.message_.cancel_order_request_
-                 : reinterpret_cast<::markethub::messaging::trading::CancelOrderRequest &>(
-                       ::markethub::messaging::trading::_CancelOrderRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::CancelOrderRequest &
-    WrapperMessage::cancel_order_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.cancel_order_request)
-      return _internal_cancel_order_request();
-    }
-    inline ::markethub::messaging::trading::CancelOrderRequest *
-    WrapperMessage::unsafe_arena_release_cancel_order_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.cancel_order_request)
-      if (message_case() == kCancelOrderRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.cancel_order_request_;
-        _impl_.message_.cancel_order_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_cancel_order_request(
-        ::markethub::messaging::trading::CancelOrderRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_cancel_order_request();
-        _impl_.message_.cancel_order_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.cancel_order_request)
-    }
-    inline ::markethub::messaging::trading::CancelOrderRequest *
-    WrapperMessage::_internal_mutable_cancel_order_request() {
-      if (message_case() != kCancelOrderRequest) {
-        clear_message();
-        set_has_cancel_order_request();
-        _impl_.message_.cancel_order_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::CancelOrderRequest>(GetArena());
-      }
-      return _impl_.message_.cancel_order_request_;
-    }
-    inline ::markethub::messaging::trading::CancelOrderRequest *
-    WrapperMessage::mutable_cancel_order_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::CancelOrderRequest *_msg =
-          _internal_mutable_cancel_order_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.cancel_order_request)
-      return _msg;
-    }
+    _impl_.message_.security_definition_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::SecurityDefinitionResponse& WrapperMessage::_internal_security_definition_response() const {
+  return message_case() == kSecurityDefinitionResponse ? *_impl_.message_.security_definition_response_ : reinterpret_cast<::markethub::messaging::trading::SecurityDefinitionResponse&>(::markethub::messaging::trading::_SecurityDefinitionResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::SecurityDefinitionResponse& WrapperMessage::security_definition_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_definition_response)
+  return _internal_security_definition_response();
+}
+inline ::markethub::messaging::trading::SecurityDefinitionResponse* WrapperMessage::unsafe_arena_release_security_definition_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_definition_response)
+  if (message_case() == kSecurityDefinitionResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_definition_response_;
+    _impl_.message_.security_definition_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_security_definition_response(::markethub::messaging::trading::SecurityDefinitionResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_security_definition_response();
+    _impl_.message_.security_definition_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_definition_response)
+}
+inline ::markethub::messaging::trading::SecurityDefinitionResponse* WrapperMessage::_internal_mutable_security_definition_response() {
+  if (message_case() != kSecurityDefinitionResponse) {
+    clear_message();
+    set_has_security_definition_response();
+    _impl_.message_.security_definition_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::SecurityDefinitionResponse>(GetArena());
+  }
+  return _impl_.message_.security_definition_response_;
+}
+inline ::markethub::messaging::trading::SecurityDefinitionResponse* WrapperMessage::mutable_security_definition_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::SecurityDefinitionResponse* _msg = _internal_mutable_security_definition_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_definition_response)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.ReplaceOrderRequest replace_order_request = 15;
-    inline bool WrapperMessage::has_replace_order_request() const {
-      return message_case() == kReplaceOrderRequest;
+// .markethub.messaging.trading.MarketDataSuscriptionRequest market_data_suscription_request = 11;
+inline bool WrapperMessage::has_market_data_suscription_request() const {
+  return message_case() == kMarketDataSuscriptionRequest;
+}
+inline bool WrapperMessage::_internal_has_market_data_suscription_request() const {
+  return message_case() == kMarketDataSuscriptionRequest;
+}
+inline void WrapperMessage::set_has_market_data_suscription_request() {
+  _impl_._oneof_case_[0] = kMarketDataSuscriptionRequest;
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionRequest* WrapperMessage::release_market_data_suscription_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.market_data_suscription_request)
+  if (message_case() == kMarketDataSuscriptionRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.market_data_suscription_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_replace_order_request() const {
-      return message_case() == kReplaceOrderRequest;
-    }
-    inline void WrapperMessage::set_has_replace_order_request() {
-      _impl_._oneof_case_[0] = kReplaceOrderRequest;
-    }
-    inline ::markethub::messaging::trading::ReplaceOrderRequest *
-    WrapperMessage::release_replace_order_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.replace_order_request)
-      if (message_case() == kReplaceOrderRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.replace_order_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.replace_order_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::ReplaceOrderRequest &
-    WrapperMessage::_internal_replace_order_request() const {
-      return message_case() == kReplaceOrderRequest
-                 ? *_impl_.message_.replace_order_request_
-                 : reinterpret_cast<::markethub::messaging::trading::ReplaceOrderRequest &>(
-                       ::markethub::messaging::trading::_ReplaceOrderRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::ReplaceOrderRequest &
-    WrapperMessage::replace_order_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.replace_order_request)
-      return _internal_replace_order_request();
-    }
-    inline ::markethub::messaging::trading::ReplaceOrderRequest *
-    WrapperMessage::unsafe_arena_release_replace_order_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.replace_order_request)
-      if (message_case() == kReplaceOrderRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.replace_order_request_;
-        _impl_.message_.replace_order_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_replace_order_request(
-        ::markethub::messaging::trading::ReplaceOrderRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_replace_order_request();
-        _impl_.message_.replace_order_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.replace_order_request)
-    }
-    inline ::markethub::messaging::trading::ReplaceOrderRequest *
-    WrapperMessage::_internal_mutable_replace_order_request() {
-      if (message_case() != kReplaceOrderRequest) {
-        clear_message();
-        set_has_replace_order_request();
-        _impl_.message_.replace_order_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::ReplaceOrderRequest>(GetArena());
-      }
-      return _impl_.message_.replace_order_request_;
-    }
-    inline ::markethub::messaging::trading::ReplaceOrderRequest *
-    WrapperMessage::mutable_replace_order_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::ReplaceOrderRequest *_msg =
-          _internal_mutable_replace_order_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.replace_order_request)
-      return _msg;
-    }
+    _impl_.message_.market_data_suscription_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::MarketDataSuscriptionRequest& WrapperMessage::_internal_market_data_suscription_request() const {
+  return message_case() == kMarketDataSuscriptionRequest ? *_impl_.message_.market_data_suscription_request_ : reinterpret_cast<::markethub::messaging::trading::MarketDataSuscriptionRequest&>(::markethub::messaging::trading::_MarketDataSuscriptionRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::MarketDataSuscriptionRequest& WrapperMessage::market_data_suscription_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.market_data_suscription_request)
+  return _internal_market_data_suscription_request();
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionRequest* WrapperMessage::unsafe_arena_release_market_data_suscription_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.market_data_suscription_request)
+  if (message_case() == kMarketDataSuscriptionRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.market_data_suscription_request_;
+    _impl_.message_.market_data_suscription_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_market_data_suscription_request(::markethub::messaging::trading::MarketDataSuscriptionRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_market_data_suscription_request();
+    _impl_.message_.market_data_suscription_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.market_data_suscription_request)
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionRequest* WrapperMessage::_internal_mutable_market_data_suscription_request() {
+  if (message_case() != kMarketDataSuscriptionRequest) {
+    clear_message();
+    set_has_market_data_suscription_request();
+    _impl_.message_.market_data_suscription_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::MarketDataSuscriptionRequest>(GetArena());
+  }
+  return _impl_.message_.market_data_suscription_request_;
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionRequest* WrapperMessage::mutable_market_data_suscription_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::MarketDataSuscriptionRequest* _msg = _internal_mutable_market_data_suscription_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.market_data_suscription_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.ExecutionReport execution_report = 16;
-    inline bool WrapperMessage::has_execution_report() const {
-      return message_case() == kExecutionReport;
+// .markethub.messaging.trading.MarketDataSuscriptionResponse market_data_suscription_response = 12;
+inline bool WrapperMessage::has_market_data_suscription_response() const {
+  return message_case() == kMarketDataSuscriptionResponse;
+}
+inline bool WrapperMessage::_internal_has_market_data_suscription_response() const {
+  return message_case() == kMarketDataSuscriptionResponse;
+}
+inline void WrapperMessage::set_has_market_data_suscription_response() {
+  _impl_._oneof_case_[0] = kMarketDataSuscriptionResponse;
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionResponse* WrapperMessage::release_market_data_suscription_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.market_data_suscription_response)
+  if (message_case() == kMarketDataSuscriptionResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.market_data_suscription_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_execution_report() const {
-      return message_case() == kExecutionReport;
-    }
-    inline void WrapperMessage::set_has_execution_report() {
-      _impl_._oneof_case_[0] = kExecutionReport;
-    }
-    inline ::markethub::messaging::trading::ExecutionReport *
-    WrapperMessage::release_execution_report() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.execution_report)
-      if (message_case() == kExecutionReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.execution_report_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.execution_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::ExecutionReport &
-    WrapperMessage::_internal_execution_report() const {
-      return message_case() == kExecutionReport
-                 ? *_impl_.message_.execution_report_
-                 : reinterpret_cast<::markethub::messaging::trading::ExecutionReport &>(
-                       ::markethub::messaging::trading::_ExecutionReport_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::ExecutionReport &
-    WrapperMessage::execution_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.execution_report)
-      return _internal_execution_report();
-    }
-    inline ::markethub::messaging::trading::ExecutionReport *
-    WrapperMessage::unsafe_arena_release_execution_report() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.execution_report)
-      if (message_case() == kExecutionReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.execution_report_;
-        _impl_.message_.execution_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_execution_report(
-        ::markethub::messaging::trading::ExecutionReport *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_execution_report();
-        _impl_.message_.execution_report_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.execution_report)
-    }
-    inline ::markethub::messaging::trading::ExecutionReport *
-    WrapperMessage::_internal_mutable_execution_report() {
-      if (message_case() != kExecutionReport) {
-        clear_message();
-        set_has_execution_report();
-        _impl_.message_.execution_report_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::ExecutionReport>(GetArena());
-      }
-      return _impl_.message_.execution_report_;
-    }
-    inline ::markethub::messaging::trading::ExecutionReport *
-    WrapperMessage::mutable_execution_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::ExecutionReport *_msg = _internal_mutable_execution_report();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.execution_report)
-      return _msg;
-    }
+    _impl_.message_.market_data_suscription_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::MarketDataSuscriptionResponse& WrapperMessage::_internal_market_data_suscription_response() const {
+  return message_case() == kMarketDataSuscriptionResponse ? *_impl_.message_.market_data_suscription_response_ : reinterpret_cast<::markethub::messaging::trading::MarketDataSuscriptionResponse&>(::markethub::messaging::trading::_MarketDataSuscriptionResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::MarketDataSuscriptionResponse& WrapperMessage::market_data_suscription_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.market_data_suscription_response)
+  return _internal_market_data_suscription_response();
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionResponse* WrapperMessage::unsafe_arena_release_market_data_suscription_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.market_data_suscription_response)
+  if (message_case() == kMarketDataSuscriptionResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.market_data_suscription_response_;
+    _impl_.message_.market_data_suscription_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_market_data_suscription_response(::markethub::messaging::trading::MarketDataSuscriptionResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_market_data_suscription_response();
+    _impl_.message_.market_data_suscription_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.market_data_suscription_response)
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionResponse* WrapperMessage::_internal_mutable_market_data_suscription_response() {
+  if (message_case() != kMarketDataSuscriptionResponse) {
+    clear_message();
+    set_has_market_data_suscription_response();
+    _impl_.message_.market_data_suscription_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::MarketDataSuscriptionResponse>(GetArena());
+  }
+  return _impl_.message_.market_data_suscription_response_;
+}
+inline ::markethub::messaging::trading::MarketDataSuscriptionResponse* WrapperMessage::mutable_market_data_suscription_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::MarketDataSuscriptionResponse* _msg = _internal_mutable_market_data_suscription_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.market_data_suscription_response)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.OrderStatusRequest order_status_request = 17;
-    inline bool WrapperMessage::has_order_status_request() const {
-      return message_case() == kOrderStatusRequest;
+// .markethub.messaging.trading.NewOrderRequest new_order_request = 13;
+inline bool WrapperMessage::has_new_order_request() const {
+  return message_case() == kNewOrderRequest;
+}
+inline bool WrapperMessage::_internal_has_new_order_request() const {
+  return message_case() == kNewOrderRequest;
+}
+inline void WrapperMessage::set_has_new_order_request() {
+  _impl_._oneof_case_[0] = kNewOrderRequest;
+}
+inline ::markethub::messaging::trading::NewOrderRequest* WrapperMessage::release_new_order_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.new_order_request)
+  if (message_case() == kNewOrderRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.new_order_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_order_status_request() const {
-      return message_case() == kOrderStatusRequest;
-    }
-    inline void WrapperMessage::set_has_order_status_request() {
-      _impl_._oneof_case_[0] = kOrderStatusRequest;
-    }
-    inline ::markethub::messaging::trading::OrderStatusRequest *
-    WrapperMessage::release_order_status_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.order_status_request)
-      if (message_case() == kOrderStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.order_status_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.order_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::OrderStatusRequest &
-    WrapperMessage::_internal_order_status_request() const {
-      return message_case() == kOrderStatusRequest
-                 ? *_impl_.message_.order_status_request_
-                 : reinterpret_cast<::markethub::messaging::trading::OrderStatusRequest &>(
-                       ::markethub::messaging::trading::_OrderStatusRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::OrderStatusRequest &
-    WrapperMessage::order_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.order_status_request)
-      return _internal_order_status_request();
-    }
-    inline ::markethub::messaging::trading::OrderStatusRequest *
-    WrapperMessage::unsafe_arena_release_order_status_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.order_status_request)
-      if (message_case() == kOrderStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.order_status_request_;
-        _impl_.message_.order_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_order_status_request(
-        ::markethub::messaging::trading::OrderStatusRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_order_status_request();
-        _impl_.message_.order_status_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.order_status_request)
-    }
-    inline ::markethub::messaging::trading::OrderStatusRequest *
-    WrapperMessage::_internal_mutable_order_status_request() {
-      if (message_case() != kOrderStatusRequest) {
-        clear_message();
-        set_has_order_status_request();
-        _impl_.message_.order_status_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::OrderStatusRequest>(GetArena());
-      }
-      return _impl_.message_.order_status_request_;
-    }
-    inline ::markethub::messaging::trading::OrderStatusRequest *
-    WrapperMessage::mutable_order_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::OrderStatusRequest *_msg =
-          _internal_mutable_order_status_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.order_status_request)
-      return _msg;
-    }
+    _impl_.message_.new_order_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::NewOrderRequest& WrapperMessage::_internal_new_order_request() const {
+  return message_case() == kNewOrderRequest ? *_impl_.message_.new_order_request_ : reinterpret_cast<::markethub::messaging::trading::NewOrderRequest&>(::markethub::messaging::trading::_NewOrderRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::NewOrderRequest& WrapperMessage::new_order_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.new_order_request)
+  return _internal_new_order_request();
+}
+inline ::markethub::messaging::trading::NewOrderRequest* WrapperMessage::unsafe_arena_release_new_order_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.new_order_request)
+  if (message_case() == kNewOrderRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.new_order_request_;
+    _impl_.message_.new_order_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_new_order_request(::markethub::messaging::trading::NewOrderRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_new_order_request();
+    _impl_.message_.new_order_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.new_order_request)
+}
+inline ::markethub::messaging::trading::NewOrderRequest* WrapperMessage::_internal_mutable_new_order_request() {
+  if (message_case() != kNewOrderRequest) {
+    clear_message();
+    set_has_new_order_request();
+    _impl_.message_.new_order_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::NewOrderRequest>(GetArena());
+  }
+  return _impl_.message_.new_order_request_;
+}
+inline ::markethub::messaging::trading::NewOrderRequest* WrapperMessage::mutable_new_order_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::NewOrderRequest* _msg = _internal_mutable_new_order_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.new_order_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.TradingSessionStatusRequest trading_session_status_request = 18;
-    inline bool WrapperMessage::has_trading_session_status_request() const {
-      return message_case() == kTradingSessionStatusRequest;
+// .markethub.messaging.trading.CancelOrderRequest cancel_order_request = 14;
+inline bool WrapperMessage::has_cancel_order_request() const {
+  return message_case() == kCancelOrderRequest;
+}
+inline bool WrapperMessage::_internal_has_cancel_order_request() const {
+  return message_case() == kCancelOrderRequest;
+}
+inline void WrapperMessage::set_has_cancel_order_request() {
+  _impl_._oneof_case_[0] = kCancelOrderRequest;
+}
+inline ::markethub::messaging::trading::CancelOrderRequest* WrapperMessage::release_cancel_order_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.cancel_order_request)
+  if (message_case() == kCancelOrderRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.cancel_order_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_trading_session_status_request() const {
-      return message_case() == kTradingSessionStatusRequest;
-    }
-    inline void WrapperMessage::set_has_trading_session_status_request() {
-      _impl_._oneof_case_[0] = kTradingSessionStatusRequest;
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusRequest *
-    WrapperMessage::release_trading_session_status_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trading_session_status_request)
-      if (message_case() == kTradingSessionStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trading_session_status_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.trading_session_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::TradingSessionStatusRequest &
-    WrapperMessage::_internal_trading_session_status_request() const {
-      return message_case() == kTradingSessionStatusRequest
-                 ? *_impl_.message_.trading_session_status_request_
-                 : reinterpret_cast<::markethub::messaging::trading::TradingSessionStatusRequest &>(
-                       ::markethub::messaging::trading::
-                           _TradingSessionStatusRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::TradingSessionStatusRequest &
-    WrapperMessage::trading_session_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trading_session_status_request)
-      return _internal_trading_session_status_request();
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusRequest *
-    WrapperMessage::unsafe_arena_release_trading_session_status_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trading_session_status_request)
-      if (message_case() == kTradingSessionStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trading_session_status_request_;
-        _impl_.message_.trading_session_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_trading_session_status_request(
-        ::markethub::messaging::trading::TradingSessionStatusRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_trading_session_status_request();
-        _impl_.message_.trading_session_status_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trading_session_status_request)
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusRequest *
-    WrapperMessage::_internal_mutable_trading_session_status_request() {
-      if (message_case() != kTradingSessionStatusRequest) {
-        clear_message();
-        set_has_trading_session_status_request();
-        _impl_.message_.trading_session_status_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::TradingSessionStatusRequest>(GetArena());
-      }
-      return _impl_.message_.trading_session_status_request_;
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusRequest *
-    WrapperMessage::mutable_trading_session_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::TradingSessionStatusRequest *_msg =
-          _internal_mutable_trading_session_status_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trading_session_status_request)
-      return _msg;
-    }
+    _impl_.message_.cancel_order_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::CancelOrderRequest& WrapperMessage::_internal_cancel_order_request() const {
+  return message_case() == kCancelOrderRequest ? *_impl_.message_.cancel_order_request_ : reinterpret_cast<::markethub::messaging::trading::CancelOrderRequest&>(::markethub::messaging::trading::_CancelOrderRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::CancelOrderRequest& WrapperMessage::cancel_order_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.cancel_order_request)
+  return _internal_cancel_order_request();
+}
+inline ::markethub::messaging::trading::CancelOrderRequest* WrapperMessage::unsafe_arena_release_cancel_order_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.cancel_order_request)
+  if (message_case() == kCancelOrderRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.cancel_order_request_;
+    _impl_.message_.cancel_order_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_cancel_order_request(::markethub::messaging::trading::CancelOrderRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_cancel_order_request();
+    _impl_.message_.cancel_order_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.cancel_order_request)
+}
+inline ::markethub::messaging::trading::CancelOrderRequest* WrapperMessage::_internal_mutable_cancel_order_request() {
+  if (message_case() != kCancelOrderRequest) {
+    clear_message();
+    set_has_cancel_order_request();
+    _impl_.message_.cancel_order_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::CancelOrderRequest>(GetArena());
+  }
+  return _impl_.message_.cancel_order_request_;
+}
+inline ::markethub::messaging::trading::CancelOrderRequest* WrapperMessage::mutable_cancel_order_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::CancelOrderRequest* _msg = _internal_mutable_cancel_order_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.cancel_order_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.TradingSessionStatusResponse trading_session_status_response =
-    // 19;
-    inline bool WrapperMessage::has_trading_session_status_response() const {
-      return message_case() == kTradingSessionStatusResponse;
+// .markethub.messaging.trading.ReplaceOrderRequest replace_order_request = 15;
+inline bool WrapperMessage::has_replace_order_request() const {
+  return message_case() == kReplaceOrderRequest;
+}
+inline bool WrapperMessage::_internal_has_replace_order_request() const {
+  return message_case() == kReplaceOrderRequest;
+}
+inline void WrapperMessage::set_has_replace_order_request() {
+  _impl_._oneof_case_[0] = kReplaceOrderRequest;
+}
+inline ::markethub::messaging::trading::ReplaceOrderRequest* WrapperMessage::release_replace_order_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.replace_order_request)
+  if (message_case() == kReplaceOrderRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.replace_order_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_trading_session_status_response() const {
-      return message_case() == kTradingSessionStatusResponse;
-    }
-    inline void WrapperMessage::set_has_trading_session_status_response() {
-      _impl_._oneof_case_[0] = kTradingSessionStatusResponse;
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusResponse *
-    WrapperMessage::release_trading_session_status_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trading_session_status_response)
-      if (message_case() == kTradingSessionStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trading_session_status_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.trading_session_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::TradingSessionStatusResponse &
-    WrapperMessage::_internal_trading_session_status_response() const {
-      return message_case() == kTradingSessionStatusResponse
-                 ? *_impl_.message_.trading_session_status_response_
-                 : reinterpret_cast<
-                       ::markethub::messaging::trading::TradingSessionStatusResponse &>(
-                       ::markethub::messaging::trading::
-                           _TradingSessionStatusResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::TradingSessionStatusResponse &
-    WrapperMessage::trading_session_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trading_session_status_response)
-      return _internal_trading_session_status_response();
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusResponse *
-    WrapperMessage::unsafe_arena_release_trading_session_status_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trading_session_status_response)
-      if (message_case() == kTradingSessionStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trading_session_status_response_;
-        _impl_.message_.trading_session_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_trading_session_status_response(
-        ::markethub::messaging::trading::TradingSessionStatusResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_trading_session_status_response();
-        _impl_.message_.trading_session_status_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trading_session_status_response)
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusResponse *
-    WrapperMessage::_internal_mutable_trading_session_status_response() {
-      if (message_case() != kTradingSessionStatusResponse) {
-        clear_message();
-        set_has_trading_session_status_response();
-        _impl_.message_.trading_session_status_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::TradingSessionStatusResponse>(GetArena());
-      }
-      return _impl_.message_.trading_session_status_response_;
-    }
-    inline ::markethub::messaging::trading::TradingSessionStatusResponse *
-    WrapperMessage::mutable_trading_session_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::TradingSessionStatusResponse *_msg =
-          _internal_mutable_trading_session_status_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trading_session_status_response)
-      return _msg;
-    }
+    _impl_.message_.replace_order_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::ReplaceOrderRequest& WrapperMessage::_internal_replace_order_request() const {
+  return message_case() == kReplaceOrderRequest ? *_impl_.message_.replace_order_request_ : reinterpret_cast<::markethub::messaging::trading::ReplaceOrderRequest&>(::markethub::messaging::trading::_ReplaceOrderRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::ReplaceOrderRequest& WrapperMessage::replace_order_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.replace_order_request)
+  return _internal_replace_order_request();
+}
+inline ::markethub::messaging::trading::ReplaceOrderRequest* WrapperMessage::unsafe_arena_release_replace_order_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.replace_order_request)
+  if (message_case() == kReplaceOrderRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.replace_order_request_;
+    _impl_.message_.replace_order_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_replace_order_request(::markethub::messaging::trading::ReplaceOrderRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_replace_order_request();
+    _impl_.message_.replace_order_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.replace_order_request)
+}
+inline ::markethub::messaging::trading::ReplaceOrderRequest* WrapperMessage::_internal_mutable_replace_order_request() {
+  if (message_case() != kReplaceOrderRequest) {
+    clear_message();
+    set_has_replace_order_request();
+    _impl_.message_.replace_order_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::ReplaceOrderRequest>(GetArena());
+  }
+  return _impl_.message_.replace_order_request_;
+}
+inline ::markethub::messaging::trading::ReplaceOrderRequest* WrapperMessage::mutable_replace_order_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::ReplaceOrderRequest* _msg = _internal_mutable_replace_order_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.replace_order_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.MassCancelRequest mass_cancel_request = 20;
-    inline bool WrapperMessage::has_mass_cancel_request() const {
-      return message_case() == kMassCancelRequest;
+// .markethub.messaging.trading.ExecutionReport execution_report = 16;
+inline bool WrapperMessage::has_execution_report() const {
+  return message_case() == kExecutionReport;
+}
+inline bool WrapperMessage::_internal_has_execution_report() const {
+  return message_case() == kExecutionReport;
+}
+inline void WrapperMessage::set_has_execution_report() {
+  _impl_._oneof_case_[0] = kExecutionReport;
+}
+inline ::markethub::messaging::trading::ExecutionReport* WrapperMessage::release_execution_report() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.execution_report)
+  if (message_case() == kExecutionReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.execution_report_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_mass_cancel_request() const {
-      return message_case() == kMassCancelRequest;
-    }
-    inline void WrapperMessage::set_has_mass_cancel_request() {
-      _impl_._oneof_case_[0] = kMassCancelRequest;
-    }
-    inline ::markethub::messaging::trading::MassCancelRequest *
-    WrapperMessage::release_mass_cancel_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_cancel_request)
-      if (message_case() == kMassCancelRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_cancel_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.mass_cancel_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::MassCancelRequest &
-    WrapperMessage::_internal_mass_cancel_request() const {
-      return message_case() == kMassCancelRequest
-                 ? *_impl_.message_.mass_cancel_request_
-                 : reinterpret_cast<::markethub::messaging::trading::MassCancelRequest &>(
-                       ::markethub::messaging::trading::_MassCancelRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::MassCancelRequest &
-    WrapperMessage::mass_cancel_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_cancel_request)
-      return _internal_mass_cancel_request();
-    }
-    inline ::markethub::messaging::trading::MassCancelRequest *
-    WrapperMessage::unsafe_arena_release_mass_cancel_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_cancel_request)
-      if (message_case() == kMassCancelRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_cancel_request_;
-        _impl_.message_.mass_cancel_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_mass_cancel_request(
-        ::markethub::messaging::trading::MassCancelRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_mass_cancel_request();
-        _impl_.message_.mass_cancel_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_cancel_request)
-    }
-    inline ::markethub::messaging::trading::MassCancelRequest *
-    WrapperMessage::_internal_mutable_mass_cancel_request() {
-      if (message_case() != kMassCancelRequest) {
-        clear_message();
-        set_has_mass_cancel_request();
-        _impl_.message_.mass_cancel_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::MassCancelRequest>(GetArena());
-      }
-      return _impl_.message_.mass_cancel_request_;
-    }
-    inline ::markethub::messaging::trading::MassCancelRequest *
-    WrapperMessage::mutable_mass_cancel_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::MassCancelRequest *_msg =
-          _internal_mutable_mass_cancel_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_cancel_request)
-      return _msg;
-    }
+    _impl_.message_.execution_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::ExecutionReport& WrapperMessage::_internal_execution_report() const {
+  return message_case() == kExecutionReport ? *_impl_.message_.execution_report_ : reinterpret_cast<::markethub::messaging::trading::ExecutionReport&>(::markethub::messaging::trading::_ExecutionReport_default_instance_);
+}
+inline const ::markethub::messaging::trading::ExecutionReport& WrapperMessage::execution_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.execution_report)
+  return _internal_execution_report();
+}
+inline ::markethub::messaging::trading::ExecutionReport* WrapperMessage::unsafe_arena_release_execution_report() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.execution_report)
+  if (message_case() == kExecutionReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.execution_report_;
+    _impl_.message_.execution_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_execution_report(::markethub::messaging::trading::ExecutionReport* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_execution_report();
+    _impl_.message_.execution_report_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.execution_report)
+}
+inline ::markethub::messaging::trading::ExecutionReport* WrapperMessage::_internal_mutable_execution_report() {
+  if (message_case() != kExecutionReport) {
+    clear_message();
+    set_has_execution_report();
+    _impl_.message_.execution_report_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::ExecutionReport>(GetArena());
+  }
+  return _impl_.message_.execution_report_;
+}
+inline ::markethub::messaging::trading::ExecutionReport* WrapperMessage::mutable_execution_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::ExecutionReport* _msg = _internal_mutable_execution_report();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.execution_report)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.MassCancelResponse mass_cancel_response = 21;
-    inline bool WrapperMessage::has_mass_cancel_response() const {
-      return message_case() == kMassCancelResponse;
+// .markethub.messaging.trading.OrderStatusRequest order_status_request = 17;
+inline bool WrapperMessage::has_order_status_request() const {
+  return message_case() == kOrderStatusRequest;
+}
+inline bool WrapperMessage::_internal_has_order_status_request() const {
+  return message_case() == kOrderStatusRequest;
+}
+inline void WrapperMessage::set_has_order_status_request() {
+  _impl_._oneof_case_[0] = kOrderStatusRequest;
+}
+inline ::markethub::messaging::trading::OrderStatusRequest* WrapperMessage::release_order_status_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.order_status_request)
+  if (message_case() == kOrderStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.order_status_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_mass_cancel_response() const {
-      return message_case() == kMassCancelResponse;
-    }
-    inline void WrapperMessage::set_has_mass_cancel_response() {
-      _impl_._oneof_case_[0] = kMassCancelResponse;
-    }
-    inline ::markethub::messaging::trading::MassCancelResponse *
-    WrapperMessage::release_mass_cancel_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_cancel_response)
-      if (message_case() == kMassCancelResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_cancel_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.mass_cancel_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::MassCancelResponse &
-    WrapperMessage::_internal_mass_cancel_response() const {
-      return message_case() == kMassCancelResponse
-                 ? *_impl_.message_.mass_cancel_response_
-                 : reinterpret_cast<::markethub::messaging::trading::MassCancelResponse &>(
-                       ::markethub::messaging::trading::_MassCancelResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::MassCancelResponse &
-    WrapperMessage::mass_cancel_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_cancel_response)
-      return _internal_mass_cancel_response();
-    }
-    inline ::markethub::messaging::trading::MassCancelResponse *
-    WrapperMessage::unsafe_arena_release_mass_cancel_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_cancel_response)
-      if (message_case() == kMassCancelResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_cancel_response_;
-        _impl_.message_.mass_cancel_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_mass_cancel_response(
-        ::markethub::messaging::trading::MassCancelResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_mass_cancel_response();
-        _impl_.message_.mass_cancel_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_cancel_response)
-    }
-    inline ::markethub::messaging::trading::MassCancelResponse *
-    WrapperMessage::_internal_mutable_mass_cancel_response() {
-      if (message_case() != kMassCancelResponse) {
-        clear_message();
-        set_has_mass_cancel_response();
-        _impl_.message_.mass_cancel_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::MassCancelResponse>(GetArena());
-      }
-      return _impl_.message_.mass_cancel_response_;
-    }
-    inline ::markethub::messaging::trading::MassCancelResponse *
-    WrapperMessage::mutable_mass_cancel_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::MassCancelResponse *_msg =
-          _internal_mutable_mass_cancel_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_cancel_response)
-      return _msg;
-    }
+    _impl_.message_.order_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::OrderStatusRequest& WrapperMessage::_internal_order_status_request() const {
+  return message_case() == kOrderStatusRequest ? *_impl_.message_.order_status_request_ : reinterpret_cast<::markethub::messaging::trading::OrderStatusRequest&>(::markethub::messaging::trading::_OrderStatusRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::OrderStatusRequest& WrapperMessage::order_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.order_status_request)
+  return _internal_order_status_request();
+}
+inline ::markethub::messaging::trading::OrderStatusRequest* WrapperMessage::unsafe_arena_release_order_status_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.order_status_request)
+  if (message_case() == kOrderStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.order_status_request_;
+    _impl_.message_.order_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_order_status_request(::markethub::messaging::trading::OrderStatusRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_order_status_request();
+    _impl_.message_.order_status_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.order_status_request)
+}
+inline ::markethub::messaging::trading::OrderStatusRequest* WrapperMessage::_internal_mutable_order_status_request() {
+  if (message_case() != kOrderStatusRequest) {
+    clear_message();
+    set_has_order_status_request();
+    _impl_.message_.order_status_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::OrderStatusRequest>(GetArena());
+  }
+  return _impl_.message_.order_status_request_;
+}
+inline ::markethub::messaging::trading::OrderStatusRequest* WrapperMessage::mutable_order_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::OrderStatusRequest* _msg = _internal_mutable_order_status_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.order_status_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.MassOrderStatusRequest mass_order_status_request = 22;
-    inline bool WrapperMessage::has_mass_order_status_request() const {
-      return message_case() == kMassOrderStatusRequest;
+// .markethub.messaging.trading.TradingSessionStatusRequest trading_session_status_request = 18;
+inline bool WrapperMessage::has_trading_session_status_request() const {
+  return message_case() == kTradingSessionStatusRequest;
+}
+inline bool WrapperMessage::_internal_has_trading_session_status_request() const {
+  return message_case() == kTradingSessionStatusRequest;
+}
+inline void WrapperMessage::set_has_trading_session_status_request() {
+  _impl_._oneof_case_[0] = kTradingSessionStatusRequest;
+}
+inline ::markethub::messaging::trading::TradingSessionStatusRequest* WrapperMessage::release_trading_session_status_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trading_session_status_request)
+  if (message_case() == kTradingSessionStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trading_session_status_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_mass_order_status_request() const {
-      return message_case() == kMassOrderStatusRequest;
-    }
-    inline void WrapperMessage::set_has_mass_order_status_request() {
-      _impl_._oneof_case_[0] = kMassOrderStatusRequest;
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusRequest *
-    WrapperMessage::release_mass_order_status_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_order_status_request)
-      if (message_case() == kMassOrderStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_order_status_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.mass_order_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::MassOrderStatusRequest &
-    WrapperMessage::_internal_mass_order_status_request() const {
-      return message_case() == kMassOrderStatusRequest
-                 ? *_impl_.message_.mass_order_status_request_
-                 : reinterpret_cast<::markethub::messaging::trading::MassOrderStatusRequest &>(
-                       ::markethub::messaging::trading::_MassOrderStatusRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::MassOrderStatusRequest &
-    WrapperMessage::mass_order_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_order_status_request)
-      return _internal_mass_order_status_request();
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusRequest *
-    WrapperMessage::unsafe_arena_release_mass_order_status_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_order_status_request)
-      if (message_case() == kMassOrderStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_order_status_request_;
-        _impl_.message_.mass_order_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_mass_order_status_request(
-        ::markethub::messaging::trading::MassOrderStatusRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_mass_order_status_request();
-        _impl_.message_.mass_order_status_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_order_status_request)
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusRequest *
-    WrapperMessage::_internal_mutable_mass_order_status_request() {
-      if (message_case() != kMassOrderStatusRequest) {
-        clear_message();
-        set_has_mass_order_status_request();
-        _impl_.message_.mass_order_status_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::MassOrderStatusRequest>(GetArena());
-      }
-      return _impl_.message_.mass_order_status_request_;
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusRequest *
-    WrapperMessage::mutable_mass_order_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::MassOrderStatusRequest *_msg =
-          _internal_mutable_mass_order_status_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_order_status_request)
-      return _msg;
-    }
+    _impl_.message_.trading_session_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::TradingSessionStatusRequest& WrapperMessage::_internal_trading_session_status_request() const {
+  return message_case() == kTradingSessionStatusRequest ? *_impl_.message_.trading_session_status_request_ : reinterpret_cast<::markethub::messaging::trading::TradingSessionStatusRequest&>(::markethub::messaging::trading::_TradingSessionStatusRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::TradingSessionStatusRequest& WrapperMessage::trading_session_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trading_session_status_request)
+  return _internal_trading_session_status_request();
+}
+inline ::markethub::messaging::trading::TradingSessionStatusRequest* WrapperMessage::unsafe_arena_release_trading_session_status_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trading_session_status_request)
+  if (message_case() == kTradingSessionStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trading_session_status_request_;
+    _impl_.message_.trading_session_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_trading_session_status_request(::markethub::messaging::trading::TradingSessionStatusRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_trading_session_status_request();
+    _impl_.message_.trading_session_status_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trading_session_status_request)
+}
+inline ::markethub::messaging::trading::TradingSessionStatusRequest* WrapperMessage::_internal_mutable_trading_session_status_request() {
+  if (message_case() != kTradingSessionStatusRequest) {
+    clear_message();
+    set_has_trading_session_status_request();
+    _impl_.message_.trading_session_status_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::TradingSessionStatusRequest>(GetArena());
+  }
+  return _impl_.message_.trading_session_status_request_;
+}
+inline ::markethub::messaging::trading::TradingSessionStatusRequest* WrapperMessage::mutable_trading_session_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::TradingSessionStatusRequest* _msg = _internal_mutable_trading_session_status_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trading_session_status_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.MassOrderStatusResponse mass_order_status_response = 23;
-    inline bool WrapperMessage::has_mass_order_status_response() const {
-      return message_case() == kMassOrderStatusResponse;
+// .markethub.messaging.trading.TradingSessionStatusResponse trading_session_status_response = 19;
+inline bool WrapperMessage::has_trading_session_status_response() const {
+  return message_case() == kTradingSessionStatusResponse;
+}
+inline bool WrapperMessage::_internal_has_trading_session_status_response() const {
+  return message_case() == kTradingSessionStatusResponse;
+}
+inline void WrapperMessage::set_has_trading_session_status_response() {
+  _impl_._oneof_case_[0] = kTradingSessionStatusResponse;
+}
+inline ::markethub::messaging::trading::TradingSessionStatusResponse* WrapperMessage::release_trading_session_status_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trading_session_status_response)
+  if (message_case() == kTradingSessionStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trading_session_status_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_mass_order_status_response() const {
-      return message_case() == kMassOrderStatusResponse;
-    }
-    inline void WrapperMessage::set_has_mass_order_status_response() {
-      _impl_._oneof_case_[0] = kMassOrderStatusResponse;
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusResponse *
-    WrapperMessage::release_mass_order_status_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_order_status_response)
-      if (message_case() == kMassOrderStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_order_status_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.mass_order_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::MassOrderStatusResponse &
-    WrapperMessage::_internal_mass_order_status_response() const {
-      return message_case() == kMassOrderStatusResponse
-                 ? *_impl_.message_.mass_order_status_response_
-                 : reinterpret_cast<::markethub::messaging::trading::MassOrderStatusResponse &>(
-                       ::markethub::messaging::trading::_MassOrderStatusResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::MassOrderStatusResponse &
-    WrapperMessage::mass_order_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_order_status_response)
-      return _internal_mass_order_status_response();
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusResponse *
-    WrapperMessage::unsafe_arena_release_mass_order_status_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_order_status_response)
-      if (message_case() == kMassOrderStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.mass_order_status_response_;
-        _impl_.message_.mass_order_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_mass_order_status_response(
-        ::markethub::messaging::trading::MassOrderStatusResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_mass_order_status_response();
-        _impl_.message_.mass_order_status_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_order_status_response)
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusResponse *
-    WrapperMessage::_internal_mutable_mass_order_status_response() {
-      if (message_case() != kMassOrderStatusResponse) {
-        clear_message();
-        set_has_mass_order_status_response();
-        _impl_.message_.mass_order_status_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::MassOrderStatusResponse>(GetArena());
-      }
-      return _impl_.message_.mass_order_status_response_;
-    }
-    inline ::markethub::messaging::trading::MassOrderStatusResponse *
-    WrapperMessage::mutable_mass_order_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::MassOrderStatusResponse *_msg =
-          _internal_mutable_mass_order_status_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_order_status_response)
-      return _msg;
-    }
+    _impl_.message_.trading_session_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::TradingSessionStatusResponse& WrapperMessage::_internal_trading_session_status_response() const {
+  return message_case() == kTradingSessionStatusResponse ? *_impl_.message_.trading_session_status_response_ : reinterpret_cast<::markethub::messaging::trading::TradingSessionStatusResponse&>(::markethub::messaging::trading::_TradingSessionStatusResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::TradingSessionStatusResponse& WrapperMessage::trading_session_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trading_session_status_response)
+  return _internal_trading_session_status_response();
+}
+inline ::markethub::messaging::trading::TradingSessionStatusResponse* WrapperMessage::unsafe_arena_release_trading_session_status_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trading_session_status_response)
+  if (message_case() == kTradingSessionStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trading_session_status_response_;
+    _impl_.message_.trading_session_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_trading_session_status_response(::markethub::messaging::trading::TradingSessionStatusResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_trading_session_status_response();
+    _impl_.message_.trading_session_status_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trading_session_status_response)
+}
+inline ::markethub::messaging::trading::TradingSessionStatusResponse* WrapperMessage::_internal_mutable_trading_session_status_response() {
+  if (message_case() != kTradingSessionStatusResponse) {
+    clear_message();
+    set_has_trading_session_status_response();
+    _impl_.message_.trading_session_status_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::TradingSessionStatusResponse>(GetArena());
+  }
+  return _impl_.message_.trading_session_status_response_;
+}
+inline ::markethub::messaging::trading::TradingSessionStatusResponse* WrapperMessage::mutable_trading_session_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::TradingSessionStatusResponse* _msg = _internal_mutable_trading_session_status_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trading_session_status_response)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.TradeCaptureReportRequest trade_capture_report_request = 24;
-    inline bool WrapperMessage::has_trade_capture_report_request() const {
-      return message_case() == kTradeCaptureReportRequest;
+// .markethub.messaging.trading.MassCancelRequest mass_cancel_request = 20;
+inline bool WrapperMessage::has_mass_cancel_request() const {
+  return message_case() == kMassCancelRequest;
+}
+inline bool WrapperMessage::_internal_has_mass_cancel_request() const {
+  return message_case() == kMassCancelRequest;
+}
+inline void WrapperMessage::set_has_mass_cancel_request() {
+  _impl_._oneof_case_[0] = kMassCancelRequest;
+}
+inline ::markethub::messaging::trading::MassCancelRequest* WrapperMessage::release_mass_cancel_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_cancel_request)
+  if (message_case() == kMassCancelRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_cancel_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_trade_capture_report_request() const {
-      return message_case() == kTradeCaptureReportRequest;
-    }
-    inline void WrapperMessage::set_has_trade_capture_report_request() {
-      _impl_._oneof_case_[0] = kTradeCaptureReportRequest;
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportRequest *
-    WrapperMessage::release_trade_capture_report_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trade_capture_report_request)
-      if (message_case() == kTradeCaptureReportRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trade_capture_report_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.trade_capture_report_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::TradeCaptureReportRequest &
-    WrapperMessage::_internal_trade_capture_report_request() const {
-      return message_case() == kTradeCaptureReportRequest
-                 ? *_impl_.message_.trade_capture_report_request_
-                 : reinterpret_cast<::markethub::messaging::trading::TradeCaptureReportRequest &>(
-                       ::markethub::messaging::trading::
-                           _TradeCaptureReportRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::TradeCaptureReportRequest &
-    WrapperMessage::trade_capture_report_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trade_capture_report_request)
-      return _internal_trade_capture_report_request();
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportRequest *
-    WrapperMessage::unsafe_arena_release_trade_capture_report_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trade_capture_report_request)
-      if (message_case() == kTradeCaptureReportRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trade_capture_report_request_;
-        _impl_.message_.trade_capture_report_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_trade_capture_report_request(
-        ::markethub::messaging::trading::TradeCaptureReportRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_trade_capture_report_request();
-        _impl_.message_.trade_capture_report_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trade_capture_report_request)
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportRequest *
-    WrapperMessage::_internal_mutable_trade_capture_report_request() {
-      if (message_case() != kTradeCaptureReportRequest) {
-        clear_message();
-        set_has_trade_capture_report_request();
-        _impl_.message_.trade_capture_report_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::TradeCaptureReportRequest>(GetArena());
-      }
-      return _impl_.message_.trade_capture_report_request_;
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportRequest *
-    WrapperMessage::mutable_trade_capture_report_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::TradeCaptureReportRequest *_msg =
-          _internal_mutable_trade_capture_report_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trade_capture_report_request)
-      return _msg;
-    }
+    _impl_.message_.mass_cancel_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::MassCancelRequest& WrapperMessage::_internal_mass_cancel_request() const {
+  return message_case() == kMassCancelRequest ? *_impl_.message_.mass_cancel_request_ : reinterpret_cast<::markethub::messaging::trading::MassCancelRequest&>(::markethub::messaging::trading::_MassCancelRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::MassCancelRequest& WrapperMessage::mass_cancel_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_cancel_request)
+  return _internal_mass_cancel_request();
+}
+inline ::markethub::messaging::trading::MassCancelRequest* WrapperMessage::unsafe_arena_release_mass_cancel_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_cancel_request)
+  if (message_case() == kMassCancelRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_cancel_request_;
+    _impl_.message_.mass_cancel_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_mass_cancel_request(::markethub::messaging::trading::MassCancelRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_mass_cancel_request();
+    _impl_.message_.mass_cancel_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_cancel_request)
+}
+inline ::markethub::messaging::trading::MassCancelRequest* WrapperMessage::_internal_mutable_mass_cancel_request() {
+  if (message_case() != kMassCancelRequest) {
+    clear_message();
+    set_has_mass_cancel_request();
+    _impl_.message_.mass_cancel_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::MassCancelRequest>(GetArena());
+  }
+  return _impl_.message_.mass_cancel_request_;
+}
+inline ::markethub::messaging::trading::MassCancelRequest* WrapperMessage::mutable_mass_cancel_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::MassCancelRequest* _msg = _internal_mutable_mass_cancel_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_cancel_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.TradeCaptureReportResponse trade_capture_report_response = 25;
-    inline bool WrapperMessage::has_trade_capture_report_response() const {
-      return message_case() == kTradeCaptureReportResponse;
+// .markethub.messaging.trading.MassCancelResponse mass_cancel_response = 21;
+inline bool WrapperMessage::has_mass_cancel_response() const {
+  return message_case() == kMassCancelResponse;
+}
+inline bool WrapperMessage::_internal_has_mass_cancel_response() const {
+  return message_case() == kMassCancelResponse;
+}
+inline void WrapperMessage::set_has_mass_cancel_response() {
+  _impl_._oneof_case_[0] = kMassCancelResponse;
+}
+inline ::markethub::messaging::trading::MassCancelResponse* WrapperMessage::release_mass_cancel_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_cancel_response)
+  if (message_case() == kMassCancelResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_cancel_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_trade_capture_report_response() const {
-      return message_case() == kTradeCaptureReportResponse;
-    }
-    inline void WrapperMessage::set_has_trade_capture_report_response() {
-      _impl_._oneof_case_[0] = kTradeCaptureReportResponse;
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportResponse *
-    WrapperMessage::release_trade_capture_report_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trade_capture_report_response)
-      if (message_case() == kTradeCaptureReportResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trade_capture_report_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.trade_capture_report_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::TradeCaptureReportResponse &
-    WrapperMessage::_internal_trade_capture_report_response() const {
-      return message_case() == kTradeCaptureReportResponse
-                 ? *_impl_.message_.trade_capture_report_response_
-                 : reinterpret_cast<::markethub::messaging::trading::TradeCaptureReportResponse &>(
-                       ::markethub::messaging::trading::
-                           _TradeCaptureReportResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::TradeCaptureReportResponse &
-    WrapperMessage::trade_capture_report_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trade_capture_report_response)
-      return _internal_trade_capture_report_response();
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportResponse *
-    WrapperMessage::unsafe_arena_release_trade_capture_report_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trade_capture_report_response)
-      if (message_case() == kTradeCaptureReportResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trade_capture_report_response_;
-        _impl_.message_.trade_capture_report_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_trade_capture_report_response(
-        ::markethub::messaging::trading::TradeCaptureReportResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_trade_capture_report_response();
-        _impl_.message_.trade_capture_report_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trade_capture_report_response)
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportResponse *
-    WrapperMessage::_internal_mutable_trade_capture_report_response() {
-      if (message_case() != kTradeCaptureReportResponse) {
-        clear_message();
-        set_has_trade_capture_report_response();
-        _impl_.message_.trade_capture_report_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::trading::TradeCaptureReportResponse>(GetArena());
-      }
-      return _impl_.message_.trade_capture_report_response_;
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReportResponse *
-    WrapperMessage::mutable_trade_capture_report_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::TradeCaptureReportResponse *_msg =
-          _internal_mutable_trade_capture_report_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trade_capture_report_response)
-      return _msg;
-    }
+    _impl_.message_.mass_cancel_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::MassCancelResponse& WrapperMessage::_internal_mass_cancel_response() const {
+  return message_case() == kMassCancelResponse ? *_impl_.message_.mass_cancel_response_ : reinterpret_cast<::markethub::messaging::trading::MassCancelResponse&>(::markethub::messaging::trading::_MassCancelResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::MassCancelResponse& WrapperMessage::mass_cancel_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_cancel_response)
+  return _internal_mass_cancel_response();
+}
+inline ::markethub::messaging::trading::MassCancelResponse* WrapperMessage::unsafe_arena_release_mass_cancel_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_cancel_response)
+  if (message_case() == kMassCancelResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_cancel_response_;
+    _impl_.message_.mass_cancel_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_mass_cancel_response(::markethub::messaging::trading::MassCancelResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_mass_cancel_response();
+    _impl_.message_.mass_cancel_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_cancel_response)
+}
+inline ::markethub::messaging::trading::MassCancelResponse* WrapperMessage::_internal_mutable_mass_cancel_response() {
+  if (message_case() != kMassCancelResponse) {
+    clear_message();
+    set_has_mass_cancel_response();
+    _impl_.message_.mass_cancel_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::MassCancelResponse>(GetArena());
+  }
+  return _impl_.message_.mass_cancel_response_;
+}
+inline ::markethub::messaging::trading::MassCancelResponse* WrapperMessage::mutable_mass_cancel_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::MassCancelResponse* _msg = _internal_mutable_mass_cancel_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_cancel_response)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.Book market_data_update = 26;
-    inline bool WrapperMessage::has_market_data_update() const {
-      return message_case() == kMarketDataUpdate;
+// .markethub.messaging.trading.MassOrderStatusRequest mass_order_status_request = 22;
+inline bool WrapperMessage::has_mass_order_status_request() const {
+  return message_case() == kMassOrderStatusRequest;
+}
+inline bool WrapperMessage::_internal_has_mass_order_status_request() const {
+  return message_case() == kMassOrderStatusRequest;
+}
+inline void WrapperMessage::set_has_mass_order_status_request() {
+  _impl_._oneof_case_[0] = kMassOrderStatusRequest;
+}
+inline ::markethub::messaging::trading::MassOrderStatusRequest* WrapperMessage::release_mass_order_status_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_order_status_request)
+  if (message_case() == kMassOrderStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_order_status_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_market_data_update() const {
-      return message_case() == kMarketDataUpdate;
-    }
-    inline void WrapperMessage::set_has_market_data_update() {
-      _impl_._oneof_case_[0] = kMarketDataUpdate;
-    }
-    inline ::markethub::messaging::trading::Book *WrapperMessage::release_market_data_update() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.market_data_update)
-      if (message_case() == kMarketDataUpdate) {
-        clear_has_message();
-        auto *temp = _impl_.message_.market_data_update_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.market_data_update_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::Book &
-    WrapperMessage::_internal_market_data_update() const {
-      return message_case() == kMarketDataUpdate
-                 ? *_impl_.message_.market_data_update_
-                 : reinterpret_cast<::markethub::messaging::trading::Book &>(
-                       ::markethub::messaging::trading::_Book_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::Book &WrapperMessage::market_data_update() const
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.market_data_update)
-      return _internal_market_data_update();
-    }
-    inline ::markethub::messaging::trading::Book *
-    WrapperMessage::unsafe_arena_release_market_data_update() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.market_data_update)
-      if (message_case() == kMarketDataUpdate) {
-        clear_has_message();
-        auto *temp = _impl_.message_.market_data_update_;
-        _impl_.message_.market_data_update_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_market_data_update(
-        ::markethub::messaging::trading::Book *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_market_data_update();
-        _impl_.message_.market_data_update_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.market_data_update)
-    }
-    inline ::markethub::messaging::trading::Book *
-    WrapperMessage::_internal_mutable_market_data_update() {
-      if (message_case() != kMarketDataUpdate) {
-        clear_message();
-        set_has_market_data_update();
-        _impl_.message_.market_data_update_ =
-            ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::Book>(
-                GetArena());
-      }
-      return _impl_.message_.market_data_update_;
-    }
-    inline ::markethub::messaging::trading::Book *WrapperMessage::mutable_market_data_update()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::Book *_msg = _internal_mutable_market_data_update();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.market_data_update)
-      return _msg;
-    }
+    _impl_.message_.mass_order_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::MassOrderStatusRequest& WrapperMessage::_internal_mass_order_status_request() const {
+  return message_case() == kMassOrderStatusRequest ? *_impl_.message_.mass_order_status_request_ : reinterpret_cast<::markethub::messaging::trading::MassOrderStatusRequest&>(::markethub::messaging::trading::_MassOrderStatusRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::MassOrderStatusRequest& WrapperMessage::mass_order_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_order_status_request)
+  return _internal_mass_order_status_request();
+}
+inline ::markethub::messaging::trading::MassOrderStatusRequest* WrapperMessage::unsafe_arena_release_mass_order_status_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_order_status_request)
+  if (message_case() == kMassOrderStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_order_status_request_;
+    _impl_.message_.mass_order_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_mass_order_status_request(::markethub::messaging::trading::MassOrderStatusRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_mass_order_status_request();
+    _impl_.message_.mass_order_status_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_order_status_request)
+}
+inline ::markethub::messaging::trading::MassOrderStatusRequest* WrapperMessage::_internal_mutable_mass_order_status_request() {
+  if (message_case() != kMassOrderStatusRequest) {
+    clear_message();
+    set_has_mass_order_status_request();
+    _impl_.message_.mass_order_status_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::MassOrderStatusRequest>(GetArena());
+  }
+  return _impl_.message_.mass_order_status_request_;
+}
+inline ::markethub::messaging::trading::MassOrderStatusRequest* WrapperMessage::mutable_mass_order_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::MassOrderStatusRequest* _msg = _internal_mutable_mass_order_status_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_order_status_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.Stop stop = 27;
-    inline bool WrapperMessage::has_stop() const { return message_case() == kStop; }
-    inline bool WrapperMessage::_internal_has_stop() const { return message_case() == kStop; }
-    inline void WrapperMessage::set_has_stop() { _impl_._oneof_case_[0] = kStop; }
-    inline ::markethub::messaging::system::Stop *WrapperMessage::release_stop() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.stop)
-      if (message_case() == kStop) {
-        clear_has_message();
-        auto *temp = _impl_.message_.stop_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.stop_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
+// .markethub.messaging.trading.MassOrderStatusResponse mass_order_status_response = 23;
+inline bool WrapperMessage::has_mass_order_status_response() const {
+  return message_case() == kMassOrderStatusResponse;
+}
+inline bool WrapperMessage::_internal_has_mass_order_status_response() const {
+  return message_case() == kMassOrderStatusResponse;
+}
+inline void WrapperMessage::set_has_mass_order_status_response() {
+  _impl_._oneof_case_[0] = kMassOrderStatusResponse;
+}
+inline ::markethub::messaging::trading::MassOrderStatusResponse* WrapperMessage::release_mass_order_status_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.mass_order_status_response)
+  if (message_case() == kMassOrderStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_order_status_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline const ::markethub::messaging::system::Stop &WrapperMessage::_internal_stop() const {
-      return message_case() == kStop ? *_impl_.message_.stop_
-                                     : reinterpret_cast<::markethub::messaging::system::Stop &>(
-                                           ::markethub::messaging::system::_Stop_default_instance_);
-    }
-    inline const ::markethub::messaging::system::Stop &WrapperMessage::stop() const
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.stop)
-      return _internal_stop();
-    }
-    inline ::markethub::messaging::system::Stop *WrapperMessage::unsafe_arena_release_stop() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.stop)
-      if (message_case() == kStop) {
-        clear_has_message();
-        auto *temp = _impl_.message_.stop_;
-        _impl_.message_.stop_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_stop(
-        ::markethub::messaging::system::Stop *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_stop();
-        _impl_.message_.stop_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.stop)
-    }
-    inline ::markethub::messaging::system::Stop *WrapperMessage::_internal_mutable_stop() {
-      if (message_case() != kStop) {
-        clear_message();
-        set_has_stop();
-        _impl_.message_.stop_ =
-            ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Stop>(
-                GetArena());
-      }
-      return _impl_.message_.stop_;
-    }
-    inline ::markethub::messaging::system::Stop *WrapperMessage::mutable_stop()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::Stop *_msg = _internal_mutable_stop();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.stop)
-      return _msg;
-    }
+    _impl_.message_.mass_order_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::MassOrderStatusResponse& WrapperMessage::_internal_mass_order_status_response() const {
+  return message_case() == kMassOrderStatusResponse ? *_impl_.message_.mass_order_status_response_ : reinterpret_cast<::markethub::messaging::trading::MassOrderStatusResponse&>(::markethub::messaging::trading::_MassOrderStatusResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::MassOrderStatusResponse& WrapperMessage::mass_order_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.mass_order_status_response)
+  return _internal_mass_order_status_response();
+}
+inline ::markethub::messaging::trading::MassOrderStatusResponse* WrapperMessage::unsafe_arena_release_mass_order_status_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.mass_order_status_response)
+  if (message_case() == kMassOrderStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.mass_order_status_response_;
+    _impl_.message_.mass_order_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_mass_order_status_response(::markethub::messaging::trading::MassOrderStatusResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_mass_order_status_response();
+    _impl_.message_.mass_order_status_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.mass_order_status_response)
+}
+inline ::markethub::messaging::trading::MassOrderStatusResponse* WrapperMessage::_internal_mutable_mass_order_status_response() {
+  if (message_case() != kMassOrderStatusResponse) {
+    clear_message();
+    set_has_mass_order_status_response();
+    _impl_.message_.mass_order_status_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::MassOrderStatusResponse>(GetArena());
+  }
+  return _impl_.message_.mass_order_status_response_;
+}
+inline ::markethub::messaging::trading::MassOrderStatusResponse* WrapperMessage::mutable_mass_order_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::MassOrderStatusResponse* _msg = _internal_mutable_mass_order_status_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.mass_order_status_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.AllSymbolsRequest all_symbols_request = 28;
-    inline bool WrapperMessage::has_all_symbols_request() const {
-      return message_case() == kAllSymbolsRequest;
+// .markethub.messaging.trading.TradeCaptureReportRequest trade_capture_report_request = 24;
+inline bool WrapperMessage::has_trade_capture_report_request() const {
+  return message_case() == kTradeCaptureReportRequest;
+}
+inline bool WrapperMessage::_internal_has_trade_capture_report_request() const {
+  return message_case() == kTradeCaptureReportRequest;
+}
+inline void WrapperMessage::set_has_trade_capture_report_request() {
+  _impl_._oneof_case_[0] = kTradeCaptureReportRequest;
+}
+inline ::markethub::messaging::trading::TradeCaptureReportRequest* WrapperMessage::release_trade_capture_report_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trade_capture_report_request)
+  if (message_case() == kTradeCaptureReportRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trade_capture_report_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_all_symbols_request() const {
-      return message_case() == kAllSymbolsRequest;
-    }
-    inline void WrapperMessage::set_has_all_symbols_request() {
-      _impl_._oneof_case_[0] = kAllSymbolsRequest;
-    }
-    inline ::markethub::messaging::system::AllSymbolsRequest *
-    WrapperMessage::release_all_symbols_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_symbols_request)
-      if (message_case() == kAllSymbolsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_symbols_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.all_symbols_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::AllSymbolsRequest &
-    WrapperMessage::_internal_all_symbols_request() const {
-      return message_case() == kAllSymbolsRequest
-                 ? *_impl_.message_.all_symbols_request_
-                 : reinterpret_cast<::markethub::messaging::system::AllSymbolsRequest &>(
-                       ::markethub::messaging::system::_AllSymbolsRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::AllSymbolsRequest &
-    WrapperMessage::all_symbols_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_symbols_request)
-      return _internal_all_symbols_request();
-    }
-    inline ::markethub::messaging::system::AllSymbolsRequest *
-    WrapperMessage::unsafe_arena_release_all_symbols_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_symbols_request)
-      if (message_case() == kAllSymbolsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_symbols_request_;
-        _impl_.message_.all_symbols_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_all_symbols_request(
-        ::markethub::messaging::system::AllSymbolsRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_all_symbols_request();
-        _impl_.message_.all_symbols_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_symbols_request)
-    }
-    inline ::markethub::messaging::system::AllSymbolsRequest *
-    WrapperMessage::_internal_mutable_all_symbols_request() {
-      if (message_case() != kAllSymbolsRequest) {
-        clear_message();
-        set_has_all_symbols_request();
-        _impl_.message_.all_symbols_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::AllSymbolsRequest>(GetArena());
-      }
-      return _impl_.message_.all_symbols_request_;
-    }
-    inline ::markethub::messaging::system::AllSymbolsRequest *
-    WrapperMessage::mutable_all_symbols_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::AllSymbolsRequest *_msg =
-          _internal_mutable_all_symbols_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_symbols_request)
-      return _msg;
-    }
+    _impl_.message_.trade_capture_report_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::TradeCaptureReportRequest& WrapperMessage::_internal_trade_capture_report_request() const {
+  return message_case() == kTradeCaptureReportRequest ? *_impl_.message_.trade_capture_report_request_ : reinterpret_cast<::markethub::messaging::trading::TradeCaptureReportRequest&>(::markethub::messaging::trading::_TradeCaptureReportRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::TradeCaptureReportRequest& WrapperMessage::trade_capture_report_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trade_capture_report_request)
+  return _internal_trade_capture_report_request();
+}
+inline ::markethub::messaging::trading::TradeCaptureReportRequest* WrapperMessage::unsafe_arena_release_trade_capture_report_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trade_capture_report_request)
+  if (message_case() == kTradeCaptureReportRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trade_capture_report_request_;
+    _impl_.message_.trade_capture_report_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_trade_capture_report_request(::markethub::messaging::trading::TradeCaptureReportRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_trade_capture_report_request();
+    _impl_.message_.trade_capture_report_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trade_capture_report_request)
+}
+inline ::markethub::messaging::trading::TradeCaptureReportRequest* WrapperMessage::_internal_mutable_trade_capture_report_request() {
+  if (message_case() != kTradeCaptureReportRequest) {
+    clear_message();
+    set_has_trade_capture_report_request();
+    _impl_.message_.trade_capture_report_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::TradeCaptureReportRequest>(GetArena());
+  }
+  return _impl_.message_.trade_capture_report_request_;
+}
+inline ::markethub::messaging::trading::TradeCaptureReportRequest* WrapperMessage::mutable_trade_capture_report_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::TradeCaptureReportRequest* _msg = _internal_mutable_trade_capture_report_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trade_capture_report_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.AllSymbolsResponse all_symbols_response = 29;
-    inline bool WrapperMessage::has_all_symbols_response() const {
-      return message_case() == kAllSymbolsResponse;
+// .markethub.messaging.trading.TradeCaptureReportResponse trade_capture_report_response = 25;
+inline bool WrapperMessage::has_trade_capture_report_response() const {
+  return message_case() == kTradeCaptureReportResponse;
+}
+inline bool WrapperMessage::_internal_has_trade_capture_report_response() const {
+  return message_case() == kTradeCaptureReportResponse;
+}
+inline void WrapperMessage::set_has_trade_capture_report_response() {
+  _impl_._oneof_case_[0] = kTradeCaptureReportResponse;
+}
+inline ::markethub::messaging::trading::TradeCaptureReportResponse* WrapperMessage::release_trade_capture_report_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trade_capture_report_response)
+  if (message_case() == kTradeCaptureReportResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trade_capture_report_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_all_symbols_response() const {
-      return message_case() == kAllSymbolsResponse;
-    }
-    inline void WrapperMessage::set_has_all_symbols_response() {
-      _impl_._oneof_case_[0] = kAllSymbolsResponse;
-    }
-    inline ::markethub::messaging::system::AllSymbolsResponse *
-    WrapperMessage::release_all_symbols_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_symbols_response)
-      if (message_case() == kAllSymbolsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_symbols_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.all_symbols_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::AllSymbolsResponse &
-    WrapperMessage::_internal_all_symbols_response() const {
-      return message_case() == kAllSymbolsResponse
-                 ? *_impl_.message_.all_symbols_response_
-                 : reinterpret_cast<::markethub::messaging::system::AllSymbolsResponse &>(
-                       ::markethub::messaging::system::_AllSymbolsResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::AllSymbolsResponse &
-    WrapperMessage::all_symbols_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_symbols_response)
-      return _internal_all_symbols_response();
-    }
-    inline ::markethub::messaging::system::AllSymbolsResponse *
-    WrapperMessage::unsafe_arena_release_all_symbols_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_symbols_response)
-      if (message_case() == kAllSymbolsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_symbols_response_;
-        _impl_.message_.all_symbols_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_all_symbols_response(
-        ::markethub::messaging::system::AllSymbolsResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_all_symbols_response();
-        _impl_.message_.all_symbols_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_symbols_response)
-    }
-    inline ::markethub::messaging::system::AllSymbolsResponse *
-    WrapperMessage::_internal_mutable_all_symbols_response() {
-      if (message_case() != kAllSymbolsResponse) {
-        clear_message();
-        set_has_all_symbols_response();
-        _impl_.message_.all_symbols_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::AllSymbolsResponse>(GetArena());
-      }
-      return _impl_.message_.all_symbols_response_;
-    }
-    inline ::markethub::messaging::system::AllSymbolsResponse *
-    WrapperMessage::mutable_all_symbols_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::AllSymbolsResponse *_msg =
-          _internal_mutable_all_symbols_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_symbols_response)
-      return _msg;
-    }
+    _impl_.message_.trade_capture_report_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::TradeCaptureReportResponse& WrapperMessage::_internal_trade_capture_report_response() const {
+  return message_case() == kTradeCaptureReportResponse ? *_impl_.message_.trade_capture_report_response_ : reinterpret_cast<::markethub::messaging::trading::TradeCaptureReportResponse&>(::markethub::messaging::trading::_TradeCaptureReportResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::TradeCaptureReportResponse& WrapperMessage::trade_capture_report_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trade_capture_report_response)
+  return _internal_trade_capture_report_response();
+}
+inline ::markethub::messaging::trading::TradeCaptureReportResponse* WrapperMessage::unsafe_arena_release_trade_capture_report_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trade_capture_report_response)
+  if (message_case() == kTradeCaptureReportResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trade_capture_report_response_;
+    _impl_.message_.trade_capture_report_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_trade_capture_report_response(::markethub::messaging::trading::TradeCaptureReportResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_trade_capture_report_response();
+    _impl_.message_.trade_capture_report_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trade_capture_report_response)
+}
+inline ::markethub::messaging::trading::TradeCaptureReportResponse* WrapperMessage::_internal_mutable_trade_capture_report_response() {
+  if (message_case() != kTradeCaptureReportResponse) {
+    clear_message();
+    set_has_trade_capture_report_response();
+    _impl_.message_.trade_capture_report_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::TradeCaptureReportResponse>(GetArena());
+  }
+  return _impl_.message_.trade_capture_report_response_;
+}
+inline ::markethub::messaging::trading::TradeCaptureReportResponse* WrapperMessage::mutable_trade_capture_report_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::TradeCaptureReportResponse* _msg = _internal_mutable_trade_capture_report_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trade_capture_report_response)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.SecurityStatusRequest security_status_request = 31;
-    inline bool WrapperMessage::has_security_status_request() const {
-      return message_case() == kSecurityStatusRequest;
+// .markethub.messaging.trading.Book market_data_update = 26;
+inline bool WrapperMessage::has_market_data_update() const {
+  return message_case() == kMarketDataUpdate;
+}
+inline bool WrapperMessage::_internal_has_market_data_update() const {
+  return message_case() == kMarketDataUpdate;
+}
+inline void WrapperMessage::set_has_market_data_update() {
+  _impl_._oneof_case_[0] = kMarketDataUpdate;
+}
+inline ::markethub::messaging::trading::Book* WrapperMessage::release_market_data_update() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.market_data_update)
+  if (message_case() == kMarketDataUpdate) {
+    clear_has_message();
+    auto* temp = _impl_.message_.market_data_update_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_security_status_request() const {
-      return message_case() == kSecurityStatusRequest;
-    }
-    inline void WrapperMessage::set_has_security_status_request() {
-      _impl_._oneof_case_[0] = kSecurityStatusRequest;
-    }
-    inline ::markethub::messaging::trading::SecurityStatusRequest *
-    WrapperMessage::release_security_status_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_status_request)
-      if (message_case() == kSecurityStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_status_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.security_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::SecurityStatusRequest &
-    WrapperMessage::_internal_security_status_request() const {
-      return message_case() == kSecurityStatusRequest
-                 ? *_impl_.message_.security_status_request_
-                 : reinterpret_cast<::markethub::messaging::trading::SecurityStatusRequest &>(
-                       ::markethub::messaging::trading::_SecurityStatusRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::SecurityStatusRequest &
-    WrapperMessage::security_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_status_request)
-      return _internal_security_status_request();
-    }
-    inline ::markethub::messaging::trading::SecurityStatusRequest *
-    WrapperMessage::unsafe_arena_release_security_status_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_status_request)
-      if (message_case() == kSecurityStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_status_request_;
-        _impl_.message_.security_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_security_status_request(
-        ::markethub::messaging::trading::SecurityStatusRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_security_status_request();
-        _impl_.message_.security_status_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_status_request)
-    }
-    inline ::markethub::messaging::trading::SecurityStatusRequest *
-    WrapperMessage::_internal_mutable_security_status_request() {
-      if (message_case() != kSecurityStatusRequest) {
-        clear_message();
-        set_has_security_status_request();
-        _impl_.message_.security_status_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::SecurityStatusRequest>(GetArena());
-      }
-      return _impl_.message_.security_status_request_;
-    }
-    inline ::markethub::messaging::trading::SecurityStatusRequest *
-    WrapperMessage::mutable_security_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::SecurityStatusRequest *_msg =
-          _internal_mutable_security_status_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_status_request)
-      return _msg;
-    }
+    _impl_.message_.market_data_update_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::Book& WrapperMessage::_internal_market_data_update() const {
+  return message_case() == kMarketDataUpdate ? *_impl_.message_.market_data_update_ : reinterpret_cast<::markethub::messaging::trading::Book&>(::markethub::messaging::trading::_Book_default_instance_);
+}
+inline const ::markethub::messaging::trading::Book& WrapperMessage::market_data_update() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.market_data_update)
+  return _internal_market_data_update();
+}
+inline ::markethub::messaging::trading::Book* WrapperMessage::unsafe_arena_release_market_data_update() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.market_data_update)
+  if (message_case() == kMarketDataUpdate) {
+    clear_has_message();
+    auto* temp = _impl_.message_.market_data_update_;
+    _impl_.message_.market_data_update_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_market_data_update(::markethub::messaging::trading::Book* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_market_data_update();
+    _impl_.message_.market_data_update_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.market_data_update)
+}
+inline ::markethub::messaging::trading::Book* WrapperMessage::_internal_mutable_market_data_update() {
+  if (message_case() != kMarketDataUpdate) {
+    clear_message();
+    set_has_market_data_update();
+    _impl_.message_.market_data_update_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::Book>(GetArena());
+  }
+  return _impl_.message_.market_data_update_;
+}
+inline ::markethub::messaging::trading::Book* WrapperMessage::mutable_market_data_update() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::Book* _msg = _internal_mutable_market_data_update();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.market_data_update)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.SecurityStatusResponse security_status_response = 32;
-    inline bool WrapperMessage::has_security_status_response() const {
-      return message_case() == kSecurityStatusResponse;
+// .markethub.messaging.system.Stop stop = 27;
+inline bool WrapperMessage::has_stop() const {
+  return message_case() == kStop;
+}
+inline bool WrapperMessage::_internal_has_stop() const {
+  return message_case() == kStop;
+}
+inline void WrapperMessage::set_has_stop() {
+  _impl_._oneof_case_[0] = kStop;
+}
+inline ::markethub::messaging::system::Stop* WrapperMessage::release_stop() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.stop)
+  if (message_case() == kStop) {
+    clear_has_message();
+    auto* temp = _impl_.message_.stop_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_security_status_response() const {
-      return message_case() == kSecurityStatusResponse;
-    }
-    inline void WrapperMessage::set_has_security_status_response() {
-      _impl_._oneof_case_[0] = kSecurityStatusResponse;
-    }
-    inline ::markethub::messaging::trading::SecurityStatusResponse *
-    WrapperMessage::release_security_status_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_status_response)
-      if (message_case() == kSecurityStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_status_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.security_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::SecurityStatusResponse &
-    WrapperMessage::_internal_security_status_response() const {
-      return message_case() == kSecurityStatusResponse
-                 ? *_impl_.message_.security_status_response_
-                 : reinterpret_cast<::markethub::messaging::trading::SecurityStatusResponse &>(
-                       ::markethub::messaging::trading::_SecurityStatusResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::SecurityStatusResponse &
-    WrapperMessage::security_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_status_response)
-      return _internal_security_status_response();
-    }
-    inline ::markethub::messaging::trading::SecurityStatusResponse *
-    WrapperMessage::unsafe_arena_release_security_status_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_status_response)
-      if (message_case() == kSecurityStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.security_status_response_;
-        _impl_.message_.security_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_security_status_response(
-        ::markethub::messaging::trading::SecurityStatusResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_security_status_response();
-        _impl_.message_.security_status_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_status_response)
-    }
-    inline ::markethub::messaging::trading::SecurityStatusResponse *
-    WrapperMessage::_internal_mutable_security_status_response() {
-      if (message_case() != kSecurityStatusResponse) {
-        clear_message();
-        set_has_security_status_response();
-        _impl_.message_.security_status_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::SecurityStatusResponse>(GetArena());
-      }
-      return _impl_.message_.security_status_response_;
-    }
-    inline ::markethub::messaging::trading::SecurityStatusResponse *
-    WrapperMessage::mutable_security_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::SecurityStatusResponse *_msg =
-          _internal_mutable_security_status_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_status_response)
-      return _msg;
-    }
+    _impl_.message_.stop_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::Stop& WrapperMessage::_internal_stop() const {
+  return message_case() == kStop ? *_impl_.message_.stop_ : reinterpret_cast<::markethub::messaging::system::Stop&>(::markethub::messaging::system::_Stop_default_instance_);
+}
+inline const ::markethub::messaging::system::Stop& WrapperMessage::stop() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.stop)
+  return _internal_stop();
+}
+inline ::markethub::messaging::system::Stop* WrapperMessage::unsafe_arena_release_stop() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.stop)
+  if (message_case() == kStop) {
+    clear_has_message();
+    auto* temp = _impl_.message_.stop_;
+    _impl_.message_.stop_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_stop(::markethub::messaging::system::Stop* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_stop();
+    _impl_.message_.stop_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.stop)
+}
+inline ::markethub::messaging::system::Stop* WrapperMessage::_internal_mutable_stop() {
+  if (message_case() != kStop) {
+    clear_message();
+    set_has_stop();
+    _impl_.message_.stop_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Stop>(GetArena());
+  }
+  return _impl_.message_.stop_;
+}
+inline ::markethub::messaging::system::Stop* WrapperMessage::mutable_stop() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::Stop* _msg = _internal_mutable_stop();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.stop)
+  return _msg;
+}
 
-    // .markethub.messaging.rofex.AccountListRequest account_list_request = 33;
-    inline bool WrapperMessage::has_account_list_request() const {
-      return message_case() == kAccountListRequest;
+// .markethub.messaging.system.AllSymbolsRequest all_symbols_request = 28;
+inline bool WrapperMessage::has_all_symbols_request() const {
+  return message_case() == kAllSymbolsRequest;
+}
+inline bool WrapperMessage::_internal_has_all_symbols_request() const {
+  return message_case() == kAllSymbolsRequest;
+}
+inline void WrapperMessage::set_has_all_symbols_request() {
+  _impl_._oneof_case_[0] = kAllSymbolsRequest;
+}
+inline ::markethub::messaging::system::AllSymbolsRequest* WrapperMessage::release_all_symbols_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_symbols_request)
+  if (message_case() == kAllSymbolsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_symbols_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_account_list_request() const {
-      return message_case() == kAccountListRequest;
-    }
-    inline void WrapperMessage::set_has_account_list_request() {
-      _impl_._oneof_case_[0] = kAccountListRequest;
-    }
-    inline ::markethub::messaging::rofex::AccountListRequest *
-    WrapperMessage::release_account_list_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.account_list_request)
-      if (message_case() == kAccountListRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.account_list_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.account_list_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::rofex::AccountListRequest &
-    WrapperMessage::_internal_account_list_request() const {
-      return message_case() == kAccountListRequest
-                 ? *_impl_.message_.account_list_request_
-                 : reinterpret_cast<::markethub::messaging::rofex::AccountListRequest &>(
-                       ::markethub::messaging::rofex::_AccountListRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::rofex::AccountListRequest &
-    WrapperMessage::account_list_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.account_list_request)
-      return _internal_account_list_request();
-    }
-    inline ::markethub::messaging::rofex::AccountListRequest *
-    WrapperMessage::unsafe_arena_release_account_list_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.account_list_request)
-      if (message_case() == kAccountListRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.account_list_request_;
-        _impl_.message_.account_list_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_account_list_request(
-        ::markethub::messaging::rofex::AccountListRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_account_list_request();
-        _impl_.message_.account_list_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.account_list_request)
-    }
-    inline ::markethub::messaging::rofex::AccountListRequest *
-    WrapperMessage::_internal_mutable_account_list_request() {
-      if (message_case() != kAccountListRequest) {
-        clear_message();
-        set_has_account_list_request();
-        _impl_.message_.account_list_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::rofex::AccountListRequest>(GetArena());
-      }
-      return _impl_.message_.account_list_request_;
-    }
-    inline ::markethub::messaging::rofex::AccountListRequest *
-    WrapperMessage::mutable_account_list_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::rofex::AccountListRequest *_msg =
-          _internal_mutable_account_list_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.account_list_request)
-      return _msg;
-    }
+    _impl_.message_.all_symbols_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::AllSymbolsRequest& WrapperMessage::_internal_all_symbols_request() const {
+  return message_case() == kAllSymbolsRequest ? *_impl_.message_.all_symbols_request_ : reinterpret_cast<::markethub::messaging::system::AllSymbolsRequest&>(::markethub::messaging::system::_AllSymbolsRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::AllSymbolsRequest& WrapperMessage::all_symbols_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_symbols_request)
+  return _internal_all_symbols_request();
+}
+inline ::markethub::messaging::system::AllSymbolsRequest* WrapperMessage::unsafe_arena_release_all_symbols_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_symbols_request)
+  if (message_case() == kAllSymbolsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_symbols_request_;
+    _impl_.message_.all_symbols_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_all_symbols_request(::markethub::messaging::system::AllSymbolsRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_all_symbols_request();
+    _impl_.message_.all_symbols_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_symbols_request)
+}
+inline ::markethub::messaging::system::AllSymbolsRequest* WrapperMessage::_internal_mutable_all_symbols_request() {
+  if (message_case() != kAllSymbolsRequest) {
+    clear_message();
+    set_has_all_symbols_request();
+    _impl_.message_.all_symbols_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::AllSymbolsRequest>(GetArena());
+  }
+  return _impl_.message_.all_symbols_request_;
+}
+inline ::markethub::messaging::system::AllSymbolsRequest* WrapperMessage::mutable_all_symbols_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::AllSymbolsRequest* _msg = _internal_mutable_all_symbols_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_symbols_request)
+  return _msg;
+}
 
-    // .markethub.messaging.rofex.AccountListResponse account_list_response = 34;
-    inline bool WrapperMessage::has_account_list_response() const {
-      return message_case() == kAccountListResponse;
+// .markethub.messaging.system.AllSymbolsResponse all_symbols_response = 29;
+inline bool WrapperMessage::has_all_symbols_response() const {
+  return message_case() == kAllSymbolsResponse;
+}
+inline bool WrapperMessage::_internal_has_all_symbols_response() const {
+  return message_case() == kAllSymbolsResponse;
+}
+inline void WrapperMessage::set_has_all_symbols_response() {
+  _impl_._oneof_case_[0] = kAllSymbolsResponse;
+}
+inline ::markethub::messaging::system::AllSymbolsResponse* WrapperMessage::release_all_symbols_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_symbols_response)
+  if (message_case() == kAllSymbolsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_symbols_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_account_list_response() const {
-      return message_case() == kAccountListResponse;
-    }
-    inline void WrapperMessage::set_has_account_list_response() {
-      _impl_._oneof_case_[0] = kAccountListResponse;
-    }
-    inline ::markethub::messaging::rofex::AccountListResponse *
-    WrapperMessage::release_account_list_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.account_list_response)
-      if (message_case() == kAccountListResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.account_list_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.account_list_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::rofex::AccountListResponse &
-    WrapperMessage::_internal_account_list_response() const {
-      return message_case() == kAccountListResponse
-                 ? *_impl_.message_.account_list_response_
-                 : reinterpret_cast<::markethub::messaging::rofex::AccountListResponse &>(
-                       ::markethub::messaging::rofex::_AccountListResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::rofex::AccountListResponse &
-    WrapperMessage::account_list_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.account_list_response)
-      return _internal_account_list_response();
-    }
-    inline ::markethub::messaging::rofex::AccountListResponse *
-    WrapperMessage::unsafe_arena_release_account_list_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.account_list_response)
-      if (message_case() == kAccountListResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.account_list_response_;
-        _impl_.message_.account_list_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_account_list_response(
-        ::markethub::messaging::rofex::AccountListResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_account_list_response();
-        _impl_.message_.account_list_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.account_list_response)
-    }
-    inline ::markethub::messaging::rofex::AccountListResponse *
-    WrapperMessage::_internal_mutable_account_list_response() {
-      if (message_case() != kAccountListResponse) {
-        clear_message();
-        set_has_account_list_response();
-        _impl_.message_.account_list_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::rofex::AccountListResponse>(GetArena());
-      }
-      return _impl_.message_.account_list_response_;
-    }
-    inline ::markethub::messaging::rofex::AccountListResponse *
-    WrapperMessage::mutable_account_list_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::rofex::AccountListResponse *_msg =
-          _internal_mutable_account_list_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.account_list_response)
-      return _msg;
-    }
+    _impl_.message_.all_symbols_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::AllSymbolsResponse& WrapperMessage::_internal_all_symbols_response() const {
+  return message_case() == kAllSymbolsResponse ? *_impl_.message_.all_symbols_response_ : reinterpret_cast<::markethub::messaging::system::AllSymbolsResponse&>(::markethub::messaging::system::_AllSymbolsResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::AllSymbolsResponse& WrapperMessage::all_symbols_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_symbols_response)
+  return _internal_all_symbols_response();
+}
+inline ::markethub::messaging::system::AllSymbolsResponse* WrapperMessage::unsafe_arena_release_all_symbols_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_symbols_response)
+  if (message_case() == kAllSymbolsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_symbols_response_;
+    _impl_.message_.all_symbols_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_all_symbols_response(::markethub::messaging::system::AllSymbolsResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_all_symbols_response();
+    _impl_.message_.all_symbols_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_symbols_response)
+}
+inline ::markethub::messaging::system::AllSymbolsResponse* WrapperMessage::_internal_mutable_all_symbols_response() {
+  if (message_case() != kAllSymbolsResponse) {
+    clear_message();
+    set_has_all_symbols_response();
+    _impl_.message_.all_symbols_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::AllSymbolsResponse>(GetArena());
+  }
+  return _impl_.message_.all_symbols_response_;
+}
+inline ::markethub::messaging::system::AllSymbolsResponse* WrapperMessage::mutable_all_symbols_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::AllSymbolsResponse* _msg = _internal_mutable_all_symbols_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_symbols_response)
+  return _msg;
+}
 
-    // .markethub.messaging.rofex.AccountListIncremental account_list_incremental = 35;
-    inline bool WrapperMessage::has_account_list_incremental() const {
-      return message_case() == kAccountListIncremental;
+// .markethub.messaging.trading.SecurityStatusRequest security_status_request = 31;
+inline bool WrapperMessage::has_security_status_request() const {
+  return message_case() == kSecurityStatusRequest;
+}
+inline bool WrapperMessage::_internal_has_security_status_request() const {
+  return message_case() == kSecurityStatusRequest;
+}
+inline void WrapperMessage::set_has_security_status_request() {
+  _impl_._oneof_case_[0] = kSecurityStatusRequest;
+}
+inline ::markethub::messaging::trading::SecurityStatusRequest* WrapperMessage::release_security_status_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_status_request)
+  if (message_case() == kSecurityStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_status_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_account_list_incremental() const {
-      return message_case() == kAccountListIncremental;
-    }
-    inline void WrapperMessage::set_has_account_list_incremental() {
-      _impl_._oneof_case_[0] = kAccountListIncremental;
-    }
-    inline ::markethub::messaging::rofex::AccountListIncremental *
-    WrapperMessage::release_account_list_incremental() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.account_list_incremental)
-      if (message_case() == kAccountListIncremental) {
-        clear_has_message();
-        auto *temp = _impl_.message_.account_list_incremental_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.account_list_incremental_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::rofex::AccountListIncremental &
-    WrapperMessage::_internal_account_list_incremental() const {
-      return message_case() == kAccountListIncremental
-                 ? *_impl_.message_.account_list_incremental_
-                 : reinterpret_cast<::markethub::messaging::rofex::AccountListIncremental &>(
-                       ::markethub::messaging::rofex::_AccountListIncremental_default_instance_);
-    }
-    inline const ::markethub::messaging::rofex::AccountListIncremental &
-    WrapperMessage::account_list_incremental() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.account_list_incremental)
-      return _internal_account_list_incremental();
-    }
-    inline ::markethub::messaging::rofex::AccountListIncremental *
-    WrapperMessage::unsafe_arena_release_account_list_incremental() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.account_list_incremental)
-      if (message_case() == kAccountListIncremental) {
-        clear_has_message();
-        auto *temp = _impl_.message_.account_list_incremental_;
-        _impl_.message_.account_list_incremental_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_account_list_incremental(
-        ::markethub::messaging::rofex::AccountListIncremental *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_account_list_incremental();
-        _impl_.message_.account_list_incremental_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.account_list_incremental)
-    }
-    inline ::markethub::messaging::rofex::AccountListIncremental *
-    WrapperMessage::_internal_mutable_account_list_incremental() {
-      if (message_case() != kAccountListIncremental) {
-        clear_message();
-        set_has_account_list_incremental();
-        _impl_.message_.account_list_incremental_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::rofex::AccountListIncremental>(GetArena());
-      }
-      return _impl_.message_.account_list_incremental_;
-    }
-    inline ::markethub::messaging::rofex::AccountListIncremental *
-    WrapperMessage::mutable_account_list_incremental() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::rofex::AccountListIncremental *_msg =
-          _internal_mutable_account_list_incremental();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.account_list_incremental)
-      return _msg;
-    }
+    _impl_.message_.security_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::SecurityStatusRequest& WrapperMessage::_internal_security_status_request() const {
+  return message_case() == kSecurityStatusRequest ? *_impl_.message_.security_status_request_ : reinterpret_cast<::markethub::messaging::trading::SecurityStatusRequest&>(::markethub::messaging::trading::_SecurityStatusRequest_default_instance_);
+}
+inline const ::markethub::messaging::trading::SecurityStatusRequest& WrapperMessage::security_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_status_request)
+  return _internal_security_status_request();
+}
+inline ::markethub::messaging::trading::SecurityStatusRequest* WrapperMessage::unsafe_arena_release_security_status_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_status_request)
+  if (message_case() == kSecurityStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_status_request_;
+    _impl_.message_.security_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_security_status_request(::markethub::messaging::trading::SecurityStatusRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_security_status_request();
+    _impl_.message_.security_status_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_status_request)
+}
+inline ::markethub::messaging::trading::SecurityStatusRequest* WrapperMessage::_internal_mutable_security_status_request() {
+  if (message_case() != kSecurityStatusRequest) {
+    clear_message();
+    set_has_security_status_request();
+    _impl_.message_.security_status_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::SecurityStatusRequest>(GetArena());
+  }
+  return _impl_.message_.security_status_request_;
+}
+inline ::markethub::messaging::trading::SecurityStatusRequest* WrapperMessage::mutable_security_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::SecurityStatusRequest* _msg = _internal_mutable_security_status_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_status_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.AddServiceRequest add_service_request = 36;
-    inline bool WrapperMessage::has_add_service_request() const {
-      return message_case() == kAddServiceRequest;
+// .markethub.messaging.trading.SecurityStatusResponse security_status_response = 32;
+inline bool WrapperMessage::has_security_status_response() const {
+  return message_case() == kSecurityStatusResponse;
+}
+inline bool WrapperMessage::_internal_has_security_status_response() const {
+  return message_case() == kSecurityStatusResponse;
+}
+inline void WrapperMessage::set_has_security_status_response() {
+  _impl_._oneof_case_[0] = kSecurityStatusResponse;
+}
+inline ::markethub::messaging::trading::SecurityStatusResponse* WrapperMessage::release_security_status_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.security_status_response)
+  if (message_case() == kSecurityStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_status_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_add_service_request() const {
-      return message_case() == kAddServiceRequest;
-    }
-    inline void WrapperMessage::set_has_add_service_request() {
-      _impl_._oneof_case_[0] = kAddServiceRequest;
-    }
-    inline ::markethub::messaging::system::AddServiceRequest *
-    WrapperMessage::release_add_service_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.add_service_request)
-      if (message_case() == kAddServiceRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.add_service_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.add_service_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::AddServiceRequest &
-    WrapperMessage::_internal_add_service_request() const {
-      return message_case() == kAddServiceRequest
-                 ? *_impl_.message_.add_service_request_
-                 : reinterpret_cast<::markethub::messaging::system::AddServiceRequest &>(
-                       ::markethub::messaging::system::_AddServiceRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::AddServiceRequest &
-    WrapperMessage::add_service_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.add_service_request)
-      return _internal_add_service_request();
-    }
-    inline ::markethub::messaging::system::AddServiceRequest *
-    WrapperMessage::unsafe_arena_release_add_service_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.add_service_request)
-      if (message_case() == kAddServiceRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.add_service_request_;
-        _impl_.message_.add_service_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_add_service_request(
-        ::markethub::messaging::system::AddServiceRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_add_service_request();
-        _impl_.message_.add_service_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.add_service_request)
-    }
-    inline ::markethub::messaging::system::AddServiceRequest *
-    WrapperMessage::_internal_mutable_add_service_request() {
-      if (message_case() != kAddServiceRequest) {
-        clear_message();
-        set_has_add_service_request();
-        _impl_.message_.add_service_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::AddServiceRequest>(GetArena());
-      }
-      return _impl_.message_.add_service_request_;
-    }
-    inline ::markethub::messaging::system::AddServiceRequest *
-    WrapperMessage::mutable_add_service_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::AddServiceRequest *_msg =
-          _internal_mutable_add_service_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.add_service_request)
-      return _msg;
-    }
+    _impl_.message_.security_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::SecurityStatusResponse& WrapperMessage::_internal_security_status_response() const {
+  return message_case() == kSecurityStatusResponse ? *_impl_.message_.security_status_response_ : reinterpret_cast<::markethub::messaging::trading::SecurityStatusResponse&>(::markethub::messaging::trading::_SecurityStatusResponse_default_instance_);
+}
+inline const ::markethub::messaging::trading::SecurityStatusResponse& WrapperMessage::security_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.security_status_response)
+  return _internal_security_status_response();
+}
+inline ::markethub::messaging::trading::SecurityStatusResponse* WrapperMessage::unsafe_arena_release_security_status_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.security_status_response)
+  if (message_case() == kSecurityStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.security_status_response_;
+    _impl_.message_.security_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_security_status_response(::markethub::messaging::trading::SecurityStatusResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_security_status_response();
+    _impl_.message_.security_status_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.security_status_response)
+}
+inline ::markethub::messaging::trading::SecurityStatusResponse* WrapperMessage::_internal_mutable_security_status_response() {
+  if (message_case() != kSecurityStatusResponse) {
+    clear_message();
+    set_has_security_status_response();
+    _impl_.message_.security_status_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::SecurityStatusResponse>(GetArena());
+  }
+  return _impl_.message_.security_status_response_;
+}
+inline ::markethub::messaging::trading::SecurityStatusResponse* WrapperMessage::mutable_security_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::SecurityStatusResponse* _msg = _internal_mutable_security_status_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.security_status_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.AddServiceResponse add_service_response = 37;
-    inline bool WrapperMessage::has_add_service_response() const {
-      return message_case() == kAddServiceResponse;
+// .markethub.messaging.rofex.AccountListRequest account_list_request = 33;
+inline bool WrapperMessage::has_account_list_request() const {
+  return message_case() == kAccountListRequest;
+}
+inline bool WrapperMessage::_internal_has_account_list_request() const {
+  return message_case() == kAccountListRequest;
+}
+inline void WrapperMessage::set_has_account_list_request() {
+  _impl_._oneof_case_[0] = kAccountListRequest;
+}
+inline ::markethub::messaging::rofex::AccountListRequest* WrapperMessage::release_account_list_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.account_list_request)
+  if (message_case() == kAccountListRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.account_list_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_add_service_response() const {
-      return message_case() == kAddServiceResponse;
-    }
-    inline void WrapperMessage::set_has_add_service_response() {
-      _impl_._oneof_case_[0] = kAddServiceResponse;
-    }
-    inline ::markethub::messaging::system::AddServiceResponse *
-    WrapperMessage::release_add_service_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.add_service_response)
-      if (message_case() == kAddServiceResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.add_service_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.add_service_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::AddServiceResponse &
-    WrapperMessage::_internal_add_service_response() const {
-      return message_case() == kAddServiceResponse
-                 ? *_impl_.message_.add_service_response_
-                 : reinterpret_cast<::markethub::messaging::system::AddServiceResponse &>(
-                       ::markethub::messaging::system::_AddServiceResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::AddServiceResponse &
-    WrapperMessage::add_service_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.add_service_response)
-      return _internal_add_service_response();
-    }
-    inline ::markethub::messaging::system::AddServiceResponse *
-    WrapperMessage::unsafe_arena_release_add_service_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.add_service_response)
-      if (message_case() == kAddServiceResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.add_service_response_;
-        _impl_.message_.add_service_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_add_service_response(
-        ::markethub::messaging::system::AddServiceResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_add_service_response();
-        _impl_.message_.add_service_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.add_service_response)
-    }
-    inline ::markethub::messaging::system::AddServiceResponse *
-    WrapperMessage::_internal_mutable_add_service_response() {
-      if (message_case() != kAddServiceResponse) {
-        clear_message();
-        set_has_add_service_response();
-        _impl_.message_.add_service_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::AddServiceResponse>(GetArena());
-      }
-      return _impl_.message_.add_service_response_;
-    }
-    inline ::markethub::messaging::system::AddServiceResponse *
-    WrapperMessage::mutable_add_service_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::AddServiceResponse *_msg =
-          _internal_mutable_add_service_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.add_service_response)
-      return _msg;
-    }
+    _impl_.message_.account_list_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::rofex::AccountListRequest& WrapperMessage::_internal_account_list_request() const {
+  return message_case() == kAccountListRequest ? *_impl_.message_.account_list_request_ : reinterpret_cast<::markethub::messaging::rofex::AccountListRequest&>(::markethub::messaging::rofex::_AccountListRequest_default_instance_);
+}
+inline const ::markethub::messaging::rofex::AccountListRequest& WrapperMessage::account_list_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.account_list_request)
+  return _internal_account_list_request();
+}
+inline ::markethub::messaging::rofex::AccountListRequest* WrapperMessage::unsafe_arena_release_account_list_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.account_list_request)
+  if (message_case() == kAccountListRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.account_list_request_;
+    _impl_.message_.account_list_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_account_list_request(::markethub::messaging::rofex::AccountListRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_account_list_request();
+    _impl_.message_.account_list_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.account_list_request)
+}
+inline ::markethub::messaging::rofex::AccountListRequest* WrapperMessage::_internal_mutable_account_list_request() {
+  if (message_case() != kAccountListRequest) {
+    clear_message();
+    set_has_account_list_request();
+    _impl_.message_.account_list_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::rofex::AccountListRequest>(GetArena());
+  }
+  return _impl_.message_.account_list_request_;
+}
+inline ::markethub::messaging::rofex::AccountListRequest* WrapperMessage::mutable_account_list_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::rofex::AccountListRequest* _msg = _internal_mutable_account_list_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.account_list_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.Heartbeat heartbeat = 38;
-    inline bool WrapperMessage::has_heartbeat() const { return message_case() == kHeartbeat; }
-    inline bool WrapperMessage::_internal_has_heartbeat() const {
-      return message_case() == kHeartbeat;
+// .markethub.messaging.rofex.AccountListResponse account_list_response = 34;
+inline bool WrapperMessage::has_account_list_response() const {
+  return message_case() == kAccountListResponse;
+}
+inline bool WrapperMessage::_internal_has_account_list_response() const {
+  return message_case() == kAccountListResponse;
+}
+inline void WrapperMessage::set_has_account_list_response() {
+  _impl_._oneof_case_[0] = kAccountListResponse;
+}
+inline ::markethub::messaging::rofex::AccountListResponse* WrapperMessage::release_account_list_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.account_list_response)
+  if (message_case() == kAccountListResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.account_list_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline void WrapperMessage::set_has_heartbeat() { _impl_._oneof_case_[0] = kHeartbeat; }
-    inline ::markethub::messaging::system::Heartbeat *WrapperMessage::release_heartbeat() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.heartbeat)
-      if (message_case() == kHeartbeat) {
-        clear_has_message();
-        auto *temp = _impl_.message_.heartbeat_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.heartbeat_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::Heartbeat &WrapperMessage::_internal_heartbeat()
-        const {
-      return message_case() == kHeartbeat
-                 ? *_impl_.message_.heartbeat_
-                 : reinterpret_cast<::markethub::messaging::system::Heartbeat &>(
-                       ::markethub::messaging::system::_Heartbeat_default_instance_);
-    }
-    inline const ::markethub::messaging::system::Heartbeat &WrapperMessage::heartbeat() const
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.heartbeat)
-      return _internal_heartbeat();
-    }
-    inline ::markethub::messaging::system::Heartbeat *
-    WrapperMessage::unsafe_arena_release_heartbeat() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.heartbeat)
-      if (message_case() == kHeartbeat) {
-        clear_has_message();
-        auto *temp = _impl_.message_.heartbeat_;
-        _impl_.message_.heartbeat_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_heartbeat(
-        ::markethub::messaging::system::Heartbeat *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_heartbeat();
-        _impl_.message_.heartbeat_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.heartbeat)
-    }
-    inline ::markethub::messaging::system::Heartbeat *
-    WrapperMessage::_internal_mutable_heartbeat() {
-      if (message_case() != kHeartbeat) {
-        clear_message();
-        set_has_heartbeat();
-        _impl_.message_.heartbeat_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::Heartbeat>(GetArena());
-      }
-      return _impl_.message_.heartbeat_;
-    }
-    inline ::markethub::messaging::system::Heartbeat *WrapperMessage::mutable_heartbeat()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::Heartbeat *_msg = _internal_mutable_heartbeat();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.heartbeat)
-      return _msg;
-    }
+    _impl_.message_.account_list_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::rofex::AccountListResponse& WrapperMessage::_internal_account_list_response() const {
+  return message_case() == kAccountListResponse ? *_impl_.message_.account_list_response_ : reinterpret_cast<::markethub::messaging::rofex::AccountListResponse&>(::markethub::messaging::rofex::_AccountListResponse_default_instance_);
+}
+inline const ::markethub::messaging::rofex::AccountListResponse& WrapperMessage::account_list_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.account_list_response)
+  return _internal_account_list_response();
+}
+inline ::markethub::messaging::rofex::AccountListResponse* WrapperMessage::unsafe_arena_release_account_list_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.account_list_response)
+  if (message_case() == kAccountListResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.account_list_response_;
+    _impl_.message_.account_list_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_account_list_response(::markethub::messaging::rofex::AccountListResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_account_list_response();
+    _impl_.message_.account_list_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.account_list_response)
+}
+inline ::markethub::messaging::rofex::AccountListResponse* WrapperMessage::_internal_mutable_account_list_response() {
+  if (message_case() != kAccountListResponse) {
+    clear_message();
+    set_has_account_list_response();
+    _impl_.message_.account_list_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::rofex::AccountListResponse>(GetArena());
+  }
+  return _impl_.message_.account_list_response_;
+}
+inline ::markethub::messaging::rofex::AccountListResponse* WrapperMessage::mutable_account_list_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::rofex::AccountListResponse* _msg = _internal_mutable_account_list_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.account_list_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.RemoveServiceRequest remove_service_request = 39;
-    inline bool WrapperMessage::has_remove_service_request() const {
-      return message_case() == kRemoveServiceRequest;
+// .markethub.messaging.rofex.AccountListIncremental account_list_incremental = 35;
+inline bool WrapperMessage::has_account_list_incremental() const {
+  return message_case() == kAccountListIncremental;
+}
+inline bool WrapperMessage::_internal_has_account_list_incremental() const {
+  return message_case() == kAccountListIncremental;
+}
+inline void WrapperMessage::set_has_account_list_incremental() {
+  _impl_._oneof_case_[0] = kAccountListIncremental;
+}
+inline ::markethub::messaging::rofex::AccountListIncremental* WrapperMessage::release_account_list_incremental() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.account_list_incremental)
+  if (message_case() == kAccountListIncremental) {
+    clear_has_message();
+    auto* temp = _impl_.message_.account_list_incremental_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_remove_service_request() const {
-      return message_case() == kRemoveServiceRequest;
-    }
-    inline void WrapperMessage::set_has_remove_service_request() {
-      _impl_._oneof_case_[0] = kRemoveServiceRequest;
-    }
-    inline ::markethub::messaging::system::RemoveServiceRequest *
-    WrapperMessage::release_remove_service_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.remove_service_request)
-      if (message_case() == kRemoveServiceRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.remove_service_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.remove_service_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::RemoveServiceRequest &
-    WrapperMessage::_internal_remove_service_request() const {
-      return message_case() == kRemoveServiceRequest
-                 ? *_impl_.message_.remove_service_request_
-                 : reinterpret_cast<::markethub::messaging::system::RemoveServiceRequest &>(
-                       ::markethub::messaging::system::_RemoveServiceRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::RemoveServiceRequest &
-    WrapperMessage::remove_service_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.remove_service_request)
-      return _internal_remove_service_request();
-    }
-    inline ::markethub::messaging::system::RemoveServiceRequest *
-    WrapperMessage::unsafe_arena_release_remove_service_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.remove_service_request)
-      if (message_case() == kRemoveServiceRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.remove_service_request_;
-        _impl_.message_.remove_service_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_remove_service_request(
-        ::markethub::messaging::system::RemoveServiceRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_remove_service_request();
-        _impl_.message_.remove_service_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.remove_service_request)
-    }
-    inline ::markethub::messaging::system::RemoveServiceRequest *
-    WrapperMessage::_internal_mutable_remove_service_request() {
-      if (message_case() != kRemoveServiceRequest) {
-        clear_message();
-        set_has_remove_service_request();
-        _impl_.message_.remove_service_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::RemoveServiceRequest>(GetArena());
-      }
-      return _impl_.message_.remove_service_request_;
-    }
-    inline ::markethub::messaging::system::RemoveServiceRequest *
-    WrapperMessage::mutable_remove_service_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::RemoveServiceRequest *_msg =
-          _internal_mutable_remove_service_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.remove_service_request)
-      return _msg;
-    }
+    _impl_.message_.account_list_incremental_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::rofex::AccountListIncremental& WrapperMessage::_internal_account_list_incremental() const {
+  return message_case() == kAccountListIncremental ? *_impl_.message_.account_list_incremental_ : reinterpret_cast<::markethub::messaging::rofex::AccountListIncremental&>(::markethub::messaging::rofex::_AccountListIncremental_default_instance_);
+}
+inline const ::markethub::messaging::rofex::AccountListIncremental& WrapperMessage::account_list_incremental() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.account_list_incremental)
+  return _internal_account_list_incremental();
+}
+inline ::markethub::messaging::rofex::AccountListIncremental* WrapperMessage::unsafe_arena_release_account_list_incremental() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.account_list_incremental)
+  if (message_case() == kAccountListIncremental) {
+    clear_has_message();
+    auto* temp = _impl_.message_.account_list_incremental_;
+    _impl_.message_.account_list_incremental_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_account_list_incremental(::markethub::messaging::rofex::AccountListIncremental* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_account_list_incremental();
+    _impl_.message_.account_list_incremental_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.account_list_incremental)
+}
+inline ::markethub::messaging::rofex::AccountListIncremental* WrapperMessage::_internal_mutable_account_list_incremental() {
+  if (message_case() != kAccountListIncremental) {
+    clear_message();
+    set_has_account_list_incremental();
+    _impl_.message_.account_list_incremental_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::rofex::AccountListIncremental>(GetArena());
+  }
+  return _impl_.message_.account_list_incremental_;
+}
+inline ::markethub::messaging::rofex::AccountListIncremental* WrapperMessage::mutable_account_list_incremental() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::rofex::AccountListIncremental* _msg = _internal_mutable_account_list_incremental();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.account_list_incremental)
+  return _msg;
+}
 
-    // .markethub.messaging.system.NodesBroadcast nodes_broadcast = 40;
-    inline bool WrapperMessage::has_nodes_broadcast() const {
-      return message_case() == kNodesBroadcast;
+// .markethub.messaging.system.AddServiceRequest add_service_request = 36;
+inline bool WrapperMessage::has_add_service_request() const {
+  return message_case() == kAddServiceRequest;
+}
+inline bool WrapperMessage::_internal_has_add_service_request() const {
+  return message_case() == kAddServiceRequest;
+}
+inline void WrapperMessage::set_has_add_service_request() {
+  _impl_._oneof_case_[0] = kAddServiceRequest;
+}
+inline ::markethub::messaging::system::AddServiceRequest* WrapperMessage::release_add_service_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.add_service_request)
+  if (message_case() == kAddServiceRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.add_service_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_nodes_broadcast() const {
-      return message_case() == kNodesBroadcast;
-    }
-    inline void WrapperMessage::set_has_nodes_broadcast() {
-      _impl_._oneof_case_[0] = kNodesBroadcast;
-    }
-    inline ::markethub::messaging::system::NodesBroadcast *
-    WrapperMessage::release_nodes_broadcast() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.nodes_broadcast)
-      if (message_case() == kNodesBroadcast) {
-        clear_has_message();
-        auto *temp = _impl_.message_.nodes_broadcast_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.nodes_broadcast_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::NodesBroadcast &
-    WrapperMessage::_internal_nodes_broadcast() const {
-      return message_case() == kNodesBroadcast
-                 ? *_impl_.message_.nodes_broadcast_
-                 : reinterpret_cast<::markethub::messaging::system::NodesBroadcast &>(
-                       ::markethub::messaging::system::_NodesBroadcast_default_instance_);
-    }
-    inline const ::markethub::messaging::system::NodesBroadcast &WrapperMessage::nodes_broadcast()
-        const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.nodes_broadcast)
-      return _internal_nodes_broadcast();
-    }
-    inline ::markethub::messaging::system::NodesBroadcast *
-    WrapperMessage::unsafe_arena_release_nodes_broadcast() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.nodes_broadcast)
-      if (message_case() == kNodesBroadcast) {
-        clear_has_message();
-        auto *temp = _impl_.message_.nodes_broadcast_;
-        _impl_.message_.nodes_broadcast_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_nodes_broadcast(
-        ::markethub::messaging::system::NodesBroadcast *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_nodes_broadcast();
-        _impl_.message_.nodes_broadcast_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.nodes_broadcast)
-    }
-    inline ::markethub::messaging::system::NodesBroadcast *
-    WrapperMessage::_internal_mutable_nodes_broadcast() {
-      if (message_case() != kNodesBroadcast) {
-        clear_message();
-        set_has_nodes_broadcast();
-        _impl_.message_.nodes_broadcast_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::NodesBroadcast>(GetArena());
-      }
-      return _impl_.message_.nodes_broadcast_;
-    }
-    inline ::markethub::messaging::system::NodesBroadcast *WrapperMessage::mutable_nodes_broadcast()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::NodesBroadcast *_msg = _internal_mutable_nodes_broadcast();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.nodes_broadcast)
-      return _msg;
-    }
+    _impl_.message_.add_service_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::AddServiceRequest& WrapperMessage::_internal_add_service_request() const {
+  return message_case() == kAddServiceRequest ? *_impl_.message_.add_service_request_ : reinterpret_cast<::markethub::messaging::system::AddServiceRequest&>(::markethub::messaging::system::_AddServiceRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::AddServiceRequest& WrapperMessage::add_service_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.add_service_request)
+  return _internal_add_service_request();
+}
+inline ::markethub::messaging::system::AddServiceRequest* WrapperMessage::unsafe_arena_release_add_service_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.add_service_request)
+  if (message_case() == kAddServiceRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.add_service_request_;
+    _impl_.message_.add_service_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_add_service_request(::markethub::messaging::system::AddServiceRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_add_service_request();
+    _impl_.message_.add_service_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.add_service_request)
+}
+inline ::markethub::messaging::system::AddServiceRequest* WrapperMessage::_internal_mutable_add_service_request() {
+  if (message_case() != kAddServiceRequest) {
+    clear_message();
+    set_has_add_service_request();
+    _impl_.message_.add_service_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::AddServiceRequest>(GetArena());
+  }
+  return _impl_.message_.add_service_request_;
+}
+inline ::markethub::messaging::system::AddServiceRequest* WrapperMessage::mutable_add_service_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::AddServiceRequest* _msg = _internal_mutable_add_service_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.add_service_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.FindNodeRequest find_node_request = 41;
-    inline bool WrapperMessage::has_find_node_request() const {
-      return message_case() == kFindNodeRequest;
+// .markethub.messaging.system.AddServiceResponse add_service_response = 37;
+inline bool WrapperMessage::has_add_service_response() const {
+  return message_case() == kAddServiceResponse;
+}
+inline bool WrapperMessage::_internal_has_add_service_response() const {
+  return message_case() == kAddServiceResponse;
+}
+inline void WrapperMessage::set_has_add_service_response() {
+  _impl_._oneof_case_[0] = kAddServiceResponse;
+}
+inline ::markethub::messaging::system::AddServiceResponse* WrapperMessage::release_add_service_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.add_service_response)
+  if (message_case() == kAddServiceResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.add_service_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_find_node_request() const {
-      return message_case() == kFindNodeRequest;
-    }
-    inline void WrapperMessage::set_has_find_node_request() {
-      _impl_._oneof_case_[0] = kFindNodeRequest;
-    }
-    inline ::markethub::messaging::system::FindNodeRequest *
-    WrapperMessage::release_find_node_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.find_node_request)
-      if (message_case() == kFindNodeRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.find_node_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.find_node_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::FindNodeRequest &
-    WrapperMessage::_internal_find_node_request() const {
-      return message_case() == kFindNodeRequest
-                 ? *_impl_.message_.find_node_request_
-                 : reinterpret_cast<::markethub::messaging::system::FindNodeRequest &>(
-                       ::markethub::messaging::system::_FindNodeRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::FindNodeRequest &
-    WrapperMessage::find_node_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.find_node_request)
-      return _internal_find_node_request();
-    }
-    inline ::markethub::messaging::system::FindNodeRequest *
-    WrapperMessage::unsafe_arena_release_find_node_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.find_node_request)
-      if (message_case() == kFindNodeRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.find_node_request_;
-        _impl_.message_.find_node_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_find_node_request(
-        ::markethub::messaging::system::FindNodeRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_find_node_request();
-        _impl_.message_.find_node_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.find_node_request)
-    }
-    inline ::markethub::messaging::system::FindNodeRequest *
-    WrapperMessage::_internal_mutable_find_node_request() {
-      if (message_case() != kFindNodeRequest) {
-        clear_message();
-        set_has_find_node_request();
-        _impl_.message_.find_node_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::FindNodeRequest>(GetArena());
-      }
-      return _impl_.message_.find_node_request_;
-    }
-    inline ::markethub::messaging::system::FindNodeRequest *
-    WrapperMessage::mutable_find_node_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::FindNodeRequest *_msg = _internal_mutable_find_node_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.find_node_request)
-      return _msg;
-    }
+    _impl_.message_.add_service_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::AddServiceResponse& WrapperMessage::_internal_add_service_response() const {
+  return message_case() == kAddServiceResponse ? *_impl_.message_.add_service_response_ : reinterpret_cast<::markethub::messaging::system::AddServiceResponse&>(::markethub::messaging::system::_AddServiceResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::AddServiceResponse& WrapperMessage::add_service_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.add_service_response)
+  return _internal_add_service_response();
+}
+inline ::markethub::messaging::system::AddServiceResponse* WrapperMessage::unsafe_arena_release_add_service_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.add_service_response)
+  if (message_case() == kAddServiceResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.add_service_response_;
+    _impl_.message_.add_service_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_add_service_response(::markethub::messaging::system::AddServiceResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_add_service_response();
+    _impl_.message_.add_service_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.add_service_response)
+}
+inline ::markethub::messaging::system::AddServiceResponse* WrapperMessage::_internal_mutable_add_service_response() {
+  if (message_case() != kAddServiceResponse) {
+    clear_message();
+    set_has_add_service_response();
+    _impl_.message_.add_service_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::AddServiceResponse>(GetArena());
+  }
+  return _impl_.message_.add_service_response_;
+}
+inline ::markethub::messaging::system::AddServiceResponse* WrapperMessage::mutable_add_service_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::AddServiceResponse* _msg = _internal_mutable_add_service_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.add_service_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.FindNodeResponse find_node_response = 42;
-    inline bool WrapperMessage::has_find_node_response() const {
-      return message_case() == kFindNodeResponse;
+// .markethub.messaging.system.Heartbeat heartbeat = 38;
+inline bool WrapperMessage::has_heartbeat() const {
+  return message_case() == kHeartbeat;
+}
+inline bool WrapperMessage::_internal_has_heartbeat() const {
+  return message_case() == kHeartbeat;
+}
+inline void WrapperMessage::set_has_heartbeat() {
+  _impl_._oneof_case_[0] = kHeartbeat;
+}
+inline ::markethub::messaging::system::Heartbeat* WrapperMessage::release_heartbeat() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.heartbeat)
+  if (message_case() == kHeartbeat) {
+    clear_has_message();
+    auto* temp = _impl_.message_.heartbeat_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_find_node_response() const {
-      return message_case() == kFindNodeResponse;
-    }
-    inline void WrapperMessage::set_has_find_node_response() {
-      _impl_._oneof_case_[0] = kFindNodeResponse;
-    }
-    inline ::markethub::messaging::system::FindNodeResponse *
-    WrapperMessage::release_find_node_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.find_node_response)
-      if (message_case() == kFindNodeResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.find_node_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.find_node_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::FindNodeResponse &
-    WrapperMessage::_internal_find_node_response() const {
-      return message_case() == kFindNodeResponse
-                 ? *_impl_.message_.find_node_response_
-                 : reinterpret_cast<::markethub::messaging::system::FindNodeResponse &>(
-                       ::markethub::messaging::system::_FindNodeResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::FindNodeResponse &
-    WrapperMessage::find_node_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.find_node_response)
-      return _internal_find_node_response();
-    }
-    inline ::markethub::messaging::system::FindNodeResponse *
-    WrapperMessage::unsafe_arena_release_find_node_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.find_node_response)
-      if (message_case() == kFindNodeResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.find_node_response_;
-        _impl_.message_.find_node_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_find_node_response(
-        ::markethub::messaging::system::FindNodeResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_find_node_response();
-        _impl_.message_.find_node_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.find_node_response)
-    }
-    inline ::markethub::messaging::system::FindNodeResponse *
-    WrapperMessage::_internal_mutable_find_node_response() {
-      if (message_case() != kFindNodeResponse) {
-        clear_message();
-        set_has_find_node_response();
-        _impl_.message_.find_node_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::FindNodeResponse>(GetArena());
-      }
-      return _impl_.message_.find_node_response_;
-    }
-    inline ::markethub::messaging::system::FindNodeResponse *
-    WrapperMessage::mutable_find_node_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::FindNodeResponse *_msg =
-          _internal_mutable_find_node_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.find_node_response)
-      return _msg;
-    }
+    _impl_.message_.heartbeat_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::Heartbeat& WrapperMessage::_internal_heartbeat() const {
+  return message_case() == kHeartbeat ? *_impl_.message_.heartbeat_ : reinterpret_cast<::markethub::messaging::system::Heartbeat&>(::markethub::messaging::system::_Heartbeat_default_instance_);
+}
+inline const ::markethub::messaging::system::Heartbeat& WrapperMessage::heartbeat() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.heartbeat)
+  return _internal_heartbeat();
+}
+inline ::markethub::messaging::system::Heartbeat* WrapperMessage::unsafe_arena_release_heartbeat() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.heartbeat)
+  if (message_case() == kHeartbeat) {
+    clear_has_message();
+    auto* temp = _impl_.message_.heartbeat_;
+    _impl_.message_.heartbeat_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_heartbeat(::markethub::messaging::system::Heartbeat* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_heartbeat();
+    _impl_.message_.heartbeat_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.heartbeat)
+}
+inline ::markethub::messaging::system::Heartbeat* WrapperMessage::_internal_mutable_heartbeat() {
+  if (message_case() != kHeartbeat) {
+    clear_message();
+    set_has_heartbeat();
+    _impl_.message_.heartbeat_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::Heartbeat>(GetArena());
+  }
+  return _impl_.message_.heartbeat_;
+}
+inline ::markethub::messaging::system::Heartbeat* WrapperMessage::mutable_heartbeat() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::Heartbeat* _msg = _internal_mutable_heartbeat();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.heartbeat)
+  return _msg;
+}
 
-    // .markethub.messaging.system.DiscoverServicesRequest discover_services_request = 43;
-    inline bool WrapperMessage::has_discover_services_request() const {
-      return message_case() == kDiscoverServicesRequest;
+// .markethub.messaging.system.RemoveServiceRequest remove_service_request = 39;
+inline bool WrapperMessage::has_remove_service_request() const {
+  return message_case() == kRemoveServiceRequest;
+}
+inline bool WrapperMessage::_internal_has_remove_service_request() const {
+  return message_case() == kRemoveServiceRequest;
+}
+inline void WrapperMessage::set_has_remove_service_request() {
+  _impl_._oneof_case_[0] = kRemoveServiceRequest;
+}
+inline ::markethub::messaging::system::RemoveServiceRequest* WrapperMessage::release_remove_service_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.remove_service_request)
+  if (message_case() == kRemoveServiceRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.remove_service_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_discover_services_request() const {
-      return message_case() == kDiscoverServicesRequest;
-    }
-    inline void WrapperMessage::set_has_discover_services_request() {
-      _impl_._oneof_case_[0] = kDiscoverServicesRequest;
-    }
-    inline ::markethub::messaging::system::DiscoverServicesRequest *
-    WrapperMessage::release_discover_services_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.discover_services_request)
-      if (message_case() == kDiscoverServicesRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.discover_services_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.discover_services_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::DiscoverServicesRequest &
-    WrapperMessage::_internal_discover_services_request() const {
-      return message_case() == kDiscoverServicesRequest
-                 ? *_impl_.message_.discover_services_request_
-                 : reinterpret_cast<::markethub::messaging::system::DiscoverServicesRequest &>(
-                       ::markethub::messaging::system::_DiscoverServicesRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::DiscoverServicesRequest &
-    WrapperMessage::discover_services_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.discover_services_request)
-      return _internal_discover_services_request();
-    }
-    inline ::markethub::messaging::system::DiscoverServicesRequest *
-    WrapperMessage::unsafe_arena_release_discover_services_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.discover_services_request)
-      if (message_case() == kDiscoverServicesRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.discover_services_request_;
-        _impl_.message_.discover_services_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_discover_services_request(
-        ::markethub::messaging::system::DiscoverServicesRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_discover_services_request();
-        _impl_.message_.discover_services_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.discover_services_request)
-    }
-    inline ::markethub::messaging::system::DiscoverServicesRequest *
-    WrapperMessage::_internal_mutable_discover_services_request() {
-      if (message_case() != kDiscoverServicesRequest) {
-        clear_message();
-        set_has_discover_services_request();
-        _impl_.message_.discover_services_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::DiscoverServicesRequest>(GetArena());
-      }
-      return _impl_.message_.discover_services_request_;
-    }
-    inline ::markethub::messaging::system::DiscoverServicesRequest *
-    WrapperMessage::mutable_discover_services_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::DiscoverServicesRequest *_msg =
-          _internal_mutable_discover_services_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.discover_services_request)
-      return _msg;
-    }
+    _impl_.message_.remove_service_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::RemoveServiceRequest& WrapperMessage::_internal_remove_service_request() const {
+  return message_case() == kRemoveServiceRequest ? *_impl_.message_.remove_service_request_ : reinterpret_cast<::markethub::messaging::system::RemoveServiceRequest&>(::markethub::messaging::system::_RemoveServiceRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::RemoveServiceRequest& WrapperMessage::remove_service_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.remove_service_request)
+  return _internal_remove_service_request();
+}
+inline ::markethub::messaging::system::RemoveServiceRequest* WrapperMessage::unsafe_arena_release_remove_service_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.remove_service_request)
+  if (message_case() == kRemoveServiceRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.remove_service_request_;
+    _impl_.message_.remove_service_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_remove_service_request(::markethub::messaging::system::RemoveServiceRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_remove_service_request();
+    _impl_.message_.remove_service_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.remove_service_request)
+}
+inline ::markethub::messaging::system::RemoveServiceRequest* WrapperMessage::_internal_mutable_remove_service_request() {
+  if (message_case() != kRemoveServiceRequest) {
+    clear_message();
+    set_has_remove_service_request();
+    _impl_.message_.remove_service_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::RemoveServiceRequest>(GetArena());
+  }
+  return _impl_.message_.remove_service_request_;
+}
+inline ::markethub::messaging::system::RemoveServiceRequest* WrapperMessage::mutable_remove_service_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::RemoveServiceRequest* _msg = _internal_mutable_remove_service_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.remove_service_request)
+  return _msg;
+}
 
-    // .markethub.messaging.trading.TradeCaptureReport trade_capture_report = 44;
-    inline bool WrapperMessage::has_trade_capture_report() const {
-      return message_case() == kTradeCaptureReport;
+// .markethub.messaging.system.NodesBroadcast nodes_broadcast = 40;
+inline bool WrapperMessage::has_nodes_broadcast() const {
+  return message_case() == kNodesBroadcast;
+}
+inline bool WrapperMessage::_internal_has_nodes_broadcast() const {
+  return message_case() == kNodesBroadcast;
+}
+inline void WrapperMessage::set_has_nodes_broadcast() {
+  _impl_._oneof_case_[0] = kNodesBroadcast;
+}
+inline ::markethub::messaging::system::NodesBroadcast* WrapperMessage::release_nodes_broadcast() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.nodes_broadcast)
+  if (message_case() == kNodesBroadcast) {
+    clear_has_message();
+    auto* temp = _impl_.message_.nodes_broadcast_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_trade_capture_report() const {
-      return message_case() == kTradeCaptureReport;
-    }
-    inline void WrapperMessage::set_has_trade_capture_report() {
-      _impl_._oneof_case_[0] = kTradeCaptureReport;
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReport *
-    WrapperMessage::release_trade_capture_report() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trade_capture_report)
-      if (message_case() == kTradeCaptureReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trade_capture_report_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.trade_capture_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::trading::TradeCaptureReport &
-    WrapperMessage::_internal_trade_capture_report() const {
-      return message_case() == kTradeCaptureReport
-                 ? *_impl_.message_.trade_capture_report_
-                 : reinterpret_cast<::markethub::messaging::trading::TradeCaptureReport &>(
-                       ::markethub::messaging::trading::_TradeCaptureReport_default_instance_);
-    }
-    inline const ::markethub::messaging::trading::TradeCaptureReport &
-    WrapperMessage::trade_capture_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trade_capture_report)
-      return _internal_trade_capture_report();
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReport *
-    WrapperMessage::unsafe_arena_release_trade_capture_report() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trade_capture_report)
-      if (message_case() == kTradeCaptureReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.trade_capture_report_;
-        _impl_.message_.trade_capture_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_trade_capture_report(
-        ::markethub::messaging::trading::TradeCaptureReport *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_trade_capture_report();
-        _impl_.message_.trade_capture_report_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trade_capture_report)
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReport *
-    WrapperMessage::_internal_mutable_trade_capture_report() {
-      if (message_case() != kTradeCaptureReport) {
-        clear_message();
-        set_has_trade_capture_report();
-        _impl_.message_.trade_capture_report_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::trading::TradeCaptureReport>(GetArena());
-      }
-      return _impl_.message_.trade_capture_report_;
-    }
-    inline ::markethub::messaging::trading::TradeCaptureReport *
-    WrapperMessage::mutable_trade_capture_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::trading::TradeCaptureReport *_msg =
-          _internal_mutable_trade_capture_report();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trade_capture_report)
-      return _msg;
-    }
+    _impl_.message_.nodes_broadcast_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::NodesBroadcast& WrapperMessage::_internal_nodes_broadcast() const {
+  return message_case() == kNodesBroadcast ? *_impl_.message_.nodes_broadcast_ : reinterpret_cast<::markethub::messaging::system::NodesBroadcast&>(::markethub::messaging::system::_NodesBroadcast_default_instance_);
+}
+inline const ::markethub::messaging::system::NodesBroadcast& WrapperMessage::nodes_broadcast() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.nodes_broadcast)
+  return _internal_nodes_broadcast();
+}
+inline ::markethub::messaging::system::NodesBroadcast* WrapperMessage::unsafe_arena_release_nodes_broadcast() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.nodes_broadcast)
+  if (message_case() == kNodesBroadcast) {
+    clear_has_message();
+    auto* temp = _impl_.message_.nodes_broadcast_;
+    _impl_.message_.nodes_broadcast_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_nodes_broadcast(::markethub::messaging::system::NodesBroadcast* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_nodes_broadcast();
+    _impl_.message_.nodes_broadcast_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.nodes_broadcast)
+}
+inline ::markethub::messaging::system::NodesBroadcast* WrapperMessage::_internal_mutable_nodes_broadcast() {
+  if (message_case() != kNodesBroadcast) {
+    clear_message();
+    set_has_nodes_broadcast();
+    _impl_.message_.nodes_broadcast_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::NodesBroadcast>(GetArena());
+  }
+  return _impl_.message_.nodes_broadcast_;
+}
+inline ::markethub::messaging::system::NodesBroadcast* WrapperMessage::mutable_nodes_broadcast() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::NodesBroadcast* _msg = _internal_mutable_nodes_broadcast();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.nodes_broadcast)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.HoldingReportRequest holding_report_request = 46;
-    inline bool WrapperMessage::has_holding_report_request() const {
-      return message_case() == kHoldingReportRequest;
+// .markethub.messaging.system.FindNodeRequest find_node_request = 41;
+inline bool WrapperMessage::has_find_node_request() const {
+  return message_case() == kFindNodeRequest;
+}
+inline bool WrapperMessage::_internal_has_find_node_request() const {
+  return message_case() == kFindNodeRequest;
+}
+inline void WrapperMessage::set_has_find_node_request() {
+  _impl_._oneof_case_[0] = kFindNodeRequest;
+}
+inline ::markethub::messaging::system::FindNodeRequest* WrapperMessage::release_find_node_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.find_node_request)
+  if (message_case() == kFindNodeRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.find_node_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_holding_report_request() const {
-      return message_case() == kHoldingReportRequest;
-    }
-    inline void WrapperMessage::set_has_holding_report_request() {
-      _impl_._oneof_case_[0] = kHoldingReportRequest;
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportRequest *
-    WrapperMessage::release_holding_report_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.holding_report_request)
-      if (message_case() == kHoldingReportRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.holding_report_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.holding_report_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::HoldingReportRequest &
-    WrapperMessage::_internal_holding_report_request() const {
-      return message_case() == kHoldingReportRequest
-                 ? *_impl_.message_.holding_report_request_
-                 : reinterpret_cast<
-                       ::markethub::messaging::risk_management::HoldingReportRequest &>(
-                       ::markethub::messaging::risk_management::
-                           _HoldingReportRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::HoldingReportRequest &
-    WrapperMessage::holding_report_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.holding_report_request)
-      return _internal_holding_report_request();
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportRequest *
-    WrapperMessage::unsafe_arena_release_holding_report_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.holding_report_request)
-      if (message_case() == kHoldingReportRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.holding_report_request_;
-        _impl_.message_.holding_report_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_holding_report_request(
-        ::markethub::messaging::risk_management::HoldingReportRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_holding_report_request();
-        _impl_.message_.holding_report_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.holding_report_request)
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportRequest *
-    WrapperMessage::_internal_mutable_holding_report_request() {
-      if (message_case() != kHoldingReportRequest) {
-        clear_message();
-        set_has_holding_report_request();
-        _impl_.message_.holding_report_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::risk_management::HoldingReportRequest>(GetArena());
-      }
-      return _impl_.message_.holding_report_request_;
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportRequest *
-    WrapperMessage::mutable_holding_report_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::HoldingReportRequest *_msg =
-          _internal_mutable_holding_report_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.holding_report_request)
-      return _msg;
-    }
+    _impl_.message_.find_node_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::FindNodeRequest& WrapperMessage::_internal_find_node_request() const {
+  return message_case() == kFindNodeRequest ? *_impl_.message_.find_node_request_ : reinterpret_cast<::markethub::messaging::system::FindNodeRequest&>(::markethub::messaging::system::_FindNodeRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::FindNodeRequest& WrapperMessage::find_node_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.find_node_request)
+  return _internal_find_node_request();
+}
+inline ::markethub::messaging::system::FindNodeRequest* WrapperMessage::unsafe_arena_release_find_node_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.find_node_request)
+  if (message_case() == kFindNodeRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.find_node_request_;
+    _impl_.message_.find_node_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_find_node_request(::markethub::messaging::system::FindNodeRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_find_node_request();
+    _impl_.message_.find_node_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.find_node_request)
+}
+inline ::markethub::messaging::system::FindNodeRequest* WrapperMessage::_internal_mutable_find_node_request() {
+  if (message_case() != kFindNodeRequest) {
+    clear_message();
+    set_has_find_node_request();
+    _impl_.message_.find_node_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::FindNodeRequest>(GetArena());
+  }
+  return _impl_.message_.find_node_request_;
+}
+inline ::markethub::messaging::system::FindNodeRequest* WrapperMessage::mutable_find_node_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::FindNodeRequest* _msg = _internal_mutable_find_node_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.find_node_request)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.PNLReportRequest pnl_report_request = 47;
-    inline bool WrapperMessage::has_pnl_report_request() const {
-      return message_case() == kPnlReportRequest;
+// .markethub.messaging.system.FindNodeResponse find_node_response = 42;
+inline bool WrapperMessage::has_find_node_response() const {
+  return message_case() == kFindNodeResponse;
+}
+inline bool WrapperMessage::_internal_has_find_node_response() const {
+  return message_case() == kFindNodeResponse;
+}
+inline void WrapperMessage::set_has_find_node_response() {
+  _impl_._oneof_case_[0] = kFindNodeResponse;
+}
+inline ::markethub::messaging::system::FindNodeResponse* WrapperMessage::release_find_node_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.find_node_response)
+  if (message_case() == kFindNodeResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.find_node_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_pnl_report_request() const {
-      return message_case() == kPnlReportRequest;
-    }
-    inline void WrapperMessage::set_has_pnl_report_request() {
-      _impl_._oneof_case_[0] = kPnlReportRequest;
-    }
-    inline ::markethub::messaging::risk_management::PNLReportRequest *
-    WrapperMessage::release_pnl_report_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pnl_report_request)
-      if (message_case() == kPnlReportRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pnl_report_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.pnl_report_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::PNLReportRequest &
-    WrapperMessage::_internal_pnl_report_request() const {
-      return message_case() == kPnlReportRequest
-                 ? *_impl_.message_.pnl_report_request_
-                 : reinterpret_cast<::markethub::messaging::risk_management::PNLReportRequest &>(
-                       ::markethub::messaging::risk_management::
-                           _PNLReportRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::PNLReportRequest &
-    WrapperMessage::pnl_report_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pnl_report_request)
-      return _internal_pnl_report_request();
-    }
-    inline ::markethub::messaging::risk_management::PNLReportRequest *
-    WrapperMessage::unsafe_arena_release_pnl_report_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pnl_report_request)
-      if (message_case() == kPnlReportRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pnl_report_request_;
-        _impl_.message_.pnl_report_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_pnl_report_request(
-        ::markethub::messaging::risk_management::PNLReportRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_pnl_report_request();
-        _impl_.message_.pnl_report_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pnl_report_request)
-    }
-    inline ::markethub::messaging::risk_management::PNLReportRequest *
-    WrapperMessage::_internal_mutable_pnl_report_request() {
-      if (message_case() != kPnlReportRequest) {
-        clear_message();
-        set_has_pnl_report_request();
-        _impl_.message_.pnl_report_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::risk_management::PNLReportRequest>(GetArena());
-      }
-      return _impl_.message_.pnl_report_request_;
-    }
-    inline ::markethub::messaging::risk_management::PNLReportRequest *
-    WrapperMessage::mutable_pnl_report_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::PNLReportRequest *_msg =
-          _internal_mutable_pnl_report_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pnl_report_request)
-      return _msg;
-    }
+    _impl_.message_.find_node_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::FindNodeResponse& WrapperMessage::_internal_find_node_response() const {
+  return message_case() == kFindNodeResponse ? *_impl_.message_.find_node_response_ : reinterpret_cast<::markethub::messaging::system::FindNodeResponse&>(::markethub::messaging::system::_FindNodeResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::FindNodeResponse& WrapperMessage::find_node_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.find_node_response)
+  return _internal_find_node_response();
+}
+inline ::markethub::messaging::system::FindNodeResponse* WrapperMessage::unsafe_arena_release_find_node_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.find_node_response)
+  if (message_case() == kFindNodeResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.find_node_response_;
+    _impl_.message_.find_node_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_find_node_response(::markethub::messaging::system::FindNodeResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_find_node_response();
+    _impl_.message_.find_node_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.find_node_response)
+}
+inline ::markethub::messaging::system::FindNodeResponse* WrapperMessage::_internal_mutable_find_node_response() {
+  if (message_case() != kFindNodeResponse) {
+    clear_message();
+    set_has_find_node_response();
+    _impl_.message_.find_node_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::FindNodeResponse>(GetArena());
+  }
+  return _impl_.message_.find_node_response_;
+}
+inline ::markethub::messaging::system::FindNodeResponse* WrapperMessage::mutable_find_node_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::FindNodeResponse* _msg = _internal_mutable_find_node_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.find_node_response)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.HoldingReportResponse holding_report_response = 49;
-    inline bool WrapperMessage::has_holding_report_response() const {
-      return message_case() == kHoldingReportResponse;
+// .markethub.messaging.system.DiscoverServicesRequest discover_services_request = 43;
+inline bool WrapperMessage::has_discover_services_request() const {
+  return message_case() == kDiscoverServicesRequest;
+}
+inline bool WrapperMessage::_internal_has_discover_services_request() const {
+  return message_case() == kDiscoverServicesRequest;
+}
+inline void WrapperMessage::set_has_discover_services_request() {
+  _impl_._oneof_case_[0] = kDiscoverServicesRequest;
+}
+inline ::markethub::messaging::system::DiscoverServicesRequest* WrapperMessage::release_discover_services_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.discover_services_request)
+  if (message_case() == kDiscoverServicesRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.discover_services_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_holding_report_response() const {
-      return message_case() == kHoldingReportResponse;
-    }
-    inline void WrapperMessage::set_has_holding_report_response() {
-      _impl_._oneof_case_[0] = kHoldingReportResponse;
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportResponse *
-    WrapperMessage::release_holding_report_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.holding_report_response)
-      if (message_case() == kHoldingReportResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.holding_report_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.holding_report_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::HoldingReportResponse &
-    WrapperMessage::_internal_holding_report_response() const {
-      return message_case() == kHoldingReportResponse
-                 ? *_impl_.message_.holding_report_response_
-                 : reinterpret_cast<
-                       ::markethub::messaging::risk_management::HoldingReportResponse &>(
-                       ::markethub::messaging::risk_management::
-                           _HoldingReportResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::HoldingReportResponse &
-    WrapperMessage::holding_report_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.holding_report_response)
-      return _internal_holding_report_response();
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportResponse *
-    WrapperMessage::unsafe_arena_release_holding_report_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.holding_report_response)
-      if (message_case() == kHoldingReportResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.holding_report_response_;
-        _impl_.message_.holding_report_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_holding_report_response(
-        ::markethub::messaging::risk_management::HoldingReportResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_holding_report_response();
-        _impl_.message_.holding_report_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.holding_report_response)
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportResponse *
-    WrapperMessage::_internal_mutable_holding_report_response() {
-      if (message_case() != kHoldingReportResponse) {
-        clear_message();
-        set_has_holding_report_response();
-        _impl_.message_.holding_report_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::risk_management::HoldingReportResponse>(GetArena());
-      }
-      return _impl_.message_.holding_report_response_;
-    }
-    inline ::markethub::messaging::risk_management::HoldingReportResponse *
-    WrapperMessage::mutable_holding_report_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::HoldingReportResponse *_msg =
-          _internal_mutable_holding_report_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.holding_report_response)
-      return _msg;
-    }
+    _impl_.message_.discover_services_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::DiscoverServicesRequest& WrapperMessage::_internal_discover_services_request() const {
+  return message_case() == kDiscoverServicesRequest ? *_impl_.message_.discover_services_request_ : reinterpret_cast<::markethub::messaging::system::DiscoverServicesRequest&>(::markethub::messaging::system::_DiscoverServicesRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::DiscoverServicesRequest& WrapperMessage::discover_services_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.discover_services_request)
+  return _internal_discover_services_request();
+}
+inline ::markethub::messaging::system::DiscoverServicesRequest* WrapperMessage::unsafe_arena_release_discover_services_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.discover_services_request)
+  if (message_case() == kDiscoverServicesRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.discover_services_request_;
+    _impl_.message_.discover_services_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_discover_services_request(::markethub::messaging::system::DiscoverServicesRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_discover_services_request();
+    _impl_.message_.discover_services_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.discover_services_request)
+}
+inline ::markethub::messaging::system::DiscoverServicesRequest* WrapperMessage::_internal_mutable_discover_services_request() {
+  if (message_case() != kDiscoverServicesRequest) {
+    clear_message();
+    set_has_discover_services_request();
+    _impl_.message_.discover_services_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::DiscoverServicesRequest>(GetArena());
+  }
+  return _impl_.message_.discover_services_request_;
+}
+inline ::markethub::messaging::system::DiscoverServicesRequest* WrapperMessage::mutable_discover_services_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::DiscoverServicesRequest* _msg = _internal_mutable_discover_services_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.discover_services_request)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.PNLReportResponse pnl_report_response = 50;
-    inline bool WrapperMessage::has_pnl_report_response() const {
-      return message_case() == kPnlReportResponse;
+// .markethub.messaging.trading.TradeCaptureReport trade_capture_report = 44;
+inline bool WrapperMessage::has_trade_capture_report() const {
+  return message_case() == kTradeCaptureReport;
+}
+inline bool WrapperMessage::_internal_has_trade_capture_report() const {
+  return message_case() == kTradeCaptureReport;
+}
+inline void WrapperMessage::set_has_trade_capture_report() {
+  _impl_._oneof_case_[0] = kTradeCaptureReport;
+}
+inline ::markethub::messaging::trading::TradeCaptureReport* WrapperMessage::release_trade_capture_report() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.trade_capture_report)
+  if (message_case() == kTradeCaptureReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trade_capture_report_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_pnl_report_response() const {
-      return message_case() == kPnlReportResponse;
-    }
-    inline void WrapperMessage::set_has_pnl_report_response() {
-      _impl_._oneof_case_[0] = kPnlReportResponse;
-    }
-    inline ::markethub::messaging::risk_management::PNLReportResponse *
-    WrapperMessage::release_pnl_report_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pnl_report_response)
-      if (message_case() == kPnlReportResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pnl_report_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.pnl_report_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::PNLReportResponse &
-    WrapperMessage::_internal_pnl_report_response() const {
-      return message_case() == kPnlReportResponse
-                 ? *_impl_.message_.pnl_report_response_
-                 : reinterpret_cast<::markethub::messaging::risk_management::PNLReportResponse &>(
-                       ::markethub::messaging::risk_management::
-                           _PNLReportResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::PNLReportResponse &
-    WrapperMessage::pnl_report_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pnl_report_response)
-      return _internal_pnl_report_response();
-    }
-    inline ::markethub::messaging::risk_management::PNLReportResponse *
-    WrapperMessage::unsafe_arena_release_pnl_report_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pnl_report_response)
-      if (message_case() == kPnlReportResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pnl_report_response_;
-        _impl_.message_.pnl_report_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_pnl_report_response(
-        ::markethub::messaging::risk_management::PNLReportResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_pnl_report_response();
-        _impl_.message_.pnl_report_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pnl_report_response)
-    }
-    inline ::markethub::messaging::risk_management::PNLReportResponse *
-    WrapperMessage::_internal_mutable_pnl_report_response() {
-      if (message_case() != kPnlReportResponse) {
-        clear_message();
-        set_has_pnl_report_response();
-        _impl_.message_.pnl_report_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::risk_management::PNLReportResponse>(GetArena());
-      }
-      return _impl_.message_.pnl_report_response_;
-    }
-    inline ::markethub::messaging::risk_management::PNLReportResponse *
-    WrapperMessage::mutable_pnl_report_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::PNLReportResponse *_msg =
-          _internal_mutable_pnl_report_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pnl_report_response)
-      return _msg;
-    }
+    _impl_.message_.trade_capture_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::trading::TradeCaptureReport& WrapperMessage::_internal_trade_capture_report() const {
+  return message_case() == kTradeCaptureReport ? *_impl_.message_.trade_capture_report_ : reinterpret_cast<::markethub::messaging::trading::TradeCaptureReport&>(::markethub::messaging::trading::_TradeCaptureReport_default_instance_);
+}
+inline const ::markethub::messaging::trading::TradeCaptureReport& WrapperMessage::trade_capture_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.trade_capture_report)
+  return _internal_trade_capture_report();
+}
+inline ::markethub::messaging::trading::TradeCaptureReport* WrapperMessage::unsafe_arena_release_trade_capture_report() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.trade_capture_report)
+  if (message_case() == kTradeCaptureReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.trade_capture_report_;
+    _impl_.message_.trade_capture_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_trade_capture_report(::markethub::messaging::trading::TradeCaptureReport* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_trade_capture_report();
+    _impl_.message_.trade_capture_report_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.trade_capture_report)
+}
+inline ::markethub::messaging::trading::TradeCaptureReport* WrapperMessage::_internal_mutable_trade_capture_report() {
+  if (message_case() != kTradeCaptureReport) {
+    clear_message();
+    set_has_trade_capture_report();
+    _impl_.message_.trade_capture_report_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::trading::TradeCaptureReport>(GetArena());
+  }
+  return _impl_.message_.trade_capture_report_;
+}
+inline ::markethub::messaging::trading::TradeCaptureReport* WrapperMessage::mutable_trade_capture_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::trading::TradeCaptureReport* _msg = _internal_mutable_trade_capture_report();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.trade_capture_report)
+  return _msg;
+}
 
-    // .markethub.messaging.system.FilterSymbolsRequest filter_symbols_request = 51;
-    inline bool WrapperMessage::has_filter_symbols_request() const {
-      return message_case() == kFilterSymbolsRequest;
+// .markethub.messaging.risk_management.HoldingReportRequest holding_report_request = 46;
+inline bool WrapperMessage::has_holding_report_request() const {
+  return message_case() == kHoldingReportRequest;
+}
+inline bool WrapperMessage::_internal_has_holding_report_request() const {
+  return message_case() == kHoldingReportRequest;
+}
+inline void WrapperMessage::set_has_holding_report_request() {
+  _impl_._oneof_case_[0] = kHoldingReportRequest;
+}
+inline ::markethub::messaging::risk_management::HoldingReportRequest* WrapperMessage::release_holding_report_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.holding_report_request)
+  if (message_case() == kHoldingReportRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.holding_report_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_filter_symbols_request() const {
-      return message_case() == kFilterSymbolsRequest;
-    }
-    inline void WrapperMessage::set_has_filter_symbols_request() {
-      _impl_._oneof_case_[0] = kFilterSymbolsRequest;
-    }
-    inline ::markethub::messaging::system::FilterSymbolsRequest *
-    WrapperMessage::release_filter_symbols_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.filter_symbols_request)
-      if (message_case() == kFilterSymbolsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.filter_symbols_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.filter_symbols_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::FilterSymbolsRequest &
-    WrapperMessage::_internal_filter_symbols_request() const {
-      return message_case() == kFilterSymbolsRequest
-                 ? *_impl_.message_.filter_symbols_request_
-                 : reinterpret_cast<::markethub::messaging::system::FilterSymbolsRequest &>(
-                       ::markethub::messaging::system::_FilterSymbolsRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::FilterSymbolsRequest &
-    WrapperMessage::filter_symbols_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.filter_symbols_request)
-      return _internal_filter_symbols_request();
-    }
-    inline ::markethub::messaging::system::FilterSymbolsRequest *
-    WrapperMessage::unsafe_arena_release_filter_symbols_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.filter_symbols_request)
-      if (message_case() == kFilterSymbolsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.filter_symbols_request_;
-        _impl_.message_.filter_symbols_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_filter_symbols_request(
-        ::markethub::messaging::system::FilterSymbolsRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_filter_symbols_request();
-        _impl_.message_.filter_symbols_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.filter_symbols_request)
-    }
-    inline ::markethub::messaging::system::FilterSymbolsRequest *
-    WrapperMessage::_internal_mutable_filter_symbols_request() {
-      if (message_case() != kFilterSymbolsRequest) {
-        clear_message();
-        set_has_filter_symbols_request();
-        _impl_.message_.filter_symbols_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::FilterSymbolsRequest>(GetArena());
-      }
-      return _impl_.message_.filter_symbols_request_;
-    }
-    inline ::markethub::messaging::system::FilterSymbolsRequest *
-    WrapperMessage::mutable_filter_symbols_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::FilterSymbolsRequest *_msg =
-          _internal_mutable_filter_symbols_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.filter_symbols_request)
-      return _msg;
-    }
+    _impl_.message_.holding_report_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::HoldingReportRequest& WrapperMessage::_internal_holding_report_request() const {
+  return message_case() == kHoldingReportRequest ? *_impl_.message_.holding_report_request_ : reinterpret_cast<::markethub::messaging::risk_management::HoldingReportRequest&>(::markethub::messaging::risk_management::_HoldingReportRequest_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::HoldingReportRequest& WrapperMessage::holding_report_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.holding_report_request)
+  return _internal_holding_report_request();
+}
+inline ::markethub::messaging::risk_management::HoldingReportRequest* WrapperMessage::unsafe_arena_release_holding_report_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.holding_report_request)
+  if (message_case() == kHoldingReportRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.holding_report_request_;
+    _impl_.message_.holding_report_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_holding_report_request(::markethub::messaging::risk_management::HoldingReportRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_holding_report_request();
+    _impl_.message_.holding_report_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.holding_report_request)
+}
+inline ::markethub::messaging::risk_management::HoldingReportRequest* WrapperMessage::_internal_mutable_holding_report_request() {
+  if (message_case() != kHoldingReportRequest) {
+    clear_message();
+    set_has_holding_report_request();
+    _impl_.message_.holding_report_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::HoldingReportRequest>(GetArena());
+  }
+  return _impl_.message_.holding_report_request_;
+}
+inline ::markethub::messaging::risk_management::HoldingReportRequest* WrapperMessage::mutable_holding_report_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::HoldingReportRequest* _msg = _internal_mutable_holding_report_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.holding_report_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.FilterSymbolsResponse filter_symbols_response = 52;
-    inline bool WrapperMessage::has_filter_symbols_response() const {
-      return message_case() == kFilterSymbolsResponse;
+// .markethub.messaging.risk_management.PNLReportRequest pnl_report_request = 47;
+inline bool WrapperMessage::has_pnl_report_request() const {
+  return message_case() == kPnlReportRequest;
+}
+inline bool WrapperMessage::_internal_has_pnl_report_request() const {
+  return message_case() == kPnlReportRequest;
+}
+inline void WrapperMessage::set_has_pnl_report_request() {
+  _impl_._oneof_case_[0] = kPnlReportRequest;
+}
+inline ::markethub::messaging::risk_management::PNLReportRequest* WrapperMessage::release_pnl_report_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pnl_report_request)
+  if (message_case() == kPnlReportRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pnl_report_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_filter_symbols_response() const {
-      return message_case() == kFilterSymbolsResponse;
-    }
-    inline void WrapperMessage::set_has_filter_symbols_response() {
-      _impl_._oneof_case_[0] = kFilterSymbolsResponse;
-    }
-    inline ::markethub::messaging::system::FilterSymbolsResponse *
-    WrapperMessage::release_filter_symbols_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.filter_symbols_response)
-      if (message_case() == kFilterSymbolsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.filter_symbols_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.filter_symbols_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::FilterSymbolsResponse &
-    WrapperMessage::_internal_filter_symbols_response() const {
-      return message_case() == kFilterSymbolsResponse
-                 ? *_impl_.message_.filter_symbols_response_
-                 : reinterpret_cast<::markethub::messaging::system::FilterSymbolsResponse &>(
-                       ::markethub::messaging::system::_FilterSymbolsResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::FilterSymbolsResponse &
-    WrapperMessage::filter_symbols_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.filter_symbols_response)
-      return _internal_filter_symbols_response();
-    }
-    inline ::markethub::messaging::system::FilterSymbolsResponse *
-    WrapperMessage::unsafe_arena_release_filter_symbols_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.filter_symbols_response)
-      if (message_case() == kFilterSymbolsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.filter_symbols_response_;
-        _impl_.message_.filter_symbols_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_filter_symbols_response(
-        ::markethub::messaging::system::FilterSymbolsResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_filter_symbols_response();
-        _impl_.message_.filter_symbols_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.filter_symbols_response)
-    }
-    inline ::markethub::messaging::system::FilterSymbolsResponse *
-    WrapperMessage::_internal_mutable_filter_symbols_response() {
-      if (message_case() != kFilterSymbolsResponse) {
-        clear_message();
-        set_has_filter_symbols_response();
-        _impl_.message_.filter_symbols_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::FilterSymbolsResponse>(GetArena());
-      }
-      return _impl_.message_.filter_symbols_response_;
-    }
-    inline ::markethub::messaging::system::FilterSymbolsResponse *
-    WrapperMessage::mutable_filter_symbols_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::FilterSymbolsResponse *_msg =
-          _internal_mutable_filter_symbols_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.filter_symbols_response)
-      return _msg;
-    }
+    _impl_.message_.pnl_report_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::PNLReportRequest& WrapperMessage::_internal_pnl_report_request() const {
+  return message_case() == kPnlReportRequest ? *_impl_.message_.pnl_report_request_ : reinterpret_cast<::markethub::messaging::risk_management::PNLReportRequest&>(::markethub::messaging::risk_management::_PNLReportRequest_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::PNLReportRequest& WrapperMessage::pnl_report_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pnl_report_request)
+  return _internal_pnl_report_request();
+}
+inline ::markethub::messaging::risk_management::PNLReportRequest* WrapperMessage::unsafe_arena_release_pnl_report_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pnl_report_request)
+  if (message_case() == kPnlReportRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pnl_report_request_;
+    _impl_.message_.pnl_report_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_pnl_report_request(::markethub::messaging::risk_management::PNLReportRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_pnl_report_request();
+    _impl_.message_.pnl_report_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pnl_report_request)
+}
+inline ::markethub::messaging::risk_management::PNLReportRequest* WrapperMessage::_internal_mutable_pnl_report_request() {
+  if (message_case() != kPnlReportRequest) {
+    clear_message();
+    set_has_pnl_report_request();
+    _impl_.message_.pnl_report_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::PNLReportRequest>(GetArena());
+  }
+  return _impl_.message_.pnl_report_request_;
+}
+inline ::markethub::messaging::risk_management::PNLReportRequest* WrapperMessage::mutable_pnl_report_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::PNLReportRequest* _msg = _internal_mutable_pnl_report_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pnl_report_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.AllInstrumentsRequest all_instruments_request = 53;
-    inline bool WrapperMessage::has_all_instruments_request() const {
-      return message_case() == kAllInstrumentsRequest;
+// .markethub.messaging.risk_management.HoldingReportResponse holding_report_response = 49;
+inline bool WrapperMessage::has_holding_report_response() const {
+  return message_case() == kHoldingReportResponse;
+}
+inline bool WrapperMessage::_internal_has_holding_report_response() const {
+  return message_case() == kHoldingReportResponse;
+}
+inline void WrapperMessage::set_has_holding_report_response() {
+  _impl_._oneof_case_[0] = kHoldingReportResponse;
+}
+inline ::markethub::messaging::risk_management::HoldingReportResponse* WrapperMessage::release_holding_report_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.holding_report_response)
+  if (message_case() == kHoldingReportResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.holding_report_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_all_instruments_request() const {
-      return message_case() == kAllInstrumentsRequest;
-    }
-    inline void WrapperMessage::set_has_all_instruments_request() {
-      _impl_._oneof_case_[0] = kAllInstrumentsRequest;
-    }
-    inline ::markethub::messaging::system::AllInstrumentsRequest *
-    WrapperMessage::release_all_instruments_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_instruments_request)
-      if (message_case() == kAllInstrumentsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_instruments_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.all_instruments_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::AllInstrumentsRequest &
-    WrapperMessage::_internal_all_instruments_request() const {
-      return message_case() == kAllInstrumentsRequest
-                 ? *_impl_.message_.all_instruments_request_
-                 : reinterpret_cast<::markethub::messaging::system::AllInstrumentsRequest &>(
-                       ::markethub::messaging::system::_AllInstrumentsRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::AllInstrumentsRequest &
-    WrapperMessage::all_instruments_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_instruments_request)
-      return _internal_all_instruments_request();
-    }
-    inline ::markethub::messaging::system::AllInstrumentsRequest *
-    WrapperMessage::unsafe_arena_release_all_instruments_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_instruments_request)
-      if (message_case() == kAllInstrumentsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_instruments_request_;
-        _impl_.message_.all_instruments_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_all_instruments_request(
-        ::markethub::messaging::system::AllInstrumentsRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_all_instruments_request();
-        _impl_.message_.all_instruments_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_instruments_request)
-    }
-    inline ::markethub::messaging::system::AllInstrumentsRequest *
-    WrapperMessage::_internal_mutable_all_instruments_request() {
-      if (message_case() != kAllInstrumentsRequest) {
-        clear_message();
-        set_has_all_instruments_request();
-        _impl_.message_.all_instruments_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::AllInstrumentsRequest>(GetArena());
-      }
-      return _impl_.message_.all_instruments_request_;
-    }
-    inline ::markethub::messaging::system::AllInstrumentsRequest *
-    WrapperMessage::mutable_all_instruments_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::AllInstrumentsRequest *_msg =
-          _internal_mutable_all_instruments_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_instruments_request)
-      return _msg;
-    }
+    _impl_.message_.holding_report_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::HoldingReportResponse& WrapperMessage::_internal_holding_report_response() const {
+  return message_case() == kHoldingReportResponse ? *_impl_.message_.holding_report_response_ : reinterpret_cast<::markethub::messaging::risk_management::HoldingReportResponse&>(::markethub::messaging::risk_management::_HoldingReportResponse_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::HoldingReportResponse& WrapperMessage::holding_report_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.holding_report_response)
+  return _internal_holding_report_response();
+}
+inline ::markethub::messaging::risk_management::HoldingReportResponse* WrapperMessage::unsafe_arena_release_holding_report_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.holding_report_response)
+  if (message_case() == kHoldingReportResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.holding_report_response_;
+    _impl_.message_.holding_report_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_holding_report_response(::markethub::messaging::risk_management::HoldingReportResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_holding_report_response();
+    _impl_.message_.holding_report_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.holding_report_response)
+}
+inline ::markethub::messaging::risk_management::HoldingReportResponse* WrapperMessage::_internal_mutable_holding_report_response() {
+  if (message_case() != kHoldingReportResponse) {
+    clear_message();
+    set_has_holding_report_response();
+    _impl_.message_.holding_report_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::HoldingReportResponse>(GetArena());
+  }
+  return _impl_.message_.holding_report_response_;
+}
+inline ::markethub::messaging::risk_management::HoldingReportResponse* WrapperMessage::mutable_holding_report_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::HoldingReportResponse* _msg = _internal_mutable_holding_report_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.holding_report_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.AllInstrumentsResponse all_instruments_response = 54;
-    inline bool WrapperMessage::has_all_instruments_response() const {
-      return message_case() == kAllInstrumentsResponse;
+// .markethub.messaging.risk_management.PNLReportResponse pnl_report_response = 50;
+inline bool WrapperMessage::has_pnl_report_response() const {
+  return message_case() == kPnlReportResponse;
+}
+inline bool WrapperMessage::_internal_has_pnl_report_response() const {
+  return message_case() == kPnlReportResponse;
+}
+inline void WrapperMessage::set_has_pnl_report_response() {
+  _impl_._oneof_case_[0] = kPnlReportResponse;
+}
+inline ::markethub::messaging::risk_management::PNLReportResponse* WrapperMessage::release_pnl_report_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pnl_report_response)
+  if (message_case() == kPnlReportResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pnl_report_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_all_instruments_response() const {
-      return message_case() == kAllInstrumentsResponse;
-    }
-    inline void WrapperMessage::set_has_all_instruments_response() {
-      _impl_._oneof_case_[0] = kAllInstrumentsResponse;
-    }
-    inline ::markethub::messaging::system::AllInstrumentsResponse *
-    WrapperMessage::release_all_instruments_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_instruments_response)
-      if (message_case() == kAllInstrumentsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_instruments_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.all_instruments_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::AllInstrumentsResponse &
-    WrapperMessage::_internal_all_instruments_response() const {
-      return message_case() == kAllInstrumentsResponse
-                 ? *_impl_.message_.all_instruments_response_
-                 : reinterpret_cast<::markethub::messaging::system::AllInstrumentsResponse &>(
-                       ::markethub::messaging::system::_AllInstrumentsResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::AllInstrumentsResponse &
-    WrapperMessage::all_instruments_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_instruments_response)
-      return _internal_all_instruments_response();
-    }
-    inline ::markethub::messaging::system::AllInstrumentsResponse *
-    WrapperMessage::unsafe_arena_release_all_instruments_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_instruments_response)
-      if (message_case() == kAllInstrumentsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.all_instruments_response_;
-        _impl_.message_.all_instruments_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_all_instruments_response(
-        ::markethub::messaging::system::AllInstrumentsResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_all_instruments_response();
-        _impl_.message_.all_instruments_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_instruments_response)
-    }
-    inline ::markethub::messaging::system::AllInstrumentsResponse *
-    WrapperMessage::_internal_mutable_all_instruments_response() {
-      if (message_case() != kAllInstrumentsResponse) {
-        clear_message();
-        set_has_all_instruments_response();
-        _impl_.message_.all_instruments_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::AllInstrumentsResponse>(GetArena());
-      }
-      return _impl_.message_.all_instruments_response_;
-    }
-    inline ::markethub::messaging::system::AllInstrumentsResponse *
-    WrapperMessage::mutable_all_instruments_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::AllInstrumentsResponse *_msg =
-          _internal_mutable_all_instruments_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_instruments_response)
-      return _msg;
-    }
+    _impl_.message_.pnl_report_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::PNLReportResponse& WrapperMessage::_internal_pnl_report_response() const {
+  return message_case() == kPnlReportResponse ? *_impl_.message_.pnl_report_response_ : reinterpret_cast<::markethub::messaging::risk_management::PNLReportResponse&>(::markethub::messaging::risk_management::_PNLReportResponse_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::PNLReportResponse& WrapperMessage::pnl_report_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pnl_report_response)
+  return _internal_pnl_report_response();
+}
+inline ::markethub::messaging::risk_management::PNLReportResponse* WrapperMessage::unsafe_arena_release_pnl_report_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pnl_report_response)
+  if (message_case() == kPnlReportResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pnl_report_response_;
+    _impl_.message_.pnl_report_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_pnl_report_response(::markethub::messaging::risk_management::PNLReportResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_pnl_report_response();
+    _impl_.message_.pnl_report_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pnl_report_response)
+}
+inline ::markethub::messaging::risk_management::PNLReportResponse* WrapperMessage::_internal_mutable_pnl_report_response() {
+  if (message_case() != kPnlReportResponse) {
+    clear_message();
+    set_has_pnl_report_response();
+    _impl_.message_.pnl_report_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::PNLReportResponse>(GetArena());
+  }
+  return _impl_.message_.pnl_report_response_;
+}
+inline ::markethub::messaging::risk_management::PNLReportResponse* WrapperMessage::mutable_pnl_report_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::PNLReportResponse* _msg = _internal_mutable_pnl_report_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pnl_report_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.PreviousClosePriceRequest previous_close_price_request = 55;
-    inline bool WrapperMessage::has_previous_close_price_request() const {
-      return message_case() == kPreviousClosePriceRequest;
+// .markethub.messaging.system.FilterSymbolsRequest filter_symbols_request = 51;
+inline bool WrapperMessage::has_filter_symbols_request() const {
+  return message_case() == kFilterSymbolsRequest;
+}
+inline bool WrapperMessage::_internal_has_filter_symbols_request() const {
+  return message_case() == kFilterSymbolsRequest;
+}
+inline void WrapperMessage::set_has_filter_symbols_request() {
+  _impl_._oneof_case_[0] = kFilterSymbolsRequest;
+}
+inline ::markethub::messaging::system::FilterSymbolsRequest* WrapperMessage::release_filter_symbols_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.filter_symbols_request)
+  if (message_case() == kFilterSymbolsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.filter_symbols_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_previous_close_price_request() const {
-      return message_case() == kPreviousClosePriceRequest;
-    }
-    inline void WrapperMessage::set_has_previous_close_price_request() {
-      _impl_._oneof_case_[0] = kPreviousClosePriceRequest;
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceRequest *
-    WrapperMessage::release_previous_close_price_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.previous_close_price_request)
-      if (message_case() == kPreviousClosePriceRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.previous_close_price_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.previous_close_price_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::PreviousClosePriceRequest &
-    WrapperMessage::_internal_previous_close_price_request() const {
-      return message_case() == kPreviousClosePriceRequest
-                 ? *_impl_.message_.previous_close_price_request_
-                 : reinterpret_cast<::markethub::messaging::system::PreviousClosePriceRequest &>(
-                       ::markethub::messaging::system::
-                           _PreviousClosePriceRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::PreviousClosePriceRequest &
-    WrapperMessage::previous_close_price_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.previous_close_price_request)
-      return _internal_previous_close_price_request();
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceRequest *
-    WrapperMessage::unsafe_arena_release_previous_close_price_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.previous_close_price_request)
-      if (message_case() == kPreviousClosePriceRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.previous_close_price_request_;
-        _impl_.message_.previous_close_price_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_previous_close_price_request(
-        ::markethub::messaging::system::PreviousClosePriceRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_previous_close_price_request();
-        _impl_.message_.previous_close_price_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.previous_close_price_request)
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceRequest *
-    WrapperMessage::_internal_mutable_previous_close_price_request() {
-      if (message_case() != kPreviousClosePriceRequest) {
-        clear_message();
-        set_has_previous_close_price_request();
-        _impl_.message_.previous_close_price_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::system::PreviousClosePriceRequest>(GetArena());
-      }
-      return _impl_.message_.previous_close_price_request_;
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceRequest *
-    WrapperMessage::mutable_previous_close_price_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::PreviousClosePriceRequest *_msg =
-          _internal_mutable_previous_close_price_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.previous_close_price_request)
-      return _msg;
-    }
+    _impl_.message_.filter_symbols_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::FilterSymbolsRequest& WrapperMessage::_internal_filter_symbols_request() const {
+  return message_case() == kFilterSymbolsRequest ? *_impl_.message_.filter_symbols_request_ : reinterpret_cast<::markethub::messaging::system::FilterSymbolsRequest&>(::markethub::messaging::system::_FilterSymbolsRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::FilterSymbolsRequest& WrapperMessage::filter_symbols_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.filter_symbols_request)
+  return _internal_filter_symbols_request();
+}
+inline ::markethub::messaging::system::FilterSymbolsRequest* WrapperMessage::unsafe_arena_release_filter_symbols_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.filter_symbols_request)
+  if (message_case() == kFilterSymbolsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.filter_symbols_request_;
+    _impl_.message_.filter_symbols_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_filter_symbols_request(::markethub::messaging::system::FilterSymbolsRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_filter_symbols_request();
+    _impl_.message_.filter_symbols_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.filter_symbols_request)
+}
+inline ::markethub::messaging::system::FilterSymbolsRequest* WrapperMessage::_internal_mutable_filter_symbols_request() {
+  if (message_case() != kFilterSymbolsRequest) {
+    clear_message();
+    set_has_filter_symbols_request();
+    _impl_.message_.filter_symbols_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::FilterSymbolsRequest>(GetArena());
+  }
+  return _impl_.message_.filter_symbols_request_;
+}
+inline ::markethub::messaging::system::FilterSymbolsRequest* WrapperMessage::mutable_filter_symbols_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::FilterSymbolsRequest* _msg = _internal_mutable_filter_symbols_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.filter_symbols_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.PreviousClosePriceResponse previous_close_price_response = 56;
-    inline bool WrapperMessage::has_previous_close_price_response() const {
-      return message_case() == kPreviousClosePriceResponse;
+// .markethub.messaging.system.FilterSymbolsResponse filter_symbols_response = 52;
+inline bool WrapperMessage::has_filter_symbols_response() const {
+  return message_case() == kFilterSymbolsResponse;
+}
+inline bool WrapperMessage::_internal_has_filter_symbols_response() const {
+  return message_case() == kFilterSymbolsResponse;
+}
+inline void WrapperMessage::set_has_filter_symbols_response() {
+  _impl_._oneof_case_[0] = kFilterSymbolsResponse;
+}
+inline ::markethub::messaging::system::FilterSymbolsResponse* WrapperMessage::release_filter_symbols_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.filter_symbols_response)
+  if (message_case() == kFilterSymbolsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.filter_symbols_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_previous_close_price_response() const {
-      return message_case() == kPreviousClosePriceResponse;
-    }
-    inline void WrapperMessage::set_has_previous_close_price_response() {
-      _impl_._oneof_case_[0] = kPreviousClosePriceResponse;
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceResponse *
-    WrapperMessage::release_previous_close_price_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.previous_close_price_response)
-      if (message_case() == kPreviousClosePriceResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.previous_close_price_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.previous_close_price_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::PreviousClosePriceResponse &
-    WrapperMessage::_internal_previous_close_price_response() const {
-      return message_case() == kPreviousClosePriceResponse
-                 ? *_impl_.message_.previous_close_price_response_
-                 : reinterpret_cast<::markethub::messaging::system::PreviousClosePriceResponse &>(
-                       ::markethub::messaging::system::
-                           _PreviousClosePriceResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::PreviousClosePriceResponse &
-    WrapperMessage::previous_close_price_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.previous_close_price_response)
-      return _internal_previous_close_price_response();
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceResponse *
-    WrapperMessage::unsafe_arena_release_previous_close_price_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.previous_close_price_response)
-      if (message_case() == kPreviousClosePriceResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.previous_close_price_response_;
-        _impl_.message_.previous_close_price_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_previous_close_price_response(
-        ::markethub::messaging::system::PreviousClosePriceResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_previous_close_price_response();
-        _impl_.message_.previous_close_price_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.previous_close_price_response)
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceResponse *
-    WrapperMessage::_internal_mutable_previous_close_price_response() {
-      if (message_case() != kPreviousClosePriceResponse) {
-        clear_message();
-        set_has_previous_close_price_response();
-        _impl_.message_.previous_close_price_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::system::PreviousClosePriceResponse>(GetArena());
-      }
-      return _impl_.message_.previous_close_price_response_;
-    }
-    inline ::markethub::messaging::system::PreviousClosePriceResponse *
-    WrapperMessage::mutable_previous_close_price_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::PreviousClosePriceResponse *_msg =
-          _internal_mutable_previous_close_price_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.previous_close_price_response)
-      return _msg;
-    }
+    _impl_.message_.filter_symbols_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::FilterSymbolsResponse& WrapperMessage::_internal_filter_symbols_response() const {
+  return message_case() == kFilterSymbolsResponse ? *_impl_.message_.filter_symbols_response_ : reinterpret_cast<::markethub::messaging::system::FilterSymbolsResponse&>(::markethub::messaging::system::_FilterSymbolsResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::FilterSymbolsResponse& WrapperMessage::filter_symbols_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.filter_symbols_response)
+  return _internal_filter_symbols_response();
+}
+inline ::markethub::messaging::system::FilterSymbolsResponse* WrapperMessage::unsafe_arena_release_filter_symbols_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.filter_symbols_response)
+  if (message_case() == kFilterSymbolsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.filter_symbols_response_;
+    _impl_.message_.filter_symbols_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_filter_symbols_response(::markethub::messaging::system::FilterSymbolsResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_filter_symbols_response();
+    _impl_.message_.filter_symbols_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.filter_symbols_response)
+}
+inline ::markethub::messaging::system::FilterSymbolsResponse* WrapperMessage::_internal_mutable_filter_symbols_response() {
+  if (message_case() != kFilterSymbolsResponse) {
+    clear_message();
+    set_has_filter_symbols_response();
+    _impl_.message_.filter_symbols_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::FilterSymbolsResponse>(GetArena());
+  }
+  return _impl_.message_.filter_symbols_response_;
+}
+inline ::markethub::messaging::system::FilterSymbolsResponse* WrapperMessage::mutable_filter_symbols_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::FilterSymbolsResponse* _msg = _internal_mutable_filter_symbols_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.filter_symbols_response)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.HoldingReport holding_report = 57;
-    inline bool WrapperMessage::has_holding_report() const {
-      return message_case() == kHoldingReport;
+// .markethub.messaging.system.AllInstrumentsRequest all_instruments_request = 53;
+inline bool WrapperMessage::has_all_instruments_request() const {
+  return message_case() == kAllInstrumentsRequest;
+}
+inline bool WrapperMessage::_internal_has_all_instruments_request() const {
+  return message_case() == kAllInstrumentsRequest;
+}
+inline void WrapperMessage::set_has_all_instruments_request() {
+  _impl_._oneof_case_[0] = kAllInstrumentsRequest;
+}
+inline ::markethub::messaging::system::AllInstrumentsRequest* WrapperMessage::release_all_instruments_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_instruments_request)
+  if (message_case() == kAllInstrumentsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_instruments_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_holding_report() const {
-      return message_case() == kHoldingReport;
-    }
-    inline void WrapperMessage::set_has_holding_report() {
-      _impl_._oneof_case_[0] = kHoldingReport;
-    }
-    inline ::markethub::messaging::risk_management::HoldingReport *
-    WrapperMessage::release_holding_report() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.holding_report)
-      if (message_case() == kHoldingReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.holding_report_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.holding_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::HoldingReport &
-    WrapperMessage::_internal_holding_report() const {
-      return message_case() == kHoldingReport
-                 ? *_impl_.message_.holding_report_
-                 : reinterpret_cast<::markethub::messaging::risk_management::HoldingReport &>(
-                       ::markethub::messaging::risk_management::_HoldingReport_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::HoldingReport &
-    WrapperMessage::holding_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.holding_report)
-      return _internal_holding_report();
-    }
-    inline ::markethub::messaging::risk_management::HoldingReport *
-    WrapperMessage::unsafe_arena_release_holding_report() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.holding_report)
-      if (message_case() == kHoldingReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.holding_report_;
-        _impl_.message_.holding_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_holding_report(
-        ::markethub::messaging::risk_management::HoldingReport *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_holding_report();
-        _impl_.message_.holding_report_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.holding_report)
-    }
-    inline ::markethub::messaging::risk_management::HoldingReport *
-    WrapperMessage::_internal_mutable_holding_report() {
-      if (message_case() != kHoldingReport) {
-        clear_message();
-        set_has_holding_report();
-        _impl_.message_.holding_report_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::risk_management::HoldingReport>(GetArena());
-      }
-      return _impl_.message_.holding_report_;
-    }
-    inline ::markethub::messaging::risk_management::HoldingReport *
-    WrapperMessage::mutable_holding_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::HoldingReport *_msg =
-          _internal_mutable_holding_report();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.holding_report)
-      return _msg;
-    }
+    _impl_.message_.all_instruments_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::AllInstrumentsRequest& WrapperMessage::_internal_all_instruments_request() const {
+  return message_case() == kAllInstrumentsRequest ? *_impl_.message_.all_instruments_request_ : reinterpret_cast<::markethub::messaging::system::AllInstrumentsRequest&>(::markethub::messaging::system::_AllInstrumentsRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::AllInstrumentsRequest& WrapperMessage::all_instruments_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_instruments_request)
+  return _internal_all_instruments_request();
+}
+inline ::markethub::messaging::system::AllInstrumentsRequest* WrapperMessage::unsafe_arena_release_all_instruments_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_instruments_request)
+  if (message_case() == kAllInstrumentsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_instruments_request_;
+    _impl_.message_.all_instruments_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_all_instruments_request(::markethub::messaging::system::AllInstrumentsRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_all_instruments_request();
+    _impl_.message_.all_instruments_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_instruments_request)
+}
+inline ::markethub::messaging::system::AllInstrumentsRequest* WrapperMessage::_internal_mutable_all_instruments_request() {
+  if (message_case() != kAllInstrumentsRequest) {
+    clear_message();
+    set_has_all_instruments_request();
+    _impl_.message_.all_instruments_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::AllInstrumentsRequest>(GetArena());
+  }
+  return _impl_.message_.all_instruments_request_;
+}
+inline ::markethub::messaging::system::AllInstrumentsRequest* WrapperMessage::mutable_all_instruments_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::AllInstrumentsRequest* _msg = _internal_mutable_all_instruments_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_instruments_request)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.PNLReport pnl_report = 58;
-    inline bool WrapperMessage::has_pnl_report() const { return message_case() == kPnlReport; }
-    inline bool WrapperMessage::_internal_has_pnl_report() const {
-      return message_case() == kPnlReport;
+// .markethub.messaging.system.AllInstrumentsResponse all_instruments_response = 54;
+inline bool WrapperMessage::has_all_instruments_response() const {
+  return message_case() == kAllInstrumentsResponse;
+}
+inline bool WrapperMessage::_internal_has_all_instruments_response() const {
+  return message_case() == kAllInstrumentsResponse;
+}
+inline void WrapperMessage::set_has_all_instruments_response() {
+  _impl_._oneof_case_[0] = kAllInstrumentsResponse;
+}
+inline ::markethub::messaging::system::AllInstrumentsResponse* WrapperMessage::release_all_instruments_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.all_instruments_response)
+  if (message_case() == kAllInstrumentsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_instruments_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline void WrapperMessage::set_has_pnl_report() { _impl_._oneof_case_[0] = kPnlReport; }
-    inline ::markethub::messaging::risk_management::PNLReport *
-    WrapperMessage::release_pnl_report() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pnl_report)
-      if (message_case() == kPnlReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pnl_report_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.pnl_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::PNLReport &
-    WrapperMessage::_internal_pnl_report() const {
-      return message_case() == kPnlReport
-                 ? *_impl_.message_.pnl_report_
-                 : reinterpret_cast<::markethub::messaging::risk_management::PNLReport &>(
-                       ::markethub::messaging::risk_management::_PNLReport_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::PNLReport &WrapperMessage::pnl_report()
-        const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pnl_report)
-      return _internal_pnl_report();
-    }
-    inline ::markethub::messaging::risk_management::PNLReport *
-    WrapperMessage::unsafe_arena_release_pnl_report() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pnl_report)
-      if (message_case() == kPnlReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.pnl_report_;
-        _impl_.message_.pnl_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_pnl_report(
-        ::markethub::messaging::risk_management::PNLReport *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_pnl_report();
-        _impl_.message_.pnl_report_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pnl_report)
-    }
-    inline ::markethub::messaging::risk_management::PNLReport *
-    WrapperMessage::_internal_mutable_pnl_report() {
-      if (message_case() != kPnlReport) {
-        clear_message();
-        set_has_pnl_report();
-        _impl_.message_.pnl_report_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::risk_management::PNLReport>(GetArena());
-      }
-      return _impl_.message_.pnl_report_;
-    }
-    inline ::markethub::messaging::risk_management::PNLReport *WrapperMessage::mutable_pnl_report()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::PNLReport *_msg = _internal_mutable_pnl_report();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pnl_report)
-      return _msg;
-    }
+    _impl_.message_.all_instruments_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::AllInstrumentsResponse& WrapperMessage::_internal_all_instruments_response() const {
+  return message_case() == kAllInstrumentsResponse ? *_impl_.message_.all_instruments_response_ : reinterpret_cast<::markethub::messaging::system::AllInstrumentsResponse&>(::markethub::messaging::system::_AllInstrumentsResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::AllInstrumentsResponse& WrapperMessage::all_instruments_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.all_instruments_response)
+  return _internal_all_instruments_response();
+}
+inline ::markethub::messaging::system::AllInstrumentsResponse* WrapperMessage::unsafe_arena_release_all_instruments_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.all_instruments_response)
+  if (message_case() == kAllInstrumentsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.all_instruments_response_;
+    _impl_.message_.all_instruments_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_all_instruments_response(::markethub::messaging::system::AllInstrumentsResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_all_instruments_response();
+    _impl_.message_.all_instruments_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.all_instruments_response)
+}
+inline ::markethub::messaging::system::AllInstrumentsResponse* WrapperMessage::_internal_mutable_all_instruments_response() {
+  if (message_case() != kAllInstrumentsResponse) {
+    clear_message();
+    set_has_all_instruments_response();
+    _impl_.message_.all_instruments_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::AllInstrumentsResponse>(GetArena());
+  }
+  return _impl_.message_.all_instruments_response_;
+}
+inline ::markethub::messaging::system::AllInstrumentsResponse* WrapperMessage::mutable_all_instruments_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::AllInstrumentsResponse* _msg = _internal_mutable_all_instruments_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.all_instruments_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.NextBusinessDayRequest next_business_day_request = 59;
-    inline bool WrapperMessage::has_next_business_day_request() const {
-      return message_case() == kNextBusinessDayRequest;
+// .markethub.messaging.system.PreviousClosePriceRequest previous_close_price_request = 55;
+inline bool WrapperMessage::has_previous_close_price_request() const {
+  return message_case() == kPreviousClosePriceRequest;
+}
+inline bool WrapperMessage::_internal_has_previous_close_price_request() const {
+  return message_case() == kPreviousClosePriceRequest;
+}
+inline void WrapperMessage::set_has_previous_close_price_request() {
+  _impl_._oneof_case_[0] = kPreviousClosePriceRequest;
+}
+inline ::markethub::messaging::system::PreviousClosePriceRequest* WrapperMessage::release_previous_close_price_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.previous_close_price_request)
+  if (message_case() == kPreviousClosePriceRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.previous_close_price_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_next_business_day_request() const {
-      return message_case() == kNextBusinessDayRequest;
-    }
-    inline void WrapperMessage::set_has_next_business_day_request() {
-      _impl_._oneof_case_[0] = kNextBusinessDayRequest;
-    }
-    inline ::markethub::messaging::system::NextBusinessDayRequest *
-    WrapperMessage::release_next_business_day_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.next_business_day_request)
-      if (message_case() == kNextBusinessDayRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.next_business_day_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.next_business_day_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::NextBusinessDayRequest &
-    WrapperMessage::_internal_next_business_day_request() const {
-      return message_case() == kNextBusinessDayRequest
-                 ? *_impl_.message_.next_business_day_request_
-                 : reinterpret_cast<::markethub::messaging::system::NextBusinessDayRequest &>(
-                       ::markethub::messaging::system::_NextBusinessDayRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::NextBusinessDayRequest &
-    WrapperMessage::next_business_day_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.next_business_day_request)
-      return _internal_next_business_day_request();
-    }
-    inline ::markethub::messaging::system::NextBusinessDayRequest *
-    WrapperMessage::unsafe_arena_release_next_business_day_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.next_business_day_request)
-      if (message_case() == kNextBusinessDayRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.next_business_day_request_;
-        _impl_.message_.next_business_day_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_next_business_day_request(
-        ::markethub::messaging::system::NextBusinessDayRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_next_business_day_request();
-        _impl_.message_.next_business_day_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.next_business_day_request)
-    }
-    inline ::markethub::messaging::system::NextBusinessDayRequest *
-    WrapperMessage::_internal_mutable_next_business_day_request() {
-      if (message_case() != kNextBusinessDayRequest) {
-        clear_message();
-        set_has_next_business_day_request();
-        _impl_.message_.next_business_day_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::NextBusinessDayRequest>(GetArena());
-      }
-      return _impl_.message_.next_business_day_request_;
-    }
-    inline ::markethub::messaging::system::NextBusinessDayRequest *
-    WrapperMessage::mutable_next_business_day_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::NextBusinessDayRequest *_msg =
-          _internal_mutable_next_business_day_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.next_business_day_request)
-      return _msg;
-    }
+    _impl_.message_.previous_close_price_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::PreviousClosePriceRequest& WrapperMessage::_internal_previous_close_price_request() const {
+  return message_case() == kPreviousClosePriceRequest ? *_impl_.message_.previous_close_price_request_ : reinterpret_cast<::markethub::messaging::system::PreviousClosePriceRequest&>(::markethub::messaging::system::_PreviousClosePriceRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::PreviousClosePriceRequest& WrapperMessage::previous_close_price_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.previous_close_price_request)
+  return _internal_previous_close_price_request();
+}
+inline ::markethub::messaging::system::PreviousClosePriceRequest* WrapperMessage::unsafe_arena_release_previous_close_price_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.previous_close_price_request)
+  if (message_case() == kPreviousClosePriceRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.previous_close_price_request_;
+    _impl_.message_.previous_close_price_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_previous_close_price_request(::markethub::messaging::system::PreviousClosePriceRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_previous_close_price_request();
+    _impl_.message_.previous_close_price_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.previous_close_price_request)
+}
+inline ::markethub::messaging::system::PreviousClosePriceRequest* WrapperMessage::_internal_mutable_previous_close_price_request() {
+  if (message_case() != kPreviousClosePriceRequest) {
+    clear_message();
+    set_has_previous_close_price_request();
+    _impl_.message_.previous_close_price_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::PreviousClosePriceRequest>(GetArena());
+  }
+  return _impl_.message_.previous_close_price_request_;
+}
+inline ::markethub::messaging::system::PreviousClosePriceRequest* WrapperMessage::mutable_previous_close_price_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::PreviousClosePriceRequest* _msg = _internal_mutable_previous_close_price_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.previous_close_price_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.NextBusinessDayResponse next_business_day_response = 60;
-    inline bool WrapperMessage::has_next_business_day_response() const {
-      return message_case() == kNextBusinessDayResponse;
+// .markethub.messaging.system.PreviousClosePriceResponse previous_close_price_response = 56;
+inline bool WrapperMessage::has_previous_close_price_response() const {
+  return message_case() == kPreviousClosePriceResponse;
+}
+inline bool WrapperMessage::_internal_has_previous_close_price_response() const {
+  return message_case() == kPreviousClosePriceResponse;
+}
+inline void WrapperMessage::set_has_previous_close_price_response() {
+  _impl_._oneof_case_[0] = kPreviousClosePriceResponse;
+}
+inline ::markethub::messaging::system::PreviousClosePriceResponse* WrapperMessage::release_previous_close_price_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.previous_close_price_response)
+  if (message_case() == kPreviousClosePriceResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.previous_close_price_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_next_business_day_response() const {
-      return message_case() == kNextBusinessDayResponse;
-    }
-    inline void WrapperMessage::set_has_next_business_day_response() {
-      _impl_._oneof_case_[0] = kNextBusinessDayResponse;
-    }
-    inline ::markethub::messaging::system::NextBusinessDayResponse *
-    WrapperMessage::release_next_business_day_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.next_business_day_response)
-      if (message_case() == kNextBusinessDayResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.next_business_day_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.next_business_day_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::NextBusinessDayResponse &
-    WrapperMessage::_internal_next_business_day_response() const {
-      return message_case() == kNextBusinessDayResponse
-                 ? *_impl_.message_.next_business_day_response_
-                 : reinterpret_cast<::markethub::messaging::system::NextBusinessDayResponse &>(
-                       ::markethub::messaging::system::_NextBusinessDayResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::NextBusinessDayResponse &
-    WrapperMessage::next_business_day_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.next_business_day_response)
-      return _internal_next_business_day_response();
-    }
-    inline ::markethub::messaging::system::NextBusinessDayResponse *
-    WrapperMessage::unsafe_arena_release_next_business_day_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.next_business_day_response)
-      if (message_case() == kNextBusinessDayResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.next_business_day_response_;
-        _impl_.message_.next_business_day_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_next_business_day_response(
-        ::markethub::messaging::system::NextBusinessDayResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_next_business_day_response();
-        _impl_.message_.next_business_day_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.next_business_day_response)
-    }
-    inline ::markethub::messaging::system::NextBusinessDayResponse *
-    WrapperMessage::_internal_mutable_next_business_day_response() {
-      if (message_case() != kNextBusinessDayResponse) {
-        clear_message();
-        set_has_next_business_day_response();
-        _impl_.message_.next_business_day_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::NextBusinessDayResponse>(GetArena());
-      }
-      return _impl_.message_.next_business_day_response_;
-    }
-    inline ::markethub::messaging::system::NextBusinessDayResponse *
-    WrapperMessage::mutable_next_business_day_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::NextBusinessDayResponse *_msg =
-          _internal_mutable_next_business_day_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.next_business_day_response)
-      return _msg;
-    }
+    _impl_.message_.previous_close_price_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::PreviousClosePriceResponse& WrapperMessage::_internal_previous_close_price_response() const {
+  return message_case() == kPreviousClosePriceResponse ? *_impl_.message_.previous_close_price_response_ : reinterpret_cast<::markethub::messaging::system::PreviousClosePriceResponse&>(::markethub::messaging::system::_PreviousClosePriceResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::PreviousClosePriceResponse& WrapperMessage::previous_close_price_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.previous_close_price_response)
+  return _internal_previous_close_price_response();
+}
+inline ::markethub::messaging::system::PreviousClosePriceResponse* WrapperMessage::unsafe_arena_release_previous_close_price_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.previous_close_price_response)
+  if (message_case() == kPreviousClosePriceResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.previous_close_price_response_;
+    _impl_.message_.previous_close_price_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_previous_close_price_response(::markethub::messaging::system::PreviousClosePriceResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_previous_close_price_response();
+    _impl_.message_.previous_close_price_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.previous_close_price_response)
+}
+inline ::markethub::messaging::system::PreviousClosePriceResponse* WrapperMessage::_internal_mutable_previous_close_price_response() {
+  if (message_case() != kPreviousClosePriceResponse) {
+    clear_message();
+    set_has_previous_close_price_response();
+    _impl_.message_.previous_close_price_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::PreviousClosePriceResponse>(GetArena());
+  }
+  return _impl_.message_.previous_close_price_response_;
+}
+inline ::markethub::messaging::system::PreviousClosePriceResponse* WrapperMessage::mutable_previous_close_price_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::PreviousClosePriceResponse* _msg = _internal_mutable_previous_close_price_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.previous_close_price_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.ReposMappingRequest repos_mapping_request = 61;
-    inline bool WrapperMessage::has_repos_mapping_request() const {
-      return message_case() == kReposMappingRequest;
+// .markethub.messaging.risk_management.HoldingReport holding_report = 57;
+inline bool WrapperMessage::has_holding_report() const {
+  return message_case() == kHoldingReport;
+}
+inline bool WrapperMessage::_internal_has_holding_report() const {
+  return message_case() == kHoldingReport;
+}
+inline void WrapperMessage::set_has_holding_report() {
+  _impl_._oneof_case_[0] = kHoldingReport;
+}
+inline ::markethub::messaging::risk_management::HoldingReport* WrapperMessage::release_holding_report() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.holding_report)
+  if (message_case() == kHoldingReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.holding_report_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_repos_mapping_request() const {
-      return message_case() == kReposMappingRequest;
-    }
-    inline void WrapperMessage::set_has_repos_mapping_request() {
-      _impl_._oneof_case_[0] = kReposMappingRequest;
-    }
-    inline ::markethub::messaging::system::ReposMappingRequest *
-    WrapperMessage::release_repos_mapping_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.repos_mapping_request)
-      if (message_case() == kReposMappingRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.repos_mapping_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.repos_mapping_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::ReposMappingRequest &
-    WrapperMessage::_internal_repos_mapping_request() const {
-      return message_case() == kReposMappingRequest
-                 ? *_impl_.message_.repos_mapping_request_
-                 : reinterpret_cast<::markethub::messaging::system::ReposMappingRequest &>(
-                       ::markethub::messaging::system::_ReposMappingRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::ReposMappingRequest &
-    WrapperMessage::repos_mapping_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.repos_mapping_request)
-      return _internal_repos_mapping_request();
-    }
-    inline ::markethub::messaging::system::ReposMappingRequest *
-    WrapperMessage::unsafe_arena_release_repos_mapping_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.repos_mapping_request)
-      if (message_case() == kReposMappingRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.repos_mapping_request_;
-        _impl_.message_.repos_mapping_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_repos_mapping_request(
-        ::markethub::messaging::system::ReposMappingRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_repos_mapping_request();
-        _impl_.message_.repos_mapping_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.repos_mapping_request)
-    }
-    inline ::markethub::messaging::system::ReposMappingRequest *
-    WrapperMessage::_internal_mutable_repos_mapping_request() {
-      if (message_case() != kReposMappingRequest) {
-        clear_message();
-        set_has_repos_mapping_request();
-        _impl_.message_.repos_mapping_request_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::ReposMappingRequest>(GetArena());
-      }
-      return _impl_.message_.repos_mapping_request_;
-    }
-    inline ::markethub::messaging::system::ReposMappingRequest *
-    WrapperMessage::mutable_repos_mapping_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::ReposMappingRequest *_msg =
-          _internal_mutable_repos_mapping_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.repos_mapping_request)
-      return _msg;
-    }
+    _impl_.message_.holding_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::HoldingReport& WrapperMessage::_internal_holding_report() const {
+  return message_case() == kHoldingReport ? *_impl_.message_.holding_report_ : reinterpret_cast<::markethub::messaging::risk_management::HoldingReport&>(::markethub::messaging::risk_management::_HoldingReport_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::HoldingReport& WrapperMessage::holding_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.holding_report)
+  return _internal_holding_report();
+}
+inline ::markethub::messaging::risk_management::HoldingReport* WrapperMessage::unsafe_arena_release_holding_report() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.holding_report)
+  if (message_case() == kHoldingReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.holding_report_;
+    _impl_.message_.holding_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_holding_report(::markethub::messaging::risk_management::HoldingReport* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_holding_report();
+    _impl_.message_.holding_report_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.holding_report)
+}
+inline ::markethub::messaging::risk_management::HoldingReport* WrapperMessage::_internal_mutable_holding_report() {
+  if (message_case() != kHoldingReport) {
+    clear_message();
+    set_has_holding_report();
+    _impl_.message_.holding_report_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::HoldingReport>(GetArena());
+  }
+  return _impl_.message_.holding_report_;
+}
+inline ::markethub::messaging::risk_management::HoldingReport* WrapperMessage::mutable_holding_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::HoldingReport* _msg = _internal_mutable_holding_report();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.holding_report)
+  return _msg;
+}
 
-    // .markethub.messaging.system.ReposMappingResponse repos_mapping_response = 62;
-    inline bool WrapperMessage::has_repos_mapping_response() const {
-      return message_case() == kReposMappingResponse;
+// .markethub.messaging.risk_management.PNLReport pnl_report = 58;
+inline bool WrapperMessage::has_pnl_report() const {
+  return message_case() == kPnlReport;
+}
+inline bool WrapperMessage::_internal_has_pnl_report() const {
+  return message_case() == kPnlReport;
+}
+inline void WrapperMessage::set_has_pnl_report() {
+  _impl_._oneof_case_[0] = kPnlReport;
+}
+inline ::markethub::messaging::risk_management::PNLReport* WrapperMessage::release_pnl_report() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.pnl_report)
+  if (message_case() == kPnlReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pnl_report_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_repos_mapping_response() const {
-      return message_case() == kReposMappingResponse;
-    }
-    inline void WrapperMessage::set_has_repos_mapping_response() {
-      _impl_._oneof_case_[0] = kReposMappingResponse;
-    }
-    inline ::markethub::messaging::system::ReposMappingResponse *
-    WrapperMessage::release_repos_mapping_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.repos_mapping_response)
-      if (message_case() == kReposMappingResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.repos_mapping_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.repos_mapping_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::ReposMappingResponse &
-    WrapperMessage::_internal_repos_mapping_response() const {
-      return message_case() == kReposMappingResponse
-                 ? *_impl_.message_.repos_mapping_response_
-                 : reinterpret_cast<::markethub::messaging::system::ReposMappingResponse &>(
-                       ::markethub::messaging::system::_ReposMappingResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::ReposMappingResponse &
-    WrapperMessage::repos_mapping_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.repos_mapping_response)
-      return _internal_repos_mapping_response();
-    }
-    inline ::markethub::messaging::system::ReposMappingResponse *
-    WrapperMessage::unsafe_arena_release_repos_mapping_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.repos_mapping_response)
-      if (message_case() == kReposMappingResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.repos_mapping_response_;
-        _impl_.message_.repos_mapping_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_repos_mapping_response(
-        ::markethub::messaging::system::ReposMappingResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_repos_mapping_response();
-        _impl_.message_.repos_mapping_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.repos_mapping_response)
-    }
-    inline ::markethub::messaging::system::ReposMappingResponse *
-    WrapperMessage::_internal_mutable_repos_mapping_response() {
-      if (message_case() != kReposMappingResponse) {
-        clear_message();
-        set_has_repos_mapping_response();
-        _impl_.message_.repos_mapping_response_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::system::ReposMappingResponse>(GetArena());
-      }
-      return _impl_.message_.repos_mapping_response_;
-    }
-    inline ::markethub::messaging::system::ReposMappingResponse *
-    WrapperMessage::mutable_repos_mapping_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::ReposMappingResponse *_msg =
-          _internal_mutable_repos_mapping_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.repos_mapping_response)
-      return _msg;
-    }
+    _impl_.message_.pnl_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::PNLReport& WrapperMessage::_internal_pnl_report() const {
+  return message_case() == kPnlReport ? *_impl_.message_.pnl_report_ : reinterpret_cast<::markethub::messaging::risk_management::PNLReport&>(::markethub::messaging::risk_management::_PNLReport_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::PNLReport& WrapperMessage::pnl_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.pnl_report)
+  return _internal_pnl_report();
+}
+inline ::markethub::messaging::risk_management::PNLReport* WrapperMessage::unsafe_arena_release_pnl_report() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.pnl_report)
+  if (message_case() == kPnlReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.pnl_report_;
+    _impl_.message_.pnl_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_pnl_report(::markethub::messaging::risk_management::PNLReport* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_pnl_report();
+    _impl_.message_.pnl_report_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.pnl_report)
+}
+inline ::markethub::messaging::risk_management::PNLReport* WrapperMessage::_internal_mutable_pnl_report() {
+  if (message_case() != kPnlReport) {
+    clear_message();
+    set_has_pnl_report();
+    _impl_.message_.pnl_report_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::PNLReport>(GetArena());
+  }
+  return _impl_.message_.pnl_report_;
+}
+inline ::markethub::messaging::risk_management::PNLReport* WrapperMessage::mutable_pnl_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::PNLReport* _msg = _internal_mutable_pnl_report();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.pnl_report)
+  return _msg;
+}
 
-    // .markethub.messaging.otc.OTCTradeReport otc_trade_report = 63;
-    inline bool WrapperMessage::has_otc_trade_report() const {
-      return message_case() == kOtcTradeReport;
+// .markethub.messaging.system.NextBusinessDayRequest next_business_day_request = 59;
+inline bool WrapperMessage::has_next_business_day_request() const {
+  return message_case() == kNextBusinessDayRequest;
+}
+inline bool WrapperMessage::_internal_has_next_business_day_request() const {
+  return message_case() == kNextBusinessDayRequest;
+}
+inline void WrapperMessage::set_has_next_business_day_request() {
+  _impl_._oneof_case_[0] = kNextBusinessDayRequest;
+}
+inline ::markethub::messaging::system::NextBusinessDayRequest* WrapperMessage::release_next_business_day_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.next_business_day_request)
+  if (message_case() == kNextBusinessDayRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.next_business_day_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_otc_trade_report() const {
-      return message_case() == kOtcTradeReport;
-    }
-    inline void WrapperMessage::set_has_otc_trade_report() {
-      _impl_._oneof_case_[0] = kOtcTradeReport;
-    }
-    inline ::markethub::messaging::otc::OTCTradeReport *WrapperMessage::release_otc_trade_report() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.otc_trade_report)
-      if (message_case() == kOtcTradeReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.otc_trade_report_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.otc_trade_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::otc::OTCTradeReport &
-    WrapperMessage::_internal_otc_trade_report() const {
-      return message_case() == kOtcTradeReport
-                 ? *_impl_.message_.otc_trade_report_
-                 : reinterpret_cast<::markethub::messaging::otc::OTCTradeReport &>(
-                       ::markethub::messaging::otc::_OTCTradeReport_default_instance_);
-    }
-    inline const ::markethub::messaging::otc::OTCTradeReport &WrapperMessage::otc_trade_report()
-        const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.otc_trade_report)
-      return _internal_otc_trade_report();
-    }
-    inline ::markethub::messaging::otc::OTCTradeReport *
-    WrapperMessage::unsafe_arena_release_otc_trade_report() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.otc_trade_report)
-      if (message_case() == kOtcTradeReport) {
-        clear_has_message();
-        auto *temp = _impl_.message_.otc_trade_report_;
-        _impl_.message_.otc_trade_report_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_otc_trade_report(
-        ::markethub::messaging::otc::OTCTradeReport *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_otc_trade_report();
-        _impl_.message_.otc_trade_report_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.otc_trade_report)
-    }
-    inline ::markethub::messaging::otc::OTCTradeReport *
-    WrapperMessage::_internal_mutable_otc_trade_report() {
-      if (message_case() != kOtcTradeReport) {
-        clear_message();
-        set_has_otc_trade_report();
-        _impl_.message_.otc_trade_report_ = ::google::protobuf::Message::DefaultConstruct<
-            ::markethub::messaging::otc::OTCTradeReport>(GetArena());
-      }
-      return _impl_.message_.otc_trade_report_;
-    }
-    inline ::markethub::messaging::otc::OTCTradeReport *WrapperMessage::mutable_otc_trade_report()
-        ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::otc::OTCTradeReport *_msg = _internal_mutable_otc_trade_report();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.otc_trade_report)
-      return _msg;
-    }
+    _impl_.message_.next_business_day_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::NextBusinessDayRequest& WrapperMessage::_internal_next_business_day_request() const {
+  return message_case() == kNextBusinessDayRequest ? *_impl_.message_.next_business_day_request_ : reinterpret_cast<::markethub::messaging::system::NextBusinessDayRequest&>(::markethub::messaging::system::_NextBusinessDayRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::NextBusinessDayRequest& WrapperMessage::next_business_day_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.next_business_day_request)
+  return _internal_next_business_day_request();
+}
+inline ::markethub::messaging::system::NextBusinessDayRequest* WrapperMessage::unsafe_arena_release_next_business_day_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.next_business_day_request)
+  if (message_case() == kNextBusinessDayRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.next_business_day_request_;
+    _impl_.message_.next_business_day_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_next_business_day_request(::markethub::messaging::system::NextBusinessDayRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_next_business_day_request();
+    _impl_.message_.next_business_day_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.next_business_day_request)
+}
+inline ::markethub::messaging::system::NextBusinessDayRequest* WrapperMessage::_internal_mutable_next_business_day_request() {
+  if (message_case() != kNextBusinessDayRequest) {
+    clear_message();
+    set_has_next_business_day_request();
+    _impl_.message_.next_business_day_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::NextBusinessDayRequest>(GetArena());
+  }
+  return _impl_.message_.next_business_day_request_;
+}
+inline ::markethub::messaging::system::NextBusinessDayRequest* WrapperMessage::mutable_next_business_day_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::NextBusinessDayRequest* _msg = _internal_mutable_next_business_day_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.next_business_day_request)
+  return _msg;
+}
 
-    // .markethub.messaging.otc.PositionUpdateNotification position_update_notification = 64;
-    inline bool WrapperMessage::has_position_update_notification() const {
-      return message_case() == kPositionUpdateNotification;
+// .markethub.messaging.system.NextBusinessDayResponse next_business_day_response = 60;
+inline bool WrapperMessage::has_next_business_day_response() const {
+  return message_case() == kNextBusinessDayResponse;
+}
+inline bool WrapperMessage::_internal_has_next_business_day_response() const {
+  return message_case() == kNextBusinessDayResponse;
+}
+inline void WrapperMessage::set_has_next_business_day_response() {
+  _impl_._oneof_case_[0] = kNextBusinessDayResponse;
+}
+inline ::markethub::messaging::system::NextBusinessDayResponse* WrapperMessage::release_next_business_day_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.next_business_day_response)
+  if (message_case() == kNextBusinessDayResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.next_business_day_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_position_update_notification() const {
-      return message_case() == kPositionUpdateNotification;
-    }
-    inline void WrapperMessage::set_has_position_update_notification() {
-      _impl_._oneof_case_[0] = kPositionUpdateNotification;
-    }
-    inline ::markethub::messaging::otc::PositionUpdateNotification *
-    WrapperMessage::release_position_update_notification() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.position_update_notification)
-      if (message_case() == kPositionUpdateNotification) {
-        clear_has_message();
-        auto *temp = _impl_.message_.position_update_notification_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.position_update_notification_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::otc::PositionUpdateNotification &
-    WrapperMessage::_internal_position_update_notification() const {
-      return message_case() == kPositionUpdateNotification
-                 ? *_impl_.message_.position_update_notification_
-                 : reinterpret_cast<::markethub::messaging::otc::PositionUpdateNotification &>(
-                       ::markethub::messaging::otc::_PositionUpdateNotification_default_instance_);
-    }
-    inline const ::markethub::messaging::otc::PositionUpdateNotification &
-    WrapperMessage::position_update_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.position_update_notification)
-      return _internal_position_update_notification();
-    }
-    inline ::markethub::messaging::otc::PositionUpdateNotification *
-    WrapperMessage::unsafe_arena_release_position_update_notification() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.position_update_notification)
-      if (message_case() == kPositionUpdateNotification) {
-        clear_has_message();
-        auto *temp = _impl_.message_.position_update_notification_;
-        _impl_.message_.position_update_notification_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_position_update_notification(
-        ::markethub::messaging::otc::PositionUpdateNotification *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_position_update_notification();
-        _impl_.message_.position_update_notification_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.position_update_notification)
-    }
-    inline ::markethub::messaging::otc::PositionUpdateNotification *
-    WrapperMessage::_internal_mutable_position_update_notification() {
-      if (message_case() != kPositionUpdateNotification) {
-        clear_message();
-        set_has_position_update_notification();
-        _impl_.message_.position_update_notification_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::otc::PositionUpdateNotification>(GetArena());
-      }
-      return _impl_.message_.position_update_notification_;
-    }
-    inline ::markethub::messaging::otc::PositionUpdateNotification *
-    WrapperMessage::mutable_position_update_notification() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::otc::PositionUpdateNotification *_msg =
-          _internal_mutable_position_update_notification();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.position_update_notification)
-      return _msg;
-    }
+    _impl_.message_.next_business_day_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::NextBusinessDayResponse& WrapperMessage::_internal_next_business_day_response() const {
+  return message_case() == kNextBusinessDayResponse ? *_impl_.message_.next_business_day_response_ : reinterpret_cast<::markethub::messaging::system::NextBusinessDayResponse&>(::markethub::messaging::system::_NextBusinessDayResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::NextBusinessDayResponse& WrapperMessage::next_business_day_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.next_business_day_response)
+  return _internal_next_business_day_response();
+}
+inline ::markethub::messaging::system::NextBusinessDayResponse* WrapperMessage::unsafe_arena_release_next_business_day_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.next_business_day_response)
+  if (message_case() == kNextBusinessDayResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.next_business_day_response_;
+    _impl_.message_.next_business_day_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_next_business_day_response(::markethub::messaging::system::NextBusinessDayResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_next_business_day_response();
+    _impl_.message_.next_business_day_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.next_business_day_response)
+}
+inline ::markethub::messaging::system::NextBusinessDayResponse* WrapperMessage::_internal_mutable_next_business_day_response() {
+  if (message_case() != kNextBusinessDayResponse) {
+    clear_message();
+    set_has_next_business_day_response();
+    _impl_.message_.next_business_day_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::NextBusinessDayResponse>(GetArena());
+  }
+  return _impl_.message_.next_business_day_response_;
+}
+inline ::markethub::messaging::system::NextBusinessDayResponse* WrapperMessage::mutable_next_business_day_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::NextBusinessDayResponse* _msg = _internal_mutable_next_business_day_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.next_business_day_response)
+  return _msg;
+}
 
-    // .markethub.messaging.otc.PositionCorrectionNotification position_correction_notification =
-    // 65;
-    inline bool WrapperMessage::has_position_correction_notification() const {
-      return message_case() == kPositionCorrectionNotification;
+// .markethub.messaging.system.ReposMappingRequest repos_mapping_request = 61;
+inline bool WrapperMessage::has_repos_mapping_request() const {
+  return message_case() == kReposMappingRequest;
+}
+inline bool WrapperMessage::_internal_has_repos_mapping_request() const {
+  return message_case() == kReposMappingRequest;
+}
+inline void WrapperMessage::set_has_repos_mapping_request() {
+  _impl_._oneof_case_[0] = kReposMappingRequest;
+}
+inline ::markethub::messaging::system::ReposMappingRequest* WrapperMessage::release_repos_mapping_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.repos_mapping_request)
+  if (message_case() == kReposMappingRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.repos_mapping_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_position_correction_notification() const {
-      return message_case() == kPositionCorrectionNotification;
-    }
-    inline void WrapperMessage::set_has_position_correction_notification() {
-      _impl_._oneof_case_[0] = kPositionCorrectionNotification;
-    }
-    inline ::markethub::messaging::otc::PositionCorrectionNotification *
-    WrapperMessage::release_position_correction_notification() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.position_correction_notification)
-      if (message_case() == kPositionCorrectionNotification) {
-        clear_has_message();
-        auto *temp = _impl_.message_.position_correction_notification_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.position_correction_notification_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::otc::PositionCorrectionNotification &
-    WrapperMessage::_internal_position_correction_notification() const {
-      return message_case() == kPositionCorrectionNotification
-                 ? *_impl_.message_.position_correction_notification_
-                 : reinterpret_cast<::markethub::messaging::otc::PositionCorrectionNotification &>(
-                       ::markethub::messaging::otc::
-                           _PositionCorrectionNotification_default_instance_);
-    }
-    inline const ::markethub::messaging::otc::PositionCorrectionNotification &
-    WrapperMessage::position_correction_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.position_correction_notification)
-      return _internal_position_correction_notification();
-    }
-    inline ::markethub::messaging::otc::PositionCorrectionNotification *
-    WrapperMessage::unsafe_arena_release_position_correction_notification() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.position_correction_notification)
-      if (message_case() == kPositionCorrectionNotification) {
-        clear_has_message();
-        auto *temp = _impl_.message_.position_correction_notification_;
-        _impl_.message_.position_correction_notification_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_position_correction_notification(
-        ::markethub::messaging::otc::PositionCorrectionNotification *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_position_correction_notification();
-        _impl_.message_.position_correction_notification_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.position_correction_notification)
-    }
-    inline ::markethub::messaging::otc::PositionCorrectionNotification *
-    WrapperMessage::_internal_mutable_position_correction_notification() {
-      if (message_case() != kPositionCorrectionNotification) {
-        clear_message();
-        set_has_position_correction_notification();
-        _impl_.message_.position_correction_notification_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::otc::PositionCorrectionNotification>(GetArena());
-      }
-      return _impl_.message_.position_correction_notification_;
-    }
-    inline ::markethub::messaging::otc::PositionCorrectionNotification *
-    WrapperMessage::mutable_position_correction_notification() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::otc::PositionCorrectionNotification *_msg =
-          _internal_mutable_position_correction_notification();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.position_correction_notification)
-      return _msg;
-    }
+    _impl_.message_.repos_mapping_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::ReposMappingRequest& WrapperMessage::_internal_repos_mapping_request() const {
+  return message_case() == kReposMappingRequest ? *_impl_.message_.repos_mapping_request_ : reinterpret_cast<::markethub::messaging::system::ReposMappingRequest&>(::markethub::messaging::system::_ReposMappingRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::ReposMappingRequest& WrapperMessage::repos_mapping_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.repos_mapping_request)
+  return _internal_repos_mapping_request();
+}
+inline ::markethub::messaging::system::ReposMappingRequest* WrapperMessage::unsafe_arena_release_repos_mapping_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.repos_mapping_request)
+  if (message_case() == kReposMappingRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.repos_mapping_request_;
+    _impl_.message_.repos_mapping_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_repos_mapping_request(::markethub::messaging::system::ReposMappingRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_repos_mapping_request();
+    _impl_.message_.repos_mapping_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.repos_mapping_request)
+}
+inline ::markethub::messaging::system::ReposMappingRequest* WrapperMessage::_internal_mutable_repos_mapping_request() {
+  if (message_case() != kReposMappingRequest) {
+    clear_message();
+    set_has_repos_mapping_request();
+    _impl_.message_.repos_mapping_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::ReposMappingRequest>(GetArena());
+  }
+  return _impl_.message_.repos_mapping_request_;
+}
+inline ::markethub::messaging::system::ReposMappingRequest* WrapperMessage::mutable_repos_mapping_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::ReposMappingRequest* _msg = _internal_mutable_repos_mapping_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.repos_mapping_request)
+  return _msg;
+}
 
-    // .markethub.messaging.system.StrategyChangeParamsRequest strategy_change_params_request = 66;
-    inline bool WrapperMessage::has_strategy_change_params_request() const {
-      return message_case() == kStrategyChangeParamsRequest;
+// .markethub.messaging.system.ReposMappingResponse repos_mapping_response = 62;
+inline bool WrapperMessage::has_repos_mapping_response() const {
+  return message_case() == kReposMappingResponse;
+}
+inline bool WrapperMessage::_internal_has_repos_mapping_response() const {
+  return message_case() == kReposMappingResponse;
+}
+inline void WrapperMessage::set_has_repos_mapping_response() {
+  _impl_._oneof_case_[0] = kReposMappingResponse;
+}
+inline ::markethub::messaging::system::ReposMappingResponse* WrapperMessage::release_repos_mapping_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.repos_mapping_response)
+  if (message_case() == kReposMappingResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.repos_mapping_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_strategy_change_params_request() const {
-      return message_case() == kStrategyChangeParamsRequest;
-    }
-    inline void WrapperMessage::set_has_strategy_change_params_request() {
-      _impl_._oneof_case_[0] = kStrategyChangeParamsRequest;
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsRequest *
-    WrapperMessage::release_strategy_change_params_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_params_request)
-      if (message_case() == kStrategyChangeParamsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_params_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.strategy_change_params_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::StrategyChangeParamsRequest &
-    WrapperMessage::_internal_strategy_change_params_request() const {
-      return message_case() == kStrategyChangeParamsRequest
-                 ? *_impl_.message_.strategy_change_params_request_
-                 : reinterpret_cast<::markethub::messaging::system::StrategyChangeParamsRequest &>(
-                       ::markethub::messaging::system::
-                           _StrategyChangeParamsRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::StrategyChangeParamsRequest &
-    WrapperMessage::strategy_change_params_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_params_request)
-      return _internal_strategy_change_params_request();
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsRequest *
-    WrapperMessage::unsafe_arena_release_strategy_change_params_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_params_request)
-      if (message_case() == kStrategyChangeParamsRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_params_request_;
-        _impl_.message_.strategy_change_params_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_params_request(
-        ::markethub::messaging::system::StrategyChangeParamsRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_strategy_change_params_request();
-        _impl_.message_.strategy_change_params_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_params_request)
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsRequest *
-    WrapperMessage::_internal_mutable_strategy_change_params_request() {
-      if (message_case() != kStrategyChangeParamsRequest) {
-        clear_message();
-        set_has_strategy_change_params_request();
-        _impl_.message_.strategy_change_params_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::system::StrategyChangeParamsRequest>(GetArena());
-      }
-      return _impl_.message_.strategy_change_params_request_;
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsRequest *
-    WrapperMessage::mutable_strategy_change_params_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::StrategyChangeParamsRequest *_msg =
-          _internal_mutable_strategy_change_params_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_params_request)
-      return _msg;
-    }
+    _impl_.message_.repos_mapping_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::ReposMappingResponse& WrapperMessage::_internal_repos_mapping_response() const {
+  return message_case() == kReposMappingResponse ? *_impl_.message_.repos_mapping_response_ : reinterpret_cast<::markethub::messaging::system::ReposMappingResponse&>(::markethub::messaging::system::_ReposMappingResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::ReposMappingResponse& WrapperMessage::repos_mapping_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.repos_mapping_response)
+  return _internal_repos_mapping_response();
+}
+inline ::markethub::messaging::system::ReposMappingResponse* WrapperMessage::unsafe_arena_release_repos_mapping_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.repos_mapping_response)
+  if (message_case() == kReposMappingResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.repos_mapping_response_;
+    _impl_.message_.repos_mapping_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_repos_mapping_response(::markethub::messaging::system::ReposMappingResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_repos_mapping_response();
+    _impl_.message_.repos_mapping_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.repos_mapping_response)
+}
+inline ::markethub::messaging::system::ReposMappingResponse* WrapperMessage::_internal_mutable_repos_mapping_response() {
+  if (message_case() != kReposMappingResponse) {
+    clear_message();
+    set_has_repos_mapping_response();
+    _impl_.message_.repos_mapping_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::ReposMappingResponse>(GetArena());
+  }
+  return _impl_.message_.repos_mapping_response_;
+}
+inline ::markethub::messaging::system::ReposMappingResponse* WrapperMessage::mutable_repos_mapping_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::ReposMappingResponse* _msg = _internal_mutable_repos_mapping_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.repos_mapping_response)
+  return _msg;
+}
 
-    // .markethub.messaging.system.StrategyChangeParamsResponse strategy_change_params_response =
-    // 67;
-    inline bool WrapperMessage::has_strategy_change_params_response() const {
-      return message_case() == kStrategyChangeParamsResponse;
+// .markethub.messaging.otc.OTCTradeReport otc_trade_report = 63;
+inline bool WrapperMessage::has_otc_trade_report() const {
+  return message_case() == kOtcTradeReport;
+}
+inline bool WrapperMessage::_internal_has_otc_trade_report() const {
+  return message_case() == kOtcTradeReport;
+}
+inline void WrapperMessage::set_has_otc_trade_report() {
+  _impl_._oneof_case_[0] = kOtcTradeReport;
+}
+inline ::markethub::messaging::otc::OTCTradeReport* WrapperMessage::release_otc_trade_report() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.otc_trade_report)
+  if (message_case() == kOtcTradeReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.otc_trade_report_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_strategy_change_params_response() const {
-      return message_case() == kStrategyChangeParamsResponse;
-    }
-    inline void WrapperMessage::set_has_strategy_change_params_response() {
-      _impl_._oneof_case_[0] = kStrategyChangeParamsResponse;
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsResponse *
-    WrapperMessage::release_strategy_change_params_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_params_response)
-      if (message_case() == kStrategyChangeParamsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_params_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.strategy_change_params_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::StrategyChangeParamsResponse &
-    WrapperMessage::_internal_strategy_change_params_response() const {
-      return message_case() == kStrategyChangeParamsResponse
-                 ? *_impl_.message_.strategy_change_params_response_
-                 : reinterpret_cast<::markethub::messaging::system::StrategyChangeParamsResponse &>(
-                       ::markethub::messaging::system::
-                           _StrategyChangeParamsResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::StrategyChangeParamsResponse &
-    WrapperMessage::strategy_change_params_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_params_response)
-      return _internal_strategy_change_params_response();
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsResponse *
-    WrapperMessage::unsafe_arena_release_strategy_change_params_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_params_response)
-      if (message_case() == kStrategyChangeParamsResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_params_response_;
-        _impl_.message_.strategy_change_params_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_params_response(
-        ::markethub::messaging::system::StrategyChangeParamsResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_strategy_change_params_response();
-        _impl_.message_.strategy_change_params_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_params_response)
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsResponse *
-    WrapperMessage::_internal_mutable_strategy_change_params_response() {
-      if (message_case() != kStrategyChangeParamsResponse) {
-        clear_message();
-        set_has_strategy_change_params_response();
-        _impl_.message_.strategy_change_params_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::system::StrategyChangeParamsResponse>(GetArena());
-      }
-      return _impl_.message_.strategy_change_params_response_;
-    }
-    inline ::markethub::messaging::system::StrategyChangeParamsResponse *
-    WrapperMessage::mutable_strategy_change_params_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::StrategyChangeParamsResponse *_msg =
-          _internal_mutable_strategy_change_params_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_params_response)
-      return _msg;
-    }
+    _impl_.message_.otc_trade_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::otc::OTCTradeReport& WrapperMessage::_internal_otc_trade_report() const {
+  return message_case() == kOtcTradeReport ? *_impl_.message_.otc_trade_report_ : reinterpret_cast<::markethub::messaging::otc::OTCTradeReport&>(::markethub::messaging::otc::_OTCTradeReport_default_instance_);
+}
+inline const ::markethub::messaging::otc::OTCTradeReport& WrapperMessage::otc_trade_report() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.otc_trade_report)
+  return _internal_otc_trade_report();
+}
+inline ::markethub::messaging::otc::OTCTradeReport* WrapperMessage::unsafe_arena_release_otc_trade_report() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.otc_trade_report)
+  if (message_case() == kOtcTradeReport) {
+    clear_has_message();
+    auto* temp = _impl_.message_.otc_trade_report_;
+    _impl_.message_.otc_trade_report_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_otc_trade_report(::markethub::messaging::otc::OTCTradeReport* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_otc_trade_report();
+    _impl_.message_.otc_trade_report_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.otc_trade_report)
+}
+inline ::markethub::messaging::otc::OTCTradeReport* WrapperMessage::_internal_mutable_otc_trade_report() {
+  if (message_case() != kOtcTradeReport) {
+    clear_message();
+    set_has_otc_trade_report();
+    _impl_.message_.otc_trade_report_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::otc::OTCTradeReport>(GetArena());
+  }
+  return _impl_.message_.otc_trade_report_;
+}
+inline ::markethub::messaging::otc::OTCTradeReport* WrapperMessage::mutable_otc_trade_report() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::otc::OTCTradeReport* _msg = _internal_mutable_otc_trade_report();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.otc_trade_report)
+  return _msg;
+}
 
-    // .markethub.messaging.system.StrategyChangeStatusRequest strategy_change_status_request = 68;
-    inline bool WrapperMessage::has_strategy_change_status_request() const {
-      return message_case() == kStrategyChangeStatusRequest;
+// .markethub.messaging.otc.PositionUpdateNotification position_update_notification = 64;
+inline bool WrapperMessage::has_position_update_notification() const {
+  return message_case() == kPositionUpdateNotification;
+}
+inline bool WrapperMessage::_internal_has_position_update_notification() const {
+  return message_case() == kPositionUpdateNotification;
+}
+inline void WrapperMessage::set_has_position_update_notification() {
+  _impl_._oneof_case_[0] = kPositionUpdateNotification;
+}
+inline ::markethub::messaging::otc::PositionUpdateNotification* WrapperMessage::release_position_update_notification() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.position_update_notification)
+  if (message_case() == kPositionUpdateNotification) {
+    clear_has_message();
+    auto* temp = _impl_.message_.position_update_notification_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_strategy_change_status_request() const {
-      return message_case() == kStrategyChangeStatusRequest;
-    }
-    inline void WrapperMessage::set_has_strategy_change_status_request() {
-      _impl_._oneof_case_[0] = kStrategyChangeStatusRequest;
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusRequest *
-    WrapperMessage::release_strategy_change_status_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_status_request)
-      if (message_case() == kStrategyChangeStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_status_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.strategy_change_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::StrategyChangeStatusRequest &
-    WrapperMessage::_internal_strategy_change_status_request() const {
-      return message_case() == kStrategyChangeStatusRequest
-                 ? *_impl_.message_.strategy_change_status_request_
-                 : reinterpret_cast<::markethub::messaging::system::StrategyChangeStatusRequest &>(
-                       ::markethub::messaging::system::
-                           _StrategyChangeStatusRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::system::StrategyChangeStatusRequest &
-    WrapperMessage::strategy_change_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_status_request)
-      return _internal_strategy_change_status_request();
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusRequest *
-    WrapperMessage::unsafe_arena_release_strategy_change_status_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_status_request)
-      if (message_case() == kStrategyChangeStatusRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_status_request_;
-        _impl_.message_.strategy_change_status_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_status_request(
-        ::markethub::messaging::system::StrategyChangeStatusRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_strategy_change_status_request();
-        _impl_.message_.strategy_change_status_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_status_request)
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusRequest *
-    WrapperMessage::_internal_mutable_strategy_change_status_request() {
-      if (message_case() != kStrategyChangeStatusRequest) {
-        clear_message();
-        set_has_strategy_change_status_request();
-        _impl_.message_.strategy_change_status_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::system::StrategyChangeStatusRequest>(GetArena());
-      }
-      return _impl_.message_.strategy_change_status_request_;
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusRequest *
-    WrapperMessage::mutable_strategy_change_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::StrategyChangeStatusRequest *_msg =
-          _internal_mutable_strategy_change_status_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_status_request)
-      return _msg;
-    }
+    _impl_.message_.position_update_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::otc::PositionUpdateNotification& WrapperMessage::_internal_position_update_notification() const {
+  return message_case() == kPositionUpdateNotification ? *_impl_.message_.position_update_notification_ : reinterpret_cast<::markethub::messaging::otc::PositionUpdateNotification&>(::markethub::messaging::otc::_PositionUpdateNotification_default_instance_);
+}
+inline const ::markethub::messaging::otc::PositionUpdateNotification& WrapperMessage::position_update_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.position_update_notification)
+  return _internal_position_update_notification();
+}
+inline ::markethub::messaging::otc::PositionUpdateNotification* WrapperMessage::unsafe_arena_release_position_update_notification() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.position_update_notification)
+  if (message_case() == kPositionUpdateNotification) {
+    clear_has_message();
+    auto* temp = _impl_.message_.position_update_notification_;
+    _impl_.message_.position_update_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_position_update_notification(::markethub::messaging::otc::PositionUpdateNotification* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_position_update_notification();
+    _impl_.message_.position_update_notification_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.position_update_notification)
+}
+inline ::markethub::messaging::otc::PositionUpdateNotification* WrapperMessage::_internal_mutable_position_update_notification() {
+  if (message_case() != kPositionUpdateNotification) {
+    clear_message();
+    set_has_position_update_notification();
+    _impl_.message_.position_update_notification_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::otc::PositionUpdateNotification>(GetArena());
+  }
+  return _impl_.message_.position_update_notification_;
+}
+inline ::markethub::messaging::otc::PositionUpdateNotification* WrapperMessage::mutable_position_update_notification() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::otc::PositionUpdateNotification* _msg = _internal_mutable_position_update_notification();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.position_update_notification)
+  return _msg;
+}
 
-    // .markethub.messaging.system.StrategyChangeStatusResponse strategy_change_status_response =
-    // 69;
-    inline bool WrapperMessage::has_strategy_change_status_response() const {
-      return message_case() == kStrategyChangeStatusResponse;
+// .markethub.messaging.otc.PositionCorrectionNotification position_correction_notification = 65;
+inline bool WrapperMessage::has_position_correction_notification() const {
+  return message_case() == kPositionCorrectionNotification;
+}
+inline bool WrapperMessage::_internal_has_position_correction_notification() const {
+  return message_case() == kPositionCorrectionNotification;
+}
+inline void WrapperMessage::set_has_position_correction_notification() {
+  _impl_._oneof_case_[0] = kPositionCorrectionNotification;
+}
+inline ::markethub::messaging::otc::PositionCorrectionNotification* WrapperMessage::release_position_correction_notification() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.position_correction_notification)
+  if (message_case() == kPositionCorrectionNotification) {
+    clear_has_message();
+    auto* temp = _impl_.message_.position_correction_notification_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_strategy_change_status_response() const {
-      return message_case() == kStrategyChangeStatusResponse;
-    }
-    inline void WrapperMessage::set_has_strategy_change_status_response() {
-      _impl_._oneof_case_[0] = kStrategyChangeStatusResponse;
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusResponse *
-    WrapperMessage::release_strategy_change_status_response() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_status_response)
-      if (message_case() == kStrategyChangeStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_status_response_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.strategy_change_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::system::StrategyChangeStatusResponse &
-    WrapperMessage::_internal_strategy_change_status_response() const {
-      return message_case() == kStrategyChangeStatusResponse
-                 ? *_impl_.message_.strategy_change_status_response_
-                 : reinterpret_cast<::markethub::messaging::system::StrategyChangeStatusResponse &>(
-                       ::markethub::messaging::system::
-                           _StrategyChangeStatusResponse_default_instance_);
-    }
-    inline const ::markethub::messaging::system::StrategyChangeStatusResponse &
-    WrapperMessage::strategy_change_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_status_response)
-      return _internal_strategy_change_status_response();
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusResponse *
-    WrapperMessage::unsafe_arena_release_strategy_change_status_response() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_status_response)
-      if (message_case() == kStrategyChangeStatusResponse) {
-        clear_has_message();
-        auto *temp = _impl_.message_.strategy_change_status_response_;
-        _impl_.message_.strategy_change_status_response_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_status_response(
-        ::markethub::messaging::system::StrategyChangeStatusResponse *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_strategy_change_status_response();
-        _impl_.message_.strategy_change_status_response_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_status_response)
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusResponse *
-    WrapperMessage::_internal_mutable_strategy_change_status_response() {
-      if (message_case() != kStrategyChangeStatusResponse) {
-        clear_message();
-        set_has_strategy_change_status_response();
-        _impl_.message_.strategy_change_status_response_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::system::StrategyChangeStatusResponse>(GetArena());
-      }
-      return _impl_.message_.strategy_change_status_response_;
-    }
-    inline ::markethub::messaging::system::StrategyChangeStatusResponse *
-    WrapperMessage::mutable_strategy_change_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::system::StrategyChangeStatusResponse *_msg =
-          _internal_mutable_strategy_change_status_response();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_status_response)
-      return _msg;
-    }
+    _impl_.message_.position_correction_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::otc::PositionCorrectionNotification& WrapperMessage::_internal_position_correction_notification() const {
+  return message_case() == kPositionCorrectionNotification ? *_impl_.message_.position_correction_notification_ : reinterpret_cast<::markethub::messaging::otc::PositionCorrectionNotification&>(::markethub::messaging::otc::_PositionCorrectionNotification_default_instance_);
+}
+inline const ::markethub::messaging::otc::PositionCorrectionNotification& WrapperMessage::position_correction_notification() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.position_correction_notification)
+  return _internal_position_correction_notification();
+}
+inline ::markethub::messaging::otc::PositionCorrectionNotification* WrapperMessage::unsafe_arena_release_position_correction_notification() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.position_correction_notification)
+  if (message_case() == kPositionCorrectionNotification) {
+    clear_has_message();
+    auto* temp = _impl_.message_.position_correction_notification_;
+    _impl_.message_.position_correction_notification_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_position_correction_notification(::markethub::messaging::otc::PositionCorrectionNotification* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_position_correction_notification();
+    _impl_.message_.position_correction_notification_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.position_correction_notification)
+}
+inline ::markethub::messaging::otc::PositionCorrectionNotification* WrapperMessage::_internal_mutable_position_correction_notification() {
+  if (message_case() != kPositionCorrectionNotification) {
+    clear_message();
+    set_has_position_correction_notification();
+    _impl_.message_.position_correction_notification_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::otc::PositionCorrectionNotification>(GetArena());
+  }
+  return _impl_.message_.position_correction_notification_;
+}
+inline ::markethub::messaging::otc::PositionCorrectionNotification* WrapperMessage::mutable_position_correction_notification() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::otc::PositionCorrectionNotification* _msg = _internal_mutable_position_correction_notification();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.position_correction_notification)
+  return _msg;
+}
 
-    // .markethub.messaging.risk_management.InitialPositionUpdateRequest
-    // initial_position_update_request = 70;
-    inline bool WrapperMessage::has_initial_position_update_request() const {
-      return message_case() == kInitialPositionUpdateRequest;
+// .markethub.messaging.system.StrategyChangeParamsRequest strategy_change_params_request = 66;
+inline bool WrapperMessage::has_strategy_change_params_request() const {
+  return message_case() == kStrategyChangeParamsRequest;
+}
+inline bool WrapperMessage::_internal_has_strategy_change_params_request() const {
+  return message_case() == kStrategyChangeParamsRequest;
+}
+inline void WrapperMessage::set_has_strategy_change_params_request() {
+  _impl_._oneof_case_[0] = kStrategyChangeParamsRequest;
+}
+inline ::markethub::messaging::system::StrategyChangeParamsRequest* WrapperMessage::release_strategy_change_params_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_params_request)
+  if (message_case() == kStrategyChangeParamsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_params_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    inline bool WrapperMessage::_internal_has_initial_position_update_request() const {
-      return message_case() == kInitialPositionUpdateRequest;
-    }
-    inline void WrapperMessage::set_has_initial_position_update_request() {
-      _impl_._oneof_case_[0] = kInitialPositionUpdateRequest;
-    }
-    inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-    WrapperMessage::release_initial_position_update_request() {
-      // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.initial_position_update_request)
-      if (message_case() == kInitialPositionUpdateRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.initial_position_update_request_;
-        if (GetArena() != nullptr) {
-          temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
-        }
-        _impl_.message_.initial_position_update_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline const ::markethub::messaging::risk_management::InitialPositionUpdateRequest &
-    WrapperMessage::_internal_initial_position_update_request() const {
-      return message_case() == kInitialPositionUpdateRequest
-                 ? *_impl_.message_.initial_position_update_request_
-                 : reinterpret_cast<
-                       ::markethub::messaging::risk_management::InitialPositionUpdateRequest &>(
-                       ::markethub::messaging::risk_management::
-                           _InitialPositionUpdateRequest_default_instance_);
-    }
-    inline const ::markethub::messaging::risk_management::InitialPositionUpdateRequest &
-    WrapperMessage::initial_position_update_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.initial_position_update_request)
-      return _internal_initial_position_update_request();
-    }
-    inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-    WrapperMessage::unsafe_arena_release_initial_position_update_request() {
-      // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.initial_position_update_request)
-      if (message_case() == kInitialPositionUpdateRequest) {
-        clear_has_message();
-        auto *temp = _impl_.message_.initial_position_update_request_;
-        _impl_.message_.initial_position_update_request_ = nullptr;
-        return temp;
-      } else {
-        return nullptr;
-      }
-    }
-    inline void WrapperMessage::unsafe_arena_set_allocated_initial_position_update_request(
-        ::markethub::messaging::risk_management::InitialPositionUpdateRequest *value) {
-      // We rely on the oneof clear method to free the earlier contents
-      // of this oneof. We can directly use the pointer we're given to
-      // set the new value.
-      clear_message();
-      if (value) {
-        set_has_initial_position_update_request();
-        _impl_.message_.initial_position_update_request_ = value;
-      }
-      // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.initial_position_update_request)
-    }
-    inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-    WrapperMessage::_internal_mutable_initial_position_update_request() {
-      if (message_case() != kInitialPositionUpdateRequest) {
-        clear_message();
-        set_has_initial_position_update_request();
-        _impl_.message_.initial_position_update_request_ =
-            ::google::protobuf::Message::DefaultConstruct<
-                ::markethub::messaging::risk_management::InitialPositionUpdateRequest>(GetArena());
-      }
-      return _impl_.message_.initial_position_update_request_;
-    }
-    inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest *
-    WrapperMessage::mutable_initial_position_update_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-      ::markethub::messaging::risk_management::InitialPositionUpdateRequest *_msg =
-          _internal_mutable_initial_position_update_request();
-      // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.initial_position_update_request)
-      return _msg;
-    }
+    _impl_.message_.strategy_change_params_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::StrategyChangeParamsRequest& WrapperMessage::_internal_strategy_change_params_request() const {
+  return message_case() == kStrategyChangeParamsRequest ? *_impl_.message_.strategy_change_params_request_ : reinterpret_cast<::markethub::messaging::system::StrategyChangeParamsRequest&>(::markethub::messaging::system::_StrategyChangeParamsRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::StrategyChangeParamsRequest& WrapperMessage::strategy_change_params_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_params_request)
+  return _internal_strategy_change_params_request();
+}
+inline ::markethub::messaging::system::StrategyChangeParamsRequest* WrapperMessage::unsafe_arena_release_strategy_change_params_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_params_request)
+  if (message_case() == kStrategyChangeParamsRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_params_request_;
+    _impl_.message_.strategy_change_params_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_params_request(::markethub::messaging::system::StrategyChangeParamsRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_strategy_change_params_request();
+    _impl_.message_.strategy_change_params_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_params_request)
+}
+inline ::markethub::messaging::system::StrategyChangeParamsRequest* WrapperMessage::_internal_mutable_strategy_change_params_request() {
+  if (message_case() != kStrategyChangeParamsRequest) {
+    clear_message();
+    set_has_strategy_change_params_request();
+    _impl_.message_.strategy_change_params_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::StrategyChangeParamsRequest>(GetArena());
+  }
+  return _impl_.message_.strategy_change_params_request_;
+}
+inline ::markethub::messaging::system::StrategyChangeParamsRequest* WrapperMessage::mutable_strategy_change_params_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::StrategyChangeParamsRequest* _msg = _internal_mutable_strategy_change_params_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_params_request)
+  return _msg;
+}
 
-    inline bool WrapperMessage::has_message() const { return message_case() != MESSAGE_NOT_SET; }
-    inline void WrapperMessage::clear_has_message() { _impl_._oneof_case_[0] = MESSAGE_NOT_SET; }
-    inline WrapperMessage::MessageCase WrapperMessage::message_case() const {
-      return WrapperMessage::MessageCase(_impl_._oneof_case_[0]);
+// .markethub.messaging.system.StrategyChangeParamsResponse strategy_change_params_response = 67;
+inline bool WrapperMessage::has_strategy_change_params_response() const {
+  return message_case() == kStrategyChangeParamsResponse;
+}
+inline bool WrapperMessage::_internal_has_strategy_change_params_response() const {
+  return message_case() == kStrategyChangeParamsResponse;
+}
+inline void WrapperMessage::set_has_strategy_change_params_response() {
+  _impl_._oneof_case_[0] = kStrategyChangeParamsResponse;
+}
+inline ::markethub::messaging::system::StrategyChangeParamsResponse* WrapperMessage::release_strategy_change_params_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_params_response)
+  if (message_case() == kStrategyChangeParamsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_params_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
+    _impl_.message_.strategy_change_params_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::StrategyChangeParamsResponse& WrapperMessage::_internal_strategy_change_params_response() const {
+  return message_case() == kStrategyChangeParamsResponse ? *_impl_.message_.strategy_change_params_response_ : reinterpret_cast<::markethub::messaging::system::StrategyChangeParamsResponse&>(::markethub::messaging::system::_StrategyChangeParamsResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::StrategyChangeParamsResponse& WrapperMessage::strategy_change_params_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_params_response)
+  return _internal_strategy_change_params_response();
+}
+inline ::markethub::messaging::system::StrategyChangeParamsResponse* WrapperMessage::unsafe_arena_release_strategy_change_params_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_params_response)
+  if (message_case() == kStrategyChangeParamsResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_params_response_;
+    _impl_.message_.strategy_change_params_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_params_response(::markethub::messaging::system::StrategyChangeParamsResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_strategy_change_params_response();
+    _impl_.message_.strategy_change_params_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_params_response)
+}
+inline ::markethub::messaging::system::StrategyChangeParamsResponse* WrapperMessage::_internal_mutable_strategy_change_params_response() {
+  if (message_case() != kStrategyChangeParamsResponse) {
+    clear_message();
+    set_has_strategy_change_params_response();
+    _impl_.message_.strategy_change_params_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::StrategyChangeParamsResponse>(GetArena());
+  }
+  return _impl_.message_.strategy_change_params_response_;
+}
+inline ::markethub::messaging::system::StrategyChangeParamsResponse* WrapperMessage::mutable_strategy_change_params_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::StrategyChangeParamsResponse* _msg = _internal_mutable_strategy_change_params_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_params_response)
+  return _msg;
+}
+
+// .markethub.messaging.system.StrategyChangeStatusRequest strategy_change_status_request = 68;
+inline bool WrapperMessage::has_strategy_change_status_request() const {
+  return message_case() == kStrategyChangeStatusRequest;
+}
+inline bool WrapperMessage::_internal_has_strategy_change_status_request() const {
+  return message_case() == kStrategyChangeStatusRequest;
+}
+inline void WrapperMessage::set_has_strategy_change_status_request() {
+  _impl_._oneof_case_[0] = kStrategyChangeStatusRequest;
+}
+inline ::markethub::messaging::system::StrategyChangeStatusRequest* WrapperMessage::release_strategy_change_status_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_status_request)
+  if (message_case() == kStrategyChangeStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_status_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.strategy_change_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::StrategyChangeStatusRequest& WrapperMessage::_internal_strategy_change_status_request() const {
+  return message_case() == kStrategyChangeStatusRequest ? *_impl_.message_.strategy_change_status_request_ : reinterpret_cast<::markethub::messaging::system::StrategyChangeStatusRequest&>(::markethub::messaging::system::_StrategyChangeStatusRequest_default_instance_);
+}
+inline const ::markethub::messaging::system::StrategyChangeStatusRequest& WrapperMessage::strategy_change_status_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_status_request)
+  return _internal_strategy_change_status_request();
+}
+inline ::markethub::messaging::system::StrategyChangeStatusRequest* WrapperMessage::unsafe_arena_release_strategy_change_status_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_status_request)
+  if (message_case() == kStrategyChangeStatusRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_status_request_;
+    _impl_.message_.strategy_change_status_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_status_request(::markethub::messaging::system::StrategyChangeStatusRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_strategy_change_status_request();
+    _impl_.message_.strategy_change_status_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_status_request)
+}
+inline ::markethub::messaging::system::StrategyChangeStatusRequest* WrapperMessage::_internal_mutable_strategy_change_status_request() {
+  if (message_case() != kStrategyChangeStatusRequest) {
+    clear_message();
+    set_has_strategy_change_status_request();
+    _impl_.message_.strategy_change_status_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::StrategyChangeStatusRequest>(GetArena());
+  }
+  return _impl_.message_.strategy_change_status_request_;
+}
+inline ::markethub::messaging::system::StrategyChangeStatusRequest* WrapperMessage::mutable_strategy_change_status_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::StrategyChangeStatusRequest* _msg = _internal_mutable_strategy_change_status_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_status_request)
+  return _msg;
+}
+
+// .markethub.messaging.system.StrategyChangeStatusResponse strategy_change_status_response = 69;
+inline bool WrapperMessage::has_strategy_change_status_response() const {
+  return message_case() == kStrategyChangeStatusResponse;
+}
+inline bool WrapperMessage::_internal_has_strategy_change_status_response() const {
+  return message_case() == kStrategyChangeStatusResponse;
+}
+inline void WrapperMessage::set_has_strategy_change_status_response() {
+  _impl_._oneof_case_[0] = kStrategyChangeStatusResponse;
+}
+inline ::markethub::messaging::system::StrategyChangeStatusResponse* WrapperMessage::release_strategy_change_status_response() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.strategy_change_status_response)
+  if (message_case() == kStrategyChangeStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_status_response_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.strategy_change_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::system::StrategyChangeStatusResponse& WrapperMessage::_internal_strategy_change_status_response() const {
+  return message_case() == kStrategyChangeStatusResponse ? *_impl_.message_.strategy_change_status_response_ : reinterpret_cast<::markethub::messaging::system::StrategyChangeStatusResponse&>(::markethub::messaging::system::_StrategyChangeStatusResponse_default_instance_);
+}
+inline const ::markethub::messaging::system::StrategyChangeStatusResponse& WrapperMessage::strategy_change_status_response() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.strategy_change_status_response)
+  return _internal_strategy_change_status_response();
+}
+inline ::markethub::messaging::system::StrategyChangeStatusResponse* WrapperMessage::unsafe_arena_release_strategy_change_status_response() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.strategy_change_status_response)
+  if (message_case() == kStrategyChangeStatusResponse) {
+    clear_has_message();
+    auto* temp = _impl_.message_.strategy_change_status_response_;
+    _impl_.message_.strategy_change_status_response_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_strategy_change_status_response(::markethub::messaging::system::StrategyChangeStatusResponse* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_strategy_change_status_response();
+    _impl_.message_.strategy_change_status_response_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.strategy_change_status_response)
+}
+inline ::markethub::messaging::system::StrategyChangeStatusResponse* WrapperMessage::_internal_mutable_strategy_change_status_response() {
+  if (message_case() != kStrategyChangeStatusResponse) {
+    clear_message();
+    set_has_strategy_change_status_response();
+    _impl_.message_.strategy_change_status_response_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::system::StrategyChangeStatusResponse>(GetArena());
+  }
+  return _impl_.message_.strategy_change_status_response_;
+}
+inline ::markethub::messaging::system::StrategyChangeStatusResponse* WrapperMessage::mutable_strategy_change_status_response() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::system::StrategyChangeStatusResponse* _msg = _internal_mutable_strategy_change_status_response();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.strategy_change_status_response)
+  return _msg;
+}
+
+// .markethub.messaging.risk_management.InitialPositionUpdateRequest initial_position_update_request = 70;
+inline bool WrapperMessage::has_initial_position_update_request() const {
+  return message_case() == kInitialPositionUpdateRequest;
+}
+inline bool WrapperMessage::_internal_has_initial_position_update_request() const {
+  return message_case() == kInitialPositionUpdateRequest;
+}
+inline void WrapperMessage::set_has_initial_position_update_request() {
+  _impl_._oneof_case_[0] = kInitialPositionUpdateRequest;
+}
+inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest* WrapperMessage::release_initial_position_update_request() {
+  // @@protoc_insertion_point(field_release:markethub.messaging.WrapperMessage.initial_position_update_request)
+  if (message_case() == kInitialPositionUpdateRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.initial_position_update_request_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.message_.initial_position_update_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::markethub::messaging::risk_management::InitialPositionUpdateRequest& WrapperMessage::_internal_initial_position_update_request() const {
+  return message_case() == kInitialPositionUpdateRequest ? *_impl_.message_.initial_position_update_request_ : reinterpret_cast<::markethub::messaging::risk_management::InitialPositionUpdateRequest&>(::markethub::messaging::risk_management::_InitialPositionUpdateRequest_default_instance_);
+}
+inline const ::markethub::messaging::risk_management::InitialPositionUpdateRequest& WrapperMessage::initial_position_update_request() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:markethub.messaging.WrapperMessage.initial_position_update_request)
+  return _internal_initial_position_update_request();
+}
+inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest* WrapperMessage::unsafe_arena_release_initial_position_update_request() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:markethub.messaging.WrapperMessage.initial_position_update_request)
+  if (message_case() == kInitialPositionUpdateRequest) {
+    clear_has_message();
+    auto* temp = _impl_.message_.initial_position_update_request_;
+    _impl_.message_.initial_position_update_request_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void WrapperMessage::unsafe_arena_set_allocated_initial_position_update_request(::markethub::messaging::risk_management::InitialPositionUpdateRequest* value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_message();
+  if (value) {
+    set_has_initial_position_update_request();
+    _impl_.message_.initial_position_update_request_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:markethub.messaging.WrapperMessage.initial_position_update_request)
+}
+inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest* WrapperMessage::_internal_mutable_initial_position_update_request() {
+  if (message_case() != kInitialPositionUpdateRequest) {
+    clear_message();
+    set_has_initial_position_update_request();
+    _impl_.message_.initial_position_update_request_ =
+        ::google::protobuf::Message::DefaultConstruct<::markethub::messaging::risk_management::InitialPositionUpdateRequest>(GetArena());
+  }
+  return _impl_.message_.initial_position_update_request_;
+}
+inline ::markethub::messaging::risk_management::InitialPositionUpdateRequest* WrapperMessage::mutable_initial_position_update_request() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::markethub::messaging::risk_management::InitialPositionUpdateRequest* _msg = _internal_mutable_initial_position_update_request();
+  // @@protoc_insertion_point(field_mutable:markethub.messaging.WrapperMessage.initial_position_update_request)
+  return _msg;
+}
+
+inline bool WrapperMessage::has_message() const {
+  return message_case() != MESSAGE_NOT_SET;
+}
+inline void WrapperMessage::clear_has_message() {
+  _impl_._oneof_case_[0] = MESSAGE_NOT_SET;
+}
+inline WrapperMessage::MessageCase WrapperMessage::message_case() const {
+  return WrapperMessage::MessageCase(_impl_._oneof_case_[0]);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
-#endif // __GNUC__
+#endif  // __GNUC__
 
-    // @@protoc_insertion_point(namespace_scope)
-  } // namespace messaging
-} // namespace markethub
+// @@protoc_insertion_point(namespace_scope)
+}  // namespace messaging
+}  // namespace markethub
+
 
 // @@protoc_insertion_point(global_scope)
 
 #include "google/protobuf/port_undef.inc"
 
-#endif // GOOGLE_PROTOBUF_INCLUDED_messages_2eproto_2epb_2eh
+#endif  // GOOGLE_PROTOBUF_INCLUDED_messages_2eproto_2epb_2eh
