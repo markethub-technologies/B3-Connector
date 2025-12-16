@@ -31,9 +31,8 @@ target_link_directories(onixs-b3-umdf INTERFACE
 
 # --- Target de tests: compila directamente los .cpp de la app ---
 add_executable(b3_md_tests
-    test_MarketDataEngine.cpp
-    ../../b3-md-connector/src/MarketDataEngine.cpp
-    ../../b3-md-connector/src/MessagingServer.cpp
+    test_md_core.cpp
+    test_md_worker.cpp
 )
 
 target_include_directories(b3_md_tests
