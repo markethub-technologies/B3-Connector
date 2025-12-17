@@ -8,7 +8,7 @@ namespace b3::md {
 // (stub determinístico para tests; luego será Protobuf)
 class MdSnapshotMapper {
 public:
-    void mapAndSerialize(const TopNBookSnapshot10& s,
+    void mapAndSerialize(const BookSnapshot& s,
                          std::string& out) const {
         out.clear();
         out.reserve(64);

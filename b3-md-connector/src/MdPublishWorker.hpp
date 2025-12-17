@@ -12,7 +12,9 @@ namespace b3::md {
 
 class MdPublishWorker {
 public:
-    static constexpr size_t QUEUE_CAPACITY = 4096;
+    static constexpr size_t QUEUE_CAPACITY = 4096; 
+                //tamaño estimado (10 niveles * 16) + ~32 = ~192 bytes
+                //4096 * 192 ≈ 786,432 bytes ≈ 768 KB  (por worker)
 
     MdPublishWorker(MdSnapshotMapper& mapper,
                     IMdPublisher& publisher,
@@ -39,7 +41,7 @@ public:
     }
 
     // Producer side
-    bool try_enqueue(const TopNBookSnapshot10& s) noexcept {
+    bool try_enqueue(const BookSnapshot& s) noexcept {
         return queue_.try_push(s);
     }
 
@@ -50,7 +52,7 @@ public:
 private:
     void runLoop() {
         std::string outBuffer;
-        TopNBookSnapshot10 s{};
+        BookSnapshot s{};
 
         while (running_.load(std::memory_order_acquire) ||
                queue_.size_approx() > 0) {
@@ -73,7 +75,7 @@ private:
     IMdPublisher& publisher_;
     std::string topic_;
 
-    SnapshotQueueSpsc<TopNBookSnapshot10, QUEUE_CAPACITY> queue_;
+    SnapshotQueueSpsc<BookSnapshot, QUEUE_CAPACITY> queue_;
     std::atomic<bool> running_{false};
     std::thread workerThread_;
 };

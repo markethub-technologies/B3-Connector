@@ -5,7 +5,7 @@
 #include <vector>
 #include <atomic>
 
-using b3::md::TopNBookSnapshot10;
+using b3::md::BookSnapshot;
 using b3::md::SnapshotQueueSpsc;
 
 // ============================================================================
@@ -13,15 +13,15 @@ using b3::md::SnapshotQueueSpsc;
 // ============================================================================
 
 TEST(TopNBookSnapshotTests, IsTriviallyCopyable) {
-    EXPECT_TRUE(std::is_trivially_copyable_v<TopNBookSnapshot10>);
+    EXPECT_TRUE(std::is_trivially_copyable_v<BookSnapshot>);
 }
 
 TEST(TopNBookSnapshotTests, IsTriviallyDestructible) {
-    EXPECT_TRUE(std::is_trivially_destructible_v<TopNBookSnapshot10>);
+    EXPECT_TRUE(std::is_trivially_destructible_v<BookSnapshot>);
 }
 
 TEST(TopNBookSnapshotTests, DefaultConstruction) {
-    TopNBookSnapshot10 s{};
+    BookSnapshot s{};
 
     EXPECT_EQ(s.instrumentId, 0);
     EXPECT_EQ(s.exchangeTsNs, 0);
@@ -29,7 +29,7 @@ TEST(TopNBookSnapshotTests, DefaultConstruction) {
     EXPECT_EQ(s.askCount, 0);
 
     // Verify all levels are zeroed
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 5; ++i) {
         EXPECT_EQ(s.bids[i].price, 0);
         EXPECT_EQ(s.bids[i].qty, 0);
         EXPECT_EQ(s.asks[i].price, 0);
@@ -38,7 +38,7 @@ TEST(TopNBookSnapshotTests, DefaultConstruction) {
 }
 
 TEST(TopNBookSnapshotTests, DataAssignment) {
-    TopNBookSnapshot10 snapshot;
+    BookSnapshot snapshot;
 
     snapshot.instrumentId = 12345;
     snapshot.exchangeTsNs = 1234567890123456789ULL;
@@ -77,16 +77,16 @@ TEST(TopNBookSnapshotTests, DataAssignment) {
 // ============================================================================
 
 TEST(SnapshotQueueSpscTests, EmptyQueueBehavior) {
-    SnapshotQueueSpsc<TopNBookSnapshot10, 1024> q;
-    TopNBookSnapshot10 out{};
+    SnapshotQueueSpsc<BookSnapshot, 1024> q;
+    BookSnapshot out{};
 
     EXPECT_EQ(q.size_approx(), 0);
     EXPECT_FALSE(q.try_pop(out));
 }
 
 TEST(SnapshotQueueSpscTests, FifoSingleThread) {
-    SnapshotQueueSpsc<TopNBookSnapshot10, 1024> q;
-    TopNBookSnapshot10 a{}, b{}, out{};
+    SnapshotQueueSpsc<BookSnapshot, 1024> q;
+    BookSnapshot a{}, b{}, out{};
     a.instrumentId = 10;
     b.instrumentId = 11;
 
@@ -172,7 +172,7 @@ TEST(SnapshotQueueSpscTests, WrapAroundBehavior) {
 
 TEST(SnapshotQueueSpscTests, SpscThreadedNoCorruption) {
     constexpr int N = 200000;
-    SnapshotQueueSpsc<TopNBookSnapshot10, 4096> q;
+    SnapshotQueueSpsc<BookSnapshot, 4096> q;
 
     std::atomic<bool> done{false};
     std::atomic<int> produced{0};
@@ -181,7 +181,7 @@ TEST(SnapshotQueueSpscTests, SpscThreadedNoCorruption) {
     // Producer thread
     std::thread prod([&]{
         for (int i = 0; i < N; ) {
-            TopNBookSnapshot10 s{};
+            BookSnapshot s{};
             s.instrumentId = 77;
             s.exchangeTsNs = static_cast<uint64_t>(i);
             if (q.try_push(s)) {
@@ -197,7 +197,7 @@ TEST(SnapshotQueueSpscTests, SpscThreadedNoCorruption) {
         uint64_t last = 0;
         bool hasLast = false;
 
-        TopNBookSnapshot10 s{};
+        BookSnapshot s{};
         while (!done.load(std::memory_order_acquire) || q.size_approx() > 0) {
             if (q.try_pop(s)) {
                 if (hasLast) {

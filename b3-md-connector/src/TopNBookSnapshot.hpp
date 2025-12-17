@@ -10,7 +10,7 @@ struct Level {
 };
 
 template <int TOP_N>
-struct TopNBookSnapshotT {
+struct BookSnapshotT {
     static_assert(TOP_N > 0 && TOP_N <= 10, "TOP_N must be 1..10");
 
     uint32_t instrumentId{0};
@@ -24,9 +24,9 @@ struct TopNBookSnapshotT {
 };
 
 // Base “max” para no cambiar ABI si publicás 5/10
-using TopNBookSnapshot10 = TopNBookSnapshotT<10>;
+using BookSnapshot = BookSnapshotT<5>;
 
-static_assert(std::is_trivially_copyable_v<TopNBookSnapshot10>);
-static_assert(std::is_trivially_destructible_v<TopNBookSnapshot10>);
+static_assert(std::is_trivially_copyable_v<BookSnapshot>);
+static_assert(std::is_trivially_destructible_v<BookSnapshot>);
 
 } // namespace b3::md

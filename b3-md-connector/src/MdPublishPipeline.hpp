@@ -41,7 +41,7 @@ public:
     }
 
     // Producer side (MarketDataEngine / callback)
-    bool enqueue(const TopNBookSnapshot10& snapshot) noexcept {
+    bool enqueue(const BookSnapshot& snapshot) noexcept {
         auto& worker = workers_[shardFor(snapshot.instrumentId)];
         return worker->try_enqueue(snapshot);
     }
@@ -52,8 +52,10 @@ public:
 
 private:
     uint32_t shardFor(uint32_t instrumentId) const noexcept {
-        return instrumentId % shardCount_;
-    }
+    
+    uint32_t h = instrumentId * 2654435761u; // Multiplicative hash (Knuth)
+    return h % shardCount_; //Guarda, que shardCount no sea potencia de 2 que resta uniformidad a la distribución
+}
 
 private:
     uint32_t shardCount_;

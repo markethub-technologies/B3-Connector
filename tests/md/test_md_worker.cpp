@@ -26,7 +26,7 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
 
     constexpr int N = 100000;
     for (int i = 0; i < N; ++i) {
-        TopNBookSnapshot10 s{};
+        BookSnapshot s{};
         s.instrumentId = 77;
         s.exchangeTsNs = static_cast<uint64_t>(i);
 

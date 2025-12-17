@@ -33,6 +33,8 @@ target_link_directories(onixs-b3-umdf INTERFACE
 add_executable(b3_md_tests
     test_md_core.cpp
     test_md_worker.cpp
+    test_md_pipeline.cpp
+    test_md_engine.cpp
 )
 
 target_include_directories(b3_md_tests
