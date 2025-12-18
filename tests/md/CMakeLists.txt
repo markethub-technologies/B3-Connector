@@ -4,12 +4,16 @@ project(b3_md_tests CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+
 include(FetchContent)
 FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/refs/tags/v1.15.0.zip
 )
 FetchContent_MakeAvailable(googletest)
+
+find_package(spdlog REQUIRED)
 
 # --- Dependencias compartidas (copypaste liviano del proyecto MD) ---
 add_library(markethub-messaging INTERFACE)
@@ -35,19 +39,22 @@ add_executable(b3_md_tests
     test_md_worker.cpp
     test_md_pipeline.cpp
     test_md_engine.cpp
+    test_spdlog_log_publisher.cpp
 )
-
 target_include_directories(b3_md_tests
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/../../b3-md-connector/src
 )
 
 target_link_libraries(b3_md_tests
-    PRIVATE
-        gtest_main
+    PRIVATE            
         markethub-messaging
         onixs-b3-umdf
+        spdlog::spdlog
+        GTest::gtest
+        GTest::gtest_main
 )
 
 enable_testing()
-add_test(NAME b3_md_tests COMMAND b3_md_tests)
+include(GoogleTest)
+gtest_discover_tests(b3_md_tests)
