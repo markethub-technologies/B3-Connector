@@ -59,8 +59,6 @@ target_link_libraries(onixs-b3-umdf INTERFACE
 
 add_executable(b3-md-connector
     src/main.cpp
-    src/MessagingServer.cpp
-    src/MarketDataEngine.cpp
 )
 
 target_include_directories(b3-md-connector PRIVATE

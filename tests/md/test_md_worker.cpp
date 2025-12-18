@@ -1,6 +1,6 @@
-#include "../../b3-md-connector/src/MdPublishWorker.hpp"
-#include "../../b3-md-connector/src/FakePublisher.hpp"
-#include "../../b3-md-connector/src/MdSnapshotMapper.hpp"
+#include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
+#include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
+#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
 #include <gtest/gtest.h>
 
 #include <chrono>

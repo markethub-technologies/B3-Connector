@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "../../b3-md-connector/src/MdPublishPipeline.hpp"
-#include "../../b3-md-connector/src/FakePublisher.hpp"
-#include "../../b3-md-connector/src/MdSnapshotMapper.hpp"
+#include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
+#include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
+#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
 
 #include <chrono>
 #include <thread>

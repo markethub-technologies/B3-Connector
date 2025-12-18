@@ -1,5 +1,5 @@
 #pragma once
-#include "../../b3-md-connector/src/IOrderBookView.hpp"
+#include "../../b3-md-connector/src/core/IOrderBookView.hpp"
 #include <array>
 
 namespace b3::md::test {

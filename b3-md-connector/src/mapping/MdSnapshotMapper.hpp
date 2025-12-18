@@ -1,5 +1,5 @@
 #pragma once
-#include "TopNBookSnapshot.hpp"
+#include "../core/BookSnapshot.hpp"
 #include <string>
 
 namespace b3::md {

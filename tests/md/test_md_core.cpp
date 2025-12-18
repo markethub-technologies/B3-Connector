@@ -1,5 +1,5 @@
-#include "../../b3-md-connector/src/TopNBookSnapshot.hpp"
-#include "../../b3-md-connector/src/SnapshotQueueSpsc.hpp"
+#include "../../b3-md-connector/src/core/BookSnapshot.hpp"
+#include "../../b3-md-connector/src/core/SnapshotQueueSpsc.hpp"
 #include <gtest/gtest.h>
 #include <thread>
 #include <vector>
