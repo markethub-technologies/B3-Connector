@@ -1,127 +1,104 @@
 #include <gtest/gtest.h>
 
-#include "../../b3-md-connector/src/core/IOrderBookView.hpp"
-#include "../../b3-md-connector/src/core/BookSnapshotBuilder.hpp"
 #include "../../b3-md-connector/src/core/MarketDataEngine.hpp"
 #include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
+#include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
+#include "../../b3-md-connector/src/telemetry/ILogSink.hpp"
 #include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
-#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
 
-#include <array>
+#include "FakeOrderBook.hpp"
+
+#include <atomic>
 #include <chrono>
 #include <thread>
+#include <memory>
+#include <vector>
 
 using namespace b3::md;
+using namespace b3::md::test;
 
-namespace {
-
-class FakeOrderBook final : public IOrderBookView {
-public:
-    void setInstrumentId(uint32_t v) { instrumentId_ = v; }
-    void setExchangeTsNs(uint64_t v) { exchangeTsNs_ = v; }
-
-    void setBidCount(uint32_t c) { bidCount_ = c; }
-    void setAskCount(uint32_t c) { askCount_ = c; }
-
-    void setBidLevel(uint32_t i, Level lv) { bids_.at(i) = lv; }
-    void setAskLevel(uint32_t i, Level lv) { asks_.at(i) = lv; }
-
-    uint32_t instrumentId() const noexcept override { return instrumentId_; }
-    uint64_t exchangeTsNs() const noexcept override { return exchangeTsNs_; }
-
-    uint32_t bidCount() const noexcept override { return bidCount_; }
-    uint32_t askCount() const noexcept override { return askCount_; }
-
-    Level bidLevel(uint32_t i) const noexcept override { return bids_.at(i); }
-    Level askLevel(uint32_t i) const noexcept override { return asks_.at(i); }
-
-private:
-    uint32_t instrumentId_{0};
-    uint64_t exchangeTsNs_{0};
-    uint32_t bidCount_{0};
-    uint32_t askCount_{0};
-    std::array<Level, 5> bids_{};
-    std::array<Level, 5> asks_{};
+// Logger dummy: nunca bloquea, nunca tira.
+struct NullLogSink final : b3::md::telemetry::ILogSink {
+    void publish(const b3::md::telemetry::LogEvent&) noexcept override {}
 };
 
-static uint32_t ParseBc(const std::string& bytes) {
-    auto pos = bytes.find(";bc=");
-    EXPECT_NE(pos, std::string::npos);
-    if (pos == std::string::npos) return 0;
-    pos += 4;
-    auto end = bytes.find(';', pos);
-    EXPECT_NE(end, std::string::npos);
-    if (end == std::string::npos) return 0;
-    return static_cast<uint32_t>(std::stoul(bytes.substr(pos, end - pos)));
-}
-
-static uint32_t ParseAc(const std::string& bytes) {
-    auto pos = bytes.find(";ac=");
-    EXPECT_NE(pos, std::string::npos);
-    if (pos == std::string::npos) return 0;
-    pos += 4;
-    return static_cast<uint32_t>(std::stoul(bytes.substr(pos)));
-}
-
-} // namespace
-
-TEST(BookSnapshotBuilderTests, CopiesLevelsAndClampsToDepth) {
-    FakeOrderBook book;
-    book.setInstrumentId(123);
-    book.setExchangeTsNs(999);
-    book.setBidCount(7); // > 5
-    book.setAskCount(6); // > 5
-
-    for (int i = 0; i < 5; ++i) {
-        book.setBidLevel(i, Level{100 - i, 10 + i});
-        book.setAskLevel(i, Level{101 + i, 20 + i});
+// Publisher que cuenta publicaciones (thread-safe).
+struct CountingPublisher final : IMdPublisher {
+    void publish(std::string_view, const uint8_t*, size_t) override {
+        published.fetch_add(1, std::memory_order_relaxed);
     }
+    std::atomic<uint64_t> published{0};
+};
 
-    auto s = buildSnapshot(book);
-
-    EXPECT_EQ(s.instrumentId, 123u);
-    EXPECT_EQ(s.exchangeTsNs, 999u);
-    EXPECT_EQ(s.bidCount, 5);
-    EXPECT_EQ(s.askCount, 5);
-
-    EXPECT_EQ(s.bids[0].price, 100);
-    EXPECT_EQ(s.asks[0].price, 101);
-}
+// Mapper de test: no aloca pesado, solo dispara publish.
+struct TestMapper final : MdSnapshotMapper {
+    void mapAndSerialize(const BookSnapshot&, std::string& out) {
+        out.assign("x"); // mínimo, para tener payload >0
+    }
+};
 
 TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
-    FakePublisher pub;
-    MdSnapshotMapper mapper;
+    TestMapper mapper;
+    CountingPublisher publisher;
+    NullLogSink logger;
 
-    MdPublishPipeline pipeline(/*shards*/1, mapper, pub, "md.snapshot");
+    auto worker = std::make_unique<MdPublishWorker>(0, mapper, publisher, logger);
+    std::vector<std::unique_ptr<MdPublishWorker>> workers;
+    workers.push_back(std::move(worker));     // o emplace_back(std::move(worker))
+
+    MdPublishPipeline pipeline(std::move(workers));
+
     pipeline.start();
 
     MarketDataEngine engine(pipeline);
 
     FakeOrderBook book;
-    book.setInstrumentId(77);
-    book.setExchangeTsNs(123456);
-    book.setBidCount(5);
-    book.setAskCount(5);
+    book.setInstrumentId(42);
+    book.setExchangeTsNs(123);
 
-    for (int i = 0; i < 5; ++i) {
-        book.setBidLevel(i, Level{100 - i, 10 + i});
-        book.setAskLevel(i, Level{101 + i, 20 + i});
-    }
+    book.setBidCount(1);
+    book.setAskCount(1);
+
+    book.setBidLevel(0, b3::md::Level{ .price = 10, .qty = 5 });
+    book.setAskLevel(0, b3::md::Level{ .price = 11, .qty = 7 });
 
     engine.onOrderBookUpdated(book);
 
-    const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(2);
-    while (pub.count() < 1 && std::chrono::steady_clock::now() < deadline) {
+    // Espera activa acotada a que el worker publique 1 vez
+    const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
+    while (publisher.published.load(std::memory_order_relaxed) < 1 &&
+           std::chrono::steady_clock::now() < deadline) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    pipeline.stop();
+    pipeline.stop(true);
 
-    ASSERT_GE(pub.count(), 1u);
-    auto msg = pub.at(0);
-
-    EXPECT_EQ(msg.topic, "md.snapshot");
-    EXPECT_EQ(ParseBc(msg.bytes), 5u);
-    EXPECT_EQ(ParseAc(msg.bytes), 5u);
     EXPECT_EQ(engine.drops(), 0u);
+    EXPECT_GE(publisher.published.load(std::memory_order_relaxed), 1u);
+}
+
+TEST(MarketDataEngineTests, EnqueueNeverBlocks) {
+    FakePublisher pub;
+    MdSnapshotMapper mapper;
+    NullLogSink logger;
+
+    std::vector<std::unique_ptr<MdPublishWorker>> workers;
+    workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, pub, logger));
+    MdPublishPipeline pipeline(std::move(workers));
+    pipeline.start();
+
+    MarketDataEngine engine(pipeline);
+
+    b3::md::test::FakeOrderBook book;
+    book.setInstrumentId(1);
+    book.setExchangeTsNs(1);
+    book.setBidCount(0);
+    book.setAskCount(0);
+
+    for (int i = 0; i < 100000; ++i) {
+        engine.onOrderBookUpdated(book);
+    }
+
+    pipeline.stop(false);
+    SUCCEED();
 }

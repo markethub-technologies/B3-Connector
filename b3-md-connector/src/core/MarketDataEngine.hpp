@@ -13,7 +13,7 @@ public:
 
     void onOrderBookUpdated(const IOrderBookView& book) noexcept {
         auto snap = buildSnapshot(book);
-        if (!pipeline_.enqueue(snap)) {
+        if (!pipeline_.tryEnqueue(snap)) {
             drops_.fetch_add(1, std::memory_order_relaxed);
         }
     }

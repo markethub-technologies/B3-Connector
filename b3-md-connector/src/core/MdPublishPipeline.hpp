@@ -1,65 +1,75 @@
 #pragma once
+
 #include "MdPublishWorker.hpp"
 #include "BookSnapshot.hpp"
 
 #include <cstdint>
 #include <memory>
 #include <vector>
+#include <atomic>
+#include <stdexcept>
 
 namespace b3::md {
 
-class MdPublishPipeline {
+// Pipeline = orquestador de sharding + lifecycle de workers.
+// NO crea threads en ctor. NO conoce IO. NO conoce OnixS.
+// Enqueue único punto de entrada (hot path friendly).
+class MdPublishPipeline final {
 public:
-    MdPublishPipeline(uint32_t shardCount,
-                      MdSnapshotMapper& mapper,
-                      IMdPublisher& publisher,
-                      std::string_view topic)
-        : shardCount_(shardCount) {
-
-        workers_.reserve(shardCount_);
-        for (uint32_t i = 0; i < shardCount_; ++i) {
-            workers_.emplace_back(
-                std::make_unique<MdPublishWorker>(i, mapper, publisher, topic)
-            );
+    explicit MdPublishPipeline(std::vector<std::unique_ptr<MdPublishWorker>> workers)
+        : workers_(std::move(workers))
+    {
+        if (workers_.empty()) {
+            throw std::invalid_argument("MdPublishPipeline: workers empty");
         }
     }
 
-    ~MdPublishPipeline() {
-        stop();
-    }
+    MdPublishPipeline(const MdPublishPipeline&) = delete;
+    MdPublishPipeline& operator=(const MdPublishPipeline&) = delete;
 
     void start() {
-        for (auto& worker : workers_) {
-            worker->start();
+        bool expected = false;
+        if (!started_.compare_exchange_strong(expected, true, std::memory_order_acq_rel)) {
+            return; // idempotente
+        }
+        for (auto& w : workers_) {
+            w->start();
         }
     }
 
-    void stop() {
-        for (auto& worker : workers_) {
-            worker->stop();
+    void stop(bool drain = true) {
+        bool expected = true;
+        if (!started_.compare_exchange_strong(expected, false, std::memory_order_acq_rel)) {
+            return; // idempotente
+        }
+        for (auto& w : workers_) {
+            w->stop(drain);
         }
     }
 
-    // Producer side (MarketDataEngine / callback)
-    bool enqueue(const BookSnapshot& snapshot) noexcept {
-        auto& worker = workers_[shardFor(snapshot.instrumentId)];
-        return worker->try_enqueue(snapshot);
+    // Hot path: no throw, no alloc.
+    // Devuelve false si se dropeó (cola llena).
+    bool tryEnqueue(const BookSnapshot& snapshot) noexcept {
+        const uint32_t shard = shardFor(snapshot.instrumentId);
+        return workers_[shard]->tryEnqueue(snapshot);
     }
 
     uint32_t shardCount() const noexcept {
-        return shardCount_;
+        return static_cast<uint32_t>(workers_.size());
     }
 
 private:
-    uint32_t shardFor(uint32_t instrumentId) const noexcept {
-    
-    uint32_t h = instrumentId * 2654435761u; // Multiplicative hash (Knuth)
-    return h % shardCount_; //Guarda, que shardCount no sea potencia de 2 que resta uniformidad a la distribución
-}
+    // Hash multiplicativo para mejorar distribución si instrumentId tiene patrones.
+    static constexpr uint64_t kKnuth = 11400714819323198485ull;
+
+    uint32_t shardFor(uint64_t instrumentId) const noexcept {
+        const uint64_t mixed = instrumentId * kKnuth;
+        return static_cast<uint32_t>(mixed % workers_.size());
+    }
 
 private:
-    uint32_t shardCount_;
     std::vector<std::unique_ptr<MdPublishWorker>> workers_;
+    std::atomic<bool> started_{false};
 };
 
 } // namespace b3::md
