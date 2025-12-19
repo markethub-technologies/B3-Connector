@@ -19,7 +19,7 @@ public:
         workers_.reserve(shardCount_);
         for (uint32_t i = 0; i < shardCount_; ++i) {
             workers_.emplace_back(
-                std::make_unique<MdPublishWorker>(mapper, publisher, topic)
+                std::make_unique<MdPublishWorker>(i, mapper, publisher, topic)
             );
         }
     }

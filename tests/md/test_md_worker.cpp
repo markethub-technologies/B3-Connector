@@ -20,8 +20,9 @@ static uint64_t parse_ts(const std::string& bytes) {
 TEST(MdPublishWorkerTests, PublishesFifoOrder) {
     FakePublisher pub;
     MdSnapshotMapper mapper;
+    uint16_t shard = 1;
 
-    MdPublishWorker worker(mapper, pub, "md.snapshot");
+    MdPublishWorker worker(shard, mapper, pub, "md.snapshot");
     worker.start();
 
     constexpr int N = 100000;
@@ -58,8 +59,9 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
 TEST(MdPublishWorkerTests, StopClean) {
     FakePublisher pub;
     MdSnapshotMapper mapper;
+    uint16_t shard = 1;
 
-    MdPublishWorker worker(mapper, pub, "md.snapshot");
+    MdPublishWorker worker(shard, mapper, pub, "md.snapshot");
     worker.start();
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     worker.stop();
