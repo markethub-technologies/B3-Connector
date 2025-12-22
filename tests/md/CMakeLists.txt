@@ -40,6 +40,7 @@ add_executable(b3_md_tests
     test_md_pipeline.cpp
     test_md_engine.cpp
     test_spdlog_log_publisher.cpp
+    test_mbo_to_mbp_aggregator.cpp
 )
 target_include_directories(b3_md_tests
     PRIVATE

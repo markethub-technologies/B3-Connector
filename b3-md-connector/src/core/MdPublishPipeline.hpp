@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MdPublishWorker.hpp"
-#include "BookSnapshot.hpp"
+#include "OrdersSnapshot.hpp"
 
 #include <cstdint>
 #include <memory>
@@ -49,7 +49,7 @@ public:
 
     // Hot path: no throw, no alloc.
     // Devuelve false si se dropeó (cola llena).
-    bool tryEnqueue(const BookSnapshot& snapshot) noexcept {
+    bool tryEnqueue(const OrdersSnapshot& snapshot) noexcept {
         const uint32_t shard = shardFor(snapshot.instrumentId);
         return workers_[shard]->tryEnqueue(snapshot);
     }

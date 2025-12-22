@@ -32,10 +32,11 @@ struct CountingPublisher final : IMdPublisher {
 
 // Mapper de test: no aloca pesado, solo dispara publish.
 struct TestMapper final : MdSnapshotMapper {
-    void mapAndSerialize(const BookSnapshot&, std::string& out) {
-        out.assign("x"); // mínimo, para tener payload >0
+    void mapAndSerialize(const BookSnapshot&, std::string& out) const {
+        out.assign("x");
     }
 };
+
 
 TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
     TestMapper mapper;

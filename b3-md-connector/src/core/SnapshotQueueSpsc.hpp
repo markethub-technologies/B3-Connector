@@ -2,6 +2,7 @@
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 
 namespace b3::md {
 
@@ -11,8 +12,11 @@ namespace b3::md {
 template <typename T, size_t CapacityPow2>
 class SnapshotQueueSpsc {
     static_assert((CapacityPow2 & (CapacityPow2 - 1)) == 0, "Capacity must be power of two");
+
 public:
-    SnapshotQueueSpsc() = default;
+    SnapshotQueueSpsc()
+        : buffer_(std::make_unique<T[]>(CapacityPow2))
+    {}
 
     bool try_push(const T& v) noexcept {
         const uint32_t t = tail_.load(std::memory_order_relaxed);
@@ -45,7 +49,8 @@ public:
 private:
     alignas(64) std::atomic<uint32_t> head_{0};
     alignas(64) std::atomic<uint32_t> tail_{0};
-    T buffer_[CapacityPow2]{};
+
+    std::unique_ptr<T[]> buffer_;
 };
 
 } // namespace b3::md

@@ -78,9 +78,15 @@ TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
 
     for (uint32_t iid : instruments) {
         for (int i = 0; i < EVENTS_PER_INSTRUMENT; ++i) {
-            BookSnapshot s{};
+            OrdersSnapshot s{};
             s.instrumentId = iid;
             s.exchangeTsNs = static_cast<uint64_t>(i);
+
+            // Para que el agregador produzca bid/askCount > 0 (opcional):
+            s.bidCountRaw = 1;
+            s.askCountRaw = 1;
+            s.bids[0] = { .priceMantissa = 1000 + i, .qty = 1 };
+            s.asks[0] = { .priceMantissa = 2000 + i, .qty = 1 };
 
             while (!pipeline.tryEnqueue(s)) {
                 std::this_thread::yield();
@@ -135,7 +141,7 @@ TEST(MdPublishPipelineTests, ProgressUnderMultipleInstruments) {
     const uint32_t iidB = 2;
 
     for (int i = 0; i < N; ++i) {
-        BookSnapshot a{}, b{};
+        OrdersSnapshot a{}, b{};
         a.instrumentId = iidA;
         a.exchangeTsNs = static_cast<uint64_t>(i);
         b.instrumentId = iidB;
