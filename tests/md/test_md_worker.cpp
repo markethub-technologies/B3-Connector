@@ -1,7 +1,6 @@
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
 #include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
 #include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
-#include "../../b3-md-connector/src/telemetry/ILogSink.hpp"
 #include "../../b3-md-connector/src/core/OrdersSnapshot.hpp"
 #include <gtest/gtest.h>
 
@@ -19,34 +18,27 @@ static uint64_t parse_ts(const std::string& bytes) {
     return std::stoull(bytes.substr(pos, end - pos));
 }
 
-namespace {
-struct NullLogSink final : b3::md::telemetry::ILogSink {
-    void publish(const b3::md::telemetry::LogEvent&) noexcept override {}
-};
-}
-
 TEST(MdPublishWorkerTests, PublishesFifoOrder) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
     uint32_t shard = 1;
 
-    MdPublishWorker worker(shard, mapper, pub, logger);
+    MdPublishWorker worker(shard, mapper, pub);
     worker.start();
 
     constexpr int N = 100000;
     for (int i = 0; i < N; ++i) {
-        OrdersSnapshot s{};
-        s.instrumentId = 77;
-        s.exchangeTsNs = static_cast<uint64_t>(i);
+        OrdersSnapshot orderSnapshot{};
+        orderSnapshot.instrumentId = 77;
+        orderSnapshot.exchangeTsNs = static_cast<uint64_t>(i);
 
         // opcional para bid/ask count:
-        s.bidCountRaw = 1;
-        s.askCountRaw = 1;
-        s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
-        s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
+        orderSnapshot.bidCountRaw = 1;
+        orderSnapshot.askCountRaw = 1;
+        orderSnapshot.bids[0] = { .priceMantissa = 1000, .qty = 1 };
+        orderSnapshot.asks[0] = { .priceMantissa = 2000, .qty = 1 };
 
-        while (!worker.tryEnqueue(s)) {
+        while (!worker.tryEnqueue(orderSnapshot)) {
             std::this_thread::yield();
         }
     }
@@ -72,12 +64,11 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
 }
 
 TEST(MdPublishWorkerTests, StopClean) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
     uint32_t shard = 1;
 
-    MdPublishWorker worker(shard, mapper, pub, logger);
+    MdPublishWorker worker(shard, mapper, pub);
     worker.start();
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     worker.stop(false);
@@ -85,11 +76,10 @@ TEST(MdPublishWorkerTests, StopClean) {
 }
 
 TEST(MdPublishWorkerTests, StopWithoutDrainDropsPending) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
 
-    MdPublishWorker worker(0, mapper, pub, logger);
+    MdPublishWorker worker(0, mapper, pub);
     worker.start();
 
     for (int i = 0; i < 1000; ++i) {
@@ -111,11 +101,10 @@ TEST(MdPublishWorkerTests, StopWithoutDrainDropsPending) {
 }
 
 TEST(MdPublishWorkerTests, StopWithDrainPublishesAll) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
 
-    MdPublishWorker worker(0, mapper, pub, logger);
+    MdPublishWorker worker(0, mapper, pub);
     worker.start();
 
     for (int i = 0; i < 1000; ++i) {
@@ -154,11 +143,10 @@ static uint32_t parse_count(const std::string& bytes, const char* key) {
 }
 
 TEST(MdPublishWorkerTests, AggregationAffectsCountsInSerializedOutput) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
 
-    MdPublishWorker worker(0, mapper, pub, logger);
+    MdPublishWorker worker(0, mapper, pub);
     worker.start();
 
     OrdersSnapshot raw{};

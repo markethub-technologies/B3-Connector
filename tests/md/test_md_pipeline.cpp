@@ -4,7 +4,6 @@
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
 #include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
 #include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
-#include "../../b3-md-connector/src/telemetry/ILogSink.hpp"
 
 #include <chrono>
 #include <thread>
@@ -16,11 +15,6 @@
 using namespace b3::md;
 
 namespace {
-
-// Logger dummy: nunca bloquea, nunca falla
-struct NullLogSink final : telemetry::ILogSink {
-    void publish(const telemetry::LogEvent&) noexcept override {}
-};
 
 uint64_t ParseTs(const std::string& bytes) {
     auto pos = bytes.find(";ts=");
@@ -50,14 +44,13 @@ uint32_t ParseIid(const std::string& bytes) {
 
 MdPublishPipeline BuildPipeline(uint32_t shards,
                                MdSnapshotMapper& mapper,
-                               FakePublisher& pub,
-                               telemetry::ILogSink& logger) {
+                               testsupport::FakePublisher &pub) {
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
     workers.reserve(shards);
 
     for (uint32_t i = 0; i < shards; ++i) {
         workers.emplace_back(
-            std::make_unique<MdPublishWorker>(i, mapper, pub, logger));
+            std::make_unique<MdPublishWorker>(i, mapper, pub));
     }
 
     return MdPublishPipeline(std::move(workers));
@@ -66,11 +59,11 @@ MdPublishPipeline BuildPipeline(uint32_t shards,
 } // namespace
 
 TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
 
-    auto pipeline = BuildPipeline(4, mapper, pub, logger);
+
+    auto pipeline = BuildPipeline(4, mapper, pub);
     pipeline.start();
 
     constexpr int EVENTS_PER_INSTRUMENT = 10'000;
@@ -128,11 +121,11 @@ TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
 }
 
 TEST(MdPublishPipelineTests, ProgressUnderMultipleInstruments) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
 
-    auto pipeline = BuildPipeline(2, mapper, pub, logger);
+
+    auto pipeline = BuildPipeline(2, mapper, pub);
     pipeline.start();
 
     constexpr int N = 50'000;

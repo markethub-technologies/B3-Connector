@@ -1,52 +1,57 @@
 #pragma once
 
-#include <OnixS/B3/MarketData/UMDF/OrderBookListener.h>
-#include <OnixS/B3/MarketData/UMDF/messaging/SbeMessage.h>
 #include "../core/MarketDataEngine.hpp"
 
-#include "OnixOrderBookView.hpp"
+#include <OnixS/B3/MarketData/UMDF/OrderBookListener.h>
+#include <OnixS/B3/MarketData/UMDF/OrderBook.h>
+#include <OnixS/B3/MarketData/UMDF/messaging/SbeMessage.h>
+
+#include <atomic>
+#include <cstdint>
 
 namespace b3::md::onixs {
 
-class OnixsOrderBookListener final
-    : public ::OnixS::B3::MarketData::UMDF::OrderBookListener
-{
+// Adapter: OnixS -> MarketDataEngine
+class OnixsOrderBookListener final : public ::OnixS::B3::MarketData::UMDF::OrderBookListener {
 public:
     explicit OnixsOrderBookListener(b3::md::MarketDataEngine& engine) noexcept
-        : engine_(engine) {}
+        : engine_(engine)
+    {}
 
-    // Se llama en cambios dentro de profundidad (puede ser muy frecuente).
-    // Por diseño, NO hacemos trabajo acá; nos quedamos con "Updated" que ya
-    // llega al EndOfEvent y consolida.
-    void onOrderBookChanged(const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/,
-                            const ::OnixS::B3::MarketData::UMDF::Messaging::SbeMessage /*message*/) override
+    OnixsOrderBookListener(const OnixsOrderBookListener&) = delete;
+    OnixsOrderBookListener& operator=(const OnixsOrderBookListener&) = delete;
+
+    void onOrderBookChanged(const ::OnixS::B3::MarketData::UMDF::OrderBook&,
+                            const ::OnixS::B3::MarketData::UMDF::Messaging::SbeMessage) override
     {
-        // intencionalmente vacío
-        // (si más adelante necesitás algo, tiene que seguir el mismo contrato:
-        // no block, no alloc, no log)
+        // Por ahora no hacemos nada acá para no publicar snapshots intermedios.
+        // Si más adelante querés flags por evento (market-order-seen, deletes, etc),
+        // este es el lugar para capturarlas sin bloquear.
+        changedCount_.fetch_add(1, std::memory_order_relaxed);
     }
 
-    // Punto principal: libro consolidado (EndOfEvent) y dentro de profundidad.
     void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& book) override
     {
-        // Stack-local view (no se guarda book_ ni refs afuera del callback)
-        OnixsOrderBookView view(book);
-
-        // Hot path: snapshot+enqueue (engine maneja drops)
-        engine_.onOrderBookUpdated(view);
+        updatedCount_.fetch_add(1, std::memory_order_relaxed);
+        engine_.onOrderBookUpdated(book);
     }
 
-    // Cuando el SDK avisa que está out of date.
-    // No bloquea. No loguea (si querés, solo contador atómico y health thread).
-    void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/) override
+    void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook&) override
     {
-        // opcional: ++outOfDate_;
-        // o marcar flag por instrumento si tenés estructura lock-free para eso
+        outOfDateCount_.fetch_add(1, std::memory_order_relaxed);
+        // Por ahora: no hacemos nada. Más adelante podrías emitir health/evento.
     }
+
+    uint64_t changedCount() const noexcept  { return changedCount_.load(std::memory_order_relaxed); }
+    uint64_t updatedCount() const noexcept  { return updatedCount_.load(std::memory_order_relaxed); }
+    uint64_t outOfDateCount() const noexcept { return outOfDateCount_.load(std::memory_order_relaxed); }
 
 private:
     b3::md::MarketDataEngine& engine_;
-    // std::atomic<uint64_t> outOfDate_{0}; // si querés, sin overhead
+
+    std::atomic<uint64_t> changedCount_{0};
+    std::atomic<uint64_t> updatedCount_{0};
+    std::atomic<uint64_t> outOfDateCount_{0};
 };
 
 } // namespace b3::md::onixs

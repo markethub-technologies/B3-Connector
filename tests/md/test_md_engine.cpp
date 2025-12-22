@@ -3,7 +3,6 @@
 #include "../../b3-md-connector/src/core/MarketDataEngine.hpp"
 #include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
-#include "../../b3-md-connector/src/telemetry/ILogSink.hpp"
 #include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
 
 #include "FakeOrderBook.hpp"
@@ -17,10 +16,6 @@
 using namespace b3::md;
 using namespace b3::md::test;
 
-// Logger dummy: nunca bloquea, nunca tira.
-struct NullLogSink final : b3::md::telemetry::ILogSink {
-    void publish(const b3::md::telemetry::LogEvent&) noexcept override {}
-};
 
 // Publisher que cuenta publicaciones (thread-safe).
 struct CountingPublisher final : IMdPublisher {
@@ -41,9 +36,8 @@ struct TestMapper final : MdSnapshotMapper {
 TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
     TestMapper mapper;
     CountingPublisher publisher;
-    NullLogSink logger;
 
-    auto worker = std::make_unique<MdPublishWorker>(0, mapper, publisher, logger);
+    auto worker = std::make_unique<MdPublishWorker>(0, mapper, publisher);
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
     workers.push_back(std::move(worker));     // o emplace_back(std::move(worker))
 
@@ -79,12 +73,12 @@ TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
 }
 
 TEST(MarketDataEngineTests, EnqueueNeverBlocks) {
-    FakePublisher pub;
+    testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
-    NullLogSink logger;
+
 
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
-    workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, pub, logger));
+    workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, pub));
     MdPublishPipeline pipeline(std::move(workers));
     pipeline.start();
 

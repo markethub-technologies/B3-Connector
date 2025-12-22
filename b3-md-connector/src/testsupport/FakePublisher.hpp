@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace b3::md {
+namespace b3::md :: testsupport {
 
 struct PublishedMessage {
     std::string topic;
