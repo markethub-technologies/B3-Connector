@@ -76,8 +76,8 @@ TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
             s.exchangeTsNs = static_cast<uint64_t>(i);
 
             // Para que el agregador produzca bid/askCount > 0 (opcional):
-            s.bidCountRaw = 1;
-            s.askCountRaw = 1;
+            s.bidsCopied = 1;
+            s.asksCopied = 1;
             s.bids[0] = { .priceMantissa = 1000 + i, .qty = 1 };
             s.asks[0] = { .priceMantissa = 2000 + i, .qty = 1 };
 

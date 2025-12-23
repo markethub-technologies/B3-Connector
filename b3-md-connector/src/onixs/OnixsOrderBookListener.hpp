@@ -21,29 +21,30 @@ public:
     OnixsOrderBookListener(const OnixsOrderBookListener&) = delete;
     OnixsOrderBookListener& operator=(const OnixsOrderBookListener&) = delete;
 
-    void onOrderBookChanged(const ::OnixS::B3::MarketData::UMDF::OrderBook&,
-                            const ::OnixS::B3::MarketData::UMDF::Messaging::SbeMessage) override
+    void onOrderBookChanged(
+        const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/,
+        const ::OnixS::B3::MarketData::UMDF::Messaging::SbeMessage /*message*/) override
     {
-        // Por ahora no hacemos nada acá para no publicar snapshots intermedios.
-        // Si más adelante querés flags por evento (market-order-seen, deletes, etc),
-        // este es el lugar para capturarlas sin bloquear.
+        // Por ahora no publicamos acá para evitar snapshots intermedios.
+        //
+        // TODO(B3): revisar si el SbeMessage trae exchange timestamp (o event time) y dónde.
+        // Si existe, decidir cómo propagarlo sin heap ni mapas en hot path (ideal: usar onOrderBookUpdated
+        // si el SDK expone el timestamp ahí; si no, estudiar estrategia).
         changedCount_.fetch_add(1, std::memory_order_relaxed);
     }
 
-    void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& book) override
-    {
+    void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& book) override {
         updatedCount_.fetch_add(1, std::memory_order_relaxed);
         engine_.onOrderBookUpdated(book);
     }
 
-    void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook&) override
-    {
+    void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/) override {
         outOfDateCount_.fetch_add(1, std::memory_order_relaxed);
-        // Por ahora: no hacemos nada. Más adelante podrías emitir health/evento.
+        // TODO(B3): emitir health/counter para marcar "books outdated" (sin bloquear).
     }
 
-    uint64_t changedCount() const noexcept  { return changedCount_.load(std::memory_order_relaxed); }
-    uint64_t updatedCount() const noexcept  { return updatedCount_.load(std::memory_order_relaxed); }
+    uint64_t changedCount() const noexcept { return changedCount_.load(std::memory_order_relaxed); }
+    uint64_t updatedCount() const noexcept { return updatedCount_.load(std::memory_order_relaxed); }
     uint64_t outOfDateCount() const noexcept { return outOfDateCount_.load(std::memory_order_relaxed); }
 
 private:

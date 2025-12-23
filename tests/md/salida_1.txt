@@ -1,0 +1,511 @@
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_core.cpp =====
+#include "../../b3-md-connector/src/core/BookSnapshot.hpp"
+#include "../../b3-md-connector/src/core/SnapshotQueueSpsc.hpp"
+#include <gtest/gtest.h>
+#include <thread>
+#include <vector>
+#include <atomic>
+
+using b3::md::BookSnapshot;
+using b3::md::SnapshotQueueSpsc;
+
+// ============================================================================
+// TopNBookSnapshot Tests
+// ============================================================================
+
+TEST(TopNBookSnapshotTests, IsTriviallyCopyable) {
+    EXPECT_TRUE(std::is_trivially_copyable_v<BookSnapshot>);
+}
+
+TEST(TopNBookSnapshotTests, IsTriviallyDestructible) {
+    EXPECT_TRUE(std::is_trivially_destructible_v<BookSnapshot>);
+}
+
+TEST(TopNBookSnapshotTests, DefaultConstruction) {
+    BookSnapshot s{};
+
+    EXPECT_EQ(s.instrumentId, 0);
+    EXPECT_EQ(s.exchangeTsNs, 0);
+    EXPECT_EQ(s.bidCount, 0);
+    EXPECT_EQ(s.askCount, 0);
+
+    // Verify all levels are zeroed
+    for (int i = 0; i < 5; ++i) {
+        EXPECT_EQ(s.bids[i].price, 0);
+        EXPECT_EQ(s.bids[i].qty, 0);
+        EXPECT_EQ(s.asks[i].price, 0);
+        EXPECT_EQ(s.asks[i].qty, 0);
+    }
+}
+
+TEST(TopNBookSnapshotTests, DataAssignment) {
+    BookSnapshot snapshot;
+
+    snapshot.instrumentId = 12345;
+    snapshot.exchangeTsNs = 1234567890123456789ULL;
+    snapshot.bidCount = 3;
+    snapshot.askCount = 2;
+
+    // Set bid levels
+    snapshot.bids[0] = {100000, 1000};
+    snapshot.bids[1] = {99500, 1500};
+    snapshot.bids[2] = {99000, 2000};
+
+    // Set ask levels
+    snapshot.asks[0] = {100500, 800};
+    snapshot.asks[1] = {101000, 1200};
+
+    EXPECT_EQ(snapshot.instrumentId, 12345);
+    EXPECT_EQ(snapshot.exchangeTsNs, 1234567890123456789ULL);
+    EXPECT_EQ(snapshot.bidCount, 3);
+    EXPECT_EQ(snapshot.askCount, 2);
+
+    EXPECT_EQ(snapshot.bids[0].price, 100000);
+    EXPECT_EQ(snapshot.bids[0].qty, 1000);
+    EXPECT_EQ(snapshot.bids[1].price, 99500);
+    EXPECT_EQ(snapshot.bids[1].qty, 1500);
+    EXPECT_EQ(snapshot.bids[2].price, 99000);
+    EXPECT_EQ(snapshot.bids[2].qty, 2000);
+
+    EXPECT_EQ(snapshot.asks[0].price, 100500);
+    EXPECT_EQ(snapshot.asks[0].qty, 800);
+    EXPECT_EQ(snapshot.asks[1].price, 101000);
+    EXPECT_EQ(snapshot.asks[1].qty, 1200);
+}
+
+// ============================================================================
+// SnapshotQueueSpsc Tests - Single Thread
+// ============================================================================
+
+TEST(SnapshotQueueSpscTests, EmptyQueueBehavior) {
+    SnapshotQueueSpsc<BookSnapshot, 1024> q;
+    BookSnapshot out{};
+
+    EXPECT_EQ(q.size_approx(), 0);
+    EXPECT_FALSE(q.try_pop(out));
+}
+
+TEST(SnapshotQueueSpscTests, FifoSingleThread) {
+    SnapshotQueueSpsc<BookSnapshot, 1024> q;
+    BookSnapshot a{}, b{}, out{};
+    a.instrumentId = 10;
+    b.instrumentId = 11;
+
+    EXPECT_TRUE(q.try_push(a));
+    EXPECT_TRUE(q.try_push(b));
+    EXPECT_GE(q.size_approx(), 2);
+
+    EXPECT_TRUE(q.try_pop(out));
+    EXPECT_EQ(out.instrumentId, 10);
+
+    EXPECT_TRUE(q.try_pop(out));
+    EXPECT_EQ(out.instrumentId, 11);
+
+    EXPECT_FALSE(q.try_pop(out));
+    EXPECT_EQ(q.size_approx(), 0);
+}
+
+TEST(SnapshotQueueSpscTests, PushMultipleElements) {
+    SnapshotQueueSpsc<int, 16> queue;
+
+    for (int i = 0; i < 10; ++i) {
+        EXPECT_TRUE(queue.try_push(i));
+    }
+
+    EXPECT_EQ(queue.size_approx(), 10);
+
+    for (int i = 0; i < 10; ++i) {
+        int value;
+        EXPECT_TRUE(queue.try_pop(value));
+        EXPECT_EQ(value, i);
+    }
+
+    EXPECT_EQ(queue.size_approx(), 0);
+}
+
+TEST(SnapshotQueueSpscTests, QueueFullBehavior) {
+    SnapshotQueueSpsc<int, 4> queue;
+
+    // Fill the queue to capacity
+    EXPECT_TRUE(queue.try_push(1));
+    EXPECT_TRUE(queue.try_push(2));
+    EXPECT_TRUE(queue.try_push(3));
+    EXPECT_TRUE(queue.try_push(4));
+
+    EXPECT_EQ(queue.size_approx(), 4);
+
+    // Next push should fail (queue is full)
+    EXPECT_FALSE(queue.try_push(5));
+
+    // Pop one element
+    int value;
+    EXPECT_TRUE(queue.try_pop(value));
+    EXPECT_EQ(value, 1);
+
+    // Now we should be able to push again
+    EXPECT_TRUE(queue.try_push(5));
+}
+
+TEST(SnapshotQueueSpscTests, WrapAroundBehavior) {
+    SnapshotQueueSpsc<int, 4> queue;
+
+    // Fill and empty multiple times to test wrap-around
+    for (int cycle = 0; cycle < 3; ++cycle) {
+        // Fill
+        for (int i = 0; i < 4; ++i) {
+            EXPECT_TRUE(queue.try_push(cycle * 10 + i));
+        }
+
+        // Empty
+        for (int i = 0; i < 4; ++i) {
+            int value;
+            EXPECT_TRUE(queue.try_pop(value));
+            EXPECT_EQ(value, cycle * 10 + i);
+        }
+
+        EXPECT_EQ(queue.size_approx(), 0);
+    }
+}
+
+// ============================================================================
+// SnapshotQueueSpsc Tests - Multi-threaded SPSC
+// ============================================================================
+
+TEST(SnapshotQueueSpscTests, SpscThreadedNoCorruption) {
+    constexpr int N = 200000;
+    SnapshotQueueSpsc<BookSnapshot, 4096> q;
+
+    std::atomic<bool> done{false};
+    std::atomic<int> produced{0};
+    std::atomic<int> consumed{0};
+
+    // Producer thread
+    std::thread prod([&]{
+        for (int i = 0; i < N; ) {
+            BookSnapshot s{};
+            s.instrumentId = 77;
+            s.exchangeTsNs = static_cast<uint64_t>(i);
+            if (q.try_push(s)) {
+                ++i;
+                ++produced;
+            }
+        }
+        done.store(true, std::memory_order_release);
+    });
+
+    // Consumer thread
+    std::thread cons([&]{
+        uint64_t last = 0;
+        bool hasLast = false;
+
+        BookSnapshot s{};
+        while (!done.load(std::memory_order_acquire) || q.size_approx() > 0) {
+            if (q.try_pop(s)) {
+                if (hasLast) {
+                    // FIFO: in a single producer, exchangeTsNs must be increasing
+                    EXPECT_EQ(s.exchangeTsNs, last + 1);
+                } else {
+                    hasLast = true;
+                }
+                last = s.exchangeTsNs;
+                ++consumed;
+            }
+        }
+        EXPECT_EQ(consumed.load(), produced.load());
+    });
+
+    prod.join();
+    cons.join();
+}
+
+TEST(SnapshotQueueSpscTests, SpscThreadedStress) {
+    constexpr int N = 100000;
+    SnapshotQueueSpsc<int, 256> q;
+
+    std::atomic<bool> producerDone{false};
+    std::vector<int> consumedValues;
+    consumedValues.reserve(N);
+
+    // Producer thread
+    std::thread producer([&]() {
+        for (int i = 0; i < N; ++i) {
+            while (!q.try_push(i)) {
+                std::this_thread::yield();
+            }
+        }
+        producerDone.store(true, std::memory_order_release);
+    });
+
+    // Consumer thread
+    std::thread consumer([&]() {
+        int value;
+        while (!producerDone.load(std::memory_order_acquire) || q.size_approx() > 0) {
+            if (q.try_pop(value)) {
+                consumedValues.push_back(value);
+            } else {
+                std::this_thread::yield();
+            }
+        }
+    });
+
+    producer.join();
+    consumer.join();
+
+    // Verify all values were consumed in order
+    EXPECT_EQ(consumedValues.size(), N);
+    for (int i = 0; i < N; ++i) {
+        EXPECT_EQ(consumedValues[i], i);
+    }
+
+    EXPECT_EQ(q.size_approx(), 0);
+}
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_mbo_to_mbp_aggregator.cpp =====
+#include <gtest/gtest.h>
+
+#include "../../b3-md-connector/src/core/OrdersSnapshot.hpp"
+#include "../../b3-md-connector/src/core/BookSnapshot.hpp"
+#include "../../b3-md-connector/src/core/MboToMbpAggregator.hpp"
+
+using namespace b3::md;
+
+TEST(MboToMbpAggregatorTests, AggregatesSamePriceIntoSingleLevel) {
+    OrdersSnapshot in{};
+    in.instrumentId = 42;
+    in.exchangeTsNs = 123;
+
+    // Bid side: 3 órdenes mismo precio, + 1 orden otro precio
+    in.bidCountRaw = 4;
+    in.bids[0] = { .priceMantissa = 1000, .qty = 10 };
+    in.bids[1] = { .priceMantissa = 1000, .qty = 20 };
+    in.bids[2] = { .priceMantissa = 1000, .qty = 30 };
+    in.bids[3] = { .priceMantissa =  900, .qty =  5 };
+
+    // Ask side: 2 precios distintos
+    in.askCountRaw = 3;
+    in.asks[0] = { .priceMantissa = 1100, .qty = 7 };
+    in.asks[1] = { .priceMantissa = 1100, .qty = 8 };
+    in.asks[2] = { .priceMantissa = 1200, .qty = 1 };
+
+    BookSnapshot out{};
+    aggregateMboWindowToMbpTopN(in, out);
+
+    EXPECT_EQ(out.instrumentId, 42u);
+    EXPECT_EQ(out.exchangeTsNs, 123u);
+
+    ASSERT_EQ(out.bidCount, 2u);
+    EXPECT_EQ(out.bids[0].price, 1000);
+    EXPECT_EQ(out.bids[0].qty,   60);
+    EXPECT_EQ(out.bids[1].price,  900);
+    EXPECT_EQ(out.bids[1].qty,    5);
+
+    ASSERT_EQ(out.askCount, 2u);
+    EXPECT_EQ(out.asks[0].price, 1100);
+    EXPECT_EQ(out.asks[0].qty,   15);
+    EXPECT_EQ(out.asks[1].price, 1200);
+    EXPECT_EQ(out.asks[1].qty,    1);
+}
+
+TEST(MboToMbpAggregatorTests, ProducesAtMostTopNLevels) {
+    OrdersSnapshot in{};
+    in.instrumentId = 1;
+    in.exchangeTsNs = 1;
+
+    // Generar 10 precios distintos (más que Top-5)
+    in.bidCountRaw = 10;
+    for (int i = 0; i < 10; ++i) {
+        in.bids[i] = { .priceMantissa = 1000 - i, .qty = 1 };
+    }
+
+    in.askCountRaw = 10;
+    for (int i = 0; i < 10; ++i) {
+        in.asks[i] = { .priceMantissa = 2000 + i, .qty = 1 };
+    }
+
+    BookSnapshot out{};
+    aggregateMboWindowToMbpTopN(in, out);
+
+    EXPECT_EQ(out.bidCount, BookSnapshot::DEPTH);
+    EXPECT_EQ(out.askCount, BookSnapshot::DEPTH);
+
+    // Solo chequeamos que no exceda DEPTH y que los primeros existan
+    EXPECT_NE(out.bids[0].price, 0);
+    EXPECT_NE(out.asks[0].price, 0);
+}
+
+TEST(MboToMbpAggregatorTests, IgnoresZeroQtyOrders) {
+    OrdersSnapshot in{};
+    in.instrumentId = 9;
+    in.exchangeTsNs = 9;
+
+    in.bidCountRaw = 3;
+    in.bids[0] = { .priceMantissa = 1000, .qty = 0 };   // ignorar
+    in.bids[1] = { .priceMantissa = 1000, .qty = 10 };  // sumar
+    in.bids[2] = { .priceMantissa =  900, .qty = 0 };   // ignorar
+
+    in.askCountRaw = 0;
+
+    BookSnapshot out{};
+    aggregateMboWindowToMbpTopN(in, out);
+
+    ASSERT_EQ(out.bidCount, 1u);
+    EXPECT_EQ(out.bids[0].price, 1000);
+    EXPECT_EQ(out.bids[0].qty,   10);
+    EXPECT_EQ(out.askCount, 0u);
+}
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/FakeOrderBook.hpp =====
+#pragma once
+#include "../../b3-md-connector/src/core/IOrderBookView.hpp"
+#include <array>
+
+namespace b3::md::test {
+
+class FakeOrderBook final : public b3::md::IOrderBookView {
+public:
+    void setInstrumentId(uint32_t v) { instrumentId_ = v; }
+    void setExchangeTsNs(uint64_t v) { exchangeTsNs_ = v; }
+
+    void setBidCount(uint32_t c) { bidCount_ = c; }
+    void setAskCount(uint32_t c) { askCount_ = c; }
+
+    void setBidLevel(uint32_t i, b3::md::Level lv) { bids_.at(i) = lv; }
+    void setAskLevel(uint32_t i, b3::md::Level lv) { asks_.at(i) = lv; }
+
+    uint32_t instrumentId() const noexcept override { return instrumentId_; }
+    uint64_t exchangeTsNs() const noexcept override { return exchangeTsNs_; }
+
+    uint32_t bidCount() const noexcept override { return bidCount_; }
+    uint32_t askCount() const noexcept override { return askCount_; }
+
+    b3::md::Level bidLevel(uint32_t i) const noexcept override { return bids_.at(i); }
+    b3::md::Level askLevel(uint32_t i) const noexcept override { return asks_.at(i); }
+
+private:
+    uint32_t instrumentId_{0};
+    uint64_t exchangeTsNs_{0};
+    uint32_t bidCount_{0};
+    uint32_t askCount_{0};
+    std::array<b3::md::Level, 10> bids_{};
+    std::array<b3::md::Level, 10> asks_{};
+};
+
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_pipeline.cpp =====
+#include <gtest/gtest.h>
+
+#include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
+#include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
+#include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
+#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
+
+#include <chrono>
+#include <thread>
+#include <unordered_map>
+#include <vector>
+#include <string>
+#include <memory>
+
+using namespace b3::md;
+
+namespace {
+
+uint64_t ParseTs(const std::string& bytes) {
+    auto pos = bytes.find(";ts=");
+    EXPECT_NE(pos, std::string::npos);
+    if (pos == std::string::npos) return 0;
+
+    pos += 4;
+    auto end = bytes.find(';', pos);
+    EXPECT_NE(end, std::string::npos);
+    if (end == std::string::npos) return 0;
+
+    return std::stoull(bytes.substr(pos, end - pos));
+}
+
+uint32_t ParseIid(const std::string& bytes) {
+    auto pos = bytes.find("iid=");
+    EXPECT_EQ(pos, 0u);
+    if (pos != 0u) return 0;
+
+    pos += 4;
+    auto end = bytes.find(';', pos);
+    EXPECT_NE(end, std::string::npos);
+    if (end == std::string::npos) return 0;
+
+    return static_cast<uint32_t>(std::stoul(bytes.substr(pos, end - pos)));
+}
+
+MdPublishPipeline BuildPipeline(uint32_t shards,
+                               MdSnapshotMapper& mapper,
+                               testsupport::FakePublisher &pub) {
+    std::vector<std::unique_ptr<MdPublishWorker>> workers;
+    workers.reserve(shards);
+
+    for (uint32_t i = 0; i < shards; ++i) {
+        workers.emplace_back(
+            std::make_unique<MdPublishWorker>(i, mapper, pub));
+    }
+
+    return MdPublishPipeline(std::move(workers));
+}
+
+} // namespace
+
+TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+
+
+    auto pipeline = BuildPipeline(4, mapper, pub);
+    pipeline.start();
+
+    constexpr int EVENTS_PER_INSTRUMENT = 10'000;
+    const std::vector<uint32_t> instruments = {1, 2, 3, 4, 5, 6};
+
+    for (uint32_t iid : instruments) {
+        for (int i = 0; i < EVENTS_PER_INSTRUMENT; ++i) {
+            OrdersSnapshot s{};
+            s.instrumentId = iid;
+            s.exchangeTsNs = static_cast<uint64_t>(i);
+
+            // Para que el agregador produzca bid/askCount > 0 (opcional):
+            s.bidCountRaw = 1;
+            s.askCountRaw = 1;
+            s.bids[0] = { .priceMantissa = 1000 + i, .qty = 1 };
+            s.asks[0] = { .priceMantissa = 2000 + i, .qty = 1 };
+
+            while (!pipeline.tryEnqueue(s)) {
+                std::this_thread::yield();
+            }
+        }
+    }
+
+    const size_t expected =
+        instruments.size() * static_cast<size_t>(EVENTS_PER_INSTRUMENT);
+
+    const auto deadline =
+        std::chrono::steady_clock::now() + std::chrono::seconds(5);
+
+    while (pub.count() < expected &&
+           std::chrono::steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
+    pipeline.stop(true);
+
+    ASSERT_EQ(pub.count(), expected);
+
+    // Agrupar timestamps por instrumento
+    std::unordered_map<uint32_t, std::vector<uint64_t>> seen;
+    seen.reserve(instruments.size());
+
+    for (size_t i = 0; i < expected; ++i) {
+        const auto msg = pub.at(i);
+        seen[ParseIid(msg.bytes)].push_back(ParseTs(msg.bytes));
+    }
+
+    // FIFO estricto por instrumento
+    for (const auto& [iid, tss] : seen) {
+        ASSERT_FALSE(tss.empty());

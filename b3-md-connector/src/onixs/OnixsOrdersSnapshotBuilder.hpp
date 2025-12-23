@@ -2,120 +2,106 @@
 
 #include "../core/OrdersSnapshot.hpp"
 
-#include <OnixS/B3/MarketData/UMDF/OrderBook.h>
+#include <cstddef>
+#include <cstdint>
 #include <chrono>
+
+// OnixS
+#include <OnixS/B3/MarketData/UMDF/OrderBook.h> // o el include correcto en tu entorno
 
 namespace b3::md::onixs {
 
-inline uint64_t nowNsSteady() noexcept {
-    const auto now = std::chrono::steady_clock::now().time_since_epoch();
-    return static_cast<uint64_t>(
-        std::chrono::duration_cast<std::chrono::nanoseconds>(now).count()
-    );
-}
+// Builder hot-path: copia una ventana acotada de órdenes (MBO) desde el OrderBook de OnixS.
+// Reglas:
+// - NO aloca
+// - NO loguea
+// - NO agrupa por niveles (eso se hace en worker)
+// - saltea órdenes con precio null (market orders), porque no aportan a MBP por niveles de precio.
+struct OnixsOrdersSnapshotBuilder final {
+    using OrderBook = OnixS::B3::MarketData::UMDF::OrderBook;
 
-// Copia una ventana acotada de órdenes desde el OrderBook del SDK.
-// IMPORTANTE: saltea órdenes con precio null (ordenes a mercado) porque no aportan al agregado MBP, 
-// ver si esta bien. 20251222
-inline void buildOrdersSnapshotFromOnixsBook(
-    const ::OnixS::B3::MarketData::UMDF::OrderBook& orderBook,
-    b3::md::OrdersSnapshot& snapshot) noexcept
-{
-    // Zero-init POD
-    snapshot = b3::md::OrdersSnapshot{};
+    static inline void buildFromBook(const OrderBook& book, b3::md::OrdersSnapshot& out) noexcept {
+        // Reset POD
+        out = b3::md::OrdersSnapshot{};
 
-    snapshot.instrumentId =
-        static_cast<uint32_t>(static_cast<uint64_t>(orderBook.instrumentId()));
+        // Metadata base
+        out.instrumentId = static_cast<uint32_t>(book.instrumentId());
+        out.rptSeq       = static_cast<uint64_t>(book.lastRptSeq());
+        out.channelSeq   = static_cast<uint64_t>(book.lastMessageSeqNumApplied());
 
-    snapshot.exchangeTsNs = nowNsSteady();
+        //TODO: tratar de meter el timestamp del exchange.
+        using clock = std::chrono::system_clock;
+        const auto now = clock::now().time_since_epoch();
+        out.exchangeTsNs =
+            static_cast<uint64_t>(
+                std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
 
-    // Secuencias del feed (útiles para orden / health / debug)
-    snapshot.rptSeq =
-        static_cast<uint64_t>(orderBook.lastRptSeq());
+        // Copia bids (según header: bids() => ascending bid prices
+        // TODO: el comentario del SDK parece raro, que viene al revés, validar en runtime, 
+        {
+            const auto bidsRange = book.bids();
+            const size_t raw = bidsRange.size();
+            out.bidCountRaw = static_cast<uint16_t>(raw > 0xFFFFu ? 0xFFFFu : raw);
 
-    snapshot.channelSeq =
-        static_cast<uint64_t>(orderBook.lastMessageSeqNumApplied());
+            uint16_t copied = 0;
+            bool truncated = false;
 
-    // -------------------------
-    // BID SIDE
-    // -------------------------
-    // El header del SDK indica que bids() está en orden ascendente,
-    // por lo tanto el mejor bid está al final del rango.
-    {
-        const auto bidOrdersRange = orderBook.bids();
-        const size_t totalBidOrders = bidOrdersRange.size();
+            // Recorremos y copiamos solo precios válidos hasta K
+            for (size_t i = 0; i < raw; ++i) {
+                const auto& ord = bidsRange[i];
 
-        uint16_t copiedBidOrders = 0;
-        bool bidSideTruncated = false;
+                const auto px = ord.price();
+                if (px.isNull()) {
+                    // Market order: se saltea; no contribuye al agregado MBP por niveles de precio.
+                    continue;
+                }
 
-        // Recorremos desde el mejor precio hacia peor
-        for (size_t offset = 0; offset < totalBidOrders; ++offset) {
-            if (copiedBidOrders >= b3::md::OrdersSnapshot::K) {
-                bidSideTruncated = true;
-                break;
+                if (copied >= b3::md::OrdersSnapshot::K) {
+                    truncated = true;
+                    break;
+                }
+
+                out.bids[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+                out.bids[copied].qty          = static_cast<int64_t>(ord.quantity());
+                ++copied;
             }
 
-            const size_t orderIndex = (totalBidOrders - 1) - offset;
-            const auto& order = bidOrdersRange[orderIndex];
-
-            const auto price = order.price();
-            if (price.isNull()) {
-                // Orden a mercado: se omite (no afecta MBP).
-                continue;
-            }
-
-            snapshot.bids[copiedBidOrders].priceMantissa =
-                static_cast<int64_t>(price.mantissa());
-
-            snapshot.bids[copiedBidOrders].qty =
-                static_cast<int64_t>(order.quantity());
-
-            ++copiedBidOrders;
+            out.bidsCopied   = copied;
+            out.bidTruncated = truncated ? 1 : 0;
         }
 
-        snapshot.bidCountRaw = copiedBidOrders;
-        snapshot.bidTruncated = bidSideTruncated ? 1u : 0u;
-    }
+        // Copia asks
+        {
+            const auto asksRange = book.asks();
+            const size_t raw = asksRange.size();
+            out.askCountRaw = static_cast<uint16_t>(raw > 0xFFFFu ? 0xFFFFu : raw);
 
-    // -------------------------
-    // ASK SIDE
-    // -------------------------
-    // El comentario del SDK es ambiguo para asks().
-    // Asumimos que el mejor ask aparece primero.
-    // Si en runtime se observa lo contrario, basta con invertir el recorrido.
-    {
-        const auto askOrdersRange = orderBook.asks();
-        const size_t totalAskOrders = askOrdersRange.size();
+            uint16_t copied = 0;
+            bool truncated = false;
 
-        uint16_t copiedAskOrders = 0;
-        bool askSideTruncated = false;
+            for (size_t i = 0; i < raw; ++i) {
+                const auto& ord = asksRange[i];
 
-        for (size_t orderIndex = 0; orderIndex < totalAskOrders; ++orderIndex) {
-            if (copiedAskOrders >= b3::md::OrdersSnapshot::K) {
-                askSideTruncated = true;
-                break;
+                const auto px = ord.price();
+                if (px.isNull()) {
+                    // Market order: se saltea; no contribuye al agregado MBP por niveles de precio.
+                    continue;
+                }
+
+                if (copied >= b3::md::OrdersSnapshot::K) {
+                    truncated = true;
+                    break;
+                }
+
+                out.asks[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+                out.asks[copied].qty          = static_cast<int64_t>(ord.quantity());
+                ++copied;
             }
 
-            const auto& order = askOrdersRange[orderIndex];
-
-            const auto price = order.price();
-            if (price.isNull()) {
-                // Orden a mercado: se omite (no afecta MBP).
-                continue;
-            }
-
-            snapshot.asks[copiedAskOrders].priceMantissa =
-                static_cast<int64_t>(price.mantissa());
-
-            snapshot.asks[copiedAskOrders].qty =
-                static_cast<int64_t>(order.quantity());
-
-            ++copiedAskOrders;
+            out.asksCopied   = copied;
+            out.askTruncated = truncated ? 1 : 0;
         }
-
-        snapshot.askCountRaw = copiedAskOrders;
-        snapshot.askTruncated = askSideTruncated ? 1u : 0u;
     }
-}
+};
 
 } // namespace b3::md::onixs

@@ -1,0 +1,407 @@
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_pipeline.cpp =====
+        for (size_t i = 1; i < tss.size(); ++i) {
+            EXPECT_EQ(tss[i], tss[i - 1] + 1) << "iid=" << iid;
+        }
+    }
+}
+
+TEST(MdPublishPipelineTests, ProgressUnderMultipleInstruments) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+
+
+    auto pipeline = BuildPipeline(2, mapper, pub);
+    pipeline.start();
+
+    constexpr int N = 50'000;
+
+    const uint32_t iidA = 1;
+    const uint32_t iidB = 2;
+
+    for (int i = 0; i < N; ++i) {
+        OrdersSnapshot a{}, b{};
+        a.instrumentId = iidA;
+        a.exchangeTsNs = static_cast<uint64_t>(i);
+        b.instrumentId = iidB;
+        b.exchangeTsNs = static_cast<uint64_t>(i);
+
+        while (!pipeline.tryEnqueue(a)) std::this_thread::yield();
+        while (!pipeline.tryEnqueue(b)) std::this_thread::yield();
+    }
+
+    const size_t expected = static_cast<size_t>(2 * N);
+
+    const auto deadline =
+        std::chrono::steady_clock::now() + std::chrono::seconds(5);
+
+    while (pub.count() < expected &&
+           std::chrono::steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
+    pipeline.stop(true);
+
+    ASSERT_EQ(pub.count(), expected);
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_engine.cpp =====
+#include <gtest/gtest.h>
+
+#include "../../b3-md-connector/src/core/MarketDataEngine.hpp"
+#include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
+#include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
+#include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
+#include "../../b3-md-connector/src/testsupport/OrdersSnapshotFromMbpView.hpp"
+#include "FakeOrderBook.hpp"
+
+#include <atomic>
+#include <chrono>
+#include <thread>
+#include <memory>
+#include <vector>
+
+using namespace b3::md;
+using namespace b3::md::test;
+
+
+// Publisher que cuenta publicaciones (thread-safe).
+struct CountingPublisher final : IMdPublisher {
+    void publish(std::string_view, const uint8_t*, size_t) override {
+        published.fetch_add(1, std::memory_order_relaxed);
+    }
+    std::atomic<uint64_t> published{0};
+};
+
+// Mapper de test: no aloca pesado, solo dispara publish.
+struct TestMapper final : MdSnapshotMapper {
+    void mapAndSerialize(const BookSnapshot&, std::string& out) const {
+        out.assign("x");
+    }
+};
+
+
+TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
+    TestMapper mapper;
+    CountingPublisher publisher;
+
+    auto worker = std::make_unique<MdPublishWorker>(0, mapper, publisher);
+    std::vector<std::unique_ptr<MdPublishWorker>> workers;
+    workers.push_back(std::move(worker));
+
+    MdPublishPipeline pipeline(std::move(workers));
+    pipeline.start();
+
+    FakeOrderBook book;
+    book.setInstrumentId(42);
+    book.setExchangeTsNs(123);
+    book.setBidCount(1);
+    book.setAskCount(1);
+    book.setBidLevel(0, b3::md::Level{10, 5});
+    book.setAskLevel(0, b3::md::Level{11, 7});
+
+    auto snapshot =
+        b3::md::testsupport::makeOrdersSnapshotFromMbpView(book);
+
+    pipeline.tryEnqueue(snapshot);
+
+    const auto deadline =
+        std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
+
+    while (publisher.published.load(std::memory_order_relaxed) < 1 &&
+           std::chrono::steady_clock::now() < deadline)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
+    pipeline.stop(true);
+
+    EXPECT_GE(publisher.published.load(), 1u);
+}
+
+
+TEST(MarketDataEngineTests, EnqueueNeverBlocks) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+
+    std::vector<std::unique_ptr<MdPublishWorker>> workers;
+    workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, pub));
+
+    MdPublishPipeline pipeline(std::move(workers));
+    pipeline.start();
+
+    FakeOrderBook book;
+    book.setInstrumentId(1);
+    book.setExchangeTsNs(1);
+    book.setBidCount(0);
+    book.setAskCount(0);
+
+    for (int i = 0; i < 100000; ++i) {
+        auto snapshot =
+            b3::md::testsupport::makeOrdersSnapshotFromMbpView(book);
+        pipeline.tryEnqueue(snapshot);
+    }
+
+    pipeline.stop(false);
+    SUCCEED();
+}
+
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_worker.cpp =====
+#include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
+#include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
+#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
+#include "../../b3-md-connector/src/core/OrdersSnapshot.hpp"
+#include <gtest/gtest.h>
+
+#include <chrono>
+#include <thread>
+
+using namespace b3::md;
+
+static uint64_t parse_ts(const std::string& bytes) {
+    auto pos = bytes.find(";ts=");
+    EXPECT_NE(pos, std::string::npos);
+    pos += 4;
+    auto end = bytes.find(';', pos);
+    EXPECT_NE(end, std::string::npos);
+    return std::stoull(bytes.substr(pos, end - pos));
+}
+
+TEST(MdPublishWorkerTests, PublishesFifoOrder) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+    uint32_t shard = 1;
+
+    MdPublishWorker worker(shard, mapper, pub);
+    worker.start();
+
+    constexpr int N = 100000;
+    for (int i = 0; i < N; ++i) {
+        OrdersSnapshot orderSnapshot{};
+        orderSnapshot.instrumentId = 77;
+        orderSnapshot.exchangeTsNs = static_cast<uint64_t>(i);
+
+        // opcional para bid/ask count:
+        orderSnapshot.bidCountRaw = 1;
+        orderSnapshot.askCountRaw = 1;
+        orderSnapshot.bids[0] = { .priceMantissa = 1000, .qty = 1 };
+        orderSnapshot.asks[0] = { .priceMantissa = 2000, .qty = 1 };
+
+        while (!worker.tryEnqueue(orderSnapshot)) {
+            std::this_thread::yield();
+        }
+    }
+
+    const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(5);
+    while (pub.count() < static_cast<size_t>(N) && std::chrono::steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
+    worker.stop(true);
+
+    ASSERT_EQ(pub.count(), static_cast<size_t>(N));
+
+    uint64_t last = 0;
+    for (int i = 0; i < N; ++i) {
+        auto m = pub.at(i);
+        EXPECT_EQ(m.topic, "b3.md.book"); // topic fijo del worker
+        uint64_t ts = parse_ts(m.bytes);
+        if (i == 0) EXPECT_EQ(ts, 0);
+        else EXPECT_EQ(ts, last + 1);
+        last = ts;
+    }
+}
+
+TEST(MdPublishWorkerTests, StopClean) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+    uint32_t shard = 1;
+
+    MdPublishWorker worker(shard, mapper, pub);
+    worker.start();
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    worker.stop(false);
+    SUCCEED();
+}
+
+TEST(MdPublishWorkerTests, StopWithoutDrainDropsPending) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+
+    MdPublishWorker worker(0, mapper, pub);
+    worker.start();
+
+    for (int i = 0; i < 1000; ++i) {
+        OrdersSnapshot s{};
+        s.instrumentId = 77;
+        s.exchangeTsNs = static_cast<uint64_t>(i);
+
+        // opcional para bid/ask count:
+        s.bidCountRaw = 1;
+        s.askCountRaw = 1;
+        s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
+        s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
+        worker.tryEnqueue(s);
+    }
+
+    worker.stop(false);
+
+    EXPECT_LT(pub.count(), 1000u); // no drenó todo
+}
+
+TEST(MdPublishWorkerTests, StopWithDrainPublishesAll) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+
+    MdPublishWorker worker(0, mapper, pub);
+    worker.start();
+
+    for (int i = 0; i < 1000; ++i) {
+    OrdersSnapshot s{};
+    s.instrumentId = 77;
+    s.exchangeTsNs = static_cast<uint64_t>(i);
+
+    s.bidCountRaw = 1;
+    s.askCountRaw = 1;
+    s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
+    s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
+
+        while (!worker.tryEnqueue(s)) {
+            std::this_thread::yield();
+        }
+    }
+
+    worker.stop(true);
+    EXPECT_EQ(pub.count(), 1000u);
+}
+
+static uint32_t parse_count(const std::string& bytes, const char* key) {
+    std::string needle = std::string(";") + key + "="; // ";bc=" o ";ac="
+    auto pos = bytes.find(needle);
+    EXPECT_NE(pos, std::string::npos);
+    if (pos == std::string::npos) return 0;
+
+    pos += needle.size();
+    auto end = bytes.find(';', pos);
+    // si es el último campo, end puede ser npos; lo toleramos
+    const std::string value = (end == std::string::npos)
+        ? bytes.substr(pos)
+        : bytes.substr(pos, end - pos);
+
+    return static_cast<uint32_t>(std::stoul(value));
+}
+
+TEST(MdPublishWorkerTests, AggregationAffectsCountsInSerializedOutput) {
+    testsupport::FakePublisher pub;
+    MdSnapshotMapper mapper;
+
+    MdPublishWorker worker(0, mapper, pub);
+    worker.start();
+
+    OrdersSnapshot raw{};
+    raw.instrumentId = 77;
+    raw.exchangeTsNs = 999;
+
+    // bids: dos órdenes mismo precio + una de otro -> 2 niveles
+    raw.bidCountRaw = 3;
+    raw.bids[0] = { .priceMantissa = 1000, .qty = 10 };
+    raw.bids[1] = { .priceMantissa = 1000, .qty = 20 };
+    raw.bids[2] = { .priceMantissa =  900, .qty =  1 };
+
+    // asks: dos precios -> 2 niveles
+    raw.askCountRaw = 3;
+    raw.asks[0] = { .priceMantissa = 1100, .qty = 7 };
+    raw.asks[1] = { .priceMantissa = 1100, .qty = 8 };
+    raw.asks[2] = { .priceMantissa = 1200, .qty = 1 };
+
+    while (!worker.tryEnqueue(raw)) {
+        std::this_thread::yield();
+    }
+
+    const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(2);
+    while (pub.count() < 1 && std::chrono::steady_clock::now() < deadline) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
+    worker.stop(true);
+
+    ASSERT_GE(pub.count(), 1u);
+
+    const auto msg = pub.at(0);
+    EXPECT_EQ(msg.topic, "b3.md.book");
+
+    const uint32_t bc = parse_count(msg.bytes, "bc");
+    const uint32_t ac = parse_count(msg.bytes, "ac");
+
+    EXPECT_EQ(bc, 2u);
+    EXPECT_EQ(ac, 2u);
+}
+
+
+
+
+===== FILE: /home/damian/repos/B3-Connector/tests/md/test_spdlog_log_publisher.cpp =====
+#include <gtest/gtest.h>
+
+#include "../../b3-md-connector/src/telemetry/SpdlogLogPublisher.hpp"
+#include "../../b3-md-connector/src/telemetry/LogEvent.hpp"
+
+#include <chrono>
+#include <thread>
+
+using namespace b3::md::telemetry;
+
+TEST(SpdlogLogPublisherTests, StartStopClean) {
+    SpdlogLogPublisher<64> pub;
+    pub.start();
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    pub.stop();
+    SUCCEED();
+}
+
+TEST(SpdlogLogPublisherTests, DropsWhenQueueIsFull) {
+    // Capacidad chica a propósito para forzar saturación
+    SpdlogLogPublisher<8> pub;
+    pub.start();
+
+    LogEvent e{};
+    e.level = LogLevel::Info;
+    e.component = Component::Worker;
+    e.code = Code::HealthTick;
+
+    // Encolamos mucho sin dormir: inevitablemente se llena y dropea
+    constexpr int N = 5000;
+    for (int i = 0; i < N; ++i) {
+        e.arg0 = static_cast<uint64_t>(i);
+        (void)pub.try_publish(e);
+    }
+
+    // Dejá que el thread consuma un poco
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    pub.stop();
+
+    // Con capacidad 8 y N=5000, casi seguro dropeó algo
+    EXPECT_GT(pub.dropped(), 0u);
+}
+
+TEST(SpdlogLogPublisherTests, DoesNotDropUnderLightLoad) {
+    SpdlogLogPublisher<1024> pub;
+    pub.start();
+
+    LogEvent e{};
+    e.level = LogLevel::Info;
+    e.component = Component::Core;
+    e.code = Code::Startup;
+
+    // Carga liviana + pequeñas pausas -> no debería dropear
+    constexpr int N = 200;
+    for (int i = 0; i < N; ++i) {
+        e.arg0 = static_cast<uint64_t>(i);
+        ASSERT_TRUE(pub.try_publish(e));
+        std::this_thread::sleep_for(std::chrono::microseconds(200));
+    }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    pub.stop();
+
+    EXPECT_EQ(pub.dropped(), 0u);

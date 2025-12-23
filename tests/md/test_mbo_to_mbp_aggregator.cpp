@@ -12,14 +12,14 @@ TEST(MboToMbpAggregatorTests, AggregatesSamePriceIntoSingleLevel) {
     in.exchangeTsNs = 123;
 
     // Bid side: 3 órdenes mismo precio, + 1 orden otro precio
-    in.bidCountRaw = 4;
+    in.bidsCopied = 4;
     in.bids[0] = { .priceMantissa = 1000, .qty = 10 };
     in.bids[1] = { .priceMantissa = 1000, .qty = 20 };
     in.bids[2] = { .priceMantissa = 1000, .qty = 30 };
     in.bids[3] = { .priceMantissa =  900, .qty =  5 };
 
     // Ask side: 2 precios distintos
-    in.askCountRaw = 3;
+    in.asksCopied = 3;
     in.asks[0] = { .priceMantissa = 1100, .qty = 7 };
     in.asks[1] = { .priceMantissa = 1100, .qty = 8 };
     in.asks[2] = { .priceMantissa = 1200, .qty = 1 };
@@ -49,12 +49,12 @@ TEST(MboToMbpAggregatorTests, ProducesAtMostTopNLevels) {
     in.exchangeTsNs = 1;
 
     // Generar 10 precios distintos (más que Top-5)
-    in.bidCountRaw = 10;
+    in.bidsCopied = 10;
     for (int i = 0; i < 10; ++i) {
         in.bids[i] = { .priceMantissa = 1000 - i, .qty = 1 };
     }
 
-    in.askCountRaw = 10;
+    in.asksCopied = 10;
     for (int i = 0; i < 10; ++i) {
         in.asks[i] = { .priceMantissa = 2000 + i, .qty = 1 };
     }
@@ -75,12 +75,12 @@ TEST(MboToMbpAggregatorTests, IgnoresZeroQtyOrders) {
     in.instrumentId = 9;
     in.exchangeTsNs = 9;
 
-    in.bidCountRaw = 3;
+    in.bidsCopied = 3;
     in.bids[0] = { .priceMantissa = 1000, .qty = 0 };   // ignorar
     in.bids[1] = { .priceMantissa = 1000, .qty = 10 };  // sumar
     in.bids[2] = { .priceMantissa =  900, .qty = 0 };   // ignorar
 
-    in.askCountRaw = 0;
+    in.asksCopied = 0;
 
     BookSnapshot out{};
     aggregateMboWindowToMbpTopN(in, out);

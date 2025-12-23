@@ -4,7 +4,7 @@
 #include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
 #include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
-
+#include "../../b3-md-connector/src/testsupport/OrdersSnapshotFromMbpView.hpp"
 #include "FakeOrderBook.hpp"
 
 #include <atomic>
@@ -39,61 +39,62 @@ TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
 
     auto worker = std::make_unique<MdPublishWorker>(0, mapper, publisher);
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
-    workers.push_back(std::move(worker));     // o emplace_back(std::move(worker))
+    workers.push_back(std::move(worker));
 
     MdPublishPipeline pipeline(std::move(workers));
-
     pipeline.start();
-
-    MarketDataEngine engine(pipeline);
 
     FakeOrderBook book;
     book.setInstrumentId(42);
     book.setExchangeTsNs(123);
-
     book.setBidCount(1);
     book.setAskCount(1);
+    book.setBidLevel(0, b3::md::Level{10, 5});
+    book.setAskLevel(0, b3::md::Level{11, 7});
 
-    book.setBidLevel(0, b3::md::Level{ .price = 10, .qty = 5 });
-    book.setAskLevel(0, b3::md::Level{ .price = 11, .qty = 7 });
+    auto snapshot =
+        b3::md::testsupport::makeOrdersSnapshotFromMbpView(book);
 
-    engine.onOrderBookUpdated(book);
+    pipeline.tryEnqueue(snapshot);
 
-    // Espera activa acotada a que el worker publique 1 vez
-    const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
+    const auto deadline =
+        std::chrono::steady_clock::now() + std::chrono::milliseconds(200);
+
     while (publisher.published.load(std::memory_order_relaxed) < 1 &&
-           std::chrono::steady_clock::now() < deadline) {
+           std::chrono::steady_clock::now() < deadline)
+    {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
     pipeline.stop(true);
 
-    EXPECT_EQ(engine.drops(), 0u);
-    EXPECT_GE(publisher.published.load(std::memory_order_relaxed), 1u);
+    EXPECT_GE(publisher.published.load(), 1u);
 }
+
 
 TEST(MarketDataEngineTests, EnqueueNeverBlocks) {
     testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
 
-
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
     workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, pub));
+
     MdPublishPipeline pipeline(std::move(workers));
     pipeline.start();
 
-    MarketDataEngine engine(pipeline);
-
-    b3::md::test::FakeOrderBook book;
+    FakeOrderBook book;
     book.setInstrumentId(1);
     book.setExchangeTsNs(1);
     book.setBidCount(0);
     book.setAskCount(0);
 
     for (int i = 0; i < 100000; ++i) {
-        engine.onOrderBookUpdated(book);
+        auto snapshot =
+            b3::md::testsupport::makeOrdersSnapshotFromMbpView(book);
+        pipeline.tryEnqueue(snapshot);
     }
 
     pipeline.stop(false);
     SUCCEED();
 }
+

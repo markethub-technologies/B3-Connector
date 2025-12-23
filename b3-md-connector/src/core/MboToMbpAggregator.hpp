@@ -23,8 +23,6 @@ inline void aggregateMboWindowToMbpTopN(const OrdersSnapshot& in, BookSnapshot& 
     auto add_level = [](Level* levels, uint8_t& count, int64_t priceMantissa, int64_t qty) noexcept {
         // Buscar si ya existe ese precio dentro de los niveles armados
         for (uint8_t i = 0; i < count; ++i) {
-            // TODO, verificar la presicion cuando tenga la documentacion para evitar narrowing
-            // típicamente Level::price es entero (mantissa) o algo compatible ṕero verificar. 20251222
             const auto existingPrice = static_cast<int64_t>(levels[i].price);
             if (existingPrice == priceMantissa) {
                 levels[i].qty = static_cast<decltype(levels[i].qty)>(
@@ -44,11 +42,11 @@ inline void aggregateMboWindowToMbpTopN(const OrdersSnapshot& in, BookSnapshot& 
 
     // BID side
     {
-        const uint16_t n = in.bidCountRaw;
+        
+        const uint16_t n = in.bidsCopied; // // solo lo copiado porque hubo descartes de raw donde order == market
         for (uint16_t i = 0; i < n && out.bidCount < BookSnapshot::DEPTH; ++i) {
             const auto& e = in.bids[i];
             if (e.qty == 0) continue;
-            // market orders se saltean en el builder, así que priceMantissa==0 acá debería ser raro.
             if (e.priceMantissa == 0) continue;
 
             add_level(out.bids, out.bidCount, e.priceMantissa, e.qty);
@@ -57,7 +55,7 @@ inline void aggregateMboWindowToMbpTopN(const OrdersSnapshot& in, BookSnapshot& 
 
     // ASK side
     {
-        const uint16_t n = in.askCountRaw;
+        const uint16_t n = in.asksCopied; // solo lo copiado porque hubo descartes de raw donde order == market
         for (uint16_t i = 0; i < n && out.askCount < BookSnapshot::DEPTH; ++i) {
             const auto& e = in.asks[i];
             if (e.qty == 0) continue;

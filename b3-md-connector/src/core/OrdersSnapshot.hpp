@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cstddef>
 #include <type_traits>
 
 namespace b3::md {
@@ -11,10 +12,10 @@ namespace b3::md {
 // Nota: las órdenes con precio null (market orders) se SALTEAN al copiar,
 // porque no contribuyen al agregado por niveles de precio (MBP).
 struct OrdersSnapshot {
-    static constexpr uint32_t K = 256;
+    static constexpr size_t K = 256;
 
-    struct OrderEntry {
-        int64_t priceMantissa{0}; // precio con 4 decimales (mantissa)
+    struct OrderEntry {  //todo:verificar prefision
+        int64_t priceMantissa{0}; // precio con 4 decimales (mantissa) 
         int64_t qty{0};           // Quantity (Int64)
     };
 
@@ -25,9 +26,15 @@ struct OrdersSnapshot {
     uint64_t rptSeq{0};      // OrderBook::lastRptSeq()
     uint64_t channelSeq{0};  // OrderBook::lastMessageSeqNumApplied()
 
+    // Tamaños "crudos" del libro (lo que expone el SDK, sin filtrar null-price)
     uint16_t bidCountRaw{0};
     uint16_t askCountRaw{0};
 
+    // Cantidad efectiva copiada (solo órdenes con precio válido, hasta K)
+    uint16_t bidsCopied{0};
+    uint16_t asksCopied{0};
+
+    // Flags: 1 si hubo más órdenes válidas que K y se truncó; 0 si entraron todas.
     uint8_t bidTruncated{0};
     uint8_t askTruncated{0};
 

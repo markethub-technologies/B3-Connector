@@ -33,8 +33,8 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
         orderSnapshot.exchangeTsNs = static_cast<uint64_t>(i);
 
         // opcional para bid/ask count:
-        orderSnapshot.bidCountRaw = 1;
-        orderSnapshot.askCountRaw = 1;
+        orderSnapshot.bidsCopied = 1;
+        orderSnapshot.asksCopied = 1;
         orderSnapshot.bids[0] = { .priceMantissa = 1000, .qty = 1 };
         orderSnapshot.asks[0] = { .priceMantissa = 2000, .qty = 1 };
 
@@ -88,8 +88,8 @@ TEST(MdPublishWorkerTests, StopWithoutDrainDropsPending) {
         s.exchangeTsNs = static_cast<uint64_t>(i);
 
         // opcional para bid/ask count:
-        s.bidCountRaw = 1;
-        s.askCountRaw = 1;
+        s.bidsCopied = 1;
+        s.asksCopied = 1;
         s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
         s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
         worker.tryEnqueue(s);
@@ -112,8 +112,8 @@ TEST(MdPublishWorkerTests, StopWithDrainPublishesAll) {
     s.instrumentId = 77;
     s.exchangeTsNs = static_cast<uint64_t>(i);
 
-    s.bidCountRaw = 1;
-    s.askCountRaw = 1;
+    s.bidsCopied = 1;
+    s.asksCopied = 1;
     s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
     s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
 
@@ -154,13 +154,13 @@ TEST(MdPublishWorkerTests, AggregationAffectsCountsInSerializedOutput) {
     raw.exchangeTsNs = 999;
 
     // bids: dos órdenes mismo precio + una de otro -> 2 niveles
-    raw.bidCountRaw = 3;
+    raw.bidsCopied = 3;
     raw.bids[0] = { .priceMantissa = 1000, .qty = 10 };
     raw.bids[1] = { .priceMantissa = 1000, .qty = 20 };
     raw.bids[2] = { .priceMantissa =  900, .qty =  1 };
 
     // asks: dos precios -> 2 niveles
-    raw.askCountRaw = 3;
+    raw.asksCopied = 3;
     raw.asks[0] = { .priceMantissa = 1100, .qty = 7 };
     raw.asks[1] = { .priceMantissa = 1100, .qty = 8 };
     raw.asks[2] = { .priceMantissa = 1200, .qty = 1 };
