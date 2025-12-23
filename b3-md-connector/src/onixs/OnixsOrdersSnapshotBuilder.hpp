@@ -36,6 +36,11 @@ struct OnixsOrdersSnapshotBuilder final {
             static_cast<uint64_t>(
                 std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
 
+        // TODO: validar orden real de bids() en runtime.
+        // Si bids() viene ascending (mejor al final) => true.
+        // Si bids() viene descending (mejor al principio) => false.
+        static constexpr bool kBidsBestAtEnd = true;
+
         // Copia bids (según header: bids() => ascending bid prices
         // TODO: el comentario del SDK parece raro, que viene al revés, validar en runtime, 
         {
@@ -47,23 +52,40 @@ struct OnixsOrdersSnapshotBuilder final {
             bool truncated = false;
 
             // Recorremos y copiamos solo precios válidos hasta K
-            for (size_t i = 0; i < raw; ++i) {
-                const auto& ord = bidsRange[i];
+            if constexpr (kBidsBestAtEnd) {
+                // mejor bid al final => iterar al revés
+                for (size_t i = raw; i > 0; --i) {
+                    const auto& ord = bidsRange[i - 1];
 
-                const auto px = ord.price();
-                if (px.isNull()) {
-                    // Market order: se saltea; no contribuye al agregado MBP por niveles de precio.
-                    continue;
+                    const auto px = ord.price();
+                    if (px.isNull()) continue;
+
+                    if (copied >= b3::md::OrdersSnapshot::K) {
+                        truncated = true;
+                        break;
+                    }
+
+                    out.bids[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+                    out.bids[copied].qty          = static_cast<int64_t>(ord.quantity());
+                    ++copied;
                 }
+            } else {
+                // mejor bid al principio => iterar normal
+                for (size_t i = 0; i < raw; ++i) {
+                    const auto& ord = bidsRange[i];
 
-                if (copied >= b3::md::OrdersSnapshot::K) {
-                    truncated = true;
-                    break;
+                    const auto px = ord.price();
+                    if (px.isNull()) continue;
+
+                    if (copied >= b3::md::OrdersSnapshot::K) {
+                        truncated = true;
+                        break;
+                    }
+
+                    out.bids[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+                    out.bids[copied].qty          = static_cast<int64_t>(ord.quantity());
+                    ++copied;
                 }
-
-                out.bids[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
-                out.bids[copied].qty          = static_cast<int64_t>(ord.quantity());
-                ++copied;
             }
 
             out.bidsCopied   = copied;
