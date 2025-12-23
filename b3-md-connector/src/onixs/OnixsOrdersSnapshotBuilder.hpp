@@ -20,7 +20,7 @@ namespace b3::md::onixs {
 struct OnixsOrdersSnapshotBuilder final {
     using OrderBook = OnixS::B3::MarketData::UMDF::OrderBook;
 
-    static inline void buildFromBook(const OrderBook& book, b3::md::OrdersSnapshot& out) noexcept {
+    static inline void buildFromBook(const OrderBook& book, uint64_t nowNs, b3::md::OrdersSnapshot& out) noexcept {
         // Reset POD
         out = b3::md::OrdersSnapshot{};
 
@@ -32,9 +32,7 @@ struct OnixsOrdersSnapshotBuilder final {
         //TODO: tratar de meter el timestamp del exchange.
         using clock = std::chrono::system_clock;
         const auto now = clock::now().time_since_epoch();
-        out.exchangeTsNs =
-            static_cast<uint64_t>(
-                std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
+        out.exchangeTsNs = nowNs;
 
         // TODO: validar orden real de bids() en runtime.
         // Si bids() viene ascending (mejor al final) => true.

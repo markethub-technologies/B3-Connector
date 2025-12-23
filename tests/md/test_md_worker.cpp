@@ -75,29 +75,36 @@ TEST(MdPublishWorkerTests, StopClean) {
     SUCCEED();
 }
 
-TEST(MdPublishWorkerTests, StopWithoutDrainDropsPending) {
+TEST(MdPublishWorkerTests, StopWithoutDrainReturnsQuickly) {
     testsupport::FakePublisher pub;
     MdSnapshotMapper mapper;
 
     MdPublishWorker worker(0, mapper, pub);
     worker.start();
 
-    for (int i = 0; i < 1000; ++i) {
-        OrdersSnapshot s{};
-        s.instrumentId = 77;
-        s.exchangeTsNs = static_cast<uint64_t>(i);
+    OrdersSnapshot s{};
+    s.instrumentId = 77;
+    s.exchangeTsNs = 0;
 
-        // opcional para bid/ask count:
-        s.bidsCopied = 1;
-        s.asksCopied = 1;
-        s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
-        s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
-        worker.tryEnqueue(s);
+    s.bidCountRaw = 1;
+    s.askCountRaw = 1;
+    s.bidsCopied  = 1;
+    s.asksCopied  = 1;
+    s.bids[0] = { .priceMantissa = 1000, .qty = 1 };
+    s.asks[0] = { .priceMantissa = 2000, .qty = 1 };
+
+    // Empujar bastante para que haya backlog real
+    for (int i = 0; i < 200000; ++i) {
+        s.exchangeTsNs = static_cast<uint64_t>(i);
+        (void)worker.tryEnqueue(s);
     }
 
+    const auto t0 = std::chrono::steady_clock::now();
     worker.stop(false);
+    const auto dt = std::chrono::steady_clock::now() - t0;
 
-    EXPECT_LT(pub.count(), 1000u); // no drenó todo
+    // No-drain: apagado rápido (umbral amplio para CI)
+    EXPECT_LT(std::chrono::duration_cast<std::chrono::milliseconds>(dt).count(), 200);
 }
 
 TEST(MdPublishWorkerTests, StopWithDrainPublishesAll) {

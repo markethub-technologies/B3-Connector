@@ -21,9 +21,9 @@ public:
 
     // Vive en el thread del feed (listener OnixS).
     // Construye OrdersSnapshot (ventana MBO) y encola al pipeline.
-    void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& orderBook) noexcept {
+    void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& orderBook, uint64_t nowNs) noexcept {        
         OrdersSnapshot snapshot{};
-        b3::md::onixs::OnixsOrdersSnapshotBuilder::buildFromBook(orderBook, snapshot);
+        b3::md::onixs::OnixsOrdersSnapshotBuilder::buildFromBook(orderBook, nowNs, snapshot);
 
         if (!pipeline_.tryEnqueue(snapshot)) {
             drops_.fetch_add(1, std::memory_order_relaxed);

@@ -5,7 +5,7 @@
 #include <OnixS/B3/MarketData/UMDF/OrderBookListener.h>
 #include <OnixS/B3/MarketData/UMDF/OrderBook.h>
 #include <OnixS/B3/MarketData/UMDF/messaging/SbeMessage.h>
-
+#include <chrono>
 #include <atomic>
 #include <cstdint>
 
@@ -34,8 +34,11 @@ public:
     }
 
     void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& book) override {
+        const auto now = std::chrono::system_clock::now().time_since_epoch();
+        const uint64_t nowNs = static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
+
         updatedCount_.fetch_add(1, std::memory_order_relaxed);
-        engine_.onOrderBookUpdated(book);
+        engine_.onOrderBookUpdated(book, nowNs);
     }
 
     void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/) override {
