@@ -6,12 +6,9 @@
 #include "onixs/OnixsOrderBookListener.hpp"
 
 #include "mapping/MdSnapshotMapper.hpp"
-#include "publishing/IMdPublisher.hpp"
-#include "telemetry/LogEvent.hpp"
 
-// TODO: reemplazar por tus implementaciones reales
-#include "testsupport/FakePublisher.hpp"   // placeholder publisher
-#include "telemetry/SpdlogLogPublisher.hpp"
+// NEW: concentrador PUB (fan-in desde shards)
+#include "publishing/ZmqPublishConcentrator.hpp"
 
 #include <cstdint>
 #include <cstdlib>
@@ -27,124 +24,145 @@ using namespace OnixS::B3::MarketData::UMDF;
 
 namespace {
 
-// Config ultra simple: key=value por línea, ignora vacíos y #comentarios.
-std::unordered_map<std::string, std::string> loadKeyValueFile(const std::string& path) {
+  // Config ultra simple: key=value por línea, ignora vacíos y #comentarios.
+  std::unordered_map<std::string, std::string> loadKeyValueFile(const std::string &path) {
     std::unordered_map<std::string, std::string> kv;
 
     std::ifstream in(path);
     if (!in.is_open()) {
-        std::cerr << "[config] cannot open file: " << path << "\n";
-        return kv;
+      std::cerr << "[config] cannot open file: " << path << "\n";
+      return kv;
     }
 
     std::string line;
     while (std::getline(in, line)) {
-        // trim básico
-        auto trim = [](std::string& s) {
-            while (!s.empty() && (s.back() == ' ' || s.back() == '\r' || s.back() == '\n' || s.back() == '\t')) s.pop_back();
-            size_t i = 0;
-            while (i < s.size() && (s[i] == ' ' || s[i] == '\t')) ++i;
-            if (i > 0) s.erase(0, i);
-        };
+      // trim básico
+      auto trim = [](std::string &s) {
+        while (!s.empty() &&
+               (s.back() == ' ' || s.back() == '\r' || s.back() == '\n' || s.back() == '\t'))
+          s.pop_back();
+        size_t i = 0;
+        while (i < s.size() && (s[i] == ' ' || s[i] == '\t')) ++i;
+        if (i > 0)
+          s.erase(0, i);
+      };
 
-        trim(line);
-        if (line.empty()) continue;
-        if (!line.empty() && line[0] == '#') continue;
+      trim(line);
+      if (line.empty())
+        continue;
+      if (!line.empty() && line[0] == '#')
+        continue;
 
-        const auto eq = line.find('=');
-        if (eq == std::string::npos) continue;
+      const auto eq = line.find('=');
+      if (eq == std::string::npos)
+        continue;
 
-        std::string key = line.substr(0, eq);
-        std::string val = line.substr(eq + 1);
+      std::string key = line.substr(0, eq);
+      std::string val = line.substr(eq + 1);
 
-        trim(key);
-        trim(val);
-        if (!key.empty()) kv[key] = val;
+      trim(key);
+      trim(val);
+      if (!key.empty())
+        kv[key] = val;
     }
 
     return kv;
-}
+  }
 
-std::string getOr(const std::unordered_map<std::string, std::string>& kv,
-                  const std::string& key,
-                  const std::string& def) {
+  std::string getOr(const std::unordered_map<std::string, std::string> &kv, const std::string &key,
+                    const std::string &def) {
     auto it = kv.find(key);
     return (it == kv.end()) ? def : it->second;
-}
+  }
 
-int getOrInt(const std::unordered_map<std::string, std::string>& kv,
-             const std::string& key,
-             int def) {
+  int getOrInt(const std::unordered_map<std::string, std::string> &kv, const std::string &key,
+               int def) {
     auto it = kv.find(key);
-    if (it == kv.end()) return def;
+    if (it == kv.end())
+      return def;
     try {
-        return std::stoi(it->second);
+      return std::stoi(it->second);
     } catch (...) {
-        return def;
+      return def;
     }
-}
+  }
 
 } // namespace
 
-int main(int argc, char** argv) {
-    const std::string configPath = (argc >= 2) ? argv[1] : "b3-md-connector.conf";
-    const auto cfg = loadKeyValueFile(configPath);
+int main(int argc, char **argv) {
+  const std::string configPath = (argc >= 2) ? argv[1] : "b3-md-connector.conf";
+  const auto cfg = loadKeyValueFile(configPath);
 
-    // -------------------------
-    // Placeholders / defaults
-    // -------------------------
-    const std::string licenseDir       = getOr(cfg, "onixs.license_dir",       "./LICENSE_DIR_TODO");
-    const std::string connectivityFile = getOr(cfg, "onixs.connectivity_file", "./CONNECTIVITY_TODO.xml");
-    const int channel                  = getOrInt(cfg, "onixs.channel",        80);
+  // -------------------------
+  // Config
+  // -------------------------
+  const std::string licenseDir = getOr(cfg, "onixs.license_dir", "./LICENSE_DIR_TODO");
+  const std::string connectivityFile =
+      getOr(cfg, "onixs.connectivity_file", "./CONNECTIVITY_TODO.xml");
+  const int channel = getOrInt(cfg, "onixs.channel", 80);
 
-    const std::string ifA              = getOr(cfg, "onixs.if_a", "");
-    const std::string ifB              = getOr(cfg, "onixs.if_b", "");
+  const std::string ifA = getOr(cfg, "onixs.if_a", "");
+  const std::string ifB = getOr(cfg, "onixs.if_b", "");
 
-    const int shards                   = getOrInt(cfg, "md.shards", 4);
+  const int shards = getOrInt(cfg, "md.shards", 4);
 
-    std::cerr << "[startup] config=" << configPath << "\n";
-    std::cerr << "[startup] onixs.license_dir=" << licenseDir << "\n";
-    std::cerr << "[startup] onixs.connectivity_file=" << connectivityFile << "\n";
-    std::cerr << "[startup] onixs.channel=" << channel << "\n";
-    std::cerr << "[startup] onixs.if_a=" << (ifA.empty() ? "<auto>" : ifA) << "\n";
-    std::cerr << "[startup] onixs.if_b=" << (ifB.empty() ? "<auto>" : ifB) << "\n";
-    std::cerr << "[startup] md.shards=" << shards << "\n";
+  // NEW: PUB endpoint (un solo puerto para todos los topics)
+  const std::string pubEndpoint = getOr(cfg, "pub.endpoint", "tcp://*:8081");
 
-    // -------------------------
-    // Pipeline (placeholders)
-    // -------------------------
-    b3::md::MdSnapshotMapper mapper;
-    b3::md::testsupport::FakePublisher publisher; // TODO: reemplazar por ZmqMdPublisher
+  std::cerr << "[startup] config=" << configPath << "\n";
+  std::cerr << "[startup] onixs.license_dir=" << licenseDir << "\n";
+  std::cerr << "[startup] onixs.connectivity_file=" << connectivityFile << "\n";
+  std::cerr << "[startup] onixs.channel=" << channel << "\n";
+  std::cerr << "[startup] onixs.if_a=" << (ifA.empty() ? "<auto>" : ifA) << "\n";
+  std::cerr << "[startup] onixs.if_b=" << (ifB.empty() ? "<auto>" : ifB) << "\n";
+  std::cerr << "[startup] md.shards=" << shards << "\n";
+  std::cerr << "[startup] pub.endpoint=" << pubEndpoint << "\n";
 
-    std::vector<std::unique_ptr<b3::md::MdPublishWorker>> workers;
-    workers.reserve(static_cast<size_t>(shards));
+  // -------------------------
+  // Publishing concentrator (1 thread, 1 PUB socket)
+  // -------------------------
+  b3::md::publishing::ZmqPublishConcentrator concentrator(pubEndpoint,
+                                                          static_cast<uint32_t>(shards));
+  concentrator.start();
 
-    for (int i = 0; i < shards; ++i) {
-        workers.emplace_back(std::make_unique<b3::md::MdPublishWorker>(
-            static_cast<uint32_t>(i), mapper, publisher));
-    }
+  // -------------------------
+  // Pipeline
+  // -------------------------
+  b3::md::MdSnapshotMapper mapper;
 
-    b3::md::MdPublishPipeline pipeline(std::move(workers));
-    pipeline.start();
+  std::vector<std::unique_ptr<b3::md::MdPublishWorker>> workers;
+  workers.reserve(static_cast<size_t>(shards));
 
-    // -------------------------
-    // Engine + Listener OnixS
-    // -------------------------
-    b3::md::MarketDataEngine engine(pipeline);
-    b3::md::onixs::OnixsOrderBookListener orderBookListener(engine);
+  for (int i = 0; i < shards; ++i) {
+    workers.emplace_back(std::make_unique<b3::md::MdPublishWorker>(
+        static_cast<uint32_t>(i), mapper,
+        concentrator // IPublishSink (fan-in)
+        ));
+  }
 
-    // -------------------------
-    // OnixS Handler
-    // -------------------------
+  b3::md::MdPublishPipeline pipeline(std::move(workers));
+  pipeline.start();
+
+  // -------------------------
+  // Engine + Listener OnixS
+  // -------------------------
+  b3::md::MarketDataEngine engine(pipeline);
+  b3::md::onixs::OnixsOrderBookListener orderBookListener(engine);
+
+  // -------------------------
+  // OnixS Handler
+  // -------------------------
+  try {
     HandlerSettings settings;
     settings.licenseDirectory = licenseDir.c_str();
-    settings.buildOrderBooks  = true;
+    settings.buildOrderBooks = true;
 
-    // Si conectivityFile está placeholder, igual intentamos: OnixS va a fallar con error claro.
     settings.loadFeeds(channel, connectivityFile.c_str());
 
-    if (!ifA.empty()) settings.networkInterfaceA = ifA.c_str();
-    if (!ifB.empty()) settings.networkInterfaceB = ifB.c_str();
+    if (!ifA.empty())
+      settings.networkInterfaceA = ifA.c_str();
+    if (!ifB.empty())
+      settings.networkInterfaceB = ifB.c_str();
 
     Handler handler(settings);
     handler.registerOrderBookListener(&orderBookListener);
@@ -157,10 +175,22 @@ int main(int argc, char** argv) {
 
     std::cerr << "[shutdown] stopping OnixS handler...\n";
     handler.stop(true);
+  } catch (const std::exception &ex) {
+    std::cerr << "[fatal] exception: " << ex.what() << "\n";
+  } catch (...) {
+    std::cerr << "[fatal] unknown exception\n";
+  }
 
-    std::cerr << "[shutdown] stopping pipeline...\n";
-    pipeline.stop(true);
+  // -------------------------
+  // Shutdown: stop pipeline first (workers stop producing publish events),
+  // then stop concentrator (drains remaining events).
+  // -------------------------
+  std::cerr << "[shutdown] stopping pipeline...\n";
+  pipeline.stop(true);
 
-    std::cerr << "[shutdown] done.\n";
-    return 0;
+  std::cerr << "[shutdown] stopping publisher concentrator...\n";
+  concentrator.stop();
+
+  std::cerr << "[shutdown] done.\n";
+  return 0;
 }
