@@ -3,6 +3,7 @@
 #include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
 #include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
+#include "../../b3-md-connector/src/testsupport/FakeInstrumentTopicMapper.hpp"
 #include "FakePublishSink.hpp"
 #include <chrono>
 #include <thread>
@@ -50,13 +51,19 @@ namespace {
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
     workers.reserve(shards);
 
+    // IMPORTANT:
+    // El worker guarda un puntero/referencia al mapper de topics para armar el topic en hot path.
+    // Si el mapper vive en stack (local) y devolvés el pipeline, queda dangling y crashea.
+    static testsupport::FakeInstrumentTopicMapper fakeTopics{
+        {1, "AAA"}, {2, "BBB"}, {3, "CCC"}, {4, "DDD"}, {5, "EEE"}, {6, "FFF"},
+    };
+
     for (uint32_t i = 0; i < shards; ++i) {
-      workers.emplace_back(std::make_unique<MdPublishWorker>(i, mapper, sink));
+      workers.emplace_back(std::make_unique<MdPublishWorker>(i, mapper, sink, fakeTopics.get()));
     }
 
     return MdPublishPipeline(std::move(workers));
   }
-
 } // namespace
 
 TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
@@ -67,9 +74,9 @@ TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
   pipeline.start();
 
   constexpr int EVENTS_PER_INSTRUMENT = 10'000;
-  const std::vector<uint32_t> instruments = {1, 2, 3, 4, 5, 6};
+  const std::vector<uint64_t> instruments = {1, 2, 3, 4, 5, 6};
 
-  for (uint32_t iid : instruments) {
+  for (uint64_t iid : instruments) {
     for (int i = 0; i < EVENTS_PER_INSTRUMENT; ++i) {
       OrdersSnapshot s{};
       s.instrumentId = iid;
@@ -100,7 +107,7 @@ TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
   ASSERT_EQ(sink.count(), expected);
 
   // Agrupar timestamps por instrumento
-  std::unordered_map<uint32_t, std::vector<uint64_t>> seen;
+  std::unordered_map<uint64_t, std::vector<uint64_t>> seen;
   seen.reserve(instruments.size());
 
   for (size_t i = 0; i < expected; ++i) {

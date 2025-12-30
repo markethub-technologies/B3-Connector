@@ -4,6 +4,7 @@
 #include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
 #include "../../b3-md-connector/src/testsupport/OrdersSnapshotFromMbpView.hpp"
+#include "../../b3-md-connector/src/testsupport/FakeInstrumentTopicMapper.hpp"
 #include "FakeOrderBook.hpp"
 
 #include <atomic>
@@ -33,7 +34,9 @@ TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
   TestMapper mapper;
   CountingSink sink;
 
-  auto worker = std::make_unique<MdPublishWorker>(0, mapper, sink);
+  testsupport::FakeInstrumentTopicMapper fakeTopics{{42, "AAA"}};
+
+  auto worker = std::make_unique<MdPublishWorker>(0, mapper, sink, fakeTopics.get());
   std::vector<std::unique_ptr<MdPublishWorker>> workers;
   workers.push_back(std::move(worker));
 
@@ -67,9 +70,13 @@ TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
 TEST(MarketDataEngineTests, EnqueueNeverBlocks) {
   CountingSink sink;
   MdSnapshotMapper mapper;
+  testsupport::FakeInstrumentTopicMapper fakeTopics{
+      {1, "AAA"},
+      {2, "BBB"},
+  };
 
   std::vector<std::unique_ptr<MdPublishWorker>> workers;
-  workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, sink));
+  workers.emplace_back(std::make_unique<MdPublishWorker>(0, mapper, sink, fakeTopics.get()));
   MdPublishPipeline pipeline(std::move(workers));
   pipeline.start();
 

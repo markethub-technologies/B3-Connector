@@ -1,3 +1,92 @@
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/publishing/ZmqPublishConcentrator.hpp =====
+        const uint64_t now = nowNsSteady();
+        if (now >= nextHealth) {
+          nextHealth = now + 5'000'000'000ull;
+          emitHealth(now);
+        }
+
+        if (!didWork)
+          std::this_thread::sleep_for(1ms);
+      }
+
+      // Drain opcional al final
+      for (uint32_t sid = 0; sid < shardCount_; ++sid) {
+        auto &q = *queues_[sid];
+        while (q.try_pop(ev)) {
+          (void)pub.sendMultipart(ev.topic, ev.topicLen, ev.bytes, ev.size);
+          sentByShard_[sid].v.fetch_add(1, std::memory_order_relaxed);
+        }
+      }
+    }
+
+   private:
+    std::string pubEndpoint_;
+    uint32_t shardCount_{0};
+
+    std::vector<std::unique_ptr<QueueT>> queues_;
+
+    // Wrapper para poder usar atomics dentro de std::vector en libstdc++.
+    //
+    // Motivo:
+    //   std::vector<std::atomic<T>> no es usable de forma portable en GCC/libstdc++,
+    //   porque operaciones inocuas como reserve() instancian código que requiere
+    //   que T sea copy/move constructible. std::atomic NO lo es, por diseño,
+    //   lo que rompe la compilación aunque el vector esté vacío.
+    //
+    // Este wrapper hace a la métrica "copyable" copiando el valor de forma relaxed.
+    // Es seguro para nuestro uso porque estos contadores son solo métricas,
+    // no participan de sincronización ni de lógica de concurrencia del hot path.
+    struct CopyableAtomicU64 {
+      std::atomic<uint64_t> v;
+      CopyableAtomicU64(uint64_t init = 0) noexcept : v(init) {}
+
+      CopyableAtomicU64(const CopyableAtomicU64 &other) noexcept
+          : v(other.v.load(std::memory_order_relaxed)) {}
+
+      CopyableAtomicU64 &operator=(const CopyableAtomicU64 &other) noexcept {
+        v.store(other.v.load(std::memory_order_relaxed), std::memory_order_relaxed);
+        return *this;
+      }
+    };
+
+    std::vector<CopyableAtomicU64> droppedByShard_;
+    std::vector<CopyableAtomicU64> enqByShard_;
+    std::vector<CopyableAtomicU64> sentByShard_;
+
+    telemetry::SpdlogLogPublisher<kLogQueueCapacity> logger_;
+
+    std::atomic<bool> running_{false};
+    std::thread thread_{};
+  };
+
+} // namespace b3::md::publishing
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/publishing/PublishEvent.hpp =====
+#pragma once
+#include <cstdint>
+#include <cstddef>
+
+namespace b3::md::publishing {
+
+  struct PublishEvent final {
+    // HARD CAP global (longitud del topic, NO cantidad de tópicos)
+    static constexpr size_t kMaxTopic = 128;
+    static constexpr size_t kMaxBytes = 4096;
+
+    // payload
+    uint32_t size{0};
+
+    // topic bytes (NO null-terminated)
+    uint8_t topicLen{0};
+    char topic[kMaxTopic]{};
+
+    uint8_t bytes[kMaxBytes]{};
+  };
+
+} // namespace b3::md::publishing
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/core/MdPublishWorker.hpp =====
 #pragma once
 
 #include "SnapshotQueueSpsc.hpp"
@@ -276,3 +365,123 @@ namespace b3::md {
   };
 
 } // namespace b3::md
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/core/IOrderBookView.hpp =====
+#pragma once
+#include <cstdint>
+
+namespace b3::md {
+
+  struct Level {
+    int64_t price{0};
+    int64_t qty{0};
+  };
+
+  class IOrderBookView {
+   public:
+    virtual ~IOrderBookView() = default;
+
+    virtual uint64_t instrumentId() const noexcept = 0;
+    virtual uint64_t exchangeTsNs() const noexcept = 0;
+
+    virtual uint32_t bidCount() const noexcept = 0;
+    virtual uint32_t askCount() const noexcept = 0;
+
+    virtual Level bidLevel(uint32_t i) const noexcept = 0;
+    virtual Level askLevel(uint32_t i) const noexcept = 0;
+  };
+
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/core/BookSnapshot.hpp =====
+#pragma once
+#include "IOrderBookView.hpp" // o donde esté Level
+#include <cstdint>
+#include <type_traits>
+
+namespace b3::md {
+
+  template <int N>
+  struct BookSnapshotT {
+    static constexpr int DEPTH = N;
+
+    uint64_t instrumentId{0};
+    uint64_t exchangeTsNs{0};
+    uint8_t bidCount{0};
+    uint8_t askCount{0};
+
+    Level bids[N]{};
+    Level asks[N]{};
+  };
+
+  using BookSnapshot = BookSnapshotT<5>;
+
+  static_assert(std::is_trivially_copyable_v<BookSnapshot>);
+  static_assert(std::is_trivially_destructible_v<BookSnapshot>);
+
+} // namespace b3::md
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/core/OrdersSnapshot.hpp =====
+#pragma once
+
+#include <cstdint>
+#include <cstddef>
+#include <type_traits>
+
+namespace b3::md {
+
+  // Ventana acotada de órdenes (MBO) copiada en hot path.
+  // Se agrega (MBO->MBP) en el worker para generar BookSnapshot (niveles de precio).
+  //
+  // Nota: las órdenes con precio null (market orders) se SALTEAN al copiar,
+  // porque no contribuyen al agregado por niveles de precio (MBP).
+  struct OrdersSnapshot {
+    static constexpr size_t K = 256;
+
+    struct OrderEntry {         // todo:verificar prefision
+      int64_t priceMantissa{0}; // precio con 4 decimales (mantissa)
+      int64_t qty{0};           // Quantity (Int64)
+    };
+
+    uint64_t instrumentId{0};
+    uint64_t exchangeTsNs{0};
+
+    // Secuencias del SDK (las copiamos para futuro/protobuf/health)
+    uint64_t rptSeq{0};     // OrderBook::lastRptSeq()
+    uint64_t channelSeq{0}; // OrderBook::lastMessageSeqNumApplied()
+
+    // Tamaños "crudos" del libro (lo que expone el SDK, sin filtrar null-price)
+    uint16_t bidCountRaw{0};
+    uint16_t askCountRaw{0};
+
+    // Cantidad efectiva copiada (solo órdenes con precio válido, hasta K)
+    uint16_t bidsCopied{0};
+    uint16_t asksCopied{0};
+
+    // Flags: 1 si hubo más órdenes válidas que K y se truncó; 0 si entraron todas.
+    uint8_t bidTruncated{0};
+    uint8_t askTruncated{0};
+
+    OrderEntry bids[K]{};
+    OrderEntry asks[K]{};
+  };
+
+  static_assert(std::is_trivially_copyable_v<OrdersSnapshot>);
+  static_assert(std::is_trivially_destructible_v<OrdersSnapshot>);
+
+} // namespace b3::md
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/core/MdPublishPipeline.hpp =====
+#pragma once
+
+#include "MdPublishWorker.hpp"
+#include "OrdersSnapshot.hpp"
+
+#include <cstdint>
+#include <memory>
+#include <vector>
+#include <atomic>
+#include <stdexcept>
+
+namespace b3::md {
+
+// Pipeline = orquestador de sharding + lifecycle de workers.

@@ -1,0 +1,459 @@
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/onixs/OnixOrderBookView.hpp =====
+      // bids() en header dice "ascending bid prices" => mejor bid al final
+      const size_t idx = (n - 1) - static_cast<size_t>(i);
+      return mapOrderToLevel(r[idx]);
+    }
+
+    b3::md::Level askLevel(uint32_t i) const noexcept override {
+      const auto r = book_.asks();
+      const auto n = r.size();
+      const auto top = clampToTopN(n);
+
+      if (i >= top || n == 0)
+        return b3::md::Level{};
+
+      // Asumimos mejor ask al principio (lo típico).
+      // Si ves que asks() viene descending realmente, cambiá a: idx = (n - 1) - i
+      const size_t idx = static_cast<size_t>(i);
+      return mapOrderToLevel(r[idx]);
+    }
+
+   private:
+    static uint32_t clampToTopN(size_t n) noexcept {
+      // si tu TopN está en otro lado, ajustá este nombre:
+      constexpr size_t TopN = static_cast<size_t>(5);
+      return static_cast<uint32_t>(std::min(n, TopN));
+    }
+
+    static b3::md::Level mapOrderToLevel(const ::OnixS::B3::MarketData::UMDF::Order &o) noexcept {
+      b3::md::Level lv{};
+
+      // ---- qty ----
+      // SDK: Quantity = Int64
+      using QtyFieldT = decltype(lv.qty);
+      lv.qty = static_cast<QtyFieldT>(o.quantity());
+
+      // ---- price ----
+      // SDK: PriceOptional (4 decimals), marketOrder => isNull()
+      const auto p = o.price();
+      if (p.isNull()) {
+        // market order: precio "sin valor"
+        // mantenemos default 0
+        return lv;
+      }
+
+      const auto mant = p.mantissa(); // entero con 4 decimales
+
+      using PriceFieldT = decltype(lv.price);
+      if constexpr (std::is_floating_point_v<PriceFieldT>) {
+        // Guardamos como double/float en unidades reales
+        lv.price = static_cast<PriceFieldT>(static_cast<double>(mant) / 10000.0);
+      } else {
+        // Guardamos como entero "mantissa" (4 decimales)
+        lv.price = static_cast<PriceFieldT>(mant);
+      }
+
+      return lv;
+    }
+
+   private:
+    const ::OnixS::B3::MarketData::UMDF::OrderBook &book_;
+  };
+
+} // namespace b3::md::onixs
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/onixs/B3SecurityListListener.hpp =====
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/onixs/OnixsOrdersSnapshotBuilder.hpp =====
+#pragma once
+
+#include "../core/OrdersSnapshot.hpp"
+
+#include <cstddef>
+#include <cstdint>
+#include <chrono>
+
+// OnixS
+#include <OnixS/B3/MarketData/UMDF/OrderBook.h> // o el include correcto en tu entorno
+
+namespace b3::md::onixs {
+
+  // Builder hot-path: copia una ventana acotada de órdenes (MBO) desde el OrderBook de OnixS.
+  // Reglas:
+  // - NO aloca
+  // - NO loguea
+  // - NO agrupa por niveles (eso se hace en worker)
+  // - saltea órdenes con precio null (market orders), porque no aportan a MBP por niveles de
+  // precio.
+  struct OnixsOrdersSnapshotBuilder final {
+    using OrderBook = OnixS::B3::MarketData::UMDF::OrderBook;
+
+    static inline void buildFromBook(const OrderBook &book, uint64_t nowNs,
+                                     b3::md::OrdersSnapshot &out) noexcept {
+      // Reset POD
+      out = b3::md::OrdersSnapshot{};
+
+      // Metadata base
+      out.instrumentId = static_cast<uint64_t>(book.instrumentId());
+      out.rptSeq = static_cast<uint64_t>(book.lastRptSeq());
+      out.channelSeq = static_cast<uint64_t>(book.lastMessageSeqNumApplied());
+
+      // TODO: tratar de meter el timestamp del exchange.
+      using clock = std::chrono::system_clock;
+      const auto now = clock::now().time_since_epoch();
+      out.exchangeTsNs = nowNs;
+
+      // TODO: validar orden real de bids() en runtime.
+      // Si bids() viene ascending (mejor al final) => true.
+      // Si bids() viene descending (mejor al principio) => false.
+      static constexpr bool kBidsBestAtEnd = true;
+
+      // Copia bids (según header: bids() => ascending bid prices
+      // TODO: el comentario del SDK parece raro, que viene al revés, validar en runtime,
+      {
+        const auto bidsRange = book.bids();
+        const size_t raw = bidsRange.size();
+        out.bidCountRaw = static_cast<uint16_t>(raw > 0xFFFFu ? 0xFFFFu : raw);
+
+        uint16_t copied = 0;
+        bool truncated = false;
+
+        // Recorremos y copiamos solo precios válidos hasta K
+        if constexpr (kBidsBestAtEnd) {
+          // mejor bid al final => iterar al revés
+          for (size_t i = raw; i > 0; --i) {
+            const auto &ord = bidsRange[i - 1];
+
+            const auto px = ord.price();
+            if (px.isNull())
+              continue;
+
+            if (copied >= b3::md::OrdersSnapshot::K) {
+              truncated = true;
+              break;
+            }
+
+            out.bids[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+            out.bids[copied].qty = static_cast<int64_t>(ord.quantity());
+            ++copied;
+          }
+        } else {
+          // mejor bid al principio => iterar normal
+          for (size_t i = 0; i < raw; ++i) {
+            const auto &ord = bidsRange[i];
+
+            const auto px = ord.price();
+            if (px.isNull())
+              continue;
+
+            if (copied >= b3::md::OrdersSnapshot::K) {
+              truncated = true;
+              break;
+            }
+
+            out.bids[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+            out.bids[copied].qty = static_cast<int64_t>(ord.quantity());
+            ++copied;
+          }
+        }
+
+        out.bidsCopied = copied;
+        out.bidTruncated = truncated ? 1 : 0;
+      }
+
+      // Copia asks
+      {
+        const auto asksRange = book.asks();
+        const size_t raw = asksRange.size();
+        out.askCountRaw = static_cast<uint16_t>(raw > 0xFFFFu ? 0xFFFFu : raw);
+
+        uint16_t copied = 0;
+        bool truncated = false;
+
+        for (size_t i = 0; i < raw; ++i) {
+          const auto &ord = asksRange[i];
+
+          const auto px = ord.price();
+          if (px.isNull()) {
+            // Market order: se saltea; no contribuye al agregado MBP por niveles de precio.
+            continue;
+          }
+
+          if (copied >= b3::md::OrdersSnapshot::K) {
+            truncated = true;
+            break;
+          }
+
+          out.asks[copied].priceMantissa = static_cast<int64_t>(px.mantissa());
+          out.asks[copied].qty = static_cast<int64_t>(ord.quantity());
+          ++copied;
+        }
+
+        out.asksCopied = copied;
+        out.askTruncated = truncated ? 1 : 0;
+      }
+    }
+  };
+
+} // namespace b3::md::onixs
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/onixs/OnixsOrderBookListener.hpp =====
+#pragma once
+
+#include "../core/MarketDataEngine.hpp"
+
+#include <OnixS/B3/MarketData/UMDF/OrderBookListener.h>
+#include <OnixS/B3/MarketData/UMDF/OrderBook.h>
+#include <OnixS/B3/MarketData/UMDF/messaging/SbeMessage.h>
+#include <chrono>
+#include <atomic>
+#include <cstdint>
+
+namespace b3::md::onixs {
+
+// Adapter: OnixS -> MarketDataEngine
+class OnixsOrderBookListener final : public ::OnixS::B3::MarketData::UMDF::OrderBookListener {
+public:
+    explicit OnixsOrderBookListener(b3::md::MarketDataEngine& engine) noexcept
+        : engine_(engine)
+    {}
+
+    OnixsOrderBookListener(const OnixsOrderBookListener&) = delete;
+    OnixsOrderBookListener& operator=(const OnixsOrderBookListener&) = delete;
+
+    void onOrderBookChanged(
+        const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/,
+        const ::OnixS::B3::MarketData::UMDF::Messaging::SbeMessage /*message*/) override
+    {
+        // Por ahora no publicamos acá para evitar snapshots intermedios.
+        //
+        // TODO(B3): revisar si el SbeMessage trae exchange timestamp (o event time) y dónde.
+        // Si existe, decidir cómo propagarlo sin heap ni mapas en hot path (ideal: usar onOrderBookUpdated
+        // si el SDK expone el timestamp ahí; si no, estudiar estrategia).
+        changedCount_.fetch_add(1, std::memory_order_relaxed);
+    }
+
+    void onOrderBookUpdated(const ::OnixS::B3::MarketData::UMDF::OrderBook& book) override {
+        const auto now = std::chrono::system_clock::now().time_since_epoch();
+        const uint64_t nowNs = static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
+
+        updatedCount_.fetch_add(1, std::memory_order_relaxed);
+        engine_.onOrderBookUpdated(book, nowNs);
+    }
+
+    void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/) override {
+        outOfDateCount_.fetch_add(1, std::memory_order_relaxed);
+        // TODO(B3): emitir health/counter para marcar "books outdated" (sin bloquear).
+    }
+
+    uint64_t changedCount() const noexcept { return changedCount_.load(std::memory_order_relaxed); }
+    uint64_t updatedCount() const noexcept { return updatedCount_.load(std::memory_order_relaxed); }
+    uint64_t outOfDateCount() const noexcept { return outOfDateCount_.load(std::memory_order_relaxed); }
+
+private:
+    b3::md::MarketDataEngine& engine_;
+
+    std::atomic<uint64_t> changedCount_{0};
+    std::atomic<uint64_t> updatedCount_{0};
+    std::atomic<uint64_t> outOfDateCount_{0};
+};
+
+} // namespace b3::md::onixs
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/b3-md-connector.conf =====
+# OnixS
+onixs.license_dir=./license
+onixs.connectivity_file=./b3_connectivity.xml
+onixs.channel=80
+# onixs.if_a=eth0
+# onixs.if_b=eth1
+
+# MD
+md.shards=4
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/publishing/IPublishSink.hpp =====
+#pragma once
+#include <cstdint>
+#include "PublishEvent.hpp"
+
+namespace b3::md::publishing {
+
+  struct IPublishSink {
+    virtual ~IPublishSink() = default;
+    virtual bool tryPublish(uint32_t shardId, const PublishEvent &ev) noexcept = 0;
+  };
+
+} // namespace b3::md::publishing
+
+===== FILE: /workspaces/MarketHub.B3Connector/b3-md-connector/src/publishing/ZmqPublishConcentrator.hpp =====
+#pragma once
+
+#include "../core/SnapshotQueueSpsc.hpp"
+#include "../telemetry/SpdlogLogPublisher.hpp"
+#include "../telemetry/LogEvent.hpp"
+
+#include "IPublishSink.hpp"
+#include "PublishEvent.hpp"
+
+#include <atomic>
+#include <chrono>
+#include <cstdint>
+#include <memory>
+#include <string>
+#include <thread>
+#include <vector>
+#include <utility>
+
+namespace b3::md::publishing {
+
+  class ZmqPublishConcentrator final : public IPublishSink {
+   public:
+    static constexpr size_t kPerShardQueueCapacity = 4096;
+    static constexpr uint32_t kBatchPerShard = 8;
+    static constexpr size_t kLogQueueCapacity = 1024;
+
+    explicit ZmqPublishConcentrator(std::string pubEndpoint, uint32_t shardCount)
+        : pubEndpoint_(std::move(pubEndpoint)), shardCount_(shardCount) {
+      queues_.reserve(shardCount_);
+      for (uint32_t i = 0; i < shardCount_; ++i) {
+        queues_.emplace_back(std::make_unique<QueueT>());
+      }
+
+      droppedByShard_.reserve(shardCount_);
+      enqByShard_.reserve(shardCount_);
+      sentByShard_.reserve(shardCount_);
+
+      for (uint32_t i = 0; i < shardCount_; ++i) {
+        droppedByShard_.emplace_back(0);
+        enqByShard_.emplace_back(0);
+        sentByShard_.emplace_back(0);
+      }
+    }
+
+    ZmqPublishConcentrator(const ZmqPublishConcentrator &) = delete;
+    ZmqPublishConcentrator &operator=(const ZmqPublishConcentrator &) = delete;
+
+    void start() {
+      bool expected = false;
+      if (!running_.compare_exchange_strong(expected, true, std::memory_order_acq_rel))
+        return;
+
+      logger_.start();
+      thread_ = std::thread([this] { run(); });
+    }
+
+    void stop() {
+      running_.store(false, std::memory_order_release);
+      if (thread_.joinable())
+        thread_.join();
+      logger_.stop();
+    }
+
+    bool tryPublish(uint32_t shardId, const PublishEvent &ev) noexcept override {
+      if (shardId >= shardCount_) {
+        // si querés, contalo como drop global; no hay slot por shard inválido
+        return false;
+      }
+
+      // sanity mínima (barata)
+      if (ev.topicLen == 0 || ev.topicLen > PublishEvent::kMaxTopic) {
+        droppedByShard_[shardId].v.fetch_add(1, std::memory_order_relaxed);
+        return false;
+      }
+      if (ev.size > PublishEvent::kMaxBytes) {
+        droppedByShard_[shardId].v.fetch_add(1, std::memory_order_relaxed);
+        return false;
+      }
+
+      auto &q = *queues_[shardId];
+      if (q.try_push(ev)) {
+        enqByShard_[shardId].v.fetch_add(1, std::memory_order_relaxed);
+        return true;
+      }
+
+      droppedByShard_[shardId].v.fetch_add(1, std::memory_order_relaxed);
+      return false;
+    }
+
+    uint64_t droppedTotal() const noexcept {
+      uint64_t sum = 0;
+      for (uint32_t i = 0; i < shardCount_; ++i) {
+        sum += droppedByShard_[i].v.load(std::memory_order_relaxed);
+      }
+      return sum;
+    }
+
+   private:
+    using QueueT = b3::md::SnapshotQueueSpsc<PublishEvent, kPerShardQueueCapacity>;
+
+    static uint64_t nowNsSteady() noexcept {
+      const auto now = std::chrono::steady_clock::now().time_since_epoch();
+      return static_cast<uint64_t>(
+          std::chrono::duration_cast<std::chrono::nanoseconds>(now).count());
+    }
+
+    void emitHealth(uint64_t nowNs) noexcept {
+      telemetry::LogEvent e{};
+      e.tsNs = nowNs;
+      e.level = telemetry::LogLevel::Health;
+      e.component = telemetry::Component::Publishing;
+      e.code = telemetry::Code::HealthTick;
+
+      uint64_t dropped = 0, sent = 0;
+      for (uint32_t i = 0; i < shardCount_; ++i) {
+        dropped += droppedByShard_[i].v.load(std::memory_order_relaxed);
+        sent += sentByShard_[i].v.load(std::memory_order_relaxed);
+      }
+      e.arg0 = dropped;
+      e.arg1 = sent;
+      (void)logger_.try_publish(e);
+    }
+
+    struct ZmqPubSocket {
+      explicit ZmqPubSocket(const std::string &endpoint) {
+        (void)endpoint;
+        // TODO: bind socket pub con tu lib
+      }
+
+      bool sendMultipart(const char *topic, size_t topicLen, const uint8_t *bytes,
+                         size_t size) noexcept {
+        (void)topic;
+        (void)topicLen;
+        (void)bytes;
+        (void)size;
+        // TODO: 2 frames: topic + payload
+        return true;
+      }
+    };
+
+    void run() noexcept {
+      using namespace std::chrono_literals;
+
+      ZmqPubSocket pub(pubEndpoint_);
+
+      // slow joiner warmup
+      std::this_thread::sleep_for(1500ms);
+
+      uint32_t rr = 0;
+      uint64_t nextHealth = nowNsSteady() + 5'000'000'000ull;
+
+      PublishEvent ev{};
+      while (running_.load(std::memory_order_acquire)) {
+        bool didWork = false;
+
+        for (uint32_t n = 0; n < shardCount_; ++n) {
+          const uint32_t sid = (rr + n) % shardCount_;
+          auto &q = *queues_[sid];
+
+          for (uint32_t k = 0; k < kBatchPerShard; ++k) {
+            if (!q.try_pop(ev))
+              break;
+            didWork = true;
+
+            (void)pub.sendMultipart(ev.topic, ev.topicLen, ev.bytes, ev.size);
+            sentByShard_[sid].v.fetch_add(1, std::memory_order_relaxed);
+          }
+        }
+        rr = (rr + 1) % shardCount_;
+

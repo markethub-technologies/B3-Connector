@@ -1,5 +1,170 @@
 
-===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_core.cpp =====
+===== FILE: /workspaces/MarketHub.B3Connector/tests/md/FakeMapper.hpp =====
+#pragma once
+
+#include <initializer_list>
+#include <string_view>
+#include <utility>
+
+#include "../../b3-md-connector/src/mapping/InstrumentTopicMapper.hpp"
+
+namespace b3::md::testsupport {
+
+  /**
+   * FakeInstrumentTopicMapper
+   * ------------------------
+   * En realidad es un "test builder" que devuelve un InstrumentTopicMapper real
+   * precargado. Es la mejor opción porque:
+   * - MdPublishWorker espera mapping::InstrumentTopicMapper (tipo concreto, final)
+   * - Evitás herencia/impostores
+   * - Misma semántica que producción
+   */
+  struct FakeInstrumentTopicMapper final {
+    using InstrumentId = b3::md::mapping::InstrumentTopicMapper::InstrumentId;
+
+    // Construye con una lista de pares {instrumentId, "SYMBOL"}
+    explicit FakeInstrumentTopicMapper(
+        std::initializer_list<std::pair<InstrumentId, std::string_view>> items = {}) {
+      for (const auto &kv : items) {
+        // En tests preferimos fail-fast: si no entra, es un error del test
+        const bool ok = mapper_.tryWriteTopic(kv.first, kv.second);
+        (void)ok;
+#ifdef _DEBUG
+        if (!ok) {
+          // Si preferís, reemplazá por tu assert framework (gtest/ctest/etc.)
+          __builtin_trap();
+        }
+#endif
+      }
+    }
+
+    // Acceso al mapper real que tu MdPublishWorker necesita
+    const b3::md::mapping::InstrumentTopicMapper &get() const noexcept { return mapper_; }
+    b3::md::mapping::InstrumentTopicMapper &get() noexcept { return mapper_; }
+
+    // Helpers cómodos
+    FakeInstrumentTopicMapper &with(InstrumentId id, std::string_view sym) noexcept {
+      mapper_.tryWriteTopic(id, sym);
+      return *this;
+    }
+
+   private:
+    b3::md::mapping::InstrumentTopicMapper mapper_{};
+  };
+
+
+===== FILE: /workspaces/MarketHub.B3Connector/tests/md/test_mbo_to_mbp_ordering_contract.cpp =====
+#include <gtest/gtest.h>
+
+#include "../../b3-md-connector/src/core/OrdersSnapshot.hpp"
+#include "../../b3-md-connector/src/core/BookSnapshot.hpp"
+#include "../../b3-md-connector/src/core/MboToMbpAggregator.hpp"
+
+using namespace b3::md;
+
+TEST(MboToMbpAggregatorOrderingContractTests, BestFirstInputProducesTrueTopN) {
+    OrdersSnapshot in{};
+    in.instrumentId = 7;
+    in.exchangeTsNs = 777;
+
+    // Queremos 10 precios únicos por lado.
+    // "Contrato" para este test: input ya viene best-first.
+    // - bids: best -> worst (mayor a menor)
+    // - asks: best -> worst (menor a mayor)
+
+    constexpr int N = 10;
+
+    // BID: 2000,1999,...,1991
+    in.bidCountRaw = N;
+    in.bidsCopied  = N;
+    for (int i = 0; i < N; ++i) {
+        in.bids[i].priceMantissa = 2000 - i;
+        in.bids[i].qty = 1;
+    }
+
+    // ASK: 3000,3001,...,3009
+    in.askCountRaw = N;
+    in.asksCopied  = N;
+    for (int i = 0; i < N; ++i) {
+        in.asks[i].priceMantissa = 3000 + i;
+        in.asks[i].qty = 1;
+    }
+
+    BookSnapshot out{};
+    aggregateMboWindowToMbpTopN(in, out);
+
+    EXPECT_EQ(out.instrumentId, 7u);
+    EXPECT_EQ(out.exchangeTsNs, 777u);
+
+    ASSERT_EQ(out.bidCount, BookSnapshot::DEPTH);
+    ASSERT_EQ(out.askCount, BookSnapshot::DEPTH);
+
+    // Top-5 bids esperados: 2000..1996
+    for (int i = 0; i < BookSnapshot::DEPTH; ++i) {
+        const int64_t expectedPx = 2000 - i;
+        EXPECT_EQ(out.bids[i].price, expectedPx) << "i=" << i;
+        EXPECT_EQ(out.bids[i].qty, 1) << "i=" << i;
+    }
+
+    // Top-5 asks esperados: 3000..3004
+    for (int i = 0; i < BookSnapshot::DEPTH; ++i) {
+        const int64_t expectedPx = 3000 + i;
+        EXPECT_EQ(out.asks[i].price, expectedPx) << "i=" << i;
+        EXPECT_EQ(out.asks[i].qty, 1) << "i=" << i;
+    }
+}
+
+===== FILE: /workspaces/MarketHub.B3Connector/tests/md/FakePublishSink.hpp =====
+#pragma once
+
+#include "../../b3-md-connector/src/publishing/IPublishSink.hpp"
+#include "../../b3-md-connector/src/publishing/PublishEvent.hpp"
+
+#include <mutex>
+#include <string>
+#include <vector>
+#include <cstdint>
+
+namespace b3::md::testsupport {
+
+  struct CapturedPublish {
+    uint32_t shardId{0};
+    std::string topic;
+    std::string bytes;
+  };
+
+  class FakePublishSink final : public b3::md::publishing::IPublishSink {
+   public:
+    bool tryPublish(uint32_t shardId,
+                    const b3::md::publishing::PublishEvent &ev) noexcept override {
+      // En tests está OK usar mutex/vector (no es hot path prod)
+      std::lock_guard<std::mutex> g(m_);
+      CapturedPublish c;
+      c.shardId = shardId;
+      c.topic.assign(ev.topic, ev.topic + ev.topicLen);
+      c.bytes.assign(reinterpret_cast<const char *>(ev.bytes), ev.size);
+      msgs_.push_back(std::move(c));
+      return true;
+    }
+
+    size_t count() const {
+      std::lock_guard<std::mutex> g(m_);
+      return msgs_.size();
+    }
+
+    CapturedPublish at(size_t i) const {
+      std::lock_guard<std::mutex> g(m_);
+      return msgs_.at(i);
+    }
+
+   private:
+    mutable std::mutex m_;
+    std::vector<CapturedPublish> msgs_;
+  };
+
+} // namespace b3::md::testsupport
+
+===== FILE: /workspaces/MarketHub.B3Connector/tests/md/test_md_core.cpp =====
 #include "../../b3-md-connector/src/core/BookSnapshot.hpp"
 #include "../../b3-md-connector/src/core/SnapshotQueueSpsc.hpp"
 #include <gtest/gtest.h>
@@ -261,7 +426,7 @@ TEST(SnapshotQueueSpscTests, SpscThreadedStress) {
     EXPECT_EQ(q.size_approx(), 0);
 }
 
-===== FILE: /home/damian/repos/B3-Connector/tests/md/test_mbo_to_mbp_aggregator.cpp =====
+===== FILE: /workspaces/MarketHub.B3Connector/tests/md/test_mbo_to_mbp_aggregator.cpp =====
 #include <gtest/gtest.h>
 
 #include "../../b3-md-connector/src/core/OrdersSnapshot.hpp"
@@ -276,14 +441,14 @@ TEST(MboToMbpAggregatorTests, AggregatesSamePriceIntoSingleLevel) {
     in.exchangeTsNs = 123;
 
     // Bid side: 3 órdenes mismo precio, + 1 orden otro precio
-    in.bidCountRaw = 4;
+    in.bidsCopied = 4;
     in.bids[0] = { .priceMantissa = 1000, .qty = 10 };
     in.bids[1] = { .priceMantissa = 1000, .qty = 20 };
     in.bids[2] = { .priceMantissa = 1000, .qty = 30 };
     in.bids[3] = { .priceMantissa =  900, .qty =  5 };
 
     // Ask side: 2 precios distintos
-    in.askCountRaw = 3;
+    in.asksCopied = 3;
     in.asks[0] = { .priceMantissa = 1100, .qty = 7 };
     in.asks[1] = { .priceMantissa = 1100, .qty = 8 };
     in.asks[2] = { .priceMantissa = 1200, .qty = 1 };
@@ -313,12 +478,12 @@ TEST(MboToMbpAggregatorTests, ProducesAtMostTopNLevels) {
     in.exchangeTsNs = 1;
 
     // Generar 10 precios distintos (más que Top-5)
-    in.bidCountRaw = 10;
+    in.bidsCopied = 10;
     for (int i = 0; i < 10; ++i) {
         in.bids[i] = { .priceMantissa = 1000 - i, .qty = 1 };
     }
 
-    in.askCountRaw = 10;
+    in.asksCopied = 10;
     for (int i = 0; i < 10; ++i) {
         in.asks[i] = { .priceMantissa = 2000 + i, .qty = 1 };
     }
@@ -339,173 +504,11 @@ TEST(MboToMbpAggregatorTests, IgnoresZeroQtyOrders) {
     in.instrumentId = 9;
     in.exchangeTsNs = 9;
 
-    in.bidCountRaw = 3;
+    in.bidsCopied = 3;
     in.bids[0] = { .priceMantissa = 1000, .qty = 0 };   // ignorar
     in.bids[1] = { .priceMantissa = 1000, .qty = 10 };  // sumar
     in.bids[2] = { .priceMantissa =  900, .qty = 0 };   // ignorar
 
-    in.askCountRaw = 0;
+    in.asksCopied = 0;
 
     BookSnapshot out{};
-    aggregateMboWindowToMbpTopN(in, out);
-
-    ASSERT_EQ(out.bidCount, 1u);
-    EXPECT_EQ(out.bids[0].price, 1000);
-    EXPECT_EQ(out.bids[0].qty,   10);
-    EXPECT_EQ(out.askCount, 0u);
-}
-
-===== FILE: /home/damian/repos/B3-Connector/tests/md/FakeOrderBook.hpp =====
-#pragma once
-#include "../../b3-md-connector/src/core/IOrderBookView.hpp"
-#include <array>
-
-namespace b3::md::test {
-
-class FakeOrderBook final : public b3::md::IOrderBookView {
-public:
-    void setInstrumentId(uint32_t v) { instrumentId_ = v; }
-    void setExchangeTsNs(uint64_t v) { exchangeTsNs_ = v; }
-
-    void setBidCount(uint32_t c) { bidCount_ = c; }
-    void setAskCount(uint32_t c) { askCount_ = c; }
-
-    void setBidLevel(uint32_t i, b3::md::Level lv) { bids_.at(i) = lv; }
-    void setAskLevel(uint32_t i, b3::md::Level lv) { asks_.at(i) = lv; }
-
-    uint32_t instrumentId() const noexcept override { return instrumentId_; }
-    uint64_t exchangeTsNs() const noexcept override { return exchangeTsNs_; }
-
-    uint32_t bidCount() const noexcept override { return bidCount_; }
-    uint32_t askCount() const noexcept override { return askCount_; }
-
-    b3::md::Level bidLevel(uint32_t i) const noexcept override { return bids_.at(i); }
-    b3::md::Level askLevel(uint32_t i) const noexcept override { return asks_.at(i); }
-
-private:
-    uint32_t instrumentId_{0};
-    uint64_t exchangeTsNs_{0};
-    uint32_t bidCount_{0};
-    uint32_t askCount_{0};
-    std::array<b3::md::Level, 10> bids_{};
-    std::array<b3::md::Level, 10> asks_{};
-};
-
-
-===== FILE: /home/damian/repos/B3-Connector/tests/md/test_md_pipeline.cpp =====
-#include <gtest/gtest.h>
-
-#include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
-#include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
-#include "../../b3-md-connector/src/testsupport/FakePublisher.hpp"
-#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
-
-#include <chrono>
-#include <thread>
-#include <unordered_map>
-#include <vector>
-#include <string>
-#include <memory>
-
-using namespace b3::md;
-
-namespace {
-
-uint64_t ParseTs(const std::string& bytes) {
-    auto pos = bytes.find(";ts=");
-    EXPECT_NE(pos, std::string::npos);
-    if (pos == std::string::npos) return 0;
-
-    pos += 4;
-    auto end = bytes.find(';', pos);
-    EXPECT_NE(end, std::string::npos);
-    if (end == std::string::npos) return 0;
-
-    return std::stoull(bytes.substr(pos, end - pos));
-}
-
-uint32_t ParseIid(const std::string& bytes) {
-    auto pos = bytes.find("iid=");
-    EXPECT_EQ(pos, 0u);
-    if (pos != 0u) return 0;
-
-    pos += 4;
-    auto end = bytes.find(';', pos);
-    EXPECT_NE(end, std::string::npos);
-    if (end == std::string::npos) return 0;
-
-    return static_cast<uint32_t>(std::stoul(bytes.substr(pos, end - pos)));
-}
-
-MdPublishPipeline BuildPipeline(uint32_t shards,
-                               MdSnapshotMapper& mapper,
-                               testsupport::FakePublisher &pub) {
-    std::vector<std::unique_ptr<MdPublishWorker>> workers;
-    workers.reserve(shards);
-
-    for (uint32_t i = 0; i < shards; ++i) {
-        workers.emplace_back(
-            std::make_unique<MdPublishWorker>(i, mapper, pub));
-    }
-
-    return MdPublishPipeline(std::move(workers));
-}
-
-} // namespace
-
-TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
-    testsupport::FakePublisher pub;
-    MdSnapshotMapper mapper;
-
-
-    auto pipeline = BuildPipeline(4, mapper, pub);
-    pipeline.start();
-
-    constexpr int EVENTS_PER_INSTRUMENT = 10'000;
-    const std::vector<uint32_t> instruments = {1, 2, 3, 4, 5, 6};
-
-    for (uint32_t iid : instruments) {
-        for (int i = 0; i < EVENTS_PER_INSTRUMENT; ++i) {
-            OrdersSnapshot s{};
-            s.instrumentId = iid;
-            s.exchangeTsNs = static_cast<uint64_t>(i);
-
-            // Para que el agregador produzca bid/askCount > 0 (opcional):
-            s.bidCountRaw = 1;
-            s.askCountRaw = 1;
-            s.bids[0] = { .priceMantissa = 1000 + i, .qty = 1 };
-            s.asks[0] = { .priceMantissa = 2000 + i, .qty = 1 };
-
-            while (!pipeline.tryEnqueue(s)) {
-                std::this_thread::yield();
-            }
-        }
-    }
-
-    const size_t expected =
-        instruments.size() * static_cast<size_t>(EVENTS_PER_INSTRUMENT);
-
-    const auto deadline =
-        std::chrono::steady_clock::now() + std::chrono::seconds(5);
-
-    while (pub.count() < expected &&
-           std::chrono::steady_clock::now() < deadline) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
-    }
-
-    pipeline.stop(true);
-
-    ASSERT_EQ(pub.count(), expected);
-
-    // Agrupar timestamps por instrumento
-    std::unordered_map<uint32_t, std::vector<uint64_t>> seen;
-    seen.reserve(instruments.size());
-
-    for (size_t i = 0; i < expected; ++i) {
-        const auto msg = pub.at(i);
-        seen[ParseIid(msg.bytes)].push_back(ParseTs(msg.bytes));
-    }
-
-    // FIFO estricto por instrumento
-    for (const auto& [iid, tss] : seen) {
-        ASSERT_FALSE(tss.empty());

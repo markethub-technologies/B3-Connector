@@ -1,7 +1,8 @@
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
-#include "FakePublishSink.hpp"
 #include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
 #include "../../b3-md-connector/src/core/OrdersSnapshot.hpp"
+#include "../../b3-md-connector/src/testsupport/FakeInstrumentTopicMapper.hpp"
+#include "FakePublishSink.hpp"
 #include <gtest/gtest.h>
 
 #include <chrono>
@@ -22,8 +23,9 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
   testsupport::FakePublishSink sink;
   MdSnapshotMapper mapper;
   uint32_t shard = 1;
+  testsupport::FakeInstrumentTopicMapper fakeTopics{{77, "AAA"}};
 
-  MdPublishWorker worker(0, mapper, sink);
+  MdPublishWorker worker(0, mapper, sink, fakeTopics.get());
   worker.start();
 
   constexpr int N = 100000;
@@ -55,7 +57,7 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
   uint64_t last = 0;
   for (int i = 0; i < N; ++i) {
     auto m = sink.at(i);
-    EXPECT_EQ(m.topic, "B3-D"); // topic fijo del worker
+    EXPECT_EQ(m.topic, "AAA"); // topic fijo del worker
     uint64_t ts = parse_ts(m.bytes);
     if (i == 0)
       EXPECT_EQ(ts, 0);
@@ -70,7 +72,9 @@ TEST(MdPublishWorkerTests, StopClean) {
   MdSnapshotMapper mapper;
   uint32_t shard = 1;
 
-  MdPublishWorker worker(0, mapper, sink);
+  testsupport::FakeInstrumentTopicMapper fakeTopics{{1, "AAA"}};
+
+  MdPublishWorker worker(0, mapper, sink, fakeTopics.get());
   worker.start();
   std::this_thread::sleep_for(std::chrono::milliseconds(10));
   worker.stop(false);
@@ -80,8 +84,10 @@ TEST(MdPublishWorkerTests, StopClean) {
 TEST(MdPublishWorkerTests, StopWithoutDrainReturnsQuickly) {
   testsupport::FakePublishSink sink;
   MdSnapshotMapper mapper;
+  uint32_t shard = 1;
 
-  MdPublishWorker worker(0, mapper, sink);
+  testsupport::FakeInstrumentTopicMapper fakeTopics{{77, "AAA"}};
+  MdPublishWorker worker(0, mapper, sink, fakeTopics.get());
   worker.start();
 
   OrdersSnapshot s{};
@@ -112,8 +118,13 @@ TEST(MdPublishWorkerTests, StopWithoutDrainReturnsQuickly) {
 TEST(MdPublishWorkerTests, StopWithDrainPublishesAll) {
   testsupport::FakePublishSink sink;
   MdSnapshotMapper mapper;
+  uint32_t shard = 1;
 
-  MdPublishWorker worker(0, mapper, sink);
+  testsupport::FakeInstrumentTopicMapper fakeTopics{
+      {77, "CCC"},
+  };
+
+  MdPublishWorker worker(0, mapper, sink, fakeTopics.get());
   worker.start();
 
   for (int i = 0; i < 1000; ++i) {
@@ -153,10 +164,11 @@ static uint32_t parse_count(const std::string &bytes, const char *key) {
 
 TEST(MdPublishWorkerTests, AggregationAffectsCountsInSerializedOutput) {
   testsupport::FakePublishSink sink;
-
   MdSnapshotMapper mapper;
+  uint32_t shard = 1;
+  testsupport::FakeInstrumentTopicMapper fakeTopics{{77, "AAA"}};
 
-  MdPublishWorker worker(0, mapper, sink);
+  MdPublishWorker worker(0, mapper, sink, fakeTopics.get());
   worker.start();
 
   OrdersSnapshot raw{};
@@ -189,7 +201,7 @@ TEST(MdPublishWorkerTests, AggregationAffectsCountsInSerializedOutput) {
   ASSERT_GE(sink.count(), 1u);
 
   const auto msg = sink.at(0);
-  EXPECT_EQ(msg.topic, "B3-D");
+  EXPECT_EQ(msg.topic, "AAA");
 
   const uint32_t bc = parse_count(msg.bytes, "bc");
   const uint32_t ac = parse_count(msg.bytes, "ac");

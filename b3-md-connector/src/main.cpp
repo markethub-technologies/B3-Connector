@@ -4,8 +4,9 @@
 #include "core/MdPublishWorker.hpp"
 #include "core/MarketDataEngine.hpp"
 #include "onixs/OnixsOrderBookListener.hpp"
-
+#include "onixs/B3InstrumentRegistryListener.hpp"
 #include "mapping/MdSnapshotMapper.hpp"
+#include "mapping/InstrumentTopicMapper.hpp"
 
 // NEW: concentrador PUB (fan-in desde shards)
 #include "publishing/ZmqPublishConcentrator.hpp"
@@ -19,7 +20,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-
 using namespace OnixS::B3::MarketData::UMDF;
 
 namespace {
@@ -118,35 +118,32 @@ int main(int argc, char **argv) {
   std::cerr << "[startup] md.shards=" << shards << "\n";
   std::cerr << "[startup] pub.endpoint=" << pubEndpoint << "\n";
 
-  // -------------------------
-  // Publishing concentrator (1 thread, 1 PUB socket)
-  // -------------------------
+  b3::md::mapping::InstrumentRegistry registry;
+  b3::md::mapping::InstrumentTopicMapper topicMapper(registry);
+
   b3::md::publishing::ZmqPublishConcentrator concentrator(pubEndpoint,
                                                           static_cast<uint32_t>(shards));
   concentrator.start();
-
-  // -------------------------
-  // Pipeline
-  // -------------------------
   b3::md::MdSnapshotMapper mapper;
 
   std::vector<std::unique_ptr<b3::md::MdPublishWorker>> workers;
   workers.reserve(static_cast<size_t>(shards));
 
   for (int i = 0; i < shards; ++i) {
-    workers.emplace_back(std::make_unique<b3::md::MdPublishWorker>(
-        static_cast<uint32_t>(i), mapper,
-        concentrator // IPublishSink (fan-in)
-        ));
+    workers.emplace_back(std::make_unique<b3::md::MdPublishWorker>(static_cast<uint32_t>(i), mapper,
+                                                                   concentrator, topicMapper));
   }
 
   b3::md::MdPublishPipeline pipeline(std::move(workers));
   pipeline.start();
-
-  // -------------------------
-  // Engine + Listener OnixS
-  // -------------------------
   b3::md::MarketDataEngine engine(pipeline);
+
+  // Listener que llena el registry con SecurityDefinition_12
+  b3::md::onixs::B3InstrumentRegistryListener instrumentListener(registry);
+
+  // Gate: no encolar MD hasta que el registry esté ready
+  engine.setRegistryReadyFlag(&instrumentListener.readyAtomic());
+
   b3::md::onixs::OnixsOrderBookListener orderBookListener(engine);
 
   // -------------------------
@@ -165,7 +162,9 @@ int main(int argc, char **argv) {
       settings.networkInterfaceB = ifB.c_str();
 
     Handler handler(settings);
+
     handler.registerOrderBookListener(&orderBookListener);
+    handler.registerMessageListener(&instrumentListener);
 
     std::cerr << "[startup] starting OnixS handler...\n";
     handler.start();

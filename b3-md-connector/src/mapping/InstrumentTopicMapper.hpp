@@ -1,0 +1,65 @@
+#pragma once
+
+#include <cstdint>
+#include <cstring>
+#include <string>
+#include <cstdio>
+
+#include "../publishing/PublishEvent.hpp"
+#include "InstrumentRegistry.hpp"
+
+namespace b3::md::mapping {
+
+  /**
+   * @brief Construye topics de marketdata en formato: "<SYMBOL>"
+   *
+   * las subscripciones y el publish usan SIEMPRE símbolo puro,   *
+   */
+  class InstrumentTopicMapper final {
+   public:
+    explicit InstrumentTopicMapper(const InstrumentRegistry &registry) : registry_(registry) {}
+
+    InstrumentTopicMapper(const InstrumentTopicMapper &) = delete;
+    InstrumentTopicMapper &operator=(const InstrumentTopicMapper &) = delete;
+
+    // Llena ev.topic + ev.topicLen. Devuelve false si excede kMaxTopic.
+    bool tryWriteTopic(InstrumentId iid, b3::md::publishing::PublishEvent &ev) const noexcept {
+      const std::string *sym = registry_.tryResolve(iid);
+
+      // Fallback en pruebas / warmup: evitamos cortar publish.
+      // Ej: "IID:123456"
+      if (!sym) {
+        return writeFallback(iid, ev);
+      }
+
+      const std::size_t n = sym->size();
+      if (n == 0 || n > b3::md::publishing::PublishEvent::kMaxTopic)
+        return false;
+
+      ev.topicLen = static_cast<std::uint8_t>(n);
+      std::memcpy(ev.topic, sym->data(), n);
+      return true;
+    }
+
+   private:
+    static bool writeFallback(InstrumentId iid, b3::md::publishing::PublishEvent &ev) noexcept {
+      // "IID:" + up to 20 digits (uint64) -> max 24
+      char buf[32];
+      const int wrote =
+          std::snprintf(buf, sizeof(buf), "IID:%llu", static_cast<unsigned long long>(iid));
+      if (wrote <= 0)
+        return false;
+      const std::size_t n = static_cast<std::size_t>(wrote);
+      if (n > b3::md::publishing::PublishEvent::kMaxTopic)
+        return false;
+
+      ev.topicLen = static_cast<std::uint8_t>(n);
+      std::memcpy(ev.topic, buf, n);
+      return true;
+    }
+
+   private:
+    const InstrumentRegistry &registry_;
+  };
+
+} // namespace b3::md::mapping
