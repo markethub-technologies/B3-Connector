@@ -26,7 +26,8 @@ namespace b3::md {
     static constexpr size_t kQueueCapacity = 4096;
     static constexpr size_t kLogQueueCapacity = 1024;
 
-    MdPublishWorker(uint32_t shardId, MdSnapshotMapper &mapper, publishing::IPublishSink &sink,
+    MdPublishWorker(uint32_t shardId, b3::md::mapping::MdSnapshotMapper &mapper,
+                    publishing::IPublishSink &sink,
                     const b3::md::mapping::InstrumentTopicMapper &topicMapper)
         : shardId_(shardId), mapper_(mapper), sink_(sink), topicMapper_(topicMapper) {}
 
@@ -192,31 +193,25 @@ namespace b3::md {
       logStartup(nowNs);
 
       auto publish_one = [&](const OrdersSnapshot &s) {
+        // 0) aggregate MBO -> MBP top N (ordenes to niveles de precio)
         aggregateMboWindowToMbpTopN(s, mbp);
 
         outBuffer.clear();
-        mapper_.mapAndSerialize(mbp, outBuffer);
+        publishing::SerializedEnvelope ev{};
 
-        publishing::PublishEvent ev{};
-
-        ev.size = 0;
-
-        // topic = símbolo humano (o fallback IID:xxxx)
+        // 1) topic (símbolo puro) dentro del worker
         if (!topicMapper_.tryWriteTopic(s.instrumentId, ev)) {
           dropped_.fetch_add(1, std::memory_order_relaxed);
           return;
         }
 
-        const size_t n = outBuffer.size();
-        if (n > publishing::PublishEvent::kMaxBytes) {
+        // 2) map + serialize wrapper -> ev.bytes + ev.topic
+        if (!mapper_.mapToSerializedEnvelope(mbp, ev)) {
           dropped_.fetch_add(1, std::memory_order_relaxed);
           return;
         }
 
-        ev.size = static_cast<uint32_t>(n);
-        if (n > 0)
-          std::memcpy(ev.bytes, outBuffer.data(), n);
-
+        // 3) publish serialized envelope
         if (!sink_.tryPublish(shardId_, ev)) {
           dropped_.fetch_add(1, std::memory_order_relaxed);
           return;
@@ -253,7 +248,7 @@ namespace b3::md {
 
     SnapshotQueueSpsc<OrdersSnapshot, kQueueCapacity> queue_;
 
-    MdSnapshotMapper &mapper_;
+    mapping::MdSnapshotMapper &mapper_;
     publishing::IPublishSink &sink_;
 
     telemetry::SpdlogLogPublisher<kLogQueueCapacity> logger_;

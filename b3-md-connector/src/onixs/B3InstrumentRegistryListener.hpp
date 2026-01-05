@@ -18,9 +18,8 @@ namespace b3::md::onixs {
     explicit B3InstrumentRegistryListener(b3::md::mapping::InstrumentRegistry &registry) noexcept
         : registry_(registry) {}
 
+    std::atomic<bool> &readyAtomic() noexcept { return ready_; }
     const std::atomic<bool> &readyAtomic() const noexcept { return ready_; }
-
-    // -------- UMDF callbacks --------
 
     void onSequenceReset_1(const ::OnixS::B3::MarketData::UMDF::Messaging::SequenceReset_1,
                            const ::OnixS::B3::MarketData::UMDF::DataSource &) override {
@@ -49,8 +48,12 @@ namespace b3::md::onixs {
       if (sym.empty())
         return;
 
+      // Strict: antes de ready, solo “capturamos”. Después de ready, podés:
+      // - ignorar updates (freeze)
+      // - o permitir updates (incremental)
       if (ready_.load(std::memory_order_acquire)) {
-        registry_.upsert(iid, std::move(sym)); // incremental update
+        // Freeze estricto: return;
+        registry_.upsert(iid, std::move(sym)); // si querés permitir incremental
         return;
       }
 
@@ -72,8 +75,8 @@ namespace b3::md::onixs {
    private:
     b3::md::mapping::InstrumentRegistry &registry_;
 
-    std::atomic<bool> capturing_{false};
     std::atomic<bool> ready_{false};
+    std::atomic<bool> capturing_{false};
 
     std::unordered_map<std::uint64_t, std::string> staging_;
   };

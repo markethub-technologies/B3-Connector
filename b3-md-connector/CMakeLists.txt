@@ -13,8 +13,9 @@ find_package(spdlog REQUIRED)
 
 add_library(markethub-messaging INTERFACE)
 
+
 target_include_directories(markethub-messaging INTERFACE
-    "${CMAKE_CURRENT_SOURCE_DIR}/../libs/markethub/messaging/include"
+    "${PROJECT_SOURCE_DIR}/../libs/markethub/messaging/include"
 )
 
 target_link_directories(markethub-messaging INTERFACE
@@ -57,8 +58,11 @@ target_link_libraries(onixs-b3-umdf INTERFACE
 # Executable
 # ============================================================
 
+
 add_executable(b3-md-connector
     src/main.cpp
+    src/messaging/B3MdSubscriptionServer.cpp
+    src/MessagingLibIntegrationTest.cpp
 )
 
 target_include_directories(b3-md-connector PRIVATE

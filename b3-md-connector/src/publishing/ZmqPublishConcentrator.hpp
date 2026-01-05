@@ -5,7 +5,7 @@
 #include "../telemetry/LogEvent.hpp"
 
 #include "IPublishSink.hpp"
-#include "PublishEvent.hpp"
+#include "SerializedEnvelope.hpp"
 
 #include <atomic>
 #include <chrono>
@@ -13,8 +13,11 @@
 #include <memory>
 #include <string>
 #include <thread>
-#include <vector>
 #include <utility>
+#include <vector>
+
+// MarketHub.Messaging
+#include <sockets/Publisher.h>
 
 namespace b3::md::publishing {
 
@@ -34,7 +37,6 @@ namespace b3::md::publishing {
       droppedByShard_.reserve(shardCount_);
       enqByShard_.reserve(shardCount_);
       sentByShard_.reserve(shardCount_);
-
       for (uint32_t i = 0; i < shardCount_; ++i) {
         droppedByShard_.emplace_back(0);
         enqByShard_.emplace_back(0);
@@ -61,18 +63,16 @@ namespace b3::md::publishing {
       logger_.stop();
     }
 
-    bool tryPublish(uint32_t shardId, const PublishEvent &ev) noexcept override {
-      if (shardId >= shardCount_) {
-        // si querés, contalo como drop global; no hay slot por shard inválido
+    // IPublishSink
+    bool tryPublish(uint32_t shardId, const SerializedEnvelope &ev) noexcept override {
+      if (shardId >= shardCount_)
         return false;
-      }
 
-      // sanity mínima (barata)
-      if (ev.topicLen == 0 || ev.topicLen > PublishEvent::kMaxTopic) {
+      if (ev.topicLen == 0 || ev.topicLen > SerializedEnvelope::kMaxTopic) {
         droppedByShard_[shardId].v.fetch_add(1, std::memory_order_relaxed);
         return false;
       }
-      if (ev.size > PublishEvent::kMaxBytes) {
+      if (ev.size == 0 || ev.size > SerializedEnvelope::kMaxBytes) {
         droppedByShard_[shardId].v.fetch_add(1, std::memory_order_relaxed);
         return false;
       }
@@ -96,7 +96,18 @@ namespace b3::md::publishing {
     }
 
    private:
-    using QueueT = b3::md::SnapshotQueueSpsc<PublishEvent, kPerShardQueueCapacity>;
+    using QueueT = b3::md::SnapshotQueueSpsc<SerializedEnvelope, kPerShardQueueCapacity>;
+
+    struct CopyableAtomicU64 {
+      std::atomic<uint64_t> v;
+      CopyableAtomicU64(uint64_t init = 0) noexcept : v(init) {}
+      CopyableAtomicU64(const CopyableAtomicU64 &other) noexcept
+          : v(other.v.load(std::memory_order_relaxed)) {}
+      CopyableAtomicU64 &operator=(const CopyableAtomicU64 &other) noexcept {
+        v.store(other.v.load(std::memory_order_relaxed), std::memory_order_relaxed);
+        return *this;
+      }
+    };
 
     static uint64_t nowNsSteady() noexcept {
       const auto now = std::chrono::steady_clock::now().time_since_epoch();
@@ -121,70 +132,73 @@ namespace b3::md::publishing {
       (void)logger_.try_publish(e);
     }
 
-    struct ZmqPubSocket {
-      explicit ZmqPubSocket(const std::string &endpoint) {
-        (void)endpoint;
-        // TODO: bind socket pub con tu lib
-      }
+    // Wrapper RAII
+    struct MessagingPublisher {
+      markethub::messaging::sockets::Publisher pub;
 
-      bool sendMultipart(const char *topic, size_t topicLen, const uint8_t *bytes,
-                         size_t size) noexcept {
-        (void)topic;
-        (void)topicLen;
-        (void)bytes;
-        (void)size;
-        // TODO: 2 frames: topic + payload
-        return true;
+      explicit MessagingPublisher(const std::string &endpoint)
+          : pub(endpoint, /*isMultiplePublisher=*/false) {}
+
+      void start() { pub.Start(); }
+      void stop() { pub.Stop(); }
+
+      void sendSerialized(const SerializedEnvelope &ev) {
+        pub.SendSerialized(ev.topic, ev.topicLen, ev.bytes, ev.size);
       }
     };
 
     void run() noexcept {
       using namespace std::chrono_literals;
 
-      ZmqPubSocket pub(pubEndpoint_);
+      try {
+        MessagingPublisher out(pubEndpoint_);
+        out.start();
 
-      // slow joiner warmup
-      std::this_thread::sleep_for(1500ms);
+        uint32_t rr = 0;
+        uint64_t nextHealth = nowNsSteady() + 5'000'000'000ull;
 
-      uint32_t rr = 0;
-      uint64_t nextHealth = nowNsSteady() + 5'000'000'000ull;
+        SerializedEnvelope ev{};
+        while (running_.load(std::memory_order_acquire)) {
+          bool didWork = false;
 
-      PublishEvent ev{};
-      while (running_.load(std::memory_order_acquire)) {
-        bool didWork = false;
+          for (uint32_t n = 0; n < shardCount_; ++n) {
+            const uint32_t sid = (rr + n) % shardCount_;
+            auto &q = *queues_[sid];
 
-        for (uint32_t n = 0; n < shardCount_; ++n) {
-          const uint32_t sid = (rr + n) % shardCount_;
+            for (uint32_t k = 0; k < kBatchPerShard; ++k) {
+              if (!q.try_pop(ev))
+                break;
+
+              didWork = true;
+              out.sendSerialized(ev);
+              sentByShard_[sid].v.fetch_add(1, std::memory_order_relaxed);
+            }
+          }
+
+          rr = (rr + 1) % shardCount_;
+
+          const uint64_t now = nowNsSteady();
+          if (now >= nextHealth) {
+            nextHealth = now + 5'000'000'000ull;
+            emitHealth(now);
+          }
+
+          if (!didWork)
+            std::this_thread::sleep_for(1ms);
+        }
+
+        // Drain final
+        for (uint32_t sid = 0; sid < shardCount_; ++sid) {
           auto &q = *queues_[sid];
-
-          for (uint32_t k = 0; k < kBatchPerShard; ++k) {
-            if (!q.try_pop(ev))
-              break;
-            didWork = true;
-
-            (void)pub.sendMultipart(ev.topic, ev.topicLen, ev.bytes, ev.size);
+          while (q.try_pop(ev)) {
+            out.sendSerialized(std::move(ev));
             sentByShard_[sid].v.fetch_add(1, std::memory_order_relaxed);
           }
         }
-        rr = (rr + 1) % shardCount_;
 
-        const uint64_t now = nowNsSteady();
-        if (now >= nextHealth) {
-          nextHealth = now + 5'000'000'000ull;
-          emitHealth(now);
-        }
-
-        if (!didWork)
-          std::this_thread::sleep_for(1ms);
-      }
-
-      // Drain opcional al final
-      for (uint32_t sid = 0; sid < shardCount_; ++sid) {
-        auto &q = *queues_[sid];
-        while (q.try_pop(ev)) {
-          (void)pub.sendMultipart(ev.topic, ev.topicLen, ev.bytes, ev.size);
-          sentByShard_[sid].v.fetch_add(1, std::memory_order_relaxed);
-        }
+        out.stop();
+      } catch (...) {
+        // noexcept: swallow
       }
     }
 
@@ -193,30 +207,6 @@ namespace b3::md::publishing {
     uint32_t shardCount_{0};
 
     std::vector<std::unique_ptr<QueueT>> queues_;
-
-    // Wrapper para poder usar atomics dentro de std::vector en libstdc++.
-    //
-    // Motivo:
-    //   std::vector<std::atomic<T>> no es usable de forma portable en GCC/libstdc++,
-    //   porque operaciones inocuas como reserve() instancian código que requiere
-    //   que T sea copy/move constructible. std::atomic NO lo es, por diseño,
-    //   lo que rompe la compilación aunque el vector esté vacío.
-    //
-    // Este wrapper hace a la métrica "copyable" copiando el valor de forma relaxed.
-    // Es seguro para nuestro uso porque estos contadores son solo métricas,
-    // no participan de sincronización ni de lógica de concurrencia del hot path.
-    struct CopyableAtomicU64 {
-      std::atomic<uint64_t> v;
-      CopyableAtomicU64(uint64_t init = 0) noexcept : v(init) {}
-
-      CopyableAtomicU64(const CopyableAtomicU64 &other) noexcept
-          : v(other.v.load(std::memory_order_relaxed)) {}
-
-      CopyableAtomicU64 &operator=(const CopyableAtomicU64 &other) noexcept {
-        v.store(other.v.load(std::memory_order_relaxed), std::memory_order_relaxed);
-        return *this;
-      }
-    };
 
     std::vector<CopyableAtomicU64> droppedByShard_;
     std::vector<CopyableAtomicU64> enqByShard_;

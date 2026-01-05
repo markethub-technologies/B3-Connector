@@ -7,8 +7,6 @@
 #include "onixs/B3InstrumentRegistryListener.hpp"
 #include "mapping/MdSnapshotMapper.hpp"
 #include "mapping/InstrumentTopicMapper.hpp"
-
-// NEW: concentrador PUB (fan-in desde shards)
 #include "publishing/ZmqPublishConcentrator.hpp"
 
 #include <cstdint>
@@ -20,52 +18,61 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <filesystem>
+
 using namespace OnixS::B3::MarketData::UMDF;
 
 namespace {
 
-  // Config ultra simple: key=value por línea, ignora vacíos y #comentarios.
+  std::string trimCopy(std::string s) {
+    auto is_ws = [](unsigned char c) { return c == ' ' || c == '\t' || c == '\r' || c == '\n'; };
+    while (!s.empty() && is_ws((unsigned char)s.back())) s.pop_back();
+    size_t i = 0;
+    while (i < s.size() && is_ws((unsigned char)s[i])) ++i;
+    if (i)
+      s.erase(0, i);
+    return s;
+  }
+
   std::unordered_map<std::string, std::string> loadKeyValueFile(const std::string &path) {
     std::unordered_map<std::string, std::string> kv;
-
-    std::ifstream in(path);
+    std::ifstream in(path, std::ios::binary);
     if (!in.is_open()) {
       std::cerr << "[config] cannot open file: " << path << "\n";
       return kv;
     }
 
     std::string line;
+    bool firstLine = true;
     while (std::getline(in, line)) {
-      // trim básico
-      auto trim = [](std::string &s) {
-        while (!s.empty() &&
-               (s.back() == ' ' || s.back() == '\r' || s.back() == '\n' || s.back() == '\t'))
-          s.pop_back();
-        size_t i = 0;
-        while (i < s.size() && (s[i] == ' ' || s[i] == '\t')) ++i;
-        if (i > 0)
-          s.erase(0, i);
-      };
+      // BOM (UTF-8) en la primera línea
+      if (firstLine) {
+        firstLine = false;
+        if (line.size() >= 3 && (unsigned char)line[0] == 0xEF && (unsigned char)line[1] == 0xBB &&
+            (unsigned char)line[2] == 0xBF) {
+          line.erase(0, 3);
+        }
+      }
 
-      trim(line);
-      if (line.empty())
-        continue;
-      if (!line.empty() && line[0] == '#')
+      line = trimCopy(line);
+      if (line.empty() || line[0] == '#')
         continue;
 
       const auto eq = line.find('=');
       if (eq == std::string::npos)
         continue;
 
-      std::string key = line.substr(0, eq);
-      std::string val = line.substr(eq + 1);
+      std::string key = trimCopy(line.substr(0, eq));
+      std::string val = trimCopy(line.substr(eq + 1));
 
-      trim(key);
-      trim(val);
+      // comentario inline: key=value # comment
+      const auto hash = val.find('#');
+      if (hash != std::string::npos)
+        val = trimCopy(val.substr(0, hash));
+
       if (!key.empty())
         kv[key] = val;
     }
-
     return kv;
   }
 
@@ -87,10 +94,39 @@ namespace {
     }
   }
 
+  std::string findConfigPath(std::string requested) {
+    namespace fs = std::filesystem;
+    fs::path p = requested;
+    if (fs::exists(p))
+      return p.string();
+
+    // si es relativo, probamos subir niveles típicos (build/md)
+    if (!p.is_absolute()) {
+      fs::path cwd = fs::current_path();
+      fs::path p1 = cwd / p;
+      if (fs::exists(p1))
+        return p1.string();
+
+      fs::path p2 = cwd.parent_path() / p;
+      if (fs::exists(p2))
+        return p2.string();
+
+      fs::path p3 = cwd.parent_path().parent_path() / p;
+      if (fs::exists(p3))
+        return p3.string();
+    }
+
+    return requested; // fallback (va a fallar y loguea)
+  }
+
 } // namespace
 
 int main(int argc, char **argv) {
-  const std::string configPath = (argc >= 2) ? argv[1] : "b3-md-connector.conf";
+  namespace fs = std::filesystem;
+  std::cerr << "[startup] cwd=" << fs::current_path().string() << "\n";
+
+  std::string requestedConfig = (argc >= 2) ? argv[1] : "b3-md-connector.conf";
+  const std::string configPath = findConfigPath(requestedConfig);
   const auto cfg = loadKeyValueFile(configPath);
 
   // -------------------------
@@ -106,7 +142,7 @@ int main(int argc, char **argv) {
 
   const int shards = getOrInt(cfg, "md.shards", 4);
 
-  // NEW: PUB endpoint (un solo puerto para todos los topics)
+  const std::string subEndpoint = getOr(cfg, "sub.endpoint", "tcp://*:8080");
   const std::string pubEndpoint = getOr(cfg, "pub.endpoint", "tcp://*:8081");
 
   std::cerr << "[startup] config=" << configPath << "\n";
@@ -116,19 +152,23 @@ int main(int argc, char **argv) {
   std::cerr << "[startup] onixs.if_a=" << (ifA.empty() ? "<auto>" : ifA) << "\n";
   std::cerr << "[startup] onixs.if_b=" << (ifB.empty() ? "<auto>" : ifB) << "\n";
   std::cerr << "[startup] md.shards=" << shards << "\n";
+  std::cerr << "[startup] sub.endpoint=" << subEndpoint << "\n";
   std::cerr << "[startup] pub.endpoint=" << pubEndpoint << "\n";
 
+  // -------------------------
+  // Pipeline publish
+  // -------------------------
   b3::md::mapping::InstrumentRegistry registry;
   b3::md::mapping::InstrumentTopicMapper topicMapper(registry);
 
   b3::md::publishing::ZmqPublishConcentrator concentrator(pubEndpoint,
                                                           static_cast<uint32_t>(shards));
   concentrator.start();
-  b3::md::MdSnapshotMapper mapper;
+
+  b3::md::mapping::MdSnapshotMapper mapper;
 
   std::vector<std::unique_ptr<b3::md::MdPublishWorker>> workers;
   workers.reserve(static_cast<size_t>(shards));
-
   for (int i = 0; i < shards; ++i) {
     workers.emplace_back(std::make_unique<b3::md::MdPublishWorker>(static_cast<uint32_t>(i), mapper,
                                                                    concentrator, topicMapper));
@@ -136,24 +176,23 @@ int main(int argc, char **argv) {
 
   b3::md::MdPublishPipeline pipeline(std::move(workers));
   pipeline.start();
+
   b3::md::MarketDataEngine engine(pipeline);
 
-  // Listener que llena el registry con SecurityDefinition_12
   b3::md::onixs::B3InstrumentRegistryListener instrumentListener(registry);
-
-  // Gate: no encolar MD hasta que el registry esté ready
   engine.setRegistryReadyFlag(&instrumentListener.readyAtomic());
 
   b3::md::onixs::OnixsOrderBookListener orderBookListener(engine);
 
   // -------------------------
-  // OnixS Handler
+  // OnixS Handler (lifetime fuera del try)
   // -------------------------
+  std::unique_ptr<Handler> handler;
+
   try {
     HandlerSettings settings;
     settings.licenseDirectory = licenseDir.c_str();
     settings.buildOrderBooks = true;
-
     settings.loadFeeds(channel, connectivityFile.c_str());
 
     if (!ifA.empty())
@@ -161,19 +200,22 @@ int main(int argc, char **argv) {
     if (!ifB.empty())
       settings.networkInterfaceB = ifB.c_str();
 
-    Handler handler(settings);
+    handler = std::make_unique<Handler>(settings);
 
-    handler.registerOrderBookListener(&orderBookListener);
-    handler.registerMessageListener(&instrumentListener);
+    handler->registerOrderBookListener(&orderBookListener);
+    handler->registerMessageListener(&instrumentListener);
 
     std::cerr << "[startup] starting OnixS handler...\n";
-    handler.start();
+    handler->start();
+
+    // Acá mañana va el start del SubscriptionServer que usa *handler
+    // subServer.Start();
 
     std::cerr << "[runtime] running. Press ENTER to stop...\n";
     std::cin.get();
 
     std::cerr << "[shutdown] stopping OnixS handler...\n";
-    handler.stop(true);
+    handler->stop(true);
   } catch (const std::exception &ex) {
     std::cerr << "[fatal] exception: " << ex.what() << "\n";
   } catch (...) {
@@ -181,8 +223,7 @@ int main(int argc, char **argv) {
   }
 
   // -------------------------
-  // Shutdown: stop pipeline first (workers stop producing publish events),
-  // then stop concentrator (drains remaining events).
+  // Shutdown
   // -------------------------
   std::cerr << "[shutdown] stopping pipeline...\n";
   pipeline.stop(true);

@@ -1,8 +1,11 @@
 #pragma once
 
+#include <cstdint>
 #include <shared_mutex>
 #include <string>
+#include <string_view>
 #include <unordered_map>
+#include <mutex> // <-- necesario para unique_lock
 
 namespace b3::md::mapping {
 
@@ -14,8 +17,8 @@ namespace b3::md::mapping {
     InstrumentRegistry(const InstrumentRegistry &) = delete;
     InstrumentRegistry &operator=(const InstrumentRegistry &) = delete;
 
-    // Lectura: shared_lock => muchos readers simultáneos.
-    const std::string *tryResolve(InstrumentId iid) const noexcept {
+    // iid -> symbol
+    const std::string *tryResolveSymbol(InstrumentId iid) const noexcept {
       std::shared_lock<std::shared_mutex> lock(mu_);
       auto it = byId_.find(iid);
       if (it == byId_.end())
@@ -23,18 +26,57 @@ namespace b3::md::mapping {
       return &it->second;
     }
 
-    // Escritura: unique_lock => 1 writer, bloquea readers mientras dura.
+    // symbol -> iid
+    const InstrumentId *tryResolveId(std::string_view symbol) const noexcept {
+      std::shared_lock<std::shared_mutex> lock(mu_);
+      auto it = bySymbol_.find(std::string(symbol));
+      if (it == bySymbol_.end())
+        return nullptr;
+      return &it->second;
+    }
+
     void upsert(InstrumentId iid, std::string symbol) {
+      if (iid == 0 || symbol.empty())
+        return;
+
       std::unique_lock<std::shared_mutex> lock(mu_);
+
+      // si el iid ya existía con otro símbolo, limpiamos reverse map viejo
+      auto itOld = byId_.find(iid);
+      if (itOld != byId_.end()) {
+        auto itRevOld = bySymbol_.find(itOld->second);
+        if (itRevOld != bySymbol_.end() && itRevOld->second == iid)
+          bySymbol_.erase(itRevOld);
+      }
+
+      // si el símbolo ya existía apuntando a otro iid, lo pisamos (última gana)
+      bySymbol_[symbol] = iid;
       byId_[iid] = std::move(symbol);
     }
 
-    // Útil cuando recibís un fragmento de SecurityList con muchas entradas.
+    // begin/end deben iterar pares (InstrumentId, std::string)
     template <class It>
     void bulkUpsert(It begin, It end) {
       std::unique_lock<std::shared_mutex> lock(mu_);
+
       for (auto it = begin; it != end; ++it) {
-        byId_[it->first] = it->second;
+        const InstrumentId iid = static_cast<InstrumentId>(it->first);
+        const std::string &symRef = it->second;
+
+        if (iid == 0 || symRef.empty())
+          continue;
+
+        // remover reverse viejo si iid ya existía
+        auto itOld = byId_.find(iid);
+        if (itOld != byId_.end()) {
+          auto itRevOld = bySymbol_.find(itOld->second);
+          if (itRevOld != bySymbol_.end() && itRevOld->second == iid)
+            bySymbol_.erase(itRevOld);
+        }
+
+        // insertar / actualizar ambos
+        bySymbol_[symRef] = iid;
+        byId_[iid] = symRef;
       }
     }
 
@@ -46,6 +88,7 @@ namespace b3::md::mapping {
    private:
     mutable std::shared_mutex mu_;
     std::unordered_map<InstrumentId, std::string> byId_;
+    std::unordered_map<std::string, InstrumentId> bySymbol_;
   };
 
 } // namespace b3::md::mapping

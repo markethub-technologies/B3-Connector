@@ -10,9 +10,35 @@
 #include <functional>
 #include <zmq.hpp>
 #include "../models/messages.pb.h"
+#include <variant>
 
 namespace markethub::messaging::sockets {
 
+  struct WireEnvelope final {
+    static constexpr size_t kMaxTopic = 128;
+    static constexpr size_t kMaxBytes = 16384;
+
+    uint32_t size{0};
+    uint8_t topicLen{0};
+    char topic[kMaxTopic]{};
+    uint8_t bytes[kMaxBytes]{};
+
+    bool setTopic(const char *t, size_t n) noexcept {
+      if (!t || n == 0 || n > kMaxTopic)
+        return false;
+      topicLen = static_cast<uint8_t>(n);
+      std::memcpy(topic, t, n);
+      return true;
+    }
+
+    bool setPayload(const void *p, size_t n) noexcept {
+      if (!p || n == 0 || n > kMaxBytes)
+        return false;
+      size = static_cast<uint32_t>(n);
+      std::memcpy(bytes, p, n);
+      return true;
+    }
+  };
   /**
    * @brief Base class for implementing servers that publish messages.
    *
@@ -73,6 +99,10 @@ namespace markethub::messaging::sockets {
      * @throws std::runtime_error If publisher is already disposed
      */
     virtual void SendMessage(WrapperMessage &&message);
+
+    // --- Low-latency path: topic+payload ya serializado (sin strings) ---
+    virtual void SendSerialized(const char *topic, uint8_t topicLen, const void *payload,
+                                uint32_t payloadLen);
 
     /**
      * @brief Gets the startup delay (slow joiner mitigation).
@@ -144,16 +174,17 @@ namespace markethub::messaging::sockets {
     std::chrono::milliseconds
         _delayAfterSendMessage; ///< Delay after sending each message (rate limiting)
 
-    // Message queue (thread-safe)
-    std::queue<WrapperMessage> _messagesToSend; ///< Queue of messages pending transmission
-    mutable std::mutex _queueMutex;             ///< Protects message queue
-    std::condition_variable _queueCV;           ///< Signals when queue has messages
+    // Message queue (thread-safe)}
+    using QueueItem = std::variant<WrapperMessage, WireEnvelope>;
+    std::queue<QueueItem> _messagesToSend;
+    mutable std::mutex _queueMutex;   ///< Protects message queue
+    std::condition_variable _queueCV; ///< Signals when queue has messages
 
     // Thread control
-    std::thread _publisherThread;     ///< Background thread for publishing
-    std::atomic<bool> _stopRequested; ///< Flag to signal thread stop
-    std::atomic<bool> _isRunning;     ///< Flag indicating if publisher is running
-    std::atomic<bool> _disposed;      ///< Flag indicating if publisher is disposed
+    std::thread _publisherThread;       ///< Background thread for publishing
+    std::atomic<bool> _stopRequested;   ///< Flag to signal thread stop
+    std::atomic<bool> _isRunning;       ///< Flag indicating if publisher is running
+    std::atomic<bool> _disposed;        ///< Flag indicating if publisher is disposed
     mutable std::mutex _startStopMutex; ///< Protects Start/Stop operations from race conditions
 
     // Socket initialization synchronization
