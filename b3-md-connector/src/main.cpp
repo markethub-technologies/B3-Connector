@@ -5,6 +5,7 @@
 #include "core/MarketDataEngine.hpp"
 #include "core/SubscriptionRegistry.hpp"
 #include "onixs/OnixsOrderBookListener.hpp"
+#include "onixs/OnixsHandlerWrapper.hpp"
 #include "onixs/B3InstrumentRegistryListener.hpp"
 #include "mapping/MdSnapshotMapper.hpp"
 #include "mapping/InstrumentTopicMapper.hpp"
@@ -132,23 +133,32 @@ int main(int argc, char **argv) {
   const auto cfg = loadKeyValueFile(configPath);
 
   // -------------------------
-  // Config
+  // Configuration Loading
   // -------------------------
+  // Load from b3-md-connector.conf (or file specified as first argument)
+  // See b3-md-connector.conf.example for detailed documentation
+
+  // OnixS B3 UMDF Connection Settings
+  // TODO: Before running, configure these in b3-md-connector.conf:
   const std::string licenseDir = getOr(cfg, "onixs.license_dir", "./LICENSE_DIR_TODO");
   const std::string connectivityFile =
       getOr(cfg, "onixs.connectivity_file", "./CONNECTIVITY_TODO.xml");
   const int channel = getOrInt(cfg, "onixs.channel", 80);
 
+  // Network interfaces for multicast (Linux only, optional)
+  // OnixS will bind to these interfaces to receive B3 multicast feeds
   const std::string ifA = getOr(cfg, "onixs.if_a", "");
   const std::string ifB = getOr(cfg, "onixs.if_b", "");
 
+  // Pipeline Configuration
   const int shards = getOrInt(cfg, "md.shards", 4);
 
-  // Subscription server endpoints
+  // Client Communication Endpoints
+  // Subscription server: Clients send MarketDataSuscriptionRequest here
   const std::string subEndpoint = getOr(cfg, "sub.endpoint", "tcp://*:8080");
-  const std::string subResponseEndpoint = "tcp://*:8082";  // Response port for SubscriberPublisher
+  const std::string subResponseEndpoint = "tcp://*:8082";  // SubscriberPublisher response port (hardcoded)
 
-  // Market data publishing endpoint
+  // Market data publishing: Clients subscribe to symbols and receive MarketDataUpdate here
   const std::string pubEndpoint = getOr(cfg, "pub.endpoint", "tcp://*:8081");
 
   std::cerr << "[startup] config=" << configPath << "\n";
@@ -207,23 +217,62 @@ int main(int argc, char **argv) {
   std::unique_ptr<b3::md::messaging::B3MdSubscriptionServer> subscriptionServer;
 
   try {
+    // -------------------------
+    // OnixS Handler Configuration
+    // -------------------------
+    // This is where we configure the connection to B3 UMDF multicast feeds
     HandlerSettings settings;
+
+    // 1. OnixS License (required)
     settings.licenseDirectory = licenseDir.c_str();
+
+    // 2. Enable OrderBook building (required for our use case)
     settings.buildOrderBooks = true;
+
+    // 3. Load B3 multicast feed addresses from XML connectivity file
+    // This configures three feeds:
+    // - instrumentFeeds: Receives SecurityDefinitions (security list)
+    // - incrementalFeeds: Receives real-time OrderBook updates
+    // - snapshotFeeds: Recovery feed for missed packets
     settings.loadFeeds(channel, connectivityFile.c_str());
 
+    // 4. Network Interface Configuration (Linux only, optional)
+    // If specified, OnixS will bind to these NICs to receive multicast traffic
+    // Feed A and B are redundant feeds from B3 for reliability
     if (!ifA.empty())
       settings.networkInterfaceA = ifA.c_str();
     if (!ifB.empty())
       settings.networkInterfaceB = ifB.c_str();
 
+    // -------------------------
+    // OnixS Handler Initialization
+    // -------------------------
     handler = std::make_unique<Handler>(settings);
 
+    // Register Listeners
+    // 1. OrderBookListener: Receives real-time OrderBook updates → MarketDataEngine → Pipeline
     handler->registerOrderBookListener(&orderBookListener);
+
+    // 2. MessageListener: Receives SecurityDefinitions → InstrumentRegistry
+    // SecurityDefinitions arrive automatically from the instrumentFeed when handler starts
+    // They are sent between two SequenceReset_1 messages (marks the security list batch)
     handler->registerMessageListener(&instrumentListener);
 
+    // -------------------------
+    // Start B3 Connection
+    // -------------------------
+    // This connects to B3 multicast feeds and starts receiving data:
+    // 1. InstrumentFeed: SecurityDefinitions populate the InstrumentRegistry
+    // 2. After registry is ready, IncrementalFeed: OrderBook updates flow through the pipeline
+    // 3. SnapshotFeed: Used for recovery if packets are lost
     std::cerr << "[startup] starting OnixS handler...\n";
     handler->start();
+
+    // At this point:
+    // - OnixS is listening on multicast groups
+    // - SecurityDefinitions will start arriving and populate the registry
+    // - Once registry is ready, OrderBook updates will be processed
+    // - Clients can connect and subscribe to symbols
 
     // -------------------------
     // Subscription Server (on-demand subscriptions)
@@ -232,12 +281,15 @@ int main(int argc, char **argv) {
       std::cerr << "[sub-server][" << level << "] " << msg << "\n";
     };
 
+    // Wrap OnixS Handler to implement IMarketDataHandler interface
+    b3::md::onixs::OnixsHandlerWrapper handlerWrapper(*handler);
+
     subscriptionServer = std::make_unique<b3::md::messaging::B3MdSubscriptionServer>(
         subEndpoint,           // tcp://*:8080 - receives MarketDataSuscriptionRequest
         subResponseEndpoint,   // tcp://*:8082 - sends MarketDataSuscriptionResponse
         registry,
         subscriptionRegistry,
-        *handler,
+        handlerWrapper,
         logCallback);
 
     std::cerr << "[startup] starting subscription server...\n";

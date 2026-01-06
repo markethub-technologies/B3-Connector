@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/MarketDataEngine.hpp"
+#include "../core/OrdersSnapshot.hpp"
 
 #include <OnixS/B3/MarketData/UMDF/OrderBookListener.h>
 #include <OnixS/B3/MarketData/UMDF/OrderBook.h>
@@ -39,6 +40,12 @@ public:
 
         updatedCount_.fetch_add(1, std::memory_order_relaxed);
         engine_.onOrderBookUpdated(book, nowNs);
+    }
+
+    // Testing-only: inject pre-built snapshot (bypasses OnixS book parsing)
+    void injectTestSnapshot(const b3::md::OrdersSnapshot& snapshot) {
+        updatedCount_.fetch_add(1, std::memory_order_relaxed);
+        engine_.injectTestSnapshot(snapshot);
     }
 
     void onOrderBookOutOfDate(const ::OnixS::B3::MarketData::UMDF::OrderBook& /*book*/) override {

@@ -1,0 +1,87 @@
+# ============================================================
+# B3 Market Data Connector - Configuration File
+# ============================================================
+# This file uses key=value format. Lines starting with # are comments.
+#
+# SETUP INSTRUCTIONS:
+# 1. Copy this file to b3-md-connector.conf
+# 2. Fill in the values provided by B3 (marked with TODO)
+# 3. Run: ./build/md/b3-md-connector b3-md-connector.conf
+
+# ============================================================
+# OnixS B3 UMDF Configuration
+# ============================================================
+
+# OnixS License Directory
+# TODO: Get license file from OnixS and place in this directory
+onixs.license_dir=/path/to/onixs/licenses
+
+# OnixS Connectivity Configuration File
+# This XML file contains the multicast IPs and ports for:
+# - instrument feed (SecurityDefinitions)
+# - incremental feed (OrderBook updates)
+# - snapshot feed (recovery)
+#
+# TODO: Get connectivity file from B3 (see b3-connectivity.xml.example)
+onixs.connectivity_file=/path/to/b3-connectivity.xml
+
+# B3 Channel ID
+# Common channels:
+# - 80: Equities (PETR4, VALE3, etc.)
+# - 82: Options
+# - 84: Futures
+# - 86: BM&F
+# - 88-98: Other asset classes
+#
+# TODO: Confirm which channel you're subscribing to
+onixs.channel=80
+
+# Network Interfaces (Linux only, optional)
+# If you have multiple NICs, specify which to use for multicast feeds
+# Feed A and Feed B are redundant feeds from B3
+#
+# Examples:
+#   onixs.if_a=eth0
+#   onixs.if_b=eth1
+#
+# Leave empty for automatic selection
+onixs.if_a=
+onixs.if_b=
+
+# ============================================================
+# Market Data Pipeline Configuration
+# ============================================================
+
+# Number of worker threads for parallel processing
+# Higher values = more parallelism but more CPU usage
+# Recommended: 4-8 for production
+md.shards=4
+
+# ============================================================
+# Client Communication Endpoints
+# ============================================================
+
+# Subscription Server Endpoint (clients send subscription requests here)
+# Clients use MarketDataSuscriptionRequest to subscribe/unsubscribe
+# Format: tcp://*:PORT or tcp://IP:PORT
+sub.endpoint=tcp://*:8080
+
+# Market Data Publishing Endpoint (ZMQ PUB socket)
+# Clients subscribe to symbols and receive MarketDataUpdate messages
+# Format: tcp://*:PORT or tcp://IP:PORT
+pub.endpoint=tcp://*:8081
+
+# Note: Subscription response endpoint is hardcoded to tcp://*:8082
+# This is used by the SubscriberPublisher to send responses back to clients
+
+# ============================================================
+# Example Production Configuration
+# ============================================================
+# onixs.license_dir=/opt/onixs/licenses
+# onixs.connectivity_file=/opt/b3/config/connectivity-prod.xml
+# onixs.channel=80
+# onixs.if_a=eth0
+# onixs.if_b=eth1
+# md.shards=8
+# sub.endpoint=tcp://*:8080
+# pub.endpoint=tcp://*:8081

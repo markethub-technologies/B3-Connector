@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  B3 UMDF Connectivity Configuration - Example Template
+
+  This file defines the multicast groups for B3 market data feeds.
+  Each channel has three types of feeds:
+
+  1. INSTRUMENT FEED: Publishes SecurityDefinition messages (security list)
+  2. INCREMENTAL FEED: Publishes real-time OrderBook updates
+  3. SNAPSHOT FEED: Provides recovery snapshots when packets are lost
+
+  B3 provides two redundant feeds (A and B) for reliability.
+
+  SETUP INSTRUCTIONS:
+  1. Get the official connectivity file from B3 (Test or Production environment)
+  2. Replace the IP addresses and ports below with the actual values
+  3. Configure the channel ID in b3-md-connector.conf to match one of these channels
+
+  IMPORTANT: The IPs below are examples from OnixS documentation.
+  Use the real IPs provided by B3 for your environment!
+-->
+
+<configuration environment="TODO_REPLACE_WITH_TEST_OR_PROD">
+
+  <!-- Channel 80: Equities (PETR4, VALE3, ITUB4, etc.) -->
+  <channel id="80">
+    <!-- Instrument Feed: Sends SecurityDefinitions -->
+    <instrument>
+      <a ip="233.XXX.XXX.XXX" port="33080"/>
+    </instrument>
+
+    <!-- Snapshot Feed: Recovery feed for missed packets -->
+    <snapshot>
+      <a ip="233.XXX.XXX.XXX" port="34080"/>
+    </snapshot>
+
+    <!-- Incremental Feed: Real-time OrderBook updates -->
+    <incremental>
+      <a ip="233.XXX.XXX.XXX" port="31080"/>  <!-- Feed A (primary) -->
+      <b ip="233.XXX.XXX.XXX" port="31080"/>  <!-- Feed B (backup) -->
+    </incremental>
+  </channel>
+
+  <!-- Channel 82: Options -->
+  <channel id="82">
+    <instrument>
+      <a ip="233.XXX.XXX.XXX" port="33082"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.XXX.XXX.XXX" port="34082"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.XXX.XXX.XXX" port="31082"/>
+      <b ip="233.XXX.XXX.XXX" port="31082"/>
+    </incremental>
+  </channel>
+
+  <!-- Channel 84: Futures -->
+  <channel id="84">
+    <instrument>
+      <a ip="233.XXX.XXX.XXX" port="33084"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.XXX.XXX.XXX" port="34084"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.XXX.XXX.XXX" port="31084"/>
+      <b ip="233.XXX.XXX.XXX" port="31084"/>
+    </incremental>
+  </channel>
+
+  <!-- Add more channels as needed (86, 88, 90, 92, 94, 98, etc.) -->
+
+</configuration>
+
+<!--
+  TEST ENVIRONMENT EXAMPLE (from OnixS documentation):
+
+  <channel id="80">
+    <instrument>
+      <a ip="233.205.192.108" port="33080"/>
+    </instrument>
+    <snapshot>
+      <a ip="233.205.192.106" port="34080"/>
+    </snapshot>
+    <incremental>
+      <a ip="233.205.192.107" port="31080"/>
+      <b ip="233.205.192.142" port="31080"/>
+    </incremental>
+  </channel>
+
+  PRODUCTION ENVIRONMENT:
+  Contact B3 support to get the official production connectivity file.
+-->

@@ -46,14 +46,16 @@ namespace b3::md::mapping {
       book->set_depth(static_cast<int32_t>((s.bidCount > s.askCount) ? s.bidCount : s.askCount));
 
       // Si bidCount/askCount ya vienen cappeados por DEPTH, no hace falta min().
+      // B3 prices are in mantissa format (4 decimal places): price × 10000
+      // Convert to readable decimal format: 109000000 → 10900.00
       for (int i = 0; i < s.bidCount; ++i) {
         auto *l = book->add_bid_lines();
-        l->set_price(s.bids[i].price);
+        l->set_price(s.bids[i].price / 10000.0);
         l->set_quantity(s.bids[i].qty);
       }
       for (int i = 0; i < s.askCount; ++i) {
         auto *l = book->add_offer_lines();
-        l->set_price(s.asks[i].price);
+        l->set_price(s.asks[i].price / 10000.0);
         l->set_quantity(s.asks[i].qty);
       }
 

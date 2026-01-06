@@ -35,6 +35,18 @@ namespace b3::md {
         drops_.fetch_add(1, std::memory_order_relaxed);
     }
 
+    // Testing-only: inject pre-built snapshot (bypasses OnixS book parsing)
+    void injectTestSnapshot(const OrdersSnapshot& snapshot) noexcept {
+      // Apply same strict gating as normal flow
+      if (registryReady_ && !registryReady_->load(std::memory_order_acquire)) {
+        gatedDrops_.fetch_add(1, std::memory_order_relaxed);
+        return;
+      }
+
+      if (!pipeline_.tryEnqueue(snapshot))
+        drops_.fetch_add(1, std::memory_order_relaxed);
+    }
+
     uint64_t drops() const noexcept { return drops_.load(std::memory_order_relaxed); }
     uint64_t gatedDrops() const noexcept { return gatedDrops_.load(std::memory_order_relaxed); }
 

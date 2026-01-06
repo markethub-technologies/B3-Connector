@@ -108,14 +108,43 @@ private:
         const char* comp = to_component(e.component);
         const char* code = to_code(e.code);
 
-        // Minimal formatting; do string work here (NOT in producers)
-        if (e.level == LogLevel::Error) {
-            spdlog::error("[{}] code={} iid={} shard={} arg0={} arg1={}",
-                          comp, code, e.instrumentId, e.shard, e.arg0, e.arg1);
+        // Decode packed values for readability
+        // Worker health_tick: arg1 = (enqueued << 32) | published
+        // Worker queue_saturated: arg1 = (deltaDrops << 32) | totalDrops
+        if (e.component == Component::Worker &&
+            (e.code == Code::HealthTick || e.code == Code::QueueSaturated)) {
+
+            const uint64_t high = (e.arg1 >> 32) & 0xFFFFFFFFull;
+            const uint64_t low = e.arg1 & 0xFFFFFFFFull;
+
+            if (e.code == Code::HealthTick) {
+                // arg0 = queue_size, high = enqueued, low = published
+                if (e.level == LogLevel::Error) {
+                    spdlog::error("[{}] code={} shard={} qsize={} enq={} pub={}",
+                                  comp, code, e.shard, e.arg0, high, low);
+                } else {
+                    spdlog::info("[{}] code={} shard={} qsize={} enq={} pub={}",
+                                 comp, code, e.shard, e.arg0, high, low);
+                }
+            } else {
+                // queue_saturated: arg0 = qsize, high = deltaDrops, low = totalDrops
+                if (e.level == LogLevel::Error) {
+                    spdlog::error("[{}] code={} shard={} qsize={} delta_drops={} total_drops={}",
+                                  comp, code, e.shard, e.arg0, high, low);
+                } else {
+                    spdlog::info("[{}] code={} shard={} qsize={} delta_drops={} total_drops={}",
+                                 comp, code, e.shard, e.arg0, high, low);
+                }
+            }
         } else {
-            // Health and Info -> info for now (can map Health->info too)
-            spdlog::info("[{}] code={} iid={} shard={} arg0={} arg1={}",
-                         comp, code, e.instrumentId, e.shard, e.arg0, e.arg1);
+            // Standard format for other events
+            if (e.level == LogLevel::Error) {
+                spdlog::error("[{}] code={} iid={} shard={} arg0={} arg1={}",
+                              comp, code, e.instrumentId, e.shard, e.arg0, e.arg1);
+            } else {
+                spdlog::info("[{}] code={} iid={} shard={} arg0={} arg1={}",
+                             comp, code, e.instrumentId, e.shard, e.arg0, e.arg1);
+            }
         }
     }
 

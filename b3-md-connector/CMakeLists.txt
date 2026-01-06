@@ -86,3 +86,56 @@ set_target_properties(b3-md-connector PROPERTIES
         "${CMAKE_CURRENT_SOURCE_DIR}/../libs/markethub/messaging/lib;
          ${CMAKE_CURRENT_SOURCE_DIR}/../external/B3/UMDF/lib"
 )
+
+# ============================================================
+# b3-md-connector-simulator: End-to-end test simulator
+# ============================================================
+
+add_executable(b3-md-connector-simulator
+    src/simulator_main.cpp
+    src/messaging/B3MdSubscriptionServer.cpp
+)
+
+target_include_directories(b3-md-connector-simulator PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+target_link_libraries(b3-md-connector-simulator PRIVATE
+    spdlog::spdlog
+    fmt::fmt
+    markethub-messaging
+    onixs-b3-umdf
+    pthread
+    zmq
+)
+
+set_target_properties(b3-md-connector-simulator PROPERTIES
+    BUILD_RPATH
+        "${CMAKE_CURRENT_SOURCE_DIR}/../libs/markethub/messaging/lib;
+         ${CMAKE_CURRENT_SOURCE_DIR}/../external/B3/UMDF/lib"
+)
+
+# ============================================================
+# test-client: Client for testing the simulator
+# ============================================================
+
+add_executable(test-client
+    src/testsupport/test_client_main.cpp
+)
+
+target_include_directories(test-client PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
+
+target_link_libraries(test-client PRIVATE
+    spdlog::spdlog
+    fmt::fmt
+    markethub-messaging
+    pthread
+    zmq
+)
+
+set_target_properties(test-client PROPERTIES
+    BUILD_RPATH
+        "${CMAKE_CURRENT_SOURCE_DIR}/../libs/markethub/messaging/lib"
+)

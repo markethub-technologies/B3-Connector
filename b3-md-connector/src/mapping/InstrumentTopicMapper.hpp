@@ -23,8 +23,18 @@ namespace b3::md::mapping {
     InstrumentTopicMapper(const InstrumentTopicMapper &) = delete;
     InstrumentTopicMapper &operator=(const InstrumentTopicMapper &) = delete;
 
-    // Get topic string and length without writing to envelope yet
-    // Returns pair: (topic_ptr, topic_len). Returns (nullptr, 0) if symbol not in registry.
+    /**
+     * @brief Get topic string for publishing
+     *
+     * Returns the symbol string for the given instrument ID.
+     *
+     * @param iid Instrument ID to resolve
+     * @return Pair of (topic_ptr, topic_len). Returns (nullptr, 0) if symbol not in registry.
+     *
+     * @note NO FALLBACK: If the symbol cannot be resolved, returns nullptr.
+     *       The caller (MdPublishWorker) will drop the message and increment dropped counter.
+     *       This ensures clients only receive messages with real symbols they can filter on.
+     */
     std::pair<const char*, std::uint8_t> getTopic(InstrumentId iid) const noexcept {
       const std::string *sym = registry_.tryResolveSymbol(iid);
       if (sym) {
@@ -36,41 +46,6 @@ namespace b3::md::mapping {
 
       // No fallback - if symbol not in registry, drop the message
       return {nullptr, 0};
-    }
-
-    // Llena ev.topic + ev.topicLen. Devuelve false si excede kMaxTopic.
-    bool tryWriteTopic(InstrumentId iid,
-                       b3::md::publishing::SerializedEnvelope &env) const noexcept {
-      const std::string *sym = registry_.tryResolveSymbol(iid);
-      if (!sym) {
-        return writeFallback(iid, env);
-      }
-
-      const std::size_t n = sym->size();
-      if (n == 0 || n > b3::md::publishing::SerializedEnvelope::kMaxTopic)
-        return false;
-
-      env.topicLen = static_cast<std::uint8_t>(n);
-      std::memcpy(env.topic, sym->data(), n);
-      return true;
-    }
-
-   private:
-    static bool writeFallback(InstrumentId iid,
-                              b3::md::publishing::SerializedEnvelope &env) noexcept {
-      char buf[32];
-      const int wrote =
-          std::snprintf(buf, sizeof(buf), "IID:%llu", static_cast<unsigned long long>(iid));
-      if (wrote <= 0)
-        return false;
-
-      const std::size_t n = static_cast<std::size_t>(wrote);
-      if (n > b3::md::publishing::SerializedEnvelope::kMaxTopic)
-        return false;
-
-      env.topicLen = static_cast<std::uint8_t>(n);
-      std::memcpy(env.topic, buf, n);
-      return true;
     }
 
    private:

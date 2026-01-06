@@ -36,7 +36,8 @@ B3-Connector/
 │       │   ├── SnapshotQueueSpsc.hpp      # Lock-free SPSC queue
 │       │   ├── MboToMbpAggregator.hpp     # MBO → MBP conversion
 │       │   ├── SubscriptionRegistry.hpp   # Tracks active subscriptions per instrument
-│       │   └── IOrderBookView.hpp         # Interface for OnixS abstraction
+│       │   ├── IOrderBookView.hpp         # Interface for OnixS OrderBook abstraction
+│       │   └── IMarketDataHandler.hpp     # Interface for OnixS Handler abstraction (subscribe/unsubscribe)
 │       ├── mapping/          # Instrument mapping system
 │       │   ├── InstrumentRegistry.hpp     # InstrumentId ↔ Symbol bidirectional registry
 │       │   ├── InstrumentTopicMapper.hpp  # Topic resolution (symbol-only, drops if not found)
@@ -58,9 +59,13 @@ B3-Connector/
 │       │   ├── LogEvent.hpp               # Structured telemetry POD
 │       │   ├── LogQueueSpsc.hpp           # SPSC queue for logs
 │       │   └── SpdlogLogPublisher.hpp     # Off-hot-path log consumer
-│       ├── testsupport/      # Test utilities
+│       ├── testsupport/      # Test utilities and simulator
 │       │   ├── FakeInstrumentTopicMapper.hpp
-│       │   └── OrdersSnapshotFromMbpView.hpp
+│       │   ├── FakeOnixsHandler.hpp       # OnixS simulator (implements IMarketDataHandler)
+│       │   ├── OrdersSnapshotFromMbpView.hpp
+│       │   ├── securities.json            # Sample instruments for simulator
+│       │   ├── test_client_main.cpp       # C++ test client (subscribes + listens)
+│       │   └── simulator_main.cpp         # End-to-end simulator executable
 │       └── main.cpp
 ├── b3-oe-connector/          # Order entry connector executable
 │   └── src/
@@ -583,6 +588,10 @@ struct LogEvent {
 - Structured telemetry (56 bytes)
 - Transported via SPSC queue
 - Formatted off-hot-path by SpdlogLogPublisher
+- **Packed values decoded for readability:**
+  - Worker `health_tick`: `arg1 = (enqueued << 32) | published` → logs show `enq=X pub=Y`
+  - Worker `queue_saturated`: `arg1 = (deltaDrops << 32) | totalDrops` → logs show `delta_drops=X total_drops=Y`
+  - Concentrator: `arg0=dropped`, `arg1=sent` (unpacked)
 
 ## Implementation Status
 
@@ -604,6 +613,10 @@ struct LogEvent {
    - ✅ Implemented using `WrapperMessage` + `MarketDataUpdate`
    - Serializes BookSnapshot (MBP Top 5 levels) to protobuf
    - Topic set to symbol (e.g., "PETR4")
+   - **Price Format**: Converts B3 mantissa (4 decimals) to readable decimal
+     - Internal: `priceMantissa = 109000000` (int64)
+     - Protobuf: `price = 10900.00` (double)
+     - Conversion: `price / 10000.0` in mapper (negligible overhead: ~0.1%)
 
 4. **Strict Registry Gating & Symbol-Only Publishing**
    - Engine drops all updates until `registryReady=true` (MarketDataEngine.hpp:26-28)
@@ -664,6 +677,87 @@ _(None - all medium priority issues resolved)_
 ### 🟢 Low (Documentation Mismatch)
 
 _(None - all low priority issues resolved)_
+
+## Testing & Simulation
+
+### End-to-End Simulator
+
+The MD connector includes a full end-to-end simulator (`b3-md-connector/src/testsupport/simulator_main.cpp`) that runs the entire production stack without requiring B3 connectivity:
+
+**Components:**
+- `FakeOnixsHandler`: Simulates OnixS UMDF Handler, generates synthetic OrderBook updates
+- `B3MdSubscriptionServer`: Real subscription server (handles client requests)
+- `MdPublishPipeline` + workers: Real production pipeline
+- `ZmqPublishConcentrator`: Real ZMQ publisher
+
+**Usage:**
+```bash
+# From b3-md-connector devcontainer
+cmake --build build/md --target simulator
+./build/md/simulator
+
+# In another terminal, run test client
+./build/md/test_client PETR4 VALE3 ITUB4
+```
+
+**Configuration:**
+- Securities loaded from `b3-md-connector/src/testsupport/securities.json`
+- Generates updates every 100ms for all loaded instruments
+- Subscription endpoint: tcp://localhost:8080 (requests) + tcp://localhost:8082 (responses)
+- Market data endpoint: tcp://localhost:8081 (MarketDataUpdate messages)
+
+See `SIMULATOR.md` for detailed documentation.
+
+### Testing-Only Injection Methods
+
+To enable end-to-end testing without OnixS SDK dependencies, the following classes have testing-only injection methods:
+
+**OnixsOrderBookListener::injectTestSnapshot()**
+- Bypasses OnixS `OrderBook` parsing
+- Directly injects pre-built `OrdersSnapshot`
+- Marked as testing-only in comments
+
+**MarketDataEngine::injectTestSnapshot()**
+- Bypasses `OnixsOrdersSnapshotBuilder::buildFromBook()`
+- Applies same strict registry gating as production path
+- Used by `FakeOnixsHandler` to generate synthetic updates
+
+**Design Principle:**
+- Injection methods are clearly marked as testing-only
+- Production code path remains unchanged
+- Tests validate full pipeline except OnixS parsing layer
+
+**What Gets Tested:**
+- ✅ Registry gating (strict mode)
+- ✅ Pipeline enqueue and sharding
+- ✅ MBO → MBP aggregation
+- ✅ Topic resolution
+- ✅ Protobuf serialization (with price conversion)
+- ✅ ZMQ publishing
+- ✅ Subscription handling
+- ❌ Only `OnixsOrdersSnapshotBuilder::buildFromBook()` not tested
+
+### IMarketDataHandler Interface
+
+To decouple the subscription server from OnixS concrete types, the `IMarketDataHandler` interface (`b3-md-connector/src/core/IMarketDataHandler.hpp`) abstracts subscribe/unsubscribe operations:
+
+```cpp
+class IMarketDataHandler {
+public:
+    virtual ~IMarketDataHandler() = default;
+    virtual void subscribe(uint64_t instrumentId) = 0;
+    virtual void unsubscribe(uint64_t instrumentId) = 0;
+};
+```
+
+**Implementations:**
+- **Production**: OnixS Handler (wrapped, TODO: implement wrapper)
+- **Testing**: `FakeOnixsHandler` (logs subscribe/unsubscribe calls, generates synthetic data)
+
+**Benefits:**
+- Avoids dangerous `reinterpret_cast` between incompatible class hierarchies
+- Enables full subscription server testing without OnixS SDK
+- Clean separation of concerns
 
 ## MarketHub Messaging Usage Patterns
 

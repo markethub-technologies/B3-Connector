@@ -56,7 +56,7 @@ namespace b3::md::messaging {
                                                  const std::string &publishingEndpoint,
                                                  b3::md::mapping::InstrumentRegistry &registry,
                                                  b3::md::SubscriptionRegistry &subs,
-                                                 ::OnixS::B3::MarketData::UMDF::Handler &handler,
+                                                 b3::md::IMarketDataHandler &handler,
                                                  LogCallback logCb)
       : SubscriberPublisher(serverEndpoint, publishingEndpoint, std::move(logCb)),
         registry_(registry),

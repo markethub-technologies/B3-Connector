@@ -3,10 +3,9 @@
 #include <memory>
 #include <string>
 
-#include <OnixS/B3/MarketData/UMDF/Handler.h>
-
 #include "../mapping/InstrumentRegistry.hpp"
 #include "../core/SubscriptionRegistry.hpp"
+#include "../core/IMarketDataHandler.hpp"
 
 // Tu librería
 #include <servers/SubscriberPublisher.h>
@@ -20,7 +19,7 @@ namespace b3::md::messaging {
     B3MdSubscriptionServer(const std::string &serverEndpoint, const std::string &publishingEndpoint,
                            b3::md::mapping::InstrumentRegistry &registry,
                            b3::md::SubscriptionRegistry &subs,
-                           ::OnixS::B3::MarketData::UMDF::Handler &handler,
+                           b3::md::IMarketDataHandler &handler,
                            LogCallback logCb = nullptr);
 
    protected:
@@ -30,7 +29,7 @@ namespace b3::md::messaging {
    private:
     b3::md::mapping::InstrumentRegistry &registry_;
     b3::md::SubscriptionRegistry &subs_;
-    ::OnixS::B3::MarketData::UMDF::Handler &handler_;
+    b3::md::IMarketDataHandler &handler_;
   };
 
 } // namespace b3::md::messaging
