@@ -4,6 +4,7 @@
 #include "../publishing/SerializedEnvelope.hpp"
 
 #include <cstdint>
+#include <cstring>
 #include <string>
 
 // Protobuf (tu lib)
@@ -12,15 +13,19 @@
 
 namespace b3::md::mapping {
 
-  class MdSnapshotMapper final {
+  class MdSnapshotMapper {
    public:
-    bool mapToSerializedEnvelope(const b3::md::BookSnapshot &s,
-                                 b3::md::publishing::SerializedEnvelope &ev) const noexcept {
+    virtual ~MdSnapshotMapper() = default;
+
+    virtual bool mapToSerializedEnvelope(const b3::md::BookSnapshot &s,
+                                         b3::md::publishing::SerializedEnvelope &ev,
+                                         const char* topic,
+                                         std::uint8_t topicLen) const noexcept {
       using ::markethub::messaging::WrapperMessage;
       using ::markethub::messaging::models::MessageTypes;
 
-      // Topic ya viene escrito por el worker (topicMapper)
-      if (ev.topicLen == 0 || ev.topicLen > b3::md::publishing::SerializedEnvelope::kMaxTopic)
+      // Validate topic before processing
+      if (topicLen == 0 || topicLen > b3::md::publishing::SerializedEnvelope::kMaxTopic)
         return false;
 
       ev.size = 0;
@@ -29,13 +34,13 @@ namespace b3::md::mapping {
       msg.set_message_type(std::string(MessageTypes::MarketDataUpdate));
 
       // C# usa ClientId como topic. Acá igual.
-      msg.set_client_id(ev.topic, ev.topicLen);
+      msg.set_client_id(topic, topicLen);
       msg.set_message_id(""); // opcional
 
       auto *book = msg.mutable_market_data_update();
 
       auto *inst = book->mutable_instrument();
-      inst->set_symbol(ev.topic, ev.topicLen);
+      inst->set_symbol(topic, topicLen);
 
       book->set_is_aggregated(true);
       book->set_depth(static_cast<int32_t>((s.bidCount > s.askCount) ? s.bidCount : s.askCount));
@@ -58,7 +63,13 @@ namespace b3::md::mapping {
         return false;
 
       ev.size = static_cast<uint32_t>(size);
-      return msg.SerializeToArray(ev.bytes, size);
+      if (!msg.SerializeToArray(ev.bytes, size))
+        return false;
+
+      // Only write topic if serialization succeeded (fixes state consistency)
+      ev.topicLen = topicLen;
+      std::memcpy(ev.topic, topic, topicLen);
+      return true;
     }
   };
 

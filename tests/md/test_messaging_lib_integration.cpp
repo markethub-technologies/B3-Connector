@@ -29,7 +29,7 @@ namespace {
   }
 } // namespace
 
-int main2() {
+int main() {
   // spdlog::info("=== B3 Market Data Connector Test ===");
   // spdlog::info("OnixS C++ B3 Binary UMDF Market Data Handler version {}",
   //              OnixS::B3::MarketData::UMDF::Handler::version());

@@ -34,26 +34,33 @@ B3-Connector/
 │       │   ├── OrdersSnapshot.hpp         # MBO window (up to 256 orders/side)
 │       │   ├── BookSnapshot.hpp           # MBP aggregated (Top 5 levels)
 │       │   ├── SnapshotQueueSpsc.hpp      # Lock-free SPSC queue
-│       │   └── MboToMbpAggregator.hpp     # MBO → MBP conversion
-│       ├── mapping/          # NEW: Instrument mapping system
-│       │   ├── InstrumentRegistry.hpp     # InstrumentId → Symbol registry
-│       │   ├── InstrumentTopicMapper.hpp  # Topic resolution (symbol or IID:*)
-│       │   └── MdSnapshotMapper.hpp       # Protobuf serialization (stub)
+│       │   ├── MboToMbpAggregator.hpp     # MBO → MBP conversion
+│       │   ├── SubscriptionRegistry.hpp   # Tracks active subscriptions per instrument
+│       │   └── IOrderBookView.hpp         # Interface for OnixS abstraction
+│       ├── mapping/          # Instrument mapping system
+│       │   ├── InstrumentRegistry.hpp     # InstrumentId ↔ Symbol bidirectional registry
+│       │   ├── InstrumentTopicMapper.hpp  # Topic resolution (symbol-only, drops if not found)
+│       │   └── MdSnapshotMapper.hpp       # Protobuf serialization (✅ IMPLEMENTED)
 │       ├── onixs/            # OnixS SDK adapters
 │       │   ├── OnixsOrderBookListener.hpp
 │       │   ├── OnixOrderBookView.hpp      # IOrderBookView interface
 │       │   ├── OnixsOrdersSnapshotBuilder.hpp
-│       │   └── B3InstrumentRegistryListener.hpp  # SecurityDefinition listener
-│       ├── publishing/       # NEW: ZMQ publishing infrastructure
+│       │   └── B3InstrumentRegistryListener.hpp  # SecurityDefinition listener (✅ WIRED)
+│       ├── publishing/       # ZMQ publishing infrastructure
 │       │   ├── IPublishSink.hpp           # Interface for publish targets
-│       │   ├── PublishEvent.hpp           # Flat event struct (topic + payload)
-│       │   └── ZmqPublishConcentrator.hpp # Fan-in concentrator (N queues → 1 socket)
+│       │   ├── SerializedEnvelope.hpp     # Flat event struct (16KB topic + payload)
+│       │   ├── PublishMessage.hpp         # Type alias for WrapperMessage
+│       │   └── ZmqPublishConcentrator.hpp # Fan-in concentrator (✅ uses MarketHub.Messaging)
+│       ├── messaging/        # MarketHub subscription server
+│       │   ├── B3MdSubscriptionServer.hpp # On-demand subscription handler (ACTIVE)
+│       │   └── B3MdSubscriptionServer.cpp # Implementation
 │       ├── telemetry/        # Logging and health monitoring
 │       │   ├── LogEvent.hpp               # Structured telemetry POD
 │       │   ├── LogQueueSpsc.hpp           # SPSC queue for logs
 │       │   └── SpdlogLogPublisher.hpp     # Off-hot-path log consumer
 │       ├── testsupport/      # Test utilities
-│       │   └── FakeInstrumentTopicMapper.hpp
+│       │   ├── FakeInstrumentTopicMapper.hpp
+│       │   └── OrdersSnapshotFromMbpView.hpp
 │       └── main.cpp
 ├── b3-oe-connector/          # Order entry connector executable
 │   └── src/
@@ -71,9 +78,13 @@ B3-Connector/
 │       └── BOE/             # OnixS B3 BOE SDK (order entry)
 └── tests/
     ├── md/                  # Market data tests
-    │   ├── test_md_pipeline.cpp      # FIFO ordering tests
-    │   ├── test_md_worker.cpp        # Worker lifecycle tests
+    │   ├── test_md_pipeline.cpp      # FIFO ordering tests (gtest)
+    │   ├── test_md_worker.cpp        # Worker lifecycle tests (gtest)
+    │   ├── test_md_engine.cpp
     │   ├── test_mbo_to_mbp_aggregator.cpp
+    │   ├── test_mbo_to_mbp_ordering_contract.cpp
+    │   ├── test_spdlog_log_publisher.cpp
+    │   ├── test_messaging_lib_integration.cpp  # MarketHub.Messaging integration (standalone)
     │   ├── FakePublishSink.hpp       # Test double for ZMQ
     │   └── FakeMapper.hpp
     └── oe/                  # Order entry tests
@@ -141,23 +152,24 @@ The MD connector has been redesigned with a **sharded publish pipeline** for hig
 │ MdPublishWorker (N threads, default N=4)                     │
 │  1. Dequeue OrdersSnapshot from SPSC queue                   │
 │  2. Aggregate MBO → MBP (Top 5 levels)                       │
-│  3. Serialize to protobuf (stub: key=value format)           │
-│  4. Resolve topic: "PETR4" or fallback "IID:123456"          │
-│  5. Publish to ZmqPublishConcentrator                        │
+│  3. Resolve topic: symbol only (drops if not in registry)    │
+│  4. Serialize to protobuf (✅ WrapperMessage/MarketDataUpdate)│
+│  5. Publish SerializedEnvelope to ZmqPublishConcentrator     │
 └──────┬───────────────────────────────────────────────────────┘
-       │ PublishEvent (topic + payload)
+       │ SerializedEnvelope (16KB: topic + protobuf payload)
        ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ ZmqPublishConcentrator (1 thread)                            │
-│  - Fan-in: N SPSC queues → 1 ZMQ socket                      │
+│  - Fan-in: N SPSC queues → 1 MarketHub.Messaging Publisher   │
 │  - Round-robin batching (8 events per shard per iteration)   │
-│  - Multipart message: [topic frame][payload frame]           │
+│  - Uses Publisher::SendSerialized(topic, topicLen, bytes, sz)│
 └──────┬───────────────────────────────────────────────────────┘
        │
        ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ ZeroMQ PUB Socket (tcp://*:8081)                             │
-│  - Single endpoint for all topics                            │
+│ MarketHub.Messaging::Publisher (tcp://*:8081)                │
+│  - Wraps ZMQ PUB socket with standardized interface          │
+│  - Multipart message: [topic frame][payload frame]           │
 │  - Subscribers filter by topic prefix                        │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -188,12 +200,24 @@ The MD connector has been redesigned with a **sharded publish pipeline** for hig
    - NEVER blocks OnixS callback
    - Health metrics emitted every 5s (enqueued, published, dropped)
 
-5. **Instrument Registry & Topic Mapping**:
-   - `InstrumentRegistry`: Thread-safe map (InstrumentId → Symbol)
-   - `InstrumentTopicMapper`: Resolves topic (e.g., "PETR4" or fallback "IID:123456")
-   - `B3InstrumentRegistryListener`: Populates registry from SecurityDefinition messages (TODO: wire up)
+5. **Instrument Registry & Topic Mapping** (✅ IMPLEMENTED):
+   - `InstrumentRegistry`: Thread-safe bidirectional map (InstrumentId ↔ Symbol)
+   - `InstrumentTopicMapper`: Resolves topic by symbol only (e.g., "PETR4")
+     - Returns `{nullptr, 0}` if symbol not in registry → worker drops the message
+     - **No fallback**: Messages without resolvable symbols are dropped
+   - `B3InstrumentRegistryListener`: Populates registry from SecurityDefinition messages
+     - Captures between first and second SequenceReset_1 messages
+     - Sets `readyAtomic=true` after second reset
+     - **Strict Freeze**: After ready=true, ignores all subsequent SecurityDefinition messages (fixed list)
+   - **Strict Gating**: Engine drops all updates until `registryReady=true`, workers drop updates for instruments not in registry
 
-6. **Off-Hot-Path Telemetry**:
+6. **On-Demand Subscriptions** (✅ IMPLEMENTED, not yet started):
+   - `B3MdSubscriptionServer`: Handles MarketDataSuscriptionRequest via MarketHub.Messaging
+   - `SubscriptionRegistry`: Tracks subscriber count per instrument
+   - OnixS Handler subscription only when first client subscribes (saves bandwidth)
+   - OnixS Handler unsubscription when last client unsubscribes
+
+7. **Off-Hot-Path Telemetry**:
    - Workers emit structured `LogEvent` PODs to SPSC queue
    - `SpdlogLogPublisher` consumes and formats in dedicated thread
    - No spdlog calls in hot path
@@ -202,12 +226,12 @@ The MD connector has been redesigned with a **sharded publish pipeline** for hig
 
 - **Sharded Pipeline**: Parallel processing with deterministic sharding for FIFO guarantees
 - **SPSC Queues**: Lock-free inter-thread communication (producer/consumer decoupling)
-- **Fan-In Concentrator**: N worker queues → 1 ZMQ socket (simplifies subscriber config)
-- **Trivially Copyable Structs**: All hot-path data is POD (OrdersSnapshot, BookSnapshot, PublishEvent, LogEvent)
+- **Fan-In Concentrator**: N worker queues → 1 MarketHub.Messaging Publisher (simplifies subscriber config)
+- **Trivially Copyable Structs**: All hot-path data is POD (OrdersSnapshot, BookSnapshot, SerializedEnvelope, LogEvent)
 - **Interface Segregation**: `IPublishSink`, `IOrderBookView` (enables testing without ZMQ/OnixS mocks)
 - **RAII**: Publishers and Subscribers use RAII pattern with automatic resource cleanup
 - **Thread-safe messaging**: All messaging classes use thread-safe queues with mutex/condition variables
-- **Slow joiner mitigation**: ZmqPublishConcentrator has configurable startup delay (default 1.5s)
+- **Strict Registry Gating**: Engine waits for security list to load before publishing (prevents invalid topic spam)
 
 ## Build Commands
 
@@ -288,6 +312,21 @@ GoogleTest allows filtering by test name:
 ```bash
 ./build/tests-md/b3_md_tests --gtest_filter="MarketDataEngineTests.CanInstantiate"
 ```
+
+### Running Integration Tests
+
+The messaging library integration test is a standalone executable (not gtest):
+
+```bash
+# Build
+cmake -S tests/md -B build/tests-md -G Ninja
+cmake --build build/tests-md
+
+# Run (interactive, connects to MarketHub server)
+./build/tests-md/messaging_lib_integration_test
+```
+
+This test validates that MarketHub.Messaging library links and works correctly.
 
 ## Development Environment
 
@@ -451,8 +490,12 @@ onixs.if_b=eth1            # Optional: Network interface B (redundancy)
 # Pipeline Settings
 md.shards=4                # Number of worker threads (default: 4)
 
-# Publishing Settings
-pub.endpoint=tcp://*:8081  # ZMQ publish endpoint
+# Subscription Server (on-demand subscriptions)
+sub.endpoint=tcp://*:8080  # Receives MarketDataSuscriptionRequest (configurable)
+# Note: Responses sent on tcp://*:8082 (hardcoded)
+
+# Market Data Publishing
+pub.endpoint=tcp://*:8081  # Publishes MarketDataUpdate (book snapshots)
 ```
 
 ### Configuration Loading
@@ -505,21 +548,21 @@ using BookSnapshot = BookSnapshotT<5>;  // Top 5 levels
 - Aggregates MBO orders by price level
 - Trivially copyable
 
-### PublishEvent (Inter-Thread Transport)
-Located at: b3-md-connector/src/publishing/PublishEvent.hpp:1
+### SerializedEnvelope (Inter-Thread Transport)
+Located at: b3-md-connector/src/publishing/SerializedEnvelope.hpp:1
 
 ```cpp
-struct PublishEvent {
+struct SerializedEnvelope {
     static constexpr size_t kMaxTopic = 128;
-    static constexpr size_t kMaxBytes = 4096;
+    static constexpr size_t kMaxBytes = 16384;  // 16KB (increased from 4KB)
 
-    uint32_t size;
-    uint8_t topicLen;
-    char topic[kMaxTopic];      // Not null-terminated
-    uint8_t bytes[kMaxBytes];
+    uint32_t size{0};
+    uint8_t topicLen{0};
+    char topic[kMaxTopic]{};     // Not null-terminated
+    uint8_t bytes[kMaxBytes]{};  // Protobuf serialized WrapperMessage
 };
 ```
-- Flat struct for inter-thread transport
+- Flat struct for inter-thread transport (16KB total)
 - No pointers, no heap allocation
 - Used in SPSC queues between workers and concentrator
 
@@ -541,90 +584,90 @@ struct LogEvent {
 - Transported via SPSC queue
 - Formatted off-hot-path by SpdlogLogPublisher
 
-## Known TODOs & Implementation Status
+## Implementation Status
 
-### High Priority (Blocking Production)
+### ✅ Completed Features
 
-1. **ZMQ Socket Implementation** (ZmqPublishConcentrator.hpp:125-138)
-   ```cpp
-   // TODO: Replace stub with actual cppzmq implementation
-   struct ZmqPubSocket {
-       explicit ZmqPubSocket(const std::string& endpoint) {
-           // TODO: bind socket pub con tu lib
-       }
-       bool sendMultipart(const char* topic, size_t topicLen,
-                          const uint8_t* bytes, size_t size) noexcept {
-           // TODO: 2 frames: topic + payload
-           return true;  // Currently stubbed
-       }
-   };
-   ```
-   **Action**: Use `cppzmq` (already linked in CMakeLists.txt)
-   - Create `zmq::socket_t(context, zmq::socket_type::pub)`
-   - Bind to endpoint
-   - Send multipart: `socket.send(zmq::buffer(topic), zmq::send_flags::sndmore)` + `socket.send(zmq::buffer(payload))`
+1. **ZMQ Publishing** (ZmqPublishConcentrator.hpp)
+   - Uses `MarketHub.Messaging::Publisher` (wraps ZMQ PUB socket)
+   - Multipart messages: [topic frame][payload frame]
+   - Round-robin fan-in from N worker shards
 
-2. **Instrument Registry Population** (main.cpp:127-128)
-   ```cpp
-   // TODO: al startup, llenás registry con SecurityList via OnixS FIX (35=y)
-   // registry.upsert(123456, "PETR4"); etc.
-   ```
-   **Action**: Wire up `B3InstrumentRegistryListener` to OnixS Handler
-   - Register listener: `handler.registerListener(&registryListener)`
-   - Listener captures `SecurityDefinition_12` messages
-   - Automatically populates `InstrumentRegistry` during warmup
-   - Enables human-readable topics: `"PETR4"` instead of `"IID:123456"`
+2. **Instrument Registry Population** (B3InstrumentRegistryListener.hpp)
+   - ✅ Wired up to OnixS Handler (main.cpp:206)
+   - Captures SecurityDefinition_12 messages between SequenceReset_1 pair
+   - Bidirectional map: InstrumentId ↔ Symbol
+   - Sets `readyAtomic=true` after second reset
+   - Strict freeze: Ignores SecurityDefinition messages after ready=true (fixed list loaded once at startup)
 
-3. **Protobuf Serialization** (MdSnapshotMapper.hpp:8-26)
-   ```cpp
-   // TODO: serializar BookSnapshot a protobuf
-   // actualmente stub (key=value)
-   ```
-   **Action**: Define `.proto` schema for BookSnapshot
-   - Create `md_snapshot.proto` with BookSnapshot message definition
-   - Generate C++ code with `protoc`
-   - Replace stub serialization with actual protobuf encoding
-   - Link against protobuf 28.3 (already in CMakeLists)
+3. **Protobuf Serialization** (MdSnapshotMapper.hpp)
+   - ✅ Implemented using `WrapperMessage` + `MarketDataUpdate`
+   - Serializes BookSnapshot (MBP Top 5 levels) to protobuf
+   - Topic set to symbol (e.g., "PETR4")
 
-### Medium Priority (Performance/Correctness)
+4. **Strict Registry Gating & Symbol-Only Publishing**
+   - Engine drops all updates until `registryReady=true` (MarketDataEngine.hpp:26-28)
+   - Workers drop messages when symbol cannot be resolved (MdPublishWorker.hpp:204-207)
+   - **No IID:* fallback**: Only real symbols are published
+   - Tracks `gatedDrops` at engine level, `dropped()` at worker level
 
-4. **Exchange Timestamp Extraction** (OnixsOrdersSnapshotBuilder.hpp:34, OnixOrderBookView.hpp:28-34)
+5. **On-Demand Subscriptions** (B3MdSubscriptionServer)
+   - ✅ Fully implemented and started in `main.cpp`
+   - Handles `MarketDataSuscriptionRequest` via MarketHub.Messaging
+   - Uses `SubscriptionRegistry` to track subscriber counts per instrument
+   - Calls `handler.subscribe(iid)` / `handler.unsubscribe(iid)` on OnixS
+   - Listens on tcp://*:8080, responds on tcp://*:8082
+
+### 🔧 Remaining Work
+
+#### High Priority
+1. **Exchange Timestamp Extraction**
    - OnixS `OrderBook` doesn't expose exchange timestamp directly
    - Currently using system timestamp (`nowNs`)
-   - **Options**:
-     - Extract from `SbeMessage` in `onOrderBookChanged()`
-     - Maintain separate event time tracking map (avoid heap in hot path)
+   - Consider extracting from `SbeMessage` in `onOrderBookChanged()`
 
-5. **Bid/Ask Ordering Validation** (OnixsOrdersSnapshotBuilder.hpp:40-42)
+#### Medium Priority
+2. **Bid/Ask Ordering Validation**
    - OnixS docs unclear if `bids()` are ascending or descending
    - Current assumption: `bids()` ascending (best bid at end) → iterates reverse
    - Current assumption: `asks()` ascending (best ask at start) → iterates forward
-   - **Action**: Add runtime assertion to verify ordering in production
+   - Add runtime assertion to verify ordering in production
 
-6. **Health Monitoring Dashboard**
+3. **Health Monitoring Dashboard**
    - Consume `LogEvent` stream
    - Display real-time metrics: throughput, drops, queue depth per shard
    - Alert on sustained drops or queue saturation
 
-### Low Priority (Enhancements)
-
-7. **Dynamic Shard Count**
+#### Low Priority
+4. **Dynamic Shard Count**
    - Currently requires restart to change `md.shards`
    - Could support online shard scaling (complex, non-trivial)
 
-8. **Configurable Queue Capacities**
+5. **Configurable Queue Capacities**
    - Currently hardcoded: 4096 (workers), 4096 (concentrator)
    - Make configurable via `b3-md-connector.conf`
-   - Trade-off: larger queues = more memory, longer drain on shutdown
 
-9. **Backpressure Flow Control**
-   - Currently drops on queue full (lossy)
-   - Alternative: Dynamic shedding (drop lower-priority instruments)
-   - Requires instrument priority classification
+## Known Issues & Bugs
+
+### 🔴 Critical (Fix Before Production)
+
+_(None - all critical issues resolved)_
+
+### 🟠 High (Correctness Issues)
+
+_(None - all high priority issues resolved)_
+
+### 🟡 Medium (Code Quality)
+
+_(None - all medium priority issues resolved)_
+
+### 🟢 Low (Documentation Mismatch)
+
+_(None - all low priority issues resolved)_
 
 ## MarketHub Messaging Usage Patterns
 
-**Note**: The MD connector publishes market data via **raw ZMQ** (not MarketHub.Messaging). MarketHub.Messaging is used by the OE connector for order submission/responses. The separation allows MD to optimize for high-throughput pub/sub without request/response overhead.
+**Note**: The MD connector uses MarketHub.Messaging for both publishing market data (`ZmqPublishConcentrator` uses `Publisher::SendSerialized`) and handling subscription requests (`B3MdSubscriptionServer` uses `SubscriberPublisher`). The OE connector also uses MarketHub.Messaging for order submission/responses.
 
 ### Publisher/Subscriber Pattern
 

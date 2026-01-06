@@ -4,8 +4,9 @@
 #include <cstring>
 #include <string>
 #include <cstdio>
+#include <utility>
 
-#include "../publishing/PublishEvent.hpp"
+#include "../publishing/SerializedEnvelope.hpp"
 #include "InstrumentRegistry.hpp"
 
 namespace b3::md::mapping {
@@ -21,6 +22,21 @@ namespace b3::md::mapping {
 
     InstrumentTopicMapper(const InstrumentTopicMapper &) = delete;
     InstrumentTopicMapper &operator=(const InstrumentTopicMapper &) = delete;
+
+    // Get topic string and length without writing to envelope yet
+    // Returns pair: (topic_ptr, topic_len). Returns (nullptr, 0) if symbol not in registry.
+    std::pair<const char*, std::uint8_t> getTopic(InstrumentId iid) const noexcept {
+      const std::string *sym = registry_.tryResolveSymbol(iid);
+      if (sym) {
+        const std::size_t n = sym->size();
+        if (n > 0 && n <= b3::md::publishing::SerializedEnvelope::kMaxTopic) {
+          return {sym->data(), static_cast<std::uint8_t>(n)};
+        }
+      }
+
+      // No fallback - if symbol not in registry, drop the message
+      return {nullptr, 0};
+    }
 
     // Llena ev.topic + ev.topicLen. Devuelve false si excede kMaxTopic.
     bool tryWriteTopic(InstrumentId iid,

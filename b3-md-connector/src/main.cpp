@@ -3,11 +3,13 @@
 #include "core/MdPublishPipeline.hpp"
 #include "core/MdPublishWorker.hpp"
 #include "core/MarketDataEngine.hpp"
+#include "core/SubscriptionRegistry.hpp"
 #include "onixs/OnixsOrderBookListener.hpp"
 #include "onixs/B3InstrumentRegistryListener.hpp"
 #include "mapping/MdSnapshotMapper.hpp"
 #include "mapping/InstrumentTopicMapper.hpp"
 #include "publishing/ZmqPublishConcentrator.hpp"
+#include "messaging/B3MdSubscriptionServer.hpp"
 
 #include <cstdint>
 #include <cstdlib>
@@ -142,7 +144,11 @@ int main(int argc, char **argv) {
 
   const int shards = getOrInt(cfg, "md.shards", 4);
 
+  // Subscription server endpoints
   const std::string subEndpoint = getOr(cfg, "sub.endpoint", "tcp://*:8080");
+  const std::string subResponseEndpoint = "tcp://*:8082";  // Response port for SubscriberPublisher
+
+  // Market data publishing endpoint
   const std::string pubEndpoint = getOr(cfg, "pub.endpoint", "tcp://*:8081");
 
   std::cerr << "[startup] config=" << configPath << "\n";
@@ -152,8 +158,9 @@ int main(int argc, char **argv) {
   std::cerr << "[startup] onixs.if_a=" << (ifA.empty() ? "<auto>" : ifA) << "\n";
   std::cerr << "[startup] onixs.if_b=" << (ifB.empty() ? "<auto>" : ifB) << "\n";
   std::cerr << "[startup] md.shards=" << shards << "\n";
-  std::cerr << "[startup] sub.endpoint=" << subEndpoint << "\n";
-  std::cerr << "[startup] pub.endpoint=" << pubEndpoint << "\n";
+  std::cerr << "[startup] sub.endpoint=" << subEndpoint << " (requests)\n";
+  std::cerr << "[startup] sub.response.endpoint=" << subResponseEndpoint << " (responses)\n";
+  std::cerr << "[startup] pub.endpoint=" << pubEndpoint << " (market data)\n";
 
   // -------------------------
   // Pipeline publish
@@ -185,9 +192,19 @@ int main(int argc, char **argv) {
   b3::md::onixs::OnixsOrderBookListener orderBookListener(engine);
 
   // -------------------------
+  // Subscription Registry (tracks active subscriptions)
+  // -------------------------
+  b3::md::SubscriptionRegistry subscriptionRegistry;
+
+  // -------------------------
   // OnixS Handler (lifetime fuera del try)
   // -------------------------
   std::unique_ptr<Handler> handler;
+
+  // -------------------------
+  // Subscription Server (lifetime fuera del try)
+  // -------------------------
+  std::unique_ptr<b3::md::messaging::B3MdSubscriptionServer> subscriptionServer;
 
   try {
     HandlerSettings settings;
@@ -208,11 +225,31 @@ int main(int argc, char **argv) {
     std::cerr << "[startup] starting OnixS handler...\n";
     handler->start();
 
-    // Acá mañana va el start del SubscriptionServer que usa *handler
-    // subServer.Start();
+    // -------------------------
+    // Subscription Server (on-demand subscriptions)
+    // -------------------------
+    auto logCallback = [](const std::string& level, const std::string& msg) {
+      std::cerr << "[sub-server][" << level << "] " << msg << "\n";
+    };
+
+    subscriptionServer = std::make_unique<b3::md::messaging::B3MdSubscriptionServer>(
+        subEndpoint,           // tcp://*:8080 - receives MarketDataSuscriptionRequest
+        subResponseEndpoint,   // tcp://*:8082 - sends MarketDataSuscriptionResponse
+        registry,
+        subscriptionRegistry,
+        *handler,
+        logCallback);
+
+    std::cerr << "[startup] starting subscription server...\n";
+    subscriptionServer->Start();
 
     std::cerr << "[runtime] running. Press ENTER to stop...\n";
     std::cin.get();
+
+    std::cerr << "[shutdown] stopping subscription server...\n";
+    if (subscriptionServer) {
+      subscriptionServer->Stop();
+    }
 
     std::cerr << "[shutdown] stopping OnixS handler...\n";
     handler->stop(true);
@@ -223,8 +260,13 @@ int main(int argc, char **argv) {
   }
 
   // -------------------------
-  // Shutdown
+  // Shutdown (cleanup if exception during startup)
   // -------------------------
+  if (subscriptionServer) {
+    std::cerr << "[shutdown] stopping subscription server (cleanup)...\n";
+    subscriptionServer->Stop();
+  }
+
   std::cerr << "[shutdown] stopping pipeline...\n";
   pipeline.stop(true);
 

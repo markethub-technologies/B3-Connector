@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../b3-md-connector/src/publishing/IPublishSink.hpp"
-#include "../../b3-md-connector/src/publishing/PublishEvent.hpp"
+#include "../../b3-md-connector/src/publishing/SerializedEnvelope.hpp"
 
 #include <mutex>
 #include <string>
@@ -19,7 +19,7 @@ namespace b3::md::testsupport {
   class FakePublishSink final : public b3::md::publishing::IPublishSink {
    public:
     bool tryPublish(uint32_t shardId,
-                    const b3::md::publishing::PublishEvent &ev) noexcept override {
+                    const b3::md::publishing::SerializedEnvelope &ev) noexcept override {
       // En tests está OK usar mutex/vector (no es hot path prod)
       std::lock_guard<std::mutex> g(m_);
       CapturedPublish c;

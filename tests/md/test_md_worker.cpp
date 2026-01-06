@@ -9,6 +9,38 @@
 #include <thread>
 
 using namespace b3::md;
+using b3::md::mapping::MdSnapshotMapper;
+
+// Test mapper that uses simple text format (not protobuf) for easy parsing
+class TestMdSnapshotMapper final : public b3::md::mapping::MdSnapshotMapper {
+ public:
+  bool mapToSerializedEnvelope(const b3::md::BookSnapshot &s,
+                               b3::md::publishing::SerializedEnvelope &ev,
+                               const char* topic,
+                               std::uint8_t topicLen) const noexcept override {
+    if (topicLen == 0 || topicLen > b3::md::publishing::SerializedEnvelope::kMaxTopic)
+      return false;
+
+    // Simple text format: iid=123;ts=456;bc=1;ac=1
+    char buf[256];
+    int n = std::snprintf(buf, sizeof(buf), "iid=%llu;ts=%llu;bc=%u;ac=%u",
+                          static_cast<unsigned long long>(s.instrumentId),
+                          static_cast<unsigned long long>(s.exchangeTsNs),
+                          static_cast<unsigned>(s.bidCount),
+                          static_cast<unsigned>(s.askCount));
+    if (n <= 0 || static_cast<size_t>(n) >= sizeof(buf))
+      return false;
+
+    ev.size = static_cast<uint32_t>(n);
+    if (ev.size > b3::md::publishing::SerializedEnvelope::kMaxBytes)
+      return false;
+
+    std::memcpy(ev.bytes, buf, n);
+    ev.topicLen = topicLen;
+    std::memcpy(ev.topic, topic, topicLen);
+    return true;
+  }
+};
 
 static uint64_t parse_ts(const std::string &bytes) {
   auto pos = bytes.find(";ts=");
@@ -21,7 +53,7 @@ static uint64_t parse_ts(const std::string &bytes) {
 
 TEST(MdPublishWorkerTests, PublishesFifoOrder) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
   uint32_t shard = 1;
   testsupport::FakeInstrumentTopicMapper fakeTopics{{77, "AAA"}};
 
@@ -69,7 +101,7 @@ TEST(MdPublishWorkerTests, PublishesFifoOrder) {
 
 TEST(MdPublishWorkerTests, StopClean) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
   uint32_t shard = 1;
 
   testsupport::FakeInstrumentTopicMapper fakeTopics{{1, "AAA"}};
@@ -83,7 +115,7 @@ TEST(MdPublishWorkerTests, StopClean) {
 
 TEST(MdPublishWorkerTests, StopWithoutDrainReturnsQuickly) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
   uint32_t shard = 1;
 
   testsupport::FakeInstrumentTopicMapper fakeTopics{{77, "AAA"}};
@@ -117,7 +149,7 @@ TEST(MdPublishWorkerTests, StopWithoutDrainReturnsQuickly) {
 
 TEST(MdPublishWorkerTests, StopWithDrainPublishesAll) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
   uint32_t shard = 1;
 
   testsupport::FakeInstrumentTopicMapper fakeTopics{
@@ -164,7 +196,7 @@ static uint32_t parse_count(const std::string &bytes, const char *key) {
 
 TEST(MdPublishWorkerTests, AggregationAffectsCountsInSerializedOutput) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
   uint32_t shard = 1;
   testsupport::FakeInstrumentTopicMapper fakeTopics{{77, "AAA"}};
 

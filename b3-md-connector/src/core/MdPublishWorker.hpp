@@ -9,7 +9,6 @@
 #include "../telemetry/SpdlogLogPublisher.hpp"
 #include "../telemetry/LogEvent.hpp"
 #include "../publishing/IPublishSink.hpp"
-#include "../publishing/PublishEvent.hpp"
 #include "../mapping/InstrumentTopicMapper.hpp"
 
 #include <atomic>
@@ -199,19 +198,20 @@ namespace b3::md {
         outBuffer.clear();
         publishing::SerializedEnvelope ev{};
 
-        // 1) topic (símbolo puro) dentro del worker
-        if (!topicMapper_.tryWriteTopic(s.instrumentId, ev)) {
+        // 1) Get topic (without writing to ev yet, to maintain consistency if serialization fails)
+        auto [topicPtr, topicLen] = topicMapper_.getTopic(s.instrumentId);
+        if (!topicPtr || topicLen == 0) {
           dropped_.fetch_add(1, std::memory_order_relaxed);
           return;
         }
 
-        // 2) map + serialize wrapper -> ev.bytes + ev.topic
-        if (!mapper_.mapToSerializedEnvelope(mbp, ev)) {
+        // 2) Serialize payload + write topic (only if serialization succeeds)
+        if (!mapper_.mapToSerializedEnvelope(mbp, ev, topicPtr, topicLen)) {
           dropped_.fetch_add(1, std::memory_order_relaxed);
           return;
         }
 
-        // 3) publish serialized envelope
+        // 3) Publish serialized envelope
         if (!sink_.tryPublish(shardId_, ev)) {
           dropped_.fetch_add(1, std::memory_order_relaxed);
           return;

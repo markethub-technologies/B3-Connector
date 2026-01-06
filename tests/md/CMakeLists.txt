@@ -49,12 +49,55 @@ target_include_directories(b3_md_tests
 )
 
 target_link_libraries(b3_md_tests
-    PRIVATE            
+    PRIVATE
         markethub-messaging
+        protobuf
+        absl_log_internal_message
+        absl_log_internal_check_op
+        absl_log_internal_nullguard
+        absl_strings
+        absl_str_format_internal
+        absl_base
+        absl_raw_logging_internal
+        absl_synchronization
+        absl_time
+        absl_hash
         onixs-b3-umdf
         spdlog::spdlog
         GTest::gtest
         GTest::gtest_main
+)
+
+# --- Messaging Library Integration Test (separate executable, not gtest) ---
+add_executable(messaging_lib_integration_test
+    test_messaging_lib_integration.cpp
+)
+
+target_include_directories(messaging_lib_integration_test
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../b3-md-connector/src
+)
+
+# Este test necesita protobuf + absl (no está en la interface básica de markethub-messaging)
+find_package(fmt REQUIRED)
+target_link_libraries(messaging_lib_integration_test
+    PRIVATE
+        markethub-messaging
+        protobuf
+        absl_log_internal_message
+        absl_log_internal_check_op
+        absl_log_internal_nullguard
+        absl_strings
+        absl_str_format_internal
+        absl_base
+        absl_raw_logging_internal
+        absl_synchronization
+        absl_time
+        absl_hash
+        onixs-b3-umdf
+        spdlog::spdlog
+        fmt::fmt
+        pthread
 )
 
 enable_testing()

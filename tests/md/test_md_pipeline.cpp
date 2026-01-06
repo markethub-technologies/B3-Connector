@@ -13,8 +13,40 @@
 #include <memory>
 
 using namespace b3::md;
+using b3::md::mapping::MdSnapshotMapper;
 
 namespace {
+
+  // Test mapper that uses simple text format (not protobuf) for easy parsing
+  class TestMdSnapshotMapper final : public b3::md::mapping::MdSnapshotMapper {
+   public:
+    bool mapToSerializedEnvelope(const b3::md::BookSnapshot &s,
+                                 b3::md::publishing::SerializedEnvelope &ev,
+                                 const char* topic,
+                                 std::uint8_t topicLen) const noexcept override {
+      if (topicLen == 0 || topicLen > b3::md::publishing::SerializedEnvelope::kMaxTopic)
+        return false;
+
+      // Simple text format: iid=123;ts=456;bc=1;ac=1
+      char buf[256];
+      int n = std::snprintf(buf, sizeof(buf), "iid=%llu;ts=%llu;bc=%u;ac=%u",
+                            static_cast<unsigned long long>(s.instrumentId),
+                            static_cast<unsigned long long>(s.exchangeTsNs),
+                            static_cast<unsigned>(s.bidCount),
+                            static_cast<unsigned>(s.askCount));
+      if (n <= 0 || static_cast<size_t>(n) >= sizeof(buf))
+        return false;
+
+      ev.size = static_cast<uint32_t>(n);
+      if (ev.size > b3::md::publishing::SerializedEnvelope::kMaxBytes)
+        return false;
+
+      std::memcpy(ev.bytes, buf, n);
+      ev.topicLen = topicLen;
+      std::memcpy(ev.topic, topic, topicLen);
+      return true;
+    }
+  };
 
   uint64_t ParseTs(const std::string &bytes) {
     auto pos = bytes.find(";ts=");
@@ -46,7 +78,7 @@ namespace {
     return static_cast<uint32_t>(std::stoul(bytes.substr(pos, end - pos)));
   }
 
-  MdPublishPipeline BuildPipeline(uint32_t shards, MdSnapshotMapper &mapper,
+  MdPublishPipeline BuildPipeline(uint32_t shards, TestMdSnapshotMapper &mapper,
                                   testsupport::FakePublishSink &sink) {
     std::vector<std::unique_ptr<MdPublishWorker>> workers;
     workers.reserve(shards);
@@ -68,7 +100,7 @@ namespace {
 
 TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
 
   auto pipeline = BuildPipeline(4, mapper, sink);
   pipeline.start();
@@ -126,7 +158,7 @@ TEST(MdPublishPipelineTests, PreservesFifoOrderPerInstrument) {
 
 TEST(MdPublishPipelineTests, ProgressUnderMultipleInstruments) {
   testsupport::FakePublishSink sink;
-  MdSnapshotMapper mapper;
+  TestMdSnapshotMapper mapper;
 
   auto pipeline = BuildPipeline(2, mapper, sink);
   pipeline.start();

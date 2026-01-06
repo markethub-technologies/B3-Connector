@@ -3,6 +3,7 @@
 #include "../../b3-md-connector/src/core/MarketDataEngine.hpp"
 #include "../../b3-md-connector/src/core/MdPublishPipeline.hpp"
 #include "../../b3-md-connector/src/core/MdPublishWorker.hpp"
+#include "../../b3-md-connector/src/mapping/MdSnapshotMapper.hpp"
 #include "../../b3-md-connector/src/testsupport/OrdersSnapshotFromMbpView.hpp"
 #include "../../b3-md-connector/src/testsupport/FakeInstrumentTopicMapper.hpp"
 #include "FakeOrderBook.hpp"
@@ -15,23 +16,19 @@
 
 using namespace b3::md;
 using namespace b3::md::test;
+using b3::md::mapping::MdSnapshotMapper;
 
 // Publisher que cuenta publicaciones (thread-safe).
 struct CountingSink final : b3::md::publishing::IPublishSink {
-  bool tryPublish(uint32_t, const b3::md::publishing::PublishEvent &) noexcept override {
+  bool tryPublish(uint32_t, const b3::md::publishing::SerializedEnvelope &) noexcept override {
     published.fetch_add(1, std::memory_order_relaxed);
     return true;
   }
   std::atomic<uint64_t> published{0};
 };
 
-// Mapper de test: no aloca pesado, solo dispara publish.
-struct TestMapper final : MdSnapshotMapper {
-  void mapAndSerialize(const BookSnapshot &, std::string &out) const { out.assign("x"); }
-};
-
 TEST(MarketDataEngineTests, EnqueuesAndPublishes) {
-  TestMapper mapper;
+  MdSnapshotMapper mapper;
   CountingSink sink;
 
   testsupport::FakeInstrumentTopicMapper fakeTopics{{42, "AAA"}};

@@ -97,7 +97,7 @@ Si la cola está llena:
 
 ### I5 — Publishing y Logging no deben afectar el core
 - `core/` no conoce sockets/endpoints.
-- Workers llaman `IPublishSink` interface con `PublishEvent` (POD, topic + payload).
+- Workers llaman `IPublishSink` interface con `SerializedEnvelope` (POD, topic + payload).
 - IO lento / backpressure / fallas de publish:
   - nunca bloquean indefinidamente al worker
   - se traducen a drop + counters + logs rate-limited
@@ -118,7 +118,7 @@ Si la cola está llena:
 
 **Implementación**:
 - `IPublishSink` interface permite testing sin ZMQ (ver `FakePublishSink` en tests)
-- `PublishEvent`: struct flat (4KB payload, 128B topic) sin punteros (SPSC-safe)
+- `SerializedEnvelope`: struct flat (16KB payload, 128B topic) sin punteros (SPSC-safe)
 
 ---
 
@@ -314,7 +314,7 @@ size_t mapAndSerialize(const BookSnapshot& book, uint8_t* out, size_t cap) {
 
 ### Componentes Publishing
 - `IPublishSink.hpp` - Interface para publish targets
-- `PublishEvent.hpp` - POD para inter-thread transport (4KB)
+- `SerializedEnvelope.hpp` - POD para inter-thread transport (16KB)
 - `ZmqPublishConcentrator.hpp` - Fan-in concentrator (232 LOC)
 
 ### Componentes Telemetry

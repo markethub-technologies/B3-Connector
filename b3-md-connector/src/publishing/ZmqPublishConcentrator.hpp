@@ -191,7 +191,7 @@ namespace b3::md::publishing {
         for (uint32_t sid = 0; sid < shardCount_; ++sid) {
           auto &q = *queues_[sid];
           while (q.try_pop(ev)) {
-            out.sendSerialized(std::move(ev));
+            out.sendSerialized(ev);  // No std::move: SerializedEnvelope is trivially copyable (16KB POD)
             sentByShard_[sid].v.fetch_add(1, std::memory_order_relaxed);
           }
         }

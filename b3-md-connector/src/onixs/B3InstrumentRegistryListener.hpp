@@ -48,13 +48,10 @@ namespace b3::md::onixs {
       if (sym.empty())
         return;
 
-      // Strict: antes de ready, solo “capturamos”. Después de ready, podés:
-      // - ignorar updates (freeze)
-      // - o permitir updates (incremental)
+      // Después de ready=true: freeze estricto (lista fija, cargada al inicio del día)
       if (ready_.load(std::memory_order_acquire)) {
-        // Freeze estricto: return;
-        registry_.upsert(iid, std::move(sym)); // si querés permitir incremental
-        return;
+        return; // Freeze: ignora SecurityDefinitions posteriores
+        // registry_.upsert(iid, std::move(sym)); // Descomentar para permitir updates incrementales
       }
 
       if (!capturing_.load(std::memory_order_acquire))
