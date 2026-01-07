@@ -18,9 +18,14 @@ namespace b3::md::messaging {
    public:
     B3MdSubscriptionServer(const std::string &serverEndpoint, const std::string &publishingEndpoint,
                            b3::md::mapping::InstrumentRegistry &registry,
-                           b3::md::SubscriptionRegistry &subs,
-                           b3::md::IMarketDataHandler &handler,
+                           b3::md::SubscriptionRegistry &subs, b3::md::IMarketDataHandler &handler,
                            LogCallback logCb = nullptr);
+
+    // Test accessor - exposes HandleMessage for unit testing
+    std::unique_ptr<markethub::messaging::WrapperMessage> HandleMessageForTest(
+        const markethub::messaging::WrapperMessage &request) {
+      return HandleMessage(request);
+    }
 
    protected:
     std::unique_ptr<markethub::messaging::WrapperMessage> HandleMessage(

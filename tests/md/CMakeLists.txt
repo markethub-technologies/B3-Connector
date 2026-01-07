@@ -42,6 +42,9 @@ add_executable(b3_md_tests
     test_spdlog_log_publisher.cpp
     test_mbo_to_mbp_aggregator.cpp
     test_mbo_to_mbp_ordering_contract.cpp
+    test_subscription_server.cpp
+    # Include B3MdSubscriptionServer implementation
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../b3-md-connector/src/messaging/B3MdSubscriptionServer.cpp
 )
 target_include_directories(b3_md_tests
     PRIVATE

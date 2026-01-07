@@ -2,6 +2,9 @@
 
 #include <type_traits>
 #include <utility>
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/message.h>
+#include <google/protobuf/reflection.h>
 
 using markethub::messaging::WrapperMessage;
 using markethub::messaging::models::MessageTypes;
@@ -48,6 +51,84 @@ namespace {
       r->set_original_request_id(s);
   }
 
+  // Intenta setear un string field (si existe y es string)
+  inline void set_string_if_exists(::google::protobuf::Message *m, const char *fieldName,
+                                   std::string_view v) {
+    if (!m)
+      return;
+    const auto *d = m->GetDescriptor();
+    const auto *r = m->GetReflection();
+    if (!d || !r)
+      return;
+
+    const auto *f = d->FindFieldByName(fieldName);
+    if (!f)
+      return;
+    if (f->cpp_type() != ::google::protobuf::FieldDescriptor::CPPTYPE_STRING)
+      return;
+
+    r->SetString(m, f, std::string(v));
+  }
+
+  // Intenta setear un uint64 field (si existe y es uint64/int64/int32/uint32)
+  inline void set_u64_if_exists(::google::protobuf::Message *m, const char *fieldName,
+                                std::uint64_t v) {
+    if (!m)
+      return;
+    const auto *d = m->GetDescriptor();
+    const auto *r = m->GetReflection();
+    if (!d || !r)
+      return;
+
+    const auto *f = d->FindFieldByName(fieldName);
+    if (!f)
+      return;
+
+    using FD = ::google::protobuf::FieldDescriptor;
+    switch (f->cpp_type()) {
+      case FD::CPPTYPE_UINT64:
+        r->SetUInt64(m, f, v);
+        break;
+      case FD::CPPTYPE_INT64:
+        r->SetInt64(m, f, static_cast<std::int64_t>(v));
+        break;
+      case FD::CPPTYPE_UINT32:
+        r->SetUInt32(m, f, static_cast<std::uint32_t>(v));
+        break;
+      case FD::CPPTYPE_INT32:
+        r->SetInt32(m, f, static_cast<std::int32_t>(v));
+        break;
+      default:
+        break;
+    }
+  }
+
+  // Agrega un Instrument al map "securities" (key = symbol, value = Security message)
+  inline void add_instrument_best_effort(
+      ::markethub::messaging::trading::SecurityListResponse *resp, std::uint64_t iid,
+      const std::string &symbol) {
+    if (!resp)
+      return;
+
+    // SecurityListResponse.securities is a map<string, Security>
+    // Use the typed accessor instead of reflection
+    auto *securitiesMap = resp->mutable_securities();
+    if (!securitiesMap)
+      return;
+
+    // Create Security entry with symbol as key
+    auto &security = (*securitiesMap)[symbol];
+
+    // Set fields on Security message using reflection (schema-agnostic)
+    set_string_if_exists(&security, "symbol", symbol);
+    set_string_if_exists(&security, "ticker", symbol);
+    set_string_if_exists(&security, "code", symbol);
+
+    set_u64_if_exists(&security, "security_id", iid);
+    set_u64_if_exists(&security, "instrument_id", iid);
+    set_u64_if_exists(&security, "id", iid);
+  }
+
 } // namespace
 
 namespace b3::md::messaging {
@@ -65,12 +146,47 @@ namespace b3::md::messaging {
 
   std::unique_ptr<WrapperMessage> B3MdSubscriptionServer::HandleMessage(
       const WrapperMessage &request) {
-    // Filtrar por tipo (lo que manda C#)
+    // -----------------------------
+    // 1) SECURITY LIST
+    // -----------------------------
+    if (request.message_type() == std::string(MessageTypes::SecurityListRequest)) {
+      if (!request.has_security_list_request()) {
+        return nullptr;
+      }
+
+      // if (!registryReady_ || !registryReady_->load(std::memory_order_acquire)) { ... }
+
+      auto resp = std::make_unique<WrapperMessage>();
+      resp->set_message_id(request.message_id());
+      resp->set_client_id(request.client_id());
+      resp->set_message_type(std::string(MessageTypes::SecurityListResponse));
+
+      auto *body = resp->mutable_security_list_response();
+
+      const auto &r = request.security_list_request();
+      set_request_id_if_exists(body, r.request_id());
+
+      // Tomamos snapshot y llenamos
+      auto items = registry_.snapshotAll();
+
+      // OK si hay algo (o siempre ok; vos definís)
+      set_ok_if_exists(body, true);
+
+      // Poblar lista (best-effort vía reflection, no dependemos del .pb.h)
+      for (const auto &kv : items) {
+        add_instrument_best_effort(body, static_cast<std::uint64_t>(kv.first), kv.second);
+      }
+
+      return resp;
+    }
+
+    // -----------------------------
+    // 2) MARKET DATA SUBSCRIPTION (tu lógica actual)
+    // -----------------------------
     if (request.message_type() != std::string(MessageTypes::MarketDataSuscriptionRequest)) {
       return nullptr;
     }
 
-    // C++ field name típico: has_market_data_suscription_request()
     if (!request.has_market_data_suscription_request()) {
       return nullptr;
     }
@@ -94,7 +210,6 @@ namespace b3::md::messaging {
       return resp;
     }
 
-    // Validar símbolo existe en security list (freeze strict)
     const auto *iid = registry_.tryResolveId(symbol);
     if (!iid) {
       auto resp = std::make_unique<WrapperMessage>();
@@ -109,7 +224,6 @@ namespace b3::md::messaging {
       return resp;
     }
 
-    // Tipo de request (según tu enum)
     const auto t = r.subscription_request_type();
     const bool enable = (t == ::markethub::messaging::trading::SNAPSHOT ||
                          t == ::markethub::messaging::trading::SNAPSHOT_PLUS_UPDATES);
@@ -128,7 +242,6 @@ namespace b3::md::messaging {
         handler_.unsubscribe(static_cast<std::uint64_t>(*iid));
       }
     } else {
-      // UNSPECIFIED u otro: lo tratamos como no-op pero respondemos ok=false
       auto resp = std::make_unique<WrapperMessage>();
       resp->set_message_id(request.message_id());
       resp->set_client_id(request.client_id());
@@ -141,7 +254,6 @@ namespace b3::md::messaging {
       return resp;
     }
 
-    // Respuesta OK (snapshot: el primer update hace de snapshot)
     auto resp = std::make_unique<WrapperMessage>();
     resp->set_message_id(request.message_id());
     resp->set_client_id(request.client_id());

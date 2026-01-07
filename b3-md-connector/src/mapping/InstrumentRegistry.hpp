@@ -5,6 +5,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <vector>
 #include <mutex> // <-- necesario para unique_lock
 
 namespace b3::md::mapping {
@@ -17,15 +18,9 @@ namespace b3::md::mapping {
     using is_transparent = void;
     using hash_type = std::hash<std::string_view>;
 
-    std::size_t operator()(std::string_view str) const noexcept {
-      return hash_type{}(str);
-    }
-    std::size_t operator()(const std::string& str) const noexcept {
-      return hash_type{}(str);
-    }
-    std::size_t operator()(const char* str) const noexcept {
-      return hash_type{}(str);
-    }
+    std::size_t operator()(std::string_view str) const noexcept { return hash_type{}(str); }
+    std::size_t operator()(const std::string &str) const noexcept { return hash_type{}(str); }
+    std::size_t operator()(const char *str) const noexcept { return hash_type{}(str); }
   };
 
   // Transparent equality for heterogeneous lookup (C++20)
@@ -55,7 +50,7 @@ namespace b3::md::mapping {
     // symbol -> iid
     const InstrumentId *tryResolveId(std::string_view symbol) const noexcept {
       std::shared_lock<std::shared_mutex> lock(mu_);
-      auto it = bySymbol_.find(symbol);  // ✅ No temp string (heterogeneous lookup)
+      auto it = bySymbol_.find(symbol); // ✅ No temp string (heterogeneous lookup)
       if (it == bySymbol_.end())
         return nullptr;
       return &it->second;
@@ -109,6 +104,16 @@ namespace b3::md::mapping {
     std::size_t size() const noexcept {
       std::shared_lock<std::shared_mutex> lock(mu_);
       return byId_.size();
+    }
+
+    std::vector<std::pair<InstrumentId, std::string>> snapshotAll() const {
+      std::vector<std::pair<InstrumentId, std::string>> out;
+      std::shared_lock<std::shared_mutex> lock(mu_);
+      out.reserve(byId_.size());
+      for (const auto &[iid, sym] : byId_) {
+        out.emplace_back(iid, sym);
+      }
+      return out;
     }
 
    private:
