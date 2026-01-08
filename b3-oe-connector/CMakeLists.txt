@@ -23,7 +23,6 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         /usr/local/lib
     )
 
-    # Protobuf 28.3 and its dependencies (Abseil) installed in /usr/local from precompiled cache
     target_link_libraries(markethub-messaging INTERFACE
         MarketHub.Messaging
         protobuf
@@ -52,34 +51,45 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # ============================================================
-# Ejecutable: b3-oe-connector
+# Executable: b3-oe-connector
 # ============================================================
 
 add_executable(b3-oe-connector
     src/main.cpp
-    src/OrderMessagingServer.cpp
-    src/OrderEngine.cpp
+
+    # Runtime wiring
+    src/AppRuntime.cpp
+
+    # BOE (session + callbacks)
+    src/boe/BoeSessionListener.cpp
+    src/boe/BoeSessionManager.cpp
+    src/boe/BoeSessionSender.cpp
+
+    # Orders (server + handler + translator)
+    src/orders/server/OrderMessagingServer.cpp
+    src/orders/core/OrderTranslator.cpp
+    src/orders/core/OrderCommandHandler.cpp
+
+    # Events (consumer loop)
+    src/events/core/OrderEventProcessingLoop.cpp
 )
 
-target_include_directories(b3-oe-connector
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
+target_include_directories(b3-oe-connector PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_link_libraries(b3-oe-connector
-    PRIVATE
-        spdlog::spdlog
-        fmt::fmt
-        markethub-messaging
-        onixs-b3-boe
-        pthread
-        zmq
+target_link_libraries(b3-oe-connector PRIVATE
+    spdlog::spdlog
+    fmt::fmt
+    markethub-messaging
+    onixs-b3-boe
+    pthread
+    zmq
 )
 
 # ============================================================
 # Runtime: que encuentre .so locales sin LD_LIBRARY_PATH (dev)
 # ============================================================
-
 set_target_properties(b3-oe-connector PROPERTIES
     BUILD_RPATH
         "${CMAKE_CURRENT_SOURCE_DIR}/../libs/markethub/messaging/lib;
