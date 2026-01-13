@@ -27,6 +27,9 @@ int main() {
   s.boeLicenseStore = "";     // e.g. "/workspaces/.../license"
   s.boeStorageDirectory = ""; // e.g. "/workspaces/.../storage";
 
+  s.boeSenderLocation = ""; // TODO real value
+  s.boeEnteringTrader = ""; // TODO real value
+
   AppRuntime app(s);
   app.start();
 

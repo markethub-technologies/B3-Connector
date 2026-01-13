@@ -6,6 +6,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 #include "common/MpscPodQueue.hpp"
+#include "common/FixedString.hpp"
 #include "events/core/BoeEventPOD.hpp"
 #include "events/core/OrderEventProcessingLoop.h" // .h/.cpp
 #include "events/core/WrapperSerializer.hpp"
@@ -111,7 +112,21 @@ void AppRuntime::build_() {
   // eventLoop_ = std::make_unique<events::OrderEventProcessingLoop>(...);
 
   // ---- orders translator/handler/server ----
-  translator_ = std::make_unique<orders::OrderTranslator>(orders::OrderTranslator::Deps{log_});
+
+  orders::OrderTranslator::Deps tdeps;
+  tdeps.log = log_;
+
+  // Estos dos deberían venir de settings (config):
+  //  - settings_.boeSenderLocation (<=10)
+  //  - settings_.boeEnteringTrader (<=5)
+
+  // Si todavía no existen, metelos al Settings de AppRuntime y listo.
+  common::fillFixedWithSpaces(tdeps.senderLocation.data(), tdeps.senderLocation.size(),
+                              std::string_view{settings_.boeSenderLocation});
+  common::fillFixedWithSpaces(tdeps.enteringTrader.data(), tdeps.enteringTrader.size(),
+                              std::string_view{settings_.boeEnteringTrader});
+
+  translator_ = std::make_unique<orders::OrderTranslator>(std::move(tdeps));
 
   // sender_ depends on a real session. We'll finalize wiring in start_() once session exists.
   built_ = true;
@@ -126,8 +141,10 @@ void AppRuntime::start_() {
 
   // 2) now we can create the sender with real session ptr
   if (!boeSender_) {
-    boeSender_ = std::make_unique<boe::BoeSessionSender>(
-        boe::BoeSessionSender::Deps{log_, boeSession_->session()});
+    boeSender_ = std::make_unique<boe::BoeSessionSender>(boe::BoeSessionSender::Deps{
+        log_, boeSession_->session(),
+        &boeListener_->establishedFlag() // o &boeListener_->establishedAtomic(), como lo nombres
+    });
   }
 
   // 3) orders handler + server

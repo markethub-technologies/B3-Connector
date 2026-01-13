@@ -64,6 +64,9 @@ namespace boe {
     bool isStarted() const noexcept { return started_; }
     OnixS::B3::BOE::Session *session() noexcept { return session_.get(); }
 
+    OnixS::B3::BOE::Session *session() const noexcept { return session_.get(); }
+    BoeSessionListener *listener() const noexcept { return deps_.listener; }
+
    private:
     void createSession_();
 

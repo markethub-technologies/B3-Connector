@@ -104,22 +104,20 @@ namespace {
   }
 
   // Agrega un Instrument al map "securities" (key = symbol, value = Security message)
+  // Legacy version with minimal fields (symbol + iid only)
   inline void add_instrument_best_effort(
       ::markethub::messaging::trading::SecurityListResponse *resp, std::uint64_t iid,
       const std::string &symbol) {
     if (!resp)
       return;
 
-    // SecurityListResponse.securities is a map<string, Security>
-    // Use the typed accessor instead of reflection
     auto *securitiesMap = resp->mutable_securities();
     if (!securitiesMap)
       return;
 
-    // Create Security entry with symbol as key
     auto &security = (*securitiesMap)[symbol];
 
-    // Set fields on Security message using reflection (schema-agnostic)
+    // Set minimal fields using reflection
     set_string_if_exists(&security, "symbol", symbol);
     set_string_if_exists(&security, "ticker", symbol);
     set_string_if_exists(&security, "code", symbol);
@@ -127,6 +125,77 @@ namespace {
     set_u64_if_exists(&security, "security_id", iid);
     set_u64_if_exists(&security, "instrument_id", iid);
     set_u64_if_exists(&security, "id", iid);
+  }
+
+  // Full version with complete InstrumentData mapping
+  inline void add_instrument_full(::markethub::messaging::trading::SecurityListResponse *resp,
+                                   const b3::md::mapping::InstrumentData &data) {
+    if (!resp || data.symbol.empty())
+      return;
+
+    auto *securitiesMap = resp->mutable_securities();
+    if (!securitiesMap)
+      return;
+
+    auto &security = (*securitiesMap)[data.symbol];
+
+    // Core identification
+    set_string_if_exists(&security, "symbol", data.symbol);
+    set_string_if_exists(&security, "ticker", data.symbol);
+    set_u64_if_exists(&security, "security_id", data.securityId);
+    set_u64_if_exists(&security, "instrument_id", data.securityId);
+    set_string_if_exists(&security, "exchange", data.securityExchange);
+
+    // Classification
+    set_string_if_exists(&security, "security_type", data.securityType);
+    set_string_if_exists(&security, "security_group", data.securityGroup);
+    set_string_if_exists(&security, "asset", data.asset);
+    set_string_if_exists(&security, "cfi_code", data.cfiCode);
+
+    // Price specifications (convert mantissa to decimal if protobuf expects double)
+    if (data.minPriceIncrement != 0) {
+      // Assuming protobuf uses double for price - convert from mantissa
+      double tickSize = data.minPriceIncrement / 10000.0;
+      // set_double_if_exists(&security, "tick_size", tickSize);
+      // Or keep as mantissa if protobuf uses int64
+      set_u64_if_exists(&security, "min_price_increment", static_cast<uint64_t>(data.minPriceIncrement));
+    }
+
+    if (data.strikePrice != 0) {
+      double strike = data.strikePrice / 10000.0;
+      // set_double_if_exists(&security, "strike_price", strike);
+      set_u64_if_exists(&security, "strike_price_mantissa", static_cast<uint64_t>(data.strikePrice));
+    }
+
+    // Quantity specifications
+    if (data.minOrderQty != 0) {
+      set_u64_if_exists(&security, "min_order_qty", static_cast<uint64_t>(data.minOrderQty));
+    }
+    if (data.maxOrderQty != 0) {
+      set_u64_if_exists(&security, "max_order_qty", static_cast<uint64_t>(data.maxOrderQty));
+    }
+    if (data.lotSize != 0) {
+      set_u64_if_exists(&security, "lot_size", static_cast<uint64_t>(data.lotSize));
+    }
+
+    // Derivatives fields
+    if (data.underlyingSecurityId != 0) {
+      set_u64_if_exists(&security, "underlying_security_id", data.underlyingSecurityId);
+    }
+    set_string_if_exists(&security, "underlying_symbol", data.underlyingSymbol);
+
+    if (data.maturityDate != 0) {
+      set_u64_if_exists(&security, "maturity_date", static_cast<uint64_t>(data.maturityDate));
+    }
+
+    // Flags
+    if (data.hasCorporateAction) {
+      set_u64_if_exists(&security, "corporate_action_event_id", data.corporateActionEventId);
+    }
+
+    set_string_if_exists(&security, "currency", data.currency);
+    set_string_if_exists(&security, "isin", data.isin);
+    set_string_if_exists(&security, "description", data.securityDesc);
   }
 
 } // namespace
@@ -166,15 +235,15 @@ namespace b3::md::messaging {
       const auto &r = request.security_list_request();
       set_request_id_if_exists(body, r.request_id());
 
-      // Tomamos snapshot y llenamos
-      auto items = registry_.snapshotAll();
+      // Tomamos snapshot completo con todos los campos
+      auto items = registry_.snapshotAllFull();
 
       // OK si hay algo (o siempre ok; vos definís)
       set_ok_if_exists(body, true);
 
-      // Poblar lista (best-effort vía reflection, no dependemos del .pb.h)
+      // Poblar lista con todos los campos disponibles
       for (const auto &kv : items) {
-        add_instrument_best_effort(body, static_cast<std::uint64_t>(kv.first), kv.second);
+        add_instrument_full(body, kv.second);
       }
 
       return resp;

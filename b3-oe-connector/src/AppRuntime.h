@@ -56,6 +56,9 @@ class AppRuntime final {
 
     // queue sizing
     uint32_t eventQueueCapacity{65536};
+
+    std::string boeSenderLocation;
+    std::string boeEnteringTrader;
   };
 
   explicit AppRuntime(Settings s);

@@ -32,8 +32,8 @@ namespace b3::md::onixs {
         return;
       }
 
-      // Second reset: close loop → commit
-      registry_.bulkUpsert(staging_.begin(), staging_.end());
+      // Second reset: close loop → commit full instrument data
+      registry_.bulkUpsertFull(staging_.begin(), staging_.end());
       ready_.store(true, std::memory_order_release);
     }
 
@@ -51,13 +51,14 @@ namespace b3::md::onixs {
       // Después de ready=true: freeze estricto (lista fija, cargada al inicio del día)
       if (ready_.load(std::memory_order_acquire)) {
         return; // Freeze: ignora SecurityDefinitions posteriores
-        // registry_.upsert(iid, std::move(sym)); // Descomentar para permitir updates incrementales
+        // registry_.upsertFull(iid, extractInstrumentData(msg)); // Descomentar para permitir
+        // updates
       }
 
       if (!capturing_.load(std::memory_order_acquire))
         return; // ignore until first reset
 
-      staging_[iid] = std::move(sym);
+      staging_[iid] = extractInstrumentData(msg);
     }
 
    private:
@@ -69,13 +70,103 @@ namespace b3::md::onixs {
       return std::string(p, n);
     }
 
+    /**
+     * @brief Extract all available fields from SecurityDefinition_12 message
+     */
+    static b3::md::mapping::InstrumentData extractInstrumentData(
+        const ::OnixS::B3::MarketData::UMDF::Messaging::SecurityDefinition_12 &msg) {
+      b3::md::mapping::InstrumentData data;
+
+      using namespace ::OnixS::B3::MarketData::UMDF::Messaging;
+
+      // ===== Core Identification =====
+      data.securityId = static_cast<std::uint64_t>(msg.securityId());
+      data.symbol = trimRight(msg.symbol());
+      data.securityExchange = trimRight(msg.securityExchange());
+
+      // ===== Classification =====
+      data.securityGroup = trimRight(msg.securityGroup());
+      data.securityType = std::to_string(static_cast<int>(msg.securityType()));
+      // data.securitySubType = static_cast<uint32_t>(msg.securitySubType()); TODO: MAP?
+
+      // ===== Price Specifications (mantissa with 4 decimals) =====
+      Fixed8 minPriceInc;
+      if (msg.minPriceIncrement(minPriceInc)) {
+        data.minPriceIncrement = static_cast<int64_t>(minPriceInc.mantissa());
+      }
+
+      PriceOptional strike;
+      if (msg.strikePrice(strike)) {
+        data.strikePrice = static_cast<int64_t>(strike.mantissa());
+      }
+
+      Fixed8 mult;
+      if (msg.contractMultiplier(mult)) {
+        // Store as int64 (mantissa)
+        data.minPriceIncrementAmount = static_cast<int64_t>(mult.mantissa());
+      }
+
+      Fixed8 divisor;
+      if (msg.priceDivisor(divisor)) {
+        // Could use a separate field if needed
+      }
+
+      // ===== Quantity Specifications =====
+      QuantityOptional minOrderQ;
+      if (msg.minOrderQty(minOrderQ)) {
+        data.minOrderQty = static_cast<int64_t>(minOrderQ);
+      }
+
+      QuantityOptional maxOrderQ;
+      if (msg.maxOrderQty(maxOrderQ)) {
+        data.maxOrderQty = static_cast<int64_t>(maxOrderQ);
+      }
+
+      QuantityOptional minLot;
+      if (msg.minLotSize(minLot)) {
+        data.lotSize = static_cast<int64_t>(minLot);
+      }
+
+      QuantityOptional minTrade;
+      if (msg.minTradeVol(minTrade)) {
+        data.minTradeVol = static_cast<int64_t>(minTrade);
+      }
+
+      // ===== Corporate Actions =====
+      UInt32NULL corpAction;
+      if (msg.corporateActionEventId(corpAction)) {
+        data.corporateActionEventId = static_cast<uint8_t>(corpAction);
+        data.hasCorporateAction = (corpAction != 0);
+      }
+
+      // ===== Timestamps =====
+      OnixS::B3::MarketData::UMDF::Timestamp maturity;
+      if (msg.maturityDate(maturity)) {
+        const auto ns = maturity.sinceEpoch(); // UInt64 nanoseconds since 1970-01-01
+        data.maturityDate = static_cast<uint32_t>(ns / 1000000000ULL); // ns → seconds
+      }
+
+      // ===== Other Fields =====
+      UInt64NULL shares;
+      if (msg.sharesIssued(shares)) {
+        // Could add to InstrumentData if needed
+      }
+
+      ClearingHouseID clearing;
+      if (msg.clearingHouseId(clearing)) {
+        // Could add to InstrumentData if needed
+      }
+
+      return data;
+    }
+
    private:
     b3::md::mapping::InstrumentRegistry &registry_;
 
     std::atomic<bool> ready_{false};
     std::atomic<bool> capturing_{false};
 
-    std::unordered_map<std::uint64_t, std::string> staging_;
+    std::unordered_map<std::uint64_t, b3::md::mapping::InstrumentData> staging_;
   };
 
 } // namespace b3::md::onixs

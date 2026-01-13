@@ -7,6 +7,10 @@
 
 #include "OrderTranslator.h"
 #include "OwnedBoeMessage.hpp"
+#include <string_view>
+#include <models/messages.pb.h>
+#include <models/messageTypes.h>
+
 #include "../../boe/BoeSessionSender.h"
 
 namespace orders {
@@ -21,11 +25,30 @@ namespace orders {
   }
 
   OrderCommandHandler::CommandType OrderCommandHandler::detectCommandType_(
-      const uint8_t * /*req*/, std::size_t /*reqSize*/) noexcept {
-    // TODO:
-    // Parse your WrapperMessage protobuf here and inspect message_type
-    // return CommandType::{NewOrder|Cancel|Replace}
-    return CommandType::Unknown;
+      const uint8_t *req, std::size_t reqSize) noexcept {
+    using markethub::messaging::models::MessageTypes;
+
+    try {
+      markethub::messaging::WrapperMessage wrapper;
+      if (!wrapper.ParseFromArray(req, static_cast<int>(reqSize)))
+        return CommandType::Unknown;
+
+      const std::string &mtStr = wrapper.message_type();
+      const std::string_view mt{mtStr.data(), mtStr.size()};
+
+      if (mt == MessageTypes::NewOrderRequest)
+        return CommandType::NewOrder;
+
+      if (mt == MessageTypes::CancelOrderRequest)
+        return CommandType::Cancel;
+
+      if (mt == MessageTypes::ReplaceOrderRequest)
+        return CommandType::Replace;
+
+      return CommandType::Unknown;
+    } catch (...) {
+      return CommandType::Unknown;
+    }
   }
 
   void OrderCommandHandler::writeOk_(std::vector<uint8_t> &out, const char *msg) noexcept {
@@ -51,7 +74,7 @@ namespace orders {
       }
 
       if (!deps_.sender->isReady()) {
-        writeErr_(outResp, "boe session not ready");
+        writeErr_(outResp, "boe session not established");
         return false;
       }
 
