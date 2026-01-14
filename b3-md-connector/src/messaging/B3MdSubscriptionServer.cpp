@@ -129,7 +129,7 @@ namespace {
 
   // Full version with complete InstrumentData mapping
   inline void add_instrument_full(::markethub::messaging::trading::SecurityListResponse *resp,
-                                   const b3::md::mapping::InstrumentData &data) {
+                                   const b3::common::InstrumentData &data) {
     if (!resp || data.symbol.empty())
       return;
 
@@ -151,6 +151,15 @@ namespace {
     set_string_if_exists(&security, "security_group", data.securityGroup);
     set_string_if_exists(&security, "asset", data.asset);
     set_string_if_exists(&security, "cfi_code", data.cfiCode);
+    set_string_if_exists(&security, "market_segment_id", data.marketSegmentId);
+
+    // Trading parameters
+    if (data.governanceIndicator != 0) {
+      set_u64_if_exists(&security, "governance_indicator", data.governanceIndicator);
+    }
+    if (data.securityMatchType != 0) {
+      set_u64_if_exists(&security, "security_match_type", static_cast<uint64_t>(data.securityMatchType));
+    }
 
     // Price specifications (convert mantissa to decimal if protobuf expects double)
     if (data.minPriceIncrement != 0) {
@@ -167,6 +176,10 @@ namespace {
       set_u64_if_exists(&security, "strike_price_mantissa", static_cast<uint64_t>(data.strikePrice));
     }
 
+    if (data.minPriceIncrementAmount != 0) {
+      set_u64_if_exists(&security, "min_price_increment_amount", static_cast<uint64_t>(data.minPriceIncrementAmount));
+    }
+
     // Quantity specifications
     if (data.minOrderQty != 0) {
       set_u64_if_exists(&security, "min_order_qty", static_cast<uint64_t>(data.minOrderQty));
@@ -176,6 +189,9 @@ namespace {
     }
     if (data.lotSize != 0) {
       set_u64_if_exists(&security, "lot_size", static_cast<uint64_t>(data.lotSize));
+    }
+    if (data.minTradeVol != 0) {
+      set_u64_if_exists(&security, "min_trade_vol", static_cast<uint64_t>(data.minTradeVol));
     }
 
     // Derivatives fields
@@ -188,11 +204,27 @@ namespace {
       set_u64_if_exists(&security, "maturity_date", static_cast<uint64_t>(data.maturityDate));
     }
 
-    // Flags
+    // Options fields
+    if (data.putOrCall != 0) {
+      set_u64_if_exists(&security, "put_or_call", static_cast<uint64_t>(data.putOrCall));
+    }
+    if (data.exerciseStyle != 0) {
+      set_u64_if_exists(&security, "exercise_style", static_cast<uint64_t>(data.exerciseStyle));
+    }
+
+    // Flags and settlement
     if (data.hasCorporateAction) {
       set_u64_if_exists(&security, "corporate_action_event_id", data.corporateActionEventId);
     }
+    if (data.isMultileg) {
+      set_u64_if_exists(&security, "is_multileg", 1);
+    }
+    set_string_if_exists(&security, "settlement_type", data.settlementType);
+    if (data.productComplex != 0) {
+      set_u64_if_exists(&security, "product_complex", static_cast<uint64_t>(data.productComplex));
+    }
 
+    // Additional info
     set_string_if_exists(&security, "currency", data.currency);
     set_string_if_exists(&security, "isin", data.isin);
     set_string_if_exists(&security, "description", data.securityDesc);
@@ -204,7 +236,7 @@ namespace b3::md::messaging {
 
   B3MdSubscriptionServer::B3MdSubscriptionServer(const std::string &serverEndpoint,
                                                  const std::string &publishingEndpoint,
-                                                 b3::md::mapping::InstrumentRegistry &registry,
+                                                 b3::common::InstrumentRegistry &registry,
                                                  b3::md::SubscriptionRegistry &subs,
                                                  b3::md::IMarketDataHandler &handler,
                                                  LogCallback logCb)

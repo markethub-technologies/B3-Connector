@@ -3,8 +3,14 @@
 #include <memory>
 #include <string>
 
+#include <b3/common/InstrumentRegistry.hpp>
+
 namespace spdlog {
   class logger;
+}
+
+namespace b3::oe::infrastructure {
+  class SecurityListClient;
 }
 
 namespace events {
@@ -35,6 +41,10 @@ namespace events {
 class AppRuntime final {
  public:
   struct Settings final {
+    // MD connector endpoints (for SecurityList subscription)
+    std::string mdRequestEndpoint;  // e.g. "tcp://localhost:8080"
+    std::string mdResponseEndpoint; // e.g. "tcp://localhost:8081"
+
     // endpoints
     std::string ordersBindEndpoint; // e.g. "tcp://*:6001"
     std::string eventsPubEndpoint;  // e.g. "tcp://*:7001" (if needed by publisher)
@@ -67,6 +77,9 @@ class AppRuntime final {
   void start();
   void stop(bool drain);
 
+  // Access to instrument registry (populated at startup)
+  const b3::common::InstrumentRegistry &registry() const noexcept { return registry_; }
+
  private:
   void build_();
   void start_();
@@ -75,6 +88,10 @@ class AppRuntime final {
  private:
   Settings settings_;
   std::shared_ptr<spdlog::logger> log_;
+
+  // ---- instrument registry (loaded at startup) ----
+  b3::common::InstrumentRegistry registry_;
+  std::unique_ptr<b3::oe::infrastructure::SecurityListClient> securityListClient_;
 
   // ---- shared infra ----
   std::unique_ptr<MpscPodQueue<events::BoeEventPOD>> eventQueue_;

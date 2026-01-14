@@ -8,6 +8,7 @@
 #include "common/MpscPodQueue.hpp"
 #include "common/FixedString.hpp"
 #include "events/core/BoeEventPOD.hpp"
+#include "infrastructure/SecurityListClient.hpp"
 #include "events/core/OrderEventProcessingLoop.h" // .h/.cpp
 #include "events/core/WrapperSerializer.hpp"
 #include "events/publish/MessagingPublisherFacade.hpp"
@@ -136,7 +137,35 @@ void AppRuntime::start_() {
   if (started_)
     return;
 
-  // 1) start BOE session (connects)
+  // 1) Load SecurityList from MD connector (blocking, with retries)
+  log_->info("Loading SecurityList from MD connector...");
+
+  b3::oe::infrastructure::SecurityListClient::Config slConfig;
+  slConfig.mdRequestEndpoint = settings_.mdRequestEndpoint;
+  slConfig.mdResponseEndpoint = settings_.mdResponseEndpoint;
+  slConfig.retryInterval = std::chrono::seconds(5);
+  slConfig.maxRetries = 120;  // 10 minutes
+
+  securityListClient_ = std::make_unique<b3::oe::infrastructure::SecurityListClient>(
+      registry_, slConfig, [this](const std::string &level, const std::string &msg) {
+        if (level == "ERROR") {
+          log_->error("{}", msg);
+        } else if (level == "WARN") {
+          log_->warn("{}", msg);
+        } else {
+          log_->info("{}", msg);
+        }
+      });
+
+  bool loaded = securityListClient_->loadSecurityList();
+  if (!loaded) {
+    log_->error("Failed to load SecurityList from MD. Cannot start without instrument data.");
+    throw std::runtime_error("SecurityList load failed after max retries");
+  }
+
+  log_->info("SecurityList loaded successfully. Instruments: {}", registry_.size());
+
+  // 2) start BOE session (connects)
   boeSession_->start();
 
   // 2) now we can create the sender with real session ptr
@@ -175,6 +204,10 @@ void AppRuntime::stop_(bool drain) {
   // stop event loop last (drain optional)
   if (eventLoop_)
     eventLoop_->stop(drain);
+
+  // stop security list client
+  if (securityListClient_)
+    securityListClient_->stop();
 
   started_ = false;
   if (log_)

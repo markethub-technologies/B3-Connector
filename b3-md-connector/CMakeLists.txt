@@ -55,6 +55,12 @@ target_link_libraries(onixs-b3-umdf INTERFACE
 )
 
 # ============================================================
+# b3-common (shared components: InstrumentRegistry, etc.)
+# ============================================================
+
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../b3-common" "${CMAKE_BINARY_DIR}/b3-common")
+
+# ============================================================
 # Executable
 # ============================================================
 
@@ -73,6 +79,7 @@ target_link_libraries(b3-md-connector PRIVATE
     fmt::fmt
     markethub-messaging
     onixs-b3-umdf
+    b3-common
     pthread
     zmq
 )
@@ -105,6 +112,7 @@ target_link_libraries(b3-md-connector-simulator PRIVATE
     fmt::fmt
     markethub-messaging
     onixs-b3-umdf
+    b3-common
     pthread
     zmq
 )

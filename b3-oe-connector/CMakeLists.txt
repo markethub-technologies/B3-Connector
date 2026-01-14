@@ -48,6 +48,9 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     target_link_libraries(onixs-b3-boe INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/B3/BOE/lib/libonixs-b3-boe.so
     )
+
+    # ---- b3-common (shared components: InstrumentRegistry, etc.) ----
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../b3-common" "${CMAKE_BINARY_DIR}/b3-common")
 endif()
 
 # ============================================================
@@ -83,6 +86,7 @@ target_link_libraries(b3-oe-connector PRIVATE
     fmt::fmt
     markethub-messaging
     onixs-b3-boe
+    b3-common
     pthread
     zmq
 )

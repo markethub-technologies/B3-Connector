@@ -4,7 +4,7 @@
 #include <OnixS/B3/MarketData/UMDF/OrderBookListener.h>
 #include <OnixS/B3/MarketData/UMDF/messaging/Messages.h>
 
-#include "../mapping/InstrumentRegistry.hpp"
+#include <b3/common/InstrumentRegistry.hpp>
 #include "../core/OrdersSnapshot.hpp"
 #include "../core/IMarketDataHandler.hpp"
 #include "../onixs/OnixsOrderBookListener.hpp"
@@ -37,7 +37,7 @@ namespace b3::md::testsupport {
     FakeOnixsHandler() = default;
 
     // Set the registry reference (needed for direct population)
-    void setRegistry(b3::md::mapping::InstrumentRegistry* registry,
+    void setRegistry(b3::common::InstrumentRegistry* registry,
                      std::atomic<bool>* readyFlag) {
       registry_ = registry;
       readyFlag_ = readyFlag;
@@ -245,7 +245,7 @@ namespace b3::md::testsupport {
     std::vector<::OnixS::B3::MarketData::UMDF::MessageListener*> messageListeners_;
     std::vector<::OnixS::B3::MarketData::UMDF::OrderBookListener*> orderBookListeners_;
 
-    b3::md::mapping::InstrumentRegistry* registry_{nullptr};
+    b3::common::InstrumentRegistry* registry_{nullptr};
     std::atomic<bool>* readyFlag_{nullptr};
 
     std::atomic<bool> running_{false};

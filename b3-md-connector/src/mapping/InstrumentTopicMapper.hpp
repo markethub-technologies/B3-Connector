@@ -6,8 +6,8 @@
 #include <cstdio>
 #include <utility>
 
+#include <b3/common/InstrumentRegistry.hpp>
 #include "../publishing/SerializedEnvelope.hpp"
-#include "InstrumentRegistry.hpp"
 
 namespace b3::md::mapping {
 
@@ -18,7 +18,7 @@ namespace b3::md::mapping {
    */
   class InstrumentTopicMapper final {
    public:
-    explicit InstrumentTopicMapper(const InstrumentRegistry &registry) : registry_(registry) {}
+    explicit InstrumentTopicMapper(const b3::common::InstrumentRegistry &registry) : registry_(registry) {}
 
     InstrumentTopicMapper(const InstrumentTopicMapper &) = delete;
     InstrumentTopicMapper &operator=(const InstrumentTopicMapper &) = delete;
@@ -35,7 +35,7 @@ namespace b3::md::mapping {
      *       The caller (MdPublishWorker) will drop the message and increment dropped counter.
      *       This ensures clients only receive messages with real symbols they can filter on.
      */
-    std::pair<const char*, std::uint8_t> getTopic(InstrumentId iid) const noexcept {
+    std::pair<const char*, std::uint8_t> getTopic(b3::common::InstrumentId iid) const noexcept {
       const std::string *sym = registry_.tryResolveSymbol(iid);
       if (sym) {
         const std::size_t n = sym->size();
@@ -49,7 +49,7 @@ namespace b3::md::mapping {
     }
 
    private:
-    const InstrumentRegistry &registry_;
+    const b3::common::InstrumentRegistry &registry_;
   };
 
 } // namespace b3::md::mapping

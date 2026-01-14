@@ -10,7 +10,7 @@
 
 #include "InstrumentData.hpp"
 
-namespace b3::md::mapping {
+namespace b3::common {
 
   using InstrumentId = std::uint64_t;
 
@@ -194,4 +194,4 @@ namespace b3::md::mapping {
     std::unordered_map<std::string, InstrumentId, StringHash, StringEqual> bySymbol_;
   };
 
-} // namespace b3::md::mapping
+} // namespace b3::common

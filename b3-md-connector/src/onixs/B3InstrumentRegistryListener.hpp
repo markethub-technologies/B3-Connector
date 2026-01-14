@@ -9,13 +9,13 @@
 #include <string>
 #include <unordered_map>
 
-#include "../mapping/InstrumentRegistry.hpp"
+#include <b3/common/InstrumentRegistry.hpp>
 
 namespace b3::md::onixs {
 
   class B3InstrumentRegistryListener final : public ::OnixS::B3::MarketData::UMDF::MessageListener {
    public:
-    explicit B3InstrumentRegistryListener(b3::md::mapping::InstrumentRegistry &registry) noexcept
+    explicit B3InstrumentRegistryListener(b3::common::InstrumentRegistry &registry) noexcept
         : registry_(registry) {}
 
     std::atomic<bool> &readyAtomic() noexcept { return ready_; }
@@ -73,9 +73,9 @@ namespace b3::md::onixs {
     /**
      * @brief Extract all available fields from SecurityDefinition_12 message
      */
-    static b3::md::mapping::InstrumentData extractInstrumentData(
+    static b3::common::InstrumentData extractInstrumentData(
         const ::OnixS::B3::MarketData::UMDF::Messaging::SecurityDefinition_12 &msg) {
-      b3::md::mapping::InstrumentData data;
+      b3::common::InstrumentData data;
 
       using namespace ::OnixS::B3::MarketData::UMDF::Messaging;
 
@@ -87,7 +87,15 @@ namespace b3::md::onixs {
       // ===== Classification =====
       data.securityGroup = trimRight(msg.securityGroup());
       data.securityType = std::to_string(static_cast<int>(msg.securityType()));
-      // data.securitySubType = static_cast<uint32_t>(msg.securitySubType()); TODO: MAP?
+      data.asset = trimRight(msg.asset());
+      data.cfiCode = trimRight(msg.cfiCode());
+      data.currency = trimRight(msg.currency());
+
+      // Market Segment
+      MarketSegmentID mktSegId;
+      if (msg.marketSegmentId(mktSegId)) {
+        data.marketSegmentId = std::to_string(static_cast<uint32_t>(mktSegId));
+      }
 
       // ===== Price Specifications (mantissa with 4 decimals) =====
       Fixed8 minPriceInc;
@@ -104,11 +112,6 @@ namespace b3::md::onixs {
       if (msg.contractMultiplier(mult)) {
         // Store as int64 (mantissa)
         data.minPriceIncrementAmount = static_cast<int64_t>(mult.mantissa());
-      }
-
-      Fixed8 divisor;
-      if (msg.priceDivisor(divisor)) {
-        // Could use a separate field if needed
       }
 
       // ===== Quantity Specifications =====
@@ -132,11 +135,47 @@ namespace b3::md::onixs {
         data.minTradeVol = static_cast<int64_t>(minTrade);
       }
 
+      // ===== Options/Derivatives =====
+      PutOrCall::Enum putOrCallEnum;
+      if (msg.putOrCall(putOrCallEnum)) {
+        data.putOrCall = static_cast<uint8_t>(putOrCallEnum);
+      }
+
+      ExerciseStyle::Enum exStyleEnum;
+      if (msg.exerciseStyle(exStyleEnum)) {
+        data.exerciseStyle = static_cast<uint8_t>(exStyleEnum);
+      }
+
+      // Underlying security (from repeating group - take first entry if present)
+      auto underlyings = msg.underlyings();
+      if (underlyings.size() > 0) {
+        auto firstUnderlying = underlyings[0];
+        data.underlyingSecurityId = static_cast<uint32_t>(firstUnderlying.underlyingSecurityId());
+        data.underlyingSymbol = trimRight(firstUnderlying.underlyingSymbol());
+      }
+
       // ===== Corporate Actions =====
       UInt32NULL corpAction;
       if (msg.corporateActionEventId(corpAction)) {
         data.corporateActionEventId = static_cast<uint8_t>(corpAction);
         data.hasCorporateAction = (corpAction != 0);
+      }
+
+      // ===== Trading Parameters =====
+      GovernanceIndicator::Enum govEnum;
+      if (msg.governanceIndicator(govEnum)) {
+        data.governanceIndicator = static_cast<uint32_t>(govEnum);
+      }
+
+      SecurityMatchType::Enum matchTypeEnum;
+      if (msg.securityMatchType(matchTypeEnum)) {
+        data.securityMatchType = static_cast<uint8_t>(matchTypeEnum);
+      }
+
+      // Multileg indicator (if multileg field is present and valid, it's a multileg)
+      MultiLegModel::Enum multiLegEnum;
+      if (msg.multiLegModel(multiLegEnum)) {
+        data.isMultileg = true;  // If the field is present, it's a multileg security
       }
 
       // ===== Timestamps =====
@@ -146,27 +185,33 @@ namespace b3::md::onixs {
         data.maturityDate = static_cast<uint32_t>(ns / 1000000000ULL); // ns → seconds
       }
 
-      // ===== Other Fields =====
-      UInt64NULL shares;
-      if (msg.sharesIssued(shares)) {
-        // Could add to InstrumentData if needed
+      // ===== Additional Info =====
+      StrRef isinRef;
+      if (msg.isinNumber(isinRef)) {
+        data.isin = trimRight(isinRef);
       }
 
-      ClearingHouseID clearing;
-      if (msg.clearingHouseId(clearing)) {
-        // Could add to InstrumentData if needed
+      data.securityDesc = trimRight(msg.securityDesc());
+
+      // Settlement type
+      SettlType settlTypeVal;
+      if (msg.settlType(settlTypeVal)) {
+        data.settlementType = std::to_string(static_cast<uint32_t>(settlTypeVal));
       }
+
+      // Product (map to productComplex)
+      data.productComplex = static_cast<uint8_t>(msg.product());
 
       return data;
     }
 
    private:
-    b3::md::mapping::InstrumentRegistry &registry_;
+    b3::common::InstrumentRegistry &registry_;
 
     std::atomic<bool> ready_{false};
     std::atomic<bool> capturing_{false};
 
-    std::unordered_map<std::uint64_t, b3::md::mapping::InstrumentData> staging_;
+    std::unordered_map<std::uint64_t, b3::common::InstrumentData> staging_;
   };
 
 } // namespace b3::md::onixs

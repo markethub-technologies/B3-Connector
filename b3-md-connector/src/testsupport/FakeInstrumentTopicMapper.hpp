@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-#include "../mapping/InstrumentRegistry.hpp"
+#include <b3/common/InstrumentRegistry.hpp>
 #include "../mapping/InstrumentTopicMapper.hpp"
 
 namespace b3::md::testsupport {
@@ -17,7 +17,7 @@ namespace b3::md::testsupport {
    */
   class FakeInstrumentTopicMapper final {
    public:
-    using InstrumentId = b3::md::mapping::InstrumentId;
+    using InstrumentId = b3::common::InstrumentId;
 
     // Construct with list of {instrumentId, "SYMBOL"} pairs
     explicit FakeInstrumentTopicMapper(
@@ -44,7 +44,7 @@ namespace b3::md::testsupport {
     }
 
    private:
-    b3::md::mapping::InstrumentRegistry registry_;
+    b3::common::InstrumentRegistry registry_;
     b3::md::mapping::InstrumentTopicMapper mapper_;
   };
 

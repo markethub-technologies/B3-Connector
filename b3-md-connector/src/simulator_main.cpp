@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
   // -------------------------
   std::cerr << "[simulator] Setting up market data pipeline...\n";
 
-  b3::md::mapping::InstrumentRegistry registry;
+  b3::common::InstrumentRegistry registry;
   b3::md::mapping::InstrumentTopicMapper topicMapper(registry);
 
   b3::md::publishing::ZmqPublishConcentrator concentrator(pubEndpoint,

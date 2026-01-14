@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <string>
 
-namespace b3::md::mapping {
+namespace b3::common {
 
   /**
    * @brief Complete instrument/security definition data from B3 SecurityDefinition_12
@@ -88,4 +88,4 @@ namespace b3::md::mapping {
     InstrumentData() = default;
   };
 
-} // namespace b3::md::mapping
+} // namespace b3::common

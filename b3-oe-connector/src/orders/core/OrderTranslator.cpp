@@ -310,9 +310,12 @@ namespace orders {
 
   } // namespace
 
-  // -----------------------------
-  // NewOrder mapping
-  // -----------------------------
+  OrderTranslator::OrderTranslator(Deps deps) : deps_(std::move(deps)) {
+    if (!deps_.log) {
+      throw std::runtime_error("OrderTranslator: log is null");
+    }
+  }
+
   bool OrderTranslator::tryBuildNewOrder(const uint8_t *req, std::size_t reqSize,
                                          OwnedBoeMessage &outMsg, std::string &errorOut) noexcept {
     try {
@@ -472,9 +475,6 @@ namespace orders {
     }
   }
 
-  // -----------------------------
-  // Cancel mapping
-  // -----------------------------
   bool OrderTranslator::tryBuildCancel(const uint8_t *req, std::size_t reqSize,
                                        OwnedBoeMessage &outMsg, std::string &errorOut) noexcept {
     using namespace OnixS::B3::BOE::Messaging;
@@ -580,20 +580,256 @@ namespace orders {
     msg.resetVariableFields();
 
     // NOTE: proto has quantity for partial cancel; BOE 105 has no qty.
-    // For now, treat as full cancel.
+    // For now, is treated as full cancel.
 
     outMsg = OwnedBoeMessage::make(std::move(holder));
     return true;
   }
 
-  // -----------------------------
-  // Replace stub (as requested)
-  // -----------------------------
-  bool OrderTranslator::tryBuildReplace(const uint8_t * /*req*/, std::size_t /*reqSize*/,
+  bool OrderTranslator::tryBuildReplace(const uint8_t *req, std::size_t reqSize,
                                         OwnedBoeMessage &outMsg, std::string &errorOut) noexcept {
+    using namespace OnixS::B3::BOE::Messaging;
+    using markethub::messaging::models::MessageTypes;
+
     outMsg = OwnedBoeMessage{};
-    errorOut = "Replace not implemented yet";
-    return false;
+
+    try {
+      markethub::messaging::WrapperMessage w;
+      if (!w.ParseFromArray(req, static_cast<int>(reqSize))) {
+        errorOut = "Invalid WrapperMessage";
+        return false;
+      }
+
+      if (std::string_view(w.message_type()) != MessageTypes::ReplaceOrderRequest) {
+        errorOut = "Wrapper message_type != ReplaceOrderRequest";
+        return false;
+      }
+
+      if (!w.has_replace_order_request()) {
+        errorOut = "Wrapper missing replace_order_request";
+        return false;
+      }
+
+      const auto &r = w.replace_order_request();
+
+      // -----------------------------
+      // Validaciones mínimas
+      // -----------------------------
+      if (r.client_order_id().empty()) {
+        errorOut = "ReplaceOrderRequest.client_order_id required";
+        return false;
+      }
+
+      // Identificador de orden a reemplazar: al menos uno
+      if (r.client_order_id_to_replace().empty() && r.order_id_to_replace().empty()) {
+        errorOut = "ReplaceOrderRequest requires client_order_id_to_replace or order_id_to_replace";
+        return false;
+      }
+
+      if (!r.has_instrument() || r.instrument().security_id().empty()) {
+        errorOut = "ReplaceOrderRequest.instrument.security_id required";
+        return false;
+      }
+
+      if (r.side() == markethub::messaging::trading::SIDE_UNSPECIFIED) {
+        errorOut = "ReplaceOrderRequest.side required";
+        return false;
+      }
+
+      if (r.new_quantity() <= 0.0) {
+        errorOut = "ReplaceOrderRequest.new_quantity must be > 0";
+        return false;
+      }
+
+      if (r.new_order_type() == markethub::messaging::trading::ORDER_TYPE_UNSPECIFIED) {
+        errorOut = "ReplaceOrderRequest.new_order_type required";
+        return false;
+      }
+
+      // Iceberg: validaciones básicas
+      if (r.is_iceberg()) {
+        if (r.new_display_quantity() <= 0.0) {
+          errorOut = "ReplaceOrderRequest.new_display_quantity must be > 0 when is_iceberg=true";
+          return false;
+        }
+        if (r.new_display_quantity() > r.new_quantity()) {
+          errorOut =
+              "ReplaceOrderRequest.new_display_quantity must be <= new_quantity when "
+              "is_iceberg=true";
+          return false;
+        }
+      }
+
+      // -----------------------------
+      // Build BOE message
+      // -----------------------------
+      MessageHolder<OrderCancelReplaceRequest104> holder;
+      auto &msg = holder.message();
+      msg.reset(); // limpia optionals + var-len
+
+      // clOrdId (nuevo ID del replace)
+      msg.setClOrdId(makeClOrdId(r.client_order_id(), *deps_.log));
+
+      // securityId (requerido, numérico estricto)
+      {
+        std::string sidErr;
+        const auto secId = makeSecurityIdFromInstrument(r.instrument(), sidErr);
+        if (!sidErr.empty()) {
+          errorOut = sidErr;
+          return false;
+        }
+        msg.setSecurityId(secId);
+      }
+
+      // side (requerido)
+      Side::Enum boeSide{};
+      if (!mapSide(r.side(), boeSide)) {
+        errorOut = "ReplaceOrderRequest.side invalid/unsupported";
+        return false;
+      }
+      msg.setSide(boeSide);
+
+      // origClOrdId (opcional) - client_order_id_to_replace
+      if (!r.client_order_id_to_replace().empty()) {
+        // permitimos fallback hash como en clOrdId (por consistencia)
+        const auto orig = makeClOrdId(r.client_order_id_to_replace(), *deps_.log);
+        msg.setOrigClOrdId(static_cast<ClOrdIDOptional>(orig));
+      } else {
+        msg.setOrigClOrdIdToNull();
+      }
+
+      // orderId (opcional) - order_id_to_replace (numérico, fit a uint32)
+      if (!r.order_id_to_replace().empty()) {
+        unsigned int oid{};
+        if (!common::tryParseUnsignedInt(r.order_id_to_replace(), oid)) {
+          errorOut = "order_id_to_replace must be numeric and fit BOE OrderIDOptional";
+          return false;
+        }
+        msg.setOrderId(static_cast<OrderIDOptional>(oid));
+      } else {
+        msg.setOrderIdToNull();
+      }
+
+      // ordType (requerido)
+      msg.setOrdType(mapOrdType(r.new_order_type()));
+
+      // timeInForce (opcional en BOE 104; si viene unspecified -> null)
+      if (r.new_time_in_force() == markethub::messaging::trading::TIME_IN_FORCE_UNSPECIFIED) {
+        msg.setTimeInForceToNull();
+        msg.setExpireDateToNull(); // por prolijidad
+      } else {
+        msg.setTimeInForce(mapTif(r.new_time_in_force()));
+
+        // GTD expiration (BOE: date-only)
+        if (r.new_time_in_force() == markethub::messaging::trading::GOOD_TILL_DATE) {
+          if (r.new_expiration_time() <= 0) {
+            errorOut = "new_expiration_time required for GoodTillDate";
+            return false;
+          }
+          msg.setExpireDate(toBoeExpireDateFromUnixMs(r.new_expiration_time()));
+        } else {
+          msg.setExpireDateToNull();
+        }
+      }
+
+      // orderQty (requerido)
+      Quantity q{};
+      if (!tryMakeQty(r.new_quantity(), q, errorOut))
+        return false;
+      msg.setOrderQty(q);
+
+      // Account (opcional)
+      if (!r.account().empty()) {
+        std::string accErr;
+        const auto acc = makeAccountOpt(r.account(), accErr);
+        if (!accErr.empty()) {
+          errorOut = accErr;
+          return false;
+        }
+        msg.setAccount(acc);
+      } else {
+        msg.setAccountToNull();
+      }
+
+      // Iceberg -> maxFloor (cantidad visible)
+      if (r.is_iceberg()) {
+        QuantityOptional dq{};
+        if (!tryMakeQtyOpt(r.new_display_quantity(), dq, errorOut))
+          return false;
+        msg.setMaxFloor(dq);
+      } else {
+        msg.setMaxFloorToNull();
+      }
+
+      // Conditional prices según tipo de orden
+      const auto ordType = r.new_order_type();
+
+      const bool needsPrice = (ordType == markethub::messaging::trading::LIMIT) ||
+                              (ordType == markethub::messaging::trading::STOP_LIMIT);
+
+      const bool needsStop = (ordType == markethub::messaging::trading::STOP) ||
+                             (ordType == markethub::messaging::trading::STOP_LIMIT);
+
+      if (needsPrice) {
+        if (r.new_price() <= 0.0) {
+          errorOut = "new_price must be > 0 for Limit/StopLimit";
+          return false;
+        }
+        msg.setPrice(makePriceOpt(r.new_price()));
+      } else {
+        msg.setPriceToNull();
+      }
+
+      if (needsStop) {
+        if (r.new_stop_price() <= 0.0) {
+          errorOut = "new_stop_price must be > 0 for Stop/StopLimit";
+          return false;
+        }
+        msg.setStopPx(makePriceOpt(r.new_stop_price()));
+      } else {
+        msg.setStopPxToNull();
+      }
+
+      // BOE fixed fields required
+      // deps_.senderLocation / enteringTrader ya vienen padded con espacios
+      msg.setSenderLocation(StrRef{deps_.senderLocation.data(), deps_.senderLocation.size()});
+      msg.setEnteringTrader(StrRef{deps_.enteringTrader.data(), deps_.enteringTrader.size()});
+
+      // executingTrader opcional (lo dejamos null)
+      msg.setExecutingTraderToNull();
+
+      // STP: por ahora None
+      msg.setSelfTradePreventionInstruction(SelfTradePreventionInstruction::None);
+
+      // Opcionales que pateamos / futuro:
+      // msg.setRoutingInstruction(...);      // optional
+      // msg.setMinQty(...);                  // optional
+      // msg.setMmProtectionReset(...);       // required? si tu schema lo pide, revisar; por ahora
+      // dejar default/reset msg.setOrdTagId(...);                // optional
+      // msg.setTradingSubAccount(...);       // optional
+      // msg.setAccountType(...);             // optional
+      // msg.setCustodianInfo(...);           // optional
+      // msg.setInvestorId(...);              // optional
+      // msg.setStrategyId(...);              // optional
+      //
+      // Flags proto (futuro / ticket):
+      // - cancel_on_disconnect
+      // - cancel_previous
+      // - cancel_if_not_best
+      // - all_or_none
+
+      // var-len tail (deskId/memo) por ahora vacío
+      msg.resetVariableFields();
+
+      outMsg = OwnedBoeMessage::make(std::move(holder));
+      return true;
+    } catch (const std::exception &ex) {
+      errorOut = ex.what();
+      return false;
+    } catch (...) {
+      errorOut = "unknown exception building OrderCancelReplaceRequest104";
+      return false;
+    }
   }
 
 } // namespace orders

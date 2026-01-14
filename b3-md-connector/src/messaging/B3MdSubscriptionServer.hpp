@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 
-#include "../mapping/InstrumentRegistry.hpp"
+#include <b3/common/InstrumentRegistry.hpp>
 #include "../core/SubscriptionRegistry.hpp"
 #include "../core/IMarketDataHandler.hpp"
 
@@ -17,7 +17,7 @@ namespace b3::md::messaging {
   class B3MdSubscriptionServer final : public markethub::messaging::servers::SubscriberPublisher {
    public:
     B3MdSubscriptionServer(const std::string &serverEndpoint, const std::string &publishingEndpoint,
-                           b3::md::mapping::InstrumentRegistry &registry,
+                           b3::common::InstrumentRegistry &registry,
                            b3::md::SubscriptionRegistry &subs, b3::md::IMarketDataHandler &handler,
                            LogCallback logCb = nullptr);
 
@@ -32,7 +32,7 @@ namespace b3::md::messaging {
         const markethub::messaging::WrapperMessage &request) override;
 
    private:
-    b3::md::mapping::InstrumentRegistry &registry_;
+    b3::common::InstrumentRegistry &registry_;
     b3::md::SubscriptionRegistry &subs_;
     b3::md::IMarketDataHandler &handler_;
   };
